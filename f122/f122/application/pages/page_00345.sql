@@ -117,7 +117,7 @@ wwv_flow_imp_page.create_page(
 '} ',
 '  ',
 '  .t-Form-label{',
-'    color:  darkblue !important;     ',
+'    color:  darkblue  !important; ',
 '    } ',
 '',
 '   .t-Form-fieldContainer:not(.js-show-label, .is-active ) .t-Form-labelContainer .t-Form-label {   ',
@@ -139,8 +139,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230807110803'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230808112103'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93791242866437708)
