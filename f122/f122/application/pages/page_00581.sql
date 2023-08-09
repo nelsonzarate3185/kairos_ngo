@@ -14,7 +14,7 @@ wwv_flow_imp.component_begin (
 wwv_flow_imp_page.create_page(
  p_id=>581
 ,p_user_interface_id=>wwv_flow_imp.id(40210426655263685)
-,p_name=>'VISOR DE BOX'
+,p_name=>'TUR - VISOR DE BOX'
 ,p_alias=>'VISOR-DE-BOX'
 ,p_step_title=>'VISOR DE BOX'
 ,p_warn_on_unsaved_changes=>'N'
@@ -339,8 +339,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#:js-pageStickyMobileHeader'
 ,p_page_is_public_y_n=>'Y'
 ,p_page_component_map=>'17'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230804134824'
+,p_last_updated_by=>'CHARBA'
+,p_last_upd_yyyymmddhh24miss=>'20230808132221'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(188180203790669312)

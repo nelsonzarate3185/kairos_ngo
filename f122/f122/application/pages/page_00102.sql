@@ -76,8 +76,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'ETRINIDAD'
-,p_last_upd_yyyymmddhh24miss=>'20221229150018'
+,p_last_updated_by=>'OSCARGO'
+,p_last_upd_yyyymmddhh24miss=>'20230808101851'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(24033201006736924)
