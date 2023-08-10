@@ -21,7 +21,8 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_html_page_header=>'<meta http-equiv="refresh" content="40000000" >'
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'  .t-Header-branding, #floating-menu , .t-Footer-topButton{ visibility: hidden;} ',
+'  .t-Header-branding, #floating-menu,#t_Body_content_offset ,  .t-Footer-topButton{ display:none;} ',
+'',
 ' .t-Body {',
 '     background-color: #001b3f;',
 '        background-image: linear-gradient(150deg, #001b3f 0%, #1d74b1 100%);',
@@ -94,8 +95,8 @@ wwv_flow_imp_page.create_page(
 '                    }'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230807165225'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230809113542'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(762101431874100539)
@@ -479,6 +480,19 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_HIDE'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(104444646536494202)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(190085197437831040)
+,p_event_id=>wwv_flow_imp.id(98641456597582127)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'if ($(''body'').hasClass(''js-navExpanded'')',
+'){',
+'$(''#t_Button_navControl'').click();',
+'};'))
 );
 wwv_flow_imp.component_end;
 end;
