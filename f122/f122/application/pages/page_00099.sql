@@ -121,7 +121,7 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230717150643'
+,p_last_upd_yyyymmddhh24miss=>'20230809153934'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21771034358343321)
@@ -6017,6 +6017,62 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P99_COD_CUSTODIO'
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(98642158411582134)
+,p_event_id=>wwv_flow_imp.id(23501021908061434)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'begin ',
+'    SELECT cod_cliente,',
+'             cod_vendedor,',
+'             cod_condicion_venta,',
+'             cod_moneda,',
+'             cod_lista_precio,',
+'             nro_autorizacion,',
+'             tel_cliente,',
+'             ruc,',
+'             dir_cliente,',
+'             nom_cliente,',
+'             entrega_inicial',
+'        INTO :P99_COD_CLIENTE,',
+'             :P99_COD_VENDEDOR,',
+'             :P99_COD_CONDICION_VENTA,',
+'             :P99_COD_MONEDA,',
+'             :P99_COD_LISTA_PRECIO,',
+'             :P99_NRO_AUTORIZACION,',
+'             :P99_TEL_CLIENTE,',
+'             :P99_RUC,',
+'             :P99_DIR_CLIENTE,',
+'             :P99_NOM_CLIENTE,',
+'             :P99_ENTREGA_INICIAL',
+'        FROM vt_pedidos_cabecera',
+'       WHERE cod_empresa = ''1''',
+'         AND tip_comprobante = :P99_TIP_COMPROBANTE_REF',
+'         AND ser_comprobante = :P99_SER_COMPROBANTE_REF',
+'         AND nro_comprobante = :P99_NRO_COMPROBANTE_REF;',
+'     exception ',
+'        when others then ',
+'            :P99_COD_CLIENTE := null;',
+'         :P99_COD_VENDEDOR := null;',
+'         :P99_COD_CONDICION_VENTA := null;',
+'         :P99_COD_MONEDA := null;',
+'         :P99_COD_LISTA_PRECIO := null;',
+'         :P99_NRO_AUTORIZACION := null;',
+'         :P99_TEL_CLIENTE := null;',
+'         :P99_RUC := null;',
+'         :P99_DIR_CLIENTE := null;',
+'         :P99_NOM_CLIENTE := null;',
+'         :P99_ENTREGA_INICIAL  := null;',
+'     end;'))
+,p_attribute_02=>'P99_TIP_COMPROBANTE_REF,P99_SER_COMPROBANTE_REF,P99_NRO_COMPROBANTE_REF'
+,p_attribute_03=>'P99_COD_CLIENTE, P99_COD_VENDEDOR, P99_COD_CONDICION_VENTA, P99_COD_MONEDA, P99_COD_LISTA_PRECIO, P99_NRO_AUTORIZACION, P99_TEL_CLIENTE, P99_RUC, P99_DIR_CLIENTE, P99_NOM_CLIENTE, P99_ENTREGA_INICIAL'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(23501321296061437)
 ,p_name=>'DA_VALIDA_TIP_COMPROBANTE'
@@ -6498,7 +6554,7 @@ wwv_flow_imp_page.create_page_da_action(
 '      PO_COD_SECTOR               => :P99_COD_SECTOR,',
 '      PO_MENSAJE                  => verror);                               ',
 '    IF verror IS NOT NULL THEN',
-'        raise_application_error(-20000, verror);',
+'       raise_application_error(-20000, verror);',
 '    END IF;',
 '    vtfactur.busca_autorizacion(:P99_COD_EMPRESA,:P99_TIP_COMPROBANTE_REF,:P99_SER_COMPROBANTE_REF,:P99_NRO_COMPROBANTE_REF,:P99_TIP_COMPROBANTE,:P99_COD_SUCURSAL,:P99_COD_CONDICION_VENTA,:P99_COD_CONDICION_VENTA);',
 unistr('    --Agregado este peque\00F1o mensaje de advertencia si el pedido generado ten\00EDa una fecha limite de facturaci\00F3n ya definida. Gaspar M. 13/09/2022'),
@@ -12547,14 +12603,14 @@ wwv_flow_imp_page.create_page_process(
 '      END;',
 '',
 '      IF v_estado =  ''B'' THEN ',
-'        RAISE_APPLICATION_ERROR(-20001,  ''El cliente seleccionado no se encuentra Bloqueado'');',
+'        RAISE_APPLICATION_ERROR(-20001,  ''El cliente seleccionado se encuentra Bloqueado'');',
 '     END IF;',
 '     IF v_estado =  ''I'' THEN ',
-'        RAISE_APPLICATION_ERROR(-20001,  ''El cliente seleccionado no se encuentra Inactivo'');',
+'        RAISE_APPLICATION_ERROR(-20001,  ''El cliente seleccionado se encuentra Inactivo'');',
 '     END IF;',
 '',
 '     IF v_estado =  ''D'' THEN ',
-'        RAISE_APPLICATION_ERROR(-20001,  ''El cliente seleccionado no se encuentra con estado Demandado'');',
+'        RAISE_APPLICATION_ERROR(-20001,  ''El cliente seleccionado se encuentra con estado Demandado'');',
 '     END IF;',
 '',
 '  END;',
@@ -12578,7 +12634,61 @@ unistr('                raise_application_error(-20001, ''Condici\00F3n de Venta
 '        end if;',
 '      END IF;',
 '  END;',
-''))
+'',
+'declare ',
+'    v_estado VARCHAR2(50) := ''N'';',
+'    v_permisos VARCHAR2(50) := ''N'';',
+'begin ',
+'    if :P99_TIP_COMPROBANTE = ''FCR'' THEN ',
+'        begin ',
+'            BEGIN',
+'                select AUTORIZADO',
+'                INTO v_estado        ',
+'                from vt_pedidos_cabecera a',
+'                where a.nro_comprobante = :P99_NRO_COMPROBANTE_REF',
+'                and a.ser_comprobante = :P99_SER_COMPROBANTE_REF',
+'                AND A.TIP_COMPROBANTE = :P99_TIP_COMPROBANTE_REF;',
+'            EXCEPTION ',
+'                WHEN OTHERS THEN  ',
+'                    v_estado :=  ''N'';',
+'            END;',
+'            IF NVL(v_estado, ''N'') <> ''S'' THEN ',
+'                RAISE_APPLICATION_ERROR(-20001, ''El pedido seleccionado no se encuentra autorizado por un supervisor de ventas'');',
+'            END IF;',
+'        end;    ',
+'',
+'    ELSIF :P99_TIP_COMPROBANTE = ''FCO'' THEN ',
+'',
+'             BEGIN',
+'            select AUTORIZADO',
+'            INTO v_estado        ',
+'            from vt_pedidos_cabecera a',
+'            where a.nro_comprobante = :P99_NRO_COMPROBANTE_REF',
+'            and a.ser_comprobante = :P99_SER_COMPROBANTE_REF',
+'            AND A.TIP_COMPROBANTE = :P99_TIP_COMPROBANTE_REF;',
+'            EXCEPTION ',
+'                WHEN OTHERS THEN  ',
+'                    v_estado :=  NULL;',
+'            END;',
+'',
+'            begin ',
+'                select PERMISO ',
+'                into v_permisos',
+'                from permisos_opciones PO',
+'                where cod_empresa = ''1''',
+'                and cod_usuario = :APP_USER',
+'                and nom_forma = ''VTFACTUR''',
+'                and parametro = ''FACTURA SIN AUTORIZACION'';',
+'                exception ',
+'                    when others then ',
+'                        v_permisos := ''N'';',
+'            end;',
+'        if v_estado <> ''S'' AND v_permisos = ''N'' THEN ',
+'                RAISE_APPLICATION_ERROR(-20001, ''El pedido seleccionado no se encuentra autorizado por un supervisor de ventas'');',
+'        end if;',
+'    END IF;',
+'',
+'end;'))
 ,p_process_clob_language=>'PLSQL'
 ,p_process_error_message=>'eRROR EN VALIDACIONES'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
