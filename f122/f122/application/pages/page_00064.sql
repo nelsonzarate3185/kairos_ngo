@@ -44,12 +44,12 @@ wwv_flow_imp_page.create_page(
 ,p_page_css_classes=>'CSS_CLASS'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'16'
-,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230315112745'
+,p_last_updated_by=>'CHARBA'
+,p_last_upd_yyyymmddhh24miss=>'20230811134149'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(402637826730423868)
-,p_plug_name=>'OT Reubicacion'
+,p_plug_name=>'OT Reubicacion II'
 ,p_region_template_options=>'#DEFAULT#:is-expanded:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40108275410263656)
 ,p_plug_display_sequence=>10
@@ -259,15 +259,24 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(402637826730423868)
 ,p_prompt=>'Posicion destino'
-,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_display_as=>'NATIVE_AUTO_COMPLETE'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+' SELECT u.posicion   ',
+' FROM CA_UBIC_PRODUCTOS U',
+' WHERE COD_EMPRESA = ''1''',
+' AND (u.nro_comprobante is null ',
+' 		or u.nro_comprobante_2 is null ',
+'		or u.nro_comprobante_3 is null ',
+'		or u.nro_comprobante_4 is null ',
+'		or u.nro_comprobante_5 is null)    '))
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
+,p_attribute_01=>'CONTAINS_IGNORE'
+,p_attribute_04=>'N'
+,p_attribute_09=>'3'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(12936518573296475)
@@ -323,16 +332,14 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'begin ',
-'   ',
+'begin    ',
 '    select  w.DESCRIPCION, ',
-'            inv.fnc_posicion_ot(o.cod_empresa, o.tip_comprobante, o.ser_comprobante, o.nro_comprobante) POSICION,',
+'            fnc_posicion_ot(o.cod_empresa, o.tip_comprobante, o.ser_comprobante, o.nro_comprobante) POSICION,',
 '            O.GARANTIA_OT, ',
 '            W.cod_articulo,',
 '            W.cod_art_corto,',
 '            O.SER_COMPROBANTE, ',
-'            O.NRO_COMPROBANTE ',
-'              ',
+'            O.NRO_COMPROBANTE               ',
 '    into ',
 '            :P64_DESCRIPCION,',
 '            :P64_POSICION,',
@@ -341,7 +348,6 @@ wwv_flow_imp_page.create_page_da_action(
 '            :P64_COD_ART_CORTO, ',
 '            :P64_SER_OT,',
 '            :P64_NRO_OT',
-'',
 '    from ST_ARTICULOS W, VT_ORDENES_TRABAJO O',
 '    where o.cod_empresa   =  ''1''',
 '    and o.ser_comprobante = :P64_SER_COMPROBANTE',
@@ -355,7 +361,6 @@ wwv_flow_imp_page.create_page_da_action(
 '     when others then ',
 '     :P64_ERR := ''OT ''|| :P64_NRO_COMPROBANTE||'' seleccionada no valida para reubicacion. ''||SQLERRM;',
 '      begin ',
-'    ',
 '            :P64_DESCRIPCION := null;',
 '            :P64_POSICION:= null;',
 '            :P64_GARANTIA_OT:= null;',
@@ -366,12 +371,8 @@ wwv_flow_imp_page.create_page_da_action(
 '            :P64_TIPO_REUBICACION := null; ',
 '            :P64_POSICION_DESTINO:= null ; ',
 '            :P64_SER_OT:= null; ',
-'            :P64_NRO_OT := null ; ',
-'',
-'        ',
-'',
+'            :P64_NRO_OT := null ;      ',
 '        end; ',
-'',
 '      ----raise_application_error(-20201, ''No se encontro la OT seleccionada!'');',
 'end;  ',
 '',
@@ -391,7 +392,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_condition_element=>'P64_POSICION_DESTINO'
 ,p_triggering_condition_type=>'NOT_NULL'
 ,p_bind_type=>'bind'
-,p_bind_event_type=>'change'
+,p_bind_event_type=>'focusout'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(12940640143296478)
@@ -410,10 +411,12 @@ wwv_flow_imp_page.create_page_da_action(
 '     AND p.POSICION = :P64_POSICION_DESTINO',
 '     and (p.nro_comprobante is null or p.nro_comprobante_2 is null or p.nro_comprobante_3 is null or p.nro_comprobante_4 is null or p.nro_comprobante_5 is null ) ;',
 '    :P64_ERR := null;',
+'	out_out(:P64_OBSERVACIONES,:P64_POSICION_DESTINO);',
 '    exception ',
-'     when others then ',
+'     when others then',
+'	 out_out(''fallos'',:P64_POSICION_DESTINO); ',
 '     :P64_ERR := ''Posicion: ''||:P64_POSICION_DESTINO||'' seleccionada no valida para reubicacion. ''||SQLERRM; ',
-'     :P64_POSICION_DESTINO := null;       ',
+'     :P64_POSICION_DESTINO := null;     ',
 'end;  ',
 '',
 ''))
@@ -500,7 +503,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_condition_element=>'P64_POSICION_DESTINO'
 ,p_triggering_condition_type=>'NOT_NULL'
 ,p_bind_type=>'bind'
-,p_bind_event_type=>'change'
+,p_bind_event_type=>'focusout'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(12945199941296480)
@@ -563,7 +566,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_condition_element=>'P64_POSICION_DESTINO'
 ,p_triggering_condition_type=>'NULL'
 ,p_bind_type=>'bind'
-,p_bind_event_type=>'change'
+,p_bind_event_type=>'focusout'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(12947837684296481)

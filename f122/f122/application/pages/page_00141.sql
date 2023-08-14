@@ -74,8 +74,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'16'
-,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230621110442'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230810103645'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(62413928440138234)
@@ -620,6 +620,18 @@ wwv_flow_imp_page.create_page_validation(
 ,p_error_message=>'Debe seleccionar el Motivo.'
 ,p_associated_item=>wwv_flow_imp.id(19646998795538232)
 ,p_error_display_location=>'INLINE_WITH_FIELD'
+);
+wwv_flow_imp_page.create_page_validation(
+ p_id=>wwv_flow_imp.id(190085434212831043)
+,p_validation_name=>'Va_OT_Garantia'
+,p_validation_sequence=>60
+,p_validation=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'IF :P141_TIPO_REF=''ORT'' AND ( :P141_NRO_REF IS NULL AND :P141_GARANTIA IS NULL) THEN',
+'        RETURN '' Debe cargar el Nro OT y/o Nro Garantia'';',
+'END IF;'))
+,p_validation2=>'PLSQL'
+,p_validation_type=>'FUNC_BODY_RETURNING_ERR_TEXT'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(19653248539538236)

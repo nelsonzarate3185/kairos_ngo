@@ -53,6 +53,12 @@ wwv_flow_imp_shared.create_static_lov_data(
 ,p_lov_disp_value=>'PENDIENTE'
 ,p_lov_return_value=>'PENDIENTE'
 );
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(191077841332139762)
+,p_lov_disp_sequence=>7
+,p_lov_disp_value=>'A LA VISTA'
+,p_lov_return_value=>'A LA VISTA'
+);
 wwv_flow_imp.component_end;
 end;
 /

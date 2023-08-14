@@ -87,8 +87,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230807150800'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230811073045'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(139854475275908245)
@@ -256,7 +256,9 @@ wwv_flow_imp_page.create_page_plug(
 '                                                 ''DD/MM/YYYY'')',
 '                           AND e.id_ticket = a.id_ticket',
 '                       --    AND e.hora_atencion IS NULL',
-'                            AND NVL(e.estado, ''ACTIVO'') IN (''CANCELADO'',''FINALIZADO''))',
+'                            AND ( NVL(e.estado, ''ACTIVO'') IN (''CANCELADO'',''FINALIZADO'')',
+'                                OR (NVL(e.estado, ''ACTIVO'')=''ACTIVO'' AND E.HORA_LLAMADA IS NOT NULL AND E.COD_USUARIO<>:APP_USER) )',
+'                            )',
 '                   AND a.fecha =',
 '                       to_date(to_char(SYSDATE, ''DD/MM/YYYY''), ''DD/MM/YYYY'')',
 '                   AND ((a.cod_tipo_cliente IN (''2'', ''3'') AND',
@@ -297,10 +299,12 @@ wwv_flow_imp_page.create_page_plug(
 '                          FROM llamador_ticket e',
 '                         WHERE e.fecha = to_date(to_char(SYSDATE, ''DD/MM/YYYY''),',
 '                                                 ''DD/MM/YYYY'')',
-'                           AND e.id_ticket = a.id_ticket',
-'                         --  AND e.hora_atencion IS NULL',
-'                           AND NVL(e.estado, ''ACTIVO'') IN (''CANCELADO'',''FINALIZADO''))',
-'                AND a.estado IN (''PENDIENTE'', ''ATENDIDO'')) x',
+'                           AND e.id_ticket = a.id_ticket ',
+'                           AND ( NVL(e.estado, ''ACTIVO'') IN (''CANCELADO'',''FINALIZADO'')  ',
+'                                OR (NVL(e.estado, ''ACTIVO'')=''ACTIVO'' AND E.HORA_LLAMADA IS NOT NULL AND E.COD_USUARIO<>:APP_USER) )',
+'                           )',
+'                AND a.estado IN (''PENDIENTE'', ''ATENDIDO'')                ',
+'                ) x',
 '        ',
 '         ORDER BY llamo, orden, id_ticket, procesar ASC)',
 ' ORDER BY ordenador ASC',
