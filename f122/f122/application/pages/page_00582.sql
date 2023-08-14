@@ -23,7 +23,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'OSCARGO'
-,p_last_upd_yyyymmddhh24miss=>'20230808145627'
+,p_last_upd_yyyymmddhh24miss=>'20230810143940'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93763586381731842)
@@ -441,6 +441,8 @@ wwv_flow_imp_page.create_page_item(
 'select periodo desc_periodo, periodo cod_periodo from rh_reg_vacaciones v where v.cod_empresa = :P_COD_EMPRESA and v.cod_empleado = :P582_COD_EMPLEADO',
 'and v.dias_disponibles > 0;'))
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P582_COD_EMPLEADO'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'

@@ -43,13 +43,13 @@ wwv_flow_imp_page.create_page(
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
-,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230616163043'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230811092223'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(54741658855018707)
 ,p_plug_name=>'Derivaciones'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--textContent:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--removeHeader:t-Region--textContent:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -82,10 +82,10 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(56175561042949580)
-,p_plug_name=>'Nuevo'
+,p_plug_name=>'MOTIVO PRINCIPAL: &P145_MOTIVO_PRINCIPAL.'
 ,p_region_name=>'reg_parametros'
 ,p_parent_plug_id=>wwv_flow_imp.id(54741658855018707)
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--stacked:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>20
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -445,7 +445,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(19688240335549342)
 ,p_name=>'P145_OPERADOR_REC'
 ,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>100
+,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
 ,p_item_source_plug_id=>wwv_flow_imp.id(54741658855018707)
 ,p_prompt=>'Oper. Retorno'
@@ -465,7 +465,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(19688677277549342)
 ,p_name=>'P145_FECHA_RETORNO'
 ,p_source_data_type=>'DATE'
-,p_item_sequence=>110
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
 ,p_item_source_plug_id=>wwv_flow_imp.id(54741658855018707)
 ,p_prompt=>'Fecha Retorno'
@@ -487,7 +487,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(19689073036549342)
 ,p_name=>'P145_OBS_REC'
 ,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>120
+,p_item_sequence=>140
 ,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
 ,p_item_source_plug_id=>wwv_flow_imp.id(54741658855018707)
 ,p_prompt=>'Obs. Retorno'
@@ -624,6 +624,100 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_06=>'0'
 ,p_attribute_08=>'600'
 ,p_attribute_09=>'400'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190085803417831047)
+,p_name=>'P145_NRO_ORT'
+,p_item_sequence=>100
+,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
+,p_prompt=>'Nro Ort'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_colspan=>3
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190085995176831048)
+,p_name=>'P145_GARANTIA'
+,p_item_sequence=>110
+,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
+,p_prompt=>'Nro. Garantia'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_colspan=>3
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190086073677831049)
+,p_name=>'P145_MOTIVO_DERIVACION'
+,p_item_sequence=>160
+,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
+,p_prompt=>unistr('Motivo de Derivaci\00F3n')
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190086129008831050)
+,p_name=>'P145_AREA_DERIVA'
+,p_item_sequence=>170
+,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
+,p_prompt=>'Area Responsable'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190693129958286601)
+,p_name=>'P145_RESPONSABLE'
+,p_item_sequence=>180
+,p_item_plug_id=>wwv_flow_imp.id(56175561042949580)
+,p_prompt=>'Responsable'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190693275308286602)
+,p_name=>'P145_MOTIVO_PRINCIPAL'
+,p_item_sequence=>120
+,p_item_plug_id=>wwv_flow_imp.id(54741658855018707)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_validation(
  p_id=>wwv_flow_imp.id(21760617129052342)
@@ -809,8 +903,59 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_success_message=>'SEEE'
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(19684258996549339)
+ p_id=>wwv_flow_imp.id(190693546204286605)
 ,p_process_sequence=>10
+,p_process_point=>'BEFORE_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'da_carga_titulo'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+' select m.descripcion',
+' into :P145_MOTIVO_PRINCIPAL',
+' from crm_casos c,',
+'      crm_motivo m',
+' where  c.id_caso= :P145_ID_CASO',
+' and    c.cod_empresa= :P_COD_EMPRESA',
+' and    c.cod_motivo=m.cod_motivo',
+' and    c.cod_empresa=m.cod_empresa;',
+'',
+'',
+'',
+' begin',
+'       select distinct e.cod_sucursal,  e.cod_area, e.cod_departamento, e.cod_empleado, ',
+'                       d.descripcion motivo,  a.descripcion area, p.nombre responsable',
+'                       ,c.nro_comp_ref,c.nro_garantia',
+'       into :P145_SUCURSAL_DERIVADA,:P145_AREA_DERIVADA,:P145_DPTO_DERIVADO,:P145_EMPLEADO_DERIVADO,',
+'            :P145_MOTIVO_DERIVACION,:P145_AREA_DERIVA, :P145_RESPONSABLE,:P145_NRO_ORT, :P145_GARANTIA',
+'                 from   crm_casos c',
+'                       ,crm_motivo_derivacion_pv m',
+'                       ,crm_motivo_derivacion d',
+'                       ,rh_areas a',
+'                       ,personas p',
+'                       ,rh_empleados e',
+'                 where  c.id_caso=  :P145_ID_CASO',
+'                 and    c.cod_empresa=  :P_COD_EMPRESA',
+'                 and    c.tipo_comp_ref=''ORT''    ',
+'                 and    c.cod_motivo=m.cod_motivo_principal',
+'                 and    c.cod_empresa=m.cod_empresa',
+'                 and    m.cod_motivo_deriva=d.cod_motivo',
+'                 and    m.cod_pers_responsable=p.cod_persona',
+'                 and    m.cod_empresa=e.cod_empresa',
+'                 and    m.cod_pers_responsable=e.cod_persona',
+'                 and    e.cod_area=a.cod_area',
+'                 and    e.cod_empresa=a.cod_empresa',
+'                 and    e.cod_sucursal = a.cod_sucursal',
+'                 and    nvl(e.activo,''S'')<>''N''',
+'                 ;',
+'',
+'exception',
+'    when others then',
+'        null;',
+' end;'))
+,p_process_clob_language=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(19684258996549339)
+,p_process_sequence=>20
 ,p_process_point=>'BEFORE_HEADER'
 ,p_region_id=>wwv_flow_imp.id(54741658855018707)
 ,p_process_type=>'NATIVE_FORM_INIT'

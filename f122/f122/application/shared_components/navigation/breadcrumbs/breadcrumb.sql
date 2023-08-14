@@ -1863,6 +1863,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_link=>'f?p=&APP_ID.:582:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>582
 );
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(190736422415790354)
+,p_short_name=>'MOTIVO DERIVACION POSTVTA'
+,p_link=>'f?p=&APP_ID.:594:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>594
+);
 wwv_flow_imp.component_end;
 end;
 /

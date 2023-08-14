@@ -95,7 +95,9 @@ prompt --install
 @@application/shared_components/user_interface/lovs/crm_derivaciones_contacto_area_derivada.sql
 @@application/shared_components/user_interface/lovs/crm_derivaciones_contacto_area_derivada_1.sql
 @@application/shared_components/user_interface/lovs/crm_motivo.sql
+@@application/shared_components/user_interface/lovs/crm_motivo_descripcion.sql
 @@application/shared_components/user_interface/lovs/crm_motivo1.sql
+@@application/shared_components/user_interface/lovs/crm_motivo_derivacion_descripcion.sql
 @@application/shared_components/user_interface/lovs/dm_boto.sql
 @@application/shared_components/user_interface/lovs/dm_sino.sql
 @@application/shared_components/user_interface/lovs/fv_vendedores_cod_persona.sql
@@ -199,6 +201,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_agrupaciones.sql
 @@application/shared_components/user_interface/lovs/lv_anulacion.sql
 @@application/shared_components/user_interface/lovs/lv_anulacion_stremisi.sql
+@@application/shared_components/user_interface/lovs/lv_areas.sql
 @@application/shared_components/user_interface/lovs/lv_areas_contacto.sql
 @@application/shared_components/user_interface/lovs/lv_areas_emp.sql
 @@application/shared_components/user_interface/lovs/lv_armador_stchkpro.sql
@@ -681,6 +684,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_usuarios_vtrepcaj.sql
 @@application/shared_components/user_interface/lovs/lv_usuario_caageven.sql
 @@application/shared_components/user_interface/lovs/lv_vale_stprocan.sql
+@@application/shared_components/user_interface/lovs/lv_vehiculos_pagina_398.sql
 @@application/shared_components/user_interface/lovs/lv_vehiculos_rpliqfle.sql
 @@application/shared_components/user_interface/lovs/lv_vehiculos_rprotv.sql
 @@application/shared_components/user_interface/lovs/lv_vehiculos_rpvetari.sql
@@ -1447,6 +1451,8 @@ prompt --install
 @@application/pages/page_00591.sql
 @@application/pages/page_00592.sql
 @@application/pages/page_00593.sql
+@@application/pages/page_00594.sql
+@@application/pages/page_00595.sql
 @@application/pages/page_00800.sql
 @@application/pages/page_00801.sql
 @@application/pages/page_00900.sql
