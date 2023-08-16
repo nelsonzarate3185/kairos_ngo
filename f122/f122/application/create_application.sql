@@ -56,7 +56,11 @@ wwv_flow_imp.create_flow(
 ,p_substitution_string_02=>'JASPERURL'
 ,p_substitution_value_02=>'http://192.168.15.98:8080/jasperserver/rest_v2/reports/reports'
 ,p_last_updated_by=>'INV'
+<<<<<<< HEAD
 ,p_last_upd_yyyymmddhh24miss=>'20230808171002'
+=======
+,p_last_upd_yyyymmddhh24miss=>'20230811160246'
+>>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>56
 ,p_ui_type_name => null

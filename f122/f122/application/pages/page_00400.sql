@@ -157,7 +157,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230804092239'
+,p_last_upd_yyyymmddhh24miss=>'20230810165907'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(128551196121042344)
@@ -589,10 +589,8 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Salir'
+,p_button_image_alt=>'Ir a Atendimiento'
 ,p_button_redirect_url=>'f?p=&APP_ID.:486:&SESSION.::&DEBUG.:400::'
-,p_button_condition=>'P400_PAGINA'
-,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_button_css_classes=>'u-color-1-bg'
 ,p_grid_new_row=>'N'
 ,p_grid_column=>12

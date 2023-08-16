@@ -23,7 +23,11 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'OSCARGO'
+<<<<<<< HEAD
 ,p_last_upd_yyyymmddhh24miss=>'20230808145627'
+=======
+,p_last_upd_yyyymmddhh24miss=>'20230810143940'
+>>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93763586381731842)
@@ -441,6 +445,8 @@ wwv_flow_imp_page.create_page_item(
 'select periodo desc_periodo, periodo cod_periodo from rh_reg_vacaciones v where v.cod_empresa = :P_COD_EMPRESA and v.cod_empleado = :P582_COD_EMPLEADO',
 'and v.dias_disponibles > 0;'))
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P582_COD_EMPLEADO'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
@@ -531,6 +537,91 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 );
 wwv_flow_imp_page.create_page_item(
+<<<<<<< HEAD
+ p_id=>wwv_flow_imp.id(190031122402876429)
+,p_name=>'P582_FECHA_INICIO'
+,p_is_required=>true
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(190030222484876420)
+,p_prompt=>'Fecha Inicio'
+,p_display_as=>'NATIVE_DATE_PICKER_JET'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'POPUP'
+,p_attribute_03=>'NONE'
+,p_attribute_06=>'ITEM'
+,p_attribute_08=>'P582_FECHA_FIN'
+,p_attribute_09=>'N'
+,p_attribute_11=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190031217146876430)
+,p_name=>'P582_FECHA_FIN'
+,p_is_required=>true
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_imp.id(190030222484876420)
+,p_prompt=>'Fecha Fin'
+,p_display_as=>'NATIVE_DATE_PICKER_JET'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'POPUP'
+,p_attribute_03=>'ITEM'
+,p_attribute_05=>'P582_FECHA_INICIO'
+,p_attribute_06=>'NONE'
+,p_attribute_09=>'N'
+,p_attribute_11=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190031724381876435)
+,p_name=>'P582_HORA_INICIO'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(190030222484876420)
+,p_prompt=>'Hora Inicio'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'START TIME SELECTOR'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select to_char(trunc(sysdate)+((i-1)/48),(''HH:MIam'')) d,',
+'       to_char(trunc(sysdate)+((i-1)/48),(''HH:MIam'')) r',
+'  from wwv_flow_dual100',
+' where i < 49',
+'order by i'))
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190031890553876436)
+,p_name=>'P582_HORA_FIN'
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_imp.id(190030222484876420)
+,p_prompt=>'Hora Fin'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'START TIME SELECTOR'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select to_char(trunc(sysdate)+((i-1)/48),(''HH:MIam'')) d,',
+'       to_char(trunc(sysdate)+((i-1)/48),(''HH:MIam'')) r',
+'  from wwv_flow_dual100',
+' where i < 49',
+'order by i'))
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+=======
+>>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
  p_id=>wwv_flow_imp.id(190032163765876439)
 ,p_name=>'P582_DESCUENTO'
 ,p_item_sequence=>30
