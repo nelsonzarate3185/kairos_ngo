@@ -36,7 +36,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230608153223'
+,p_last_upd_yyyymmddhh24miss=>'20230816151345'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(157931378613331813)
@@ -351,7 +351,7 @@ wwv_flow_imp_page.create_page_button(
 wwv_flow_imp_page.create_page_branch(
  p_id=>wwv_flow_imp.id(160863159963518843)
 ,p_branch_name=>unistr('Ir a P\00E1gina 535')
-,p_branch_action=>'f?p=&APP_ID.:535:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+,p_branch_action=>'f?p=&APP_ID.:535:&SESSION.::&DEBUG.::P535_COD_CLIENTE:&P532_ID_CLIENTE.&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_when_button_id=>wwv_flow_imp.id(161014674402538839)

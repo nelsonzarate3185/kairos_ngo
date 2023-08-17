@@ -23,8 +23,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
-,p_last_updated_by=>'ETRINIDAD'
-,p_last_upd_yyyymmddhh24miss=>'20230226154718'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230816113724'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(116056119599387805)
@@ -47,6 +47,7 @@ wwv_flow_imp_page.create_page_plug(
 'VTELEFONO VARCHAR2(200) := ''+595984766870'';',
 'VEMAIL VARCHAR2(200) := ''elias.trinidad@ngosaeca.com.py'';',
 'VPAGINAWEB VARCHAR2(200):= ''ngosaeca.com.py'';',
+'vwhatsapp VARCHAR2(200):= ''https://wa.me/595982700313'';',
 '/*VAPELLIDO VARCHAR2(200);*/',
 '',
 'BEGIN',
@@ -67,7 +68,7 @@ wwv_flow_imp_page.create_page_plug(
 '       E.DIRECCION VDIRECCION,',
 '       E.TELEFONO VTELEFONO,',
 '       E.EMAIL VEMAIL,',
-'       EMP.PAGINA_WEB VPAGINAWEB',
+'       EMP.PAGINA_WEB VPAGINAWEB, ''https%3A%2F%2Fwa.me%2F''||e.whatsapp',
 '  INTO VNOMBRES,',
 '       VAPELLIDOS,',
 '       VEMPRESA,',
@@ -75,7 +76,7 @@ wwv_flow_imp_page.create_page_plug(
 '       VDIRECCION,',
 '       VTELEFONO,',
 '       VEMAIL,',
-'       VPAGINAWEB',
+'       VPAGINAWEB,vwhatsapp',
 '  FROM V_EMPLEADOS E,',
 '       EMPRESAS EMP,',
 '       USUARIOS U ',
@@ -86,11 +87,12 @@ wwv_flow_imp_page.create_page_plug(
 '   ',
 '   ',
 '',
-'   ',
+'   --out_out(''https://chart.googleapis.com/chart?cht=qr&chl=BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3A''||VAPELLIDOS||''%3B''||VNOMBRES||''%20%0AFN%3A''||VNOMBRES||''%20%20''||VAPELLIDOS||''%0AORG%3A''||VEMPRESA||''%0ATITLE%3A''||VCARGO||''%0AADR%3A%3B%3B''||VDIRECCION'
+||'||''%0ATEL%3BWORK%3BVOICE%3A%0ATEL%3BCELL%3A''||VTELEFONO||''%0ATEL%3BFAX%3A%0AEMAIL%3BWORK%3BINTERNET%3A''||VEMAIL||''%0AURL%3A''||VPAGINAWEB||''%0AURL%3A''||vwhatsapp||''%0AEND%3AVCARD&chs=380x380&choe=UTF-8&chld=L|2'');',
 '  ',
 'htp.p(''<center><pre><a href="https://www.qr-code-generator.com"  style="cursor:default"></a>',
 '<img src="https://chart.googleapis.com/chart?cht=qr&chl=BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3A''||VAPELLIDOS||''%3B''||VNOMBRES||''%20%0AFN%3A''||VNOMBRES||''%20%20''||VAPELLIDOS||''%0AORG%3A''||VEMPRESA||''%0ATITLE%3A''||VCARGO||''%0AADR%3A%3B%3B''||VDIRECCION||''%'
-||'0ATEL%3BWORK%3BVOICE%3A%0ATEL%3BCELL%3A''||VTELEFONO||''%0ATEL%3BFAX%3A%0AEMAIL%3BWORK%3BINTERNET%3A''||VEMAIL||''%0AURL%3A''||VPAGINAWEB||''%0AEND%3AVCARD&chs=380x380&choe=UTF-8&chld=L|2"></a>'');',
+||'0ATEL%3BWORK%3BVOICE%3A%0ATEL%3BCELL%3A''||VTELEFONO||''%0ATEL%3BFAX%3A%0AEMAIL%3BWORK%3BINTERNET%3A''||VEMAIL||''%0AURL%3A''||VPAGINAWEB||''%0AURL%3A''||vwhatsapp||''%0AEND%3AVCARD&chs=380x380&choe=UTF-8&chld=L|2"></a>'');',
 'END ;',
 '',
 '',

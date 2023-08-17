@@ -36,8 +36,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
-,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230609162252'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230816151530'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(160860838192518820)
@@ -696,6 +696,14 @@ wwv_flow_imp_page.create_page_branch(
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_sequence=>10
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190746130792605907)
+,p_name=>'P535_COD_CLIENTE'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(160860838192518820)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(160862956777518841)
 ,p_name=>'Obtiene datos '
@@ -710,7 +718,10 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>'inv.catickets.pr_carga_proceso_ot(p_usuario => :APP_USER);'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'inv.catickets.pr_carga_proceso_ot(p_usuario => :APP_USER,',
+'                                 p_cod_cliente => :P535_COD_CLIENTE);'))
+,p_attribute_02=>'P535_COD_CLIENTE'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
