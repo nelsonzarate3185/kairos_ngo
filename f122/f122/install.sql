@@ -1,9 +1,8 @@
-prompt --install  
+prompt --install
 @@application/set_environment.sql
 @@application/delete_application.sql
 @@application/create_application.sql
 @@workspace/credentials/credentials_for_roberto.sql
-
 @@workspace/remote_servers/192_168_15_44.sql
 @@application/shared_components/data_profiles/roberto.sql
 @@application/shared_components/web_sources/roberto.sql
@@ -1447,6 +1446,7 @@ prompt --install
 @@application/pages/page_00581.sql
 @@application/pages/page_00582.sql
 @@application/pages/page_00583.sql
+@@application/pages/page_00584.sql
 @@application/pages/page_00589.sql
 @@application/pages/page_00590.sql
 @@application/pages/page_00591.sql

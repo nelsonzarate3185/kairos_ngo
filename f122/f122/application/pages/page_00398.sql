@@ -75,11 +75,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-<<<<<<< HEAD
-,p_last_upd_yyyymmddhh24miss=>'20230808171002'
-=======
 ,p_last_upd_yyyymmddhh24miss=>'20230811160246'
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(117611450062947315)
@@ -723,45 +719,22 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_report_columns=>'INCLUIDO:TIEMPO_PEDIDO:COMPROBANTE:RUTA_ENTREGA_ASIGNADA:VOLUMEN:PESO_KG:DEPARTAMENTO:CIUDAD:BARRIO:COD_CLIENTE:IMPORTE:FECHA_ENTREGA:SITUACION:PEDIDOS_PENDIENTES:DETALLES:PED:'
 );
 wwv_flow_imp_page.create_worksheet_condition(
-<<<<<<< HEAD
- p_id=>wwv_flow_imp.id(190124230611445695)
-=======
  p_id=>wwv_flow_imp.id(191060551875721165)
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 ,p_report_id=>wwv_flow_imp.id(118515665001358648)
 ,p_name=>'FACT PARCIAL'
 ,p_condition_type=>'HIGHLIGHT'
 ,p_allow_delete=>'Y'
 ,p_column_name=>'SITUACION'
-<<<<<<< HEAD
-,p_operator=>'!='
-,p_expr=>'FACT PARCIAL'
-,p_condition_sql=>' (case when ("SITUACION" != #APXWS_EXPR#) then #APXWS_HL_ID# end) '
-,p_condition_display=>'#APXWS_COL_NAME# != ''FACT PARCIAL''  '
-=======
 ,p_operator=>'='
 ,p_expr=>'FACT PARCIAL'
 ,p_condition_sql=>' (case when ("SITUACION" = #APXWS_EXPR#) then #APXWS_HL_ID# end) '
 ,p_condition_display=>'#APXWS_COL_NAME# = ''FACT PARCIAL''  '
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 ,p_enabled=>'Y'
 ,p_highlight_sequence=>10
 ,p_row_bg_color=>'#ffffff'
 ,p_row_font_color=>'#e4032c'
 );
 wwv_flow_imp_page.create_worksheet_condition(
-<<<<<<< HEAD
- p_id=>wwv_flow_imp.id(190124611788445695)
-,p_report_id=>wwv_flow_imp.id(118515665001358648)
-,p_name=>'STOCK COMPLETO'
-,p_condition_type=>'HIGHLIGHT'
-,p_allow_delete=>'Y'
-,p_column_name=>'SITUACION'
-,p_operator=>'!='
-,p_expr=>'STOCK COMPLETO'
-,p_condition_sql=>' (case when ("SITUACION" != #APXWS_EXPR#) then #APXWS_HL_ID# end) '
-,p_condition_display=>'#APXWS_COL_NAME# != ''STOCK COMPLETO''  '
-=======
  p_id=>wwv_flow_imp.id(191060966740721164)
 ,p_report_id=>wwv_flow_imp.id(118515665001358648)
 ,p_name=>'SIN STOCK'
@@ -772,14 +745,11 @@ wwv_flow_imp_page.create_worksheet_condition(
 ,p_expr=>'SIN STOCK'
 ,p_condition_sql=>' (case when ("SITUACION" = #APXWS_EXPR#) then #APXWS_HL_ID# end) '
 ,p_condition_display=>'#APXWS_COL_NAME# = ''SIN STOCK''  '
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 ,p_enabled=>'Y'
 ,p_highlight_sequence=>10
 ,p_row_bg_color=>'#ffffff'
 ,p_row_font_color=>'#e4032c'
 );
-<<<<<<< HEAD
-=======
 wwv_flow_imp_page.create_worksheet_condition(
  p_id=>wwv_flow_imp.id(191061383471721164)
 ,p_report_id=>wwv_flow_imp.id(118515665001358648)
@@ -794,7 +764,6 @@ wwv_flow_imp_page.create_worksheet_condition(
 ,p_enabled=>'Y'
 ,p_highlight_sequence=>10
 );
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(118503530062355202)
 ,p_plug_name=>'B_PARAMETRO_DETALLE'
@@ -1069,18 +1038,6 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_type=>'STRING'
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_worksheet_column(
  p_id=>wwv_flow_imp.id(119015525547594210)
@@ -2129,18 +2086,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'N'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118412699892727531)
 ,p_name=>'P398_RUTA_ASIGNADA'
@@ -2899,8 +2844,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'S'
 ,p_attribute_03=>'N'
 );
-<<<<<<< HEAD
-=======
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(188213308410298031)
 ,p_name=>'P398_CAMION'
@@ -2969,7 +2912,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(117613412626947335)
 ,p_name=>'DA_HABILITAR_ITEMS'
@@ -3191,29 +3133,13 @@ wwv_flow_imp_page.create_page_da_action(
 '        APEX_DEBUG.ERROR(SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P398_ESTADO_DISTRIBUCION_PIE,P398_FECHA_INI,P398_FECHA_FIN,P398_CLIENTE,P398_IND_TRANSPORTADORA,P398_ORIGEN_ENTREGA_PIE,P398_EMPRESA_ORIGEN,P398_ZONA_ENTREGA,P398_SITUACION,P398_IND_TIPO_PEDIDO,P398_DEPARTAMENTO,APP_USER,P398_ID_RUTEO,P398_CIUDAD,P39'
-<<<<<<< HEAD
-||'8_RUTA_ASIGNADA,P398_IND_GUARDA,P398_IND_CLIENTE_FINAL,P398_ECOMMERCE,P398_IND_SNC,P398_IND_REQUIERE_CONFIRMACION,P398_CONDICION,P398_IND_NOGAL,P398_ORIGEN_ENTREGA'
-=======
 ||'8_RUTA_ASIGNADA,P398_IND_GUARDA,P398_IND_CLIENTE_FINAL,P398_ECOMMERCE,P398_IND_SNC,P398_IND_REQUIERE_CONFIRMACION,P398_CONDICION,P398_IND_NOGAL,P398_ORIGEN_ENTREGA,P398_ESTADO_DISTRIBUCION'
->>>>>>> 68ff9ac14e63ffb9950e34adf11b33edd71d6ed9
 ,p_attribute_03=>'P398_INDICADOR_REPORTE_PED_RUT'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 ,p_client_condition_type=>'NULL'
 ,p_client_condition_element=>'P398_MENSAJE_ALERT'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(118508229940355249)
@@ -4167,18 +4093,6 @@ wwv_flow_imp_page.create_page_da_action(
 'apex.navigation.openInNewWindow(url, "_blank");'))
 ,p_client_condition_type=>'NULL'
 ,p_client_condition_element=>'P398_MENSAJE_ALERT'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(119118663571300224)

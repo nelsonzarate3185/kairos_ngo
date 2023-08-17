@@ -810,7 +810,7 @@ unistr('          keyElement.innerHTML = createIconHTML("Bloq. May\00FAs");'),
 ,p_page_is_public_y_n=>'Y'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230807151522'
+,p_last_upd_yyyymmddhh24miss=>'20230816085803'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(136461951842824243)
@@ -1247,6 +1247,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P469_RUC'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(136461951842824243)
+,p_use_cache_before_default=>'NO'
 ,p_prompt=>unistr('INGRESE SU N\00DAMERO CI/RUC')
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
@@ -1281,6 +1282,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P469_COD_PERSONA'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(136461951842824243)
+,p_use_cache_before_default=>'NO'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -1289,6 +1291,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P469_COD_CLIENTE'
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(136461951842824243)
+,p_use_cache_before_default=>'NO'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -1508,6 +1511,16 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P469_RUC'
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(190745864759605904)
+,p_event_id=>wwv_flow_imp.id(136462457113824248)
+,p_event_result=>'TRUE'
+,p_action_sequence=>100
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CLEAR'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P469_COD_CLIENTE,P469_RUC,P469_RUC1,P469_COD_PERSONA'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(136462660796824250)
 ,p_name=>'da_trae_datos'
@@ -1561,6 +1574,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    VERROR EXCEPTION;',
 'BEGIN ',
 '    :P469_NOMBRE :=NULL;',
+'    :P469_COD_PERSONA := null;',
 '    select NVL(length(trim(TRANSLATE(:P469_RUC, ''1234567890-'', '' ''))),0)',
 '    INTO VCOUNT',
 '    from dual',
@@ -2152,6 +2166,16 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>'setInterval(''refrescargrilla()'',5000);'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(190745743813605903)
+,p_event_id=>wwv_flow_imp.id(140732736394581839)
+,p_event_result=>'TRUE'
+,p_action_sequence=>110
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CLEAR'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P469_RUC,P469_COD_CLIENTE,P469_COD_PERSONA'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(175728704112649225)

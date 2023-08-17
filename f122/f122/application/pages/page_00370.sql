@@ -82,7 +82,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230728161421'
+,p_last_upd_yyyymmddhh24miss=>'20230816142051'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(106525111792760542)
@@ -4374,7 +4374,12 @@ wwv_flow_imp_page.create_page_button(
 'IF :P370_ESTADO_PRESU IN (''C'', ''E'') THEN ',
 '    RETURN FALSE;',
 'ELSE ',
-'    RETURN TRUE;',
+'    IF inv.catickets.pr_verifica_usuario(p_usuario => :APP_USER,',
+'                                        p_nro_ot => :P370_NRO_COMPROBANTE) = TRUE THEN ',
+'        RETURN FALSE;',
+'    ELSE ',
+'        RETURN TRUE;',
+'    END IF;',
 'END IF;'))
 ,p_button_condition2=>'PLSQL'
 ,p_button_condition_type=>'FUNCTION_BODY'

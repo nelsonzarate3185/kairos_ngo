@@ -341,7 +341,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_is_public_y_n=>'Y'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230807163659'
+,p_last_upd_yyyymmddhh24miss=>'20230816103818'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(188179930122669309)
@@ -434,7 +434,7 @@ wwv_flow_imp_page.create_page_plug(
 '                       to_date(to_char(SYSDATE, ''DD/MM/YYYY''), ''DD/MM/YYYY'')',
 '                   AND e.id_ticket = a.id_ticket',
 '                   AND e.estado NOT IN (''CANCELADO'', ''FINALIZADO'')',
-'                   AND e.hora_atencion IS NULL)',
+'                   /*AND e.hora_atencion IS NULL*/)',
 '        ',
 '        UNION ALL',
 '        SELECT ''Ticket: '' || a.ser_ticket || '''' || a.nro_ticket ticket,',
@@ -475,7 +475,7 @@ wwv_flow_imp_page.create_page_plug(
 '                 WHERE e.fecha =',
 '                       to_date(to_char(SYSDATE, ''DD/MM/YYYY''), ''DD/MM/YYYY'')',
 '                   AND e.id_ticket = a.id_ticket',
-'                   AND e.hora_atencion IS NULL',
+'                   --AND e.hora_atencion IS NULL',
 '                   AND e.estado NOT IN (''CANCELADO'', ''FINALIZADO'')))',
 ' WHERE rownum < 6',
 ''))
@@ -582,7 +582,7 @@ wwv_flow_imp_page.create_page_plug(
 '                       to_date(to_char(SYSDATE, ''DD/MM/YYYY''), ''DD/MM/YYYY'')',
 '                   AND e.id_ticket = a.id_ticket',
 '                   AND e.estado NOT IN (''CANCELADO'', ''FINALIZADO'')',
-'                   AND e.hora_atencion IS NULL)',
+'                   /*AND e.hora_atencion IS NULL*/)',
 '        ',
 '        UNION ALL',
 '        SELECT ''Ticket: '' || a.ser_ticket || '''' || a.nro_ticket ticket,',
@@ -622,7 +622,7 @@ wwv_flow_imp_page.create_page_plug(
 '                 WHERE e.fecha =',
 '                       to_date(to_char(SYSDATE, ''DD/MM/YYYY''), ''DD/MM/YYYY'')',
 '                   AND e.id_ticket = a.id_ticket',
-'                   AND e.hora_atencion IS NULL',
+'                  -- AND e.hora_atencion IS NULL',
 '                   AND e.estado NOT IN (''CANCELADO'', ''FINALIZADO'')))',
 ' WHERE rownum < 6',
 ''))
