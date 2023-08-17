@@ -87,8 +87,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230811073045'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230816161933'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(139854475275908245)
@@ -554,6 +554,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P468_CANCELAR'
 ,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(137938614110472710)
+,p_use_cache_before_default=>'NO'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -695,8 +696,7 @@ wwv_flow_imp_page.create_page_da_action(
 '            SELECT COUNT(*)',
 '            INTO v_verificar',
 '            FROM INV.LLAMADOR_TICKET ',
-'            WHERE  ID_TICKET =  :P468_ID_TICKET',
-'            AND ROWNUM = 1;',
+'            WHERE  ID_TICKET =  :P468_ID_TICKET;',
 '            EXCEPTION ',
 '                WHEN OTHERS THEN ',
 '                    v_verificar := 0;',
@@ -714,6 +714,15 @@ wwv_flow_imp_page.create_page_da_action(
 '                        v_numero := 0;',
 '                     ',
 '            END;',
+'',
+'',
+'            BEGIN',
+'                select NRO_TICKET, SER_TICKET',
+'                INTO :P468_TICKET, :P468_SERIE_BOX',
+'                from ca_ticket_atencion   A',
+'                WHERE A.ID_TICKET  =  :P468_ID_TICKET;',
+'            END;',
+'',
 '            ',
 '            INSERT INTO INV.LLAMADOR_TICKET (id_llamador, box, num_ticket, llamar, fecha, hora_llamada, SERIE_TICKET, ID_TICKET, OPERACION, COD_USUARIO)',
 '                                    VALUES (v_numero, :P468_BOX, :P468_TICKET, ''S'', SYSDATE, NULL, :P468_SERIE_BOX, :P468_ID_TICKET, ''BOX'', :APP_USER);',
@@ -981,8 +990,39 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'update INV.LLAMADOR_TICKET set estado  = ''CANCELADO'', MOTIVO_CANCELACION = :P468_MOTIVO',
-'where id_ticket =  :P468_CANCELAR;'))
+'DECLARE ',
+'    v_contador NUMBER := 0;',
+'    v_numero number;',
+'BEGIN',
+'        BEGIN ',
+'            SELECT COUNT(*)',
+'            INTO v_contador',
+'            FROM INV.LLAMADOR_TICKET',
+'            where id_ticket =  :P468_CANCELAR;',
+'            EXCEPTION',
+'                WHEN OTHERS THEN ',
+'                    v_contador := NULL;',
+'        END;',
+'    IF v_contador = 0  THEN ',
+'        begin ',
+'',
+'            BEGIN',
+'                update INV.ca_ticket_atencion   set estado = ''CANCELADO''',
+'                WHERE ID_TICKET  =  :P468_CANCELAR;',
+'            END;',
+'        exception ',
+'            when others then ',
+'                raise_application_error(-20001, sqlerrm);',
+'        end;',
+'    ELSE ',
+'        BEGIN ',
+'            update INV.LLAMADOR_TICKET set estado  = ''CANCELADO'', MOTIVO_CANCELACION = :P468_MOTIVO',
+'            where id_ticket =  :P468_CANCELAR;',
+'        END;',
+'    END IF;',
+' END;',
+'',
+''))
 ,p_attribute_02=>'P468_CANCELAR,P468_MOTIVO'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -1005,7 +1045,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_CLEAR'
 ,p_affected_elements_type=>'ITEM'
-,p_affected_elements=>'P468_MOTIVO'
+,p_affected_elements=>'P468_MOTIVO,P468_CANCELAR'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(139853737349908238)
@@ -1116,13 +1156,26 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(143661660822222740)
+ p_id=>wwv_flow_imp.id(190746093523605906)
 ,p_event_id=>wwv_flow_imp.id(143661596933222739)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CLEAR'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P468_MOTIVO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(143661660822222740)
+,p_event_id=>wwv_flow_imp.id(143661596933222739)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'javascript:openModal(''cancelacion'');',
+'/* ',
+' ',
 ' apex.server.process(',
 ' ''VALIDA_CANCELACION'', ',
 ' { x01: apex.item("P468_CANCELAR").getValue()}, ',
@@ -1139,7 +1192,7 @@ wwv_flow_imp_page.create_page_da_action(
 '     ',
 '     ',
 ' }, ',
-' });'))
+' });*/'))
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(143660550067222729)

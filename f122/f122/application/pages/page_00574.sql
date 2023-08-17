@@ -19,7 +19,7 @@ wwv_flow_imp_page.create_page(
 ,p_step_title=>'OTs  Solicitadas Clientes'
 ,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
-,p_html_page_header=>'<meta http-equiv="refresh" content="40000000" >'
+,p_html_page_header=>'<meta http-equiv="refresh" content="40" >'
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '  .t-Header-branding, #floating-menu,#t_Body_content_offset ,  .t-Footer-topButton{ display:none;} ',
 ' .t-Body {',
@@ -95,27 +95,15 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230809122729'
+,p_last_upd_yyyymmddhh24miss=>'20230816090821'
 );
 wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(572348153206370911)
-,p_plug_name=>'Parametros'
-,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle:margin-top-none:margin-bottom-none'
-,p_plug_template=>wwv_flow_imp.id(40134615190263663)
-,p_plug_display_sequence=>30
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(573294526030559843)
-,p_plug_name=>'Ordenes de trabajo'
-,p_region_name=>'GRILLA'
+ p_id=>wwv_flow_imp.id(190696604506286636)
+,p_plug_name=>'Ingreso'
 ,p_region_template_options=>'#DEFAULT#:margin-top-none'
+,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(40100032401263654)
-,p_plug_display_sequence=>40
-,p_plug_new_grid_row=>false
-,p_plug_new_grid_column=>false
+,p_plug_display_sequence=>50
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select  cc.ser_comprobante,',
@@ -211,9 +199,187 @@ unistr('               ''INGRESO SAL\00D3N'''),
 '                  where a.id_ticket =  o.nro_ticket',
 '                  )',
 '       END)=''Cliente Final''',
+'AND',
+'(     CASE WHEN NVL(O.IND_SNC,''N'') = ''S'' THEN ',
+'           ''SNC''',
+'        ELSE ',
+'          CASE WHEN CC.tipo=''E'' AND CC.COD_GRUPO=''TECNIC'' THEN',
+unistr('           ''ENTREGA T\00C9CNICO'''),
+'          ELSE ',
+'            CASE WHEN CC.COD_GRUPO=''TECNIC'' THEN ',
+unistr('              ''SOLICITUD T\00C9CNICO'''),
+'            ELSE ',
+'             CASE WHEN CC.tipo=''E'' THEN ',
+unistr('               ''INGRESO SAL\00D3N'''),
+'             ELSE ',
+'               ''SOLICITUD CAJA''',
+'             END',
+'            END ',
+'         END ',
+unistr('        END) =''INGRESO SAL\00D3N'''),
 '',
+'order by CC.FEC_ALTA'))
+,p_lazy_loading=>false
+,p_plug_source_type=>'NATIVE_CARDS'
+,p_plug_query_num_rows_type=>'SCROLL'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_show_total_row_count=>false
+);
+wwv_flow_imp_page.create_card(
+ p_id=>wwv_flow_imp.id(190696737911286637)
+,p_region_id=>wwv_flow_imp.id(190696604506286636)
+,p_layout_type=>'GRID'
+,p_grid_column_count=>3
+,p_card_css_classes=>'&CLASE.'
+,p_title_adv_formatting=>true
+,p_title_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<div class="a-CardView-title">',
+'    <span >&TIPO_DESC.</span>',
+'    <strong style="float:right">&NRO_COMPROBANTE.</strong>',
+'</div> ',
+''))
+,p_sub_title_adv_formatting=>false
+,p_sub_title_column_name=>'PROVEEDOR'
+,p_body_adv_formatting=>false
+,p_body_column_name=>'DESCRIPCION'
+,p_second_body_adv_formatting=>false
+,p_second_body_column_name=>'POSICION'
+,p_media_adv_formatting=>false
+,p_pk1_column_name=>'NRO_COMPROBANTE'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(572348153206370911)
+,p_plug_name=>'Parametros'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle:margin-top-none:margin-bottom-none'
+,p_plug_template=>wwv_flow_imp.id(40134615190263663)
+,p_plug_display_sequence=>30
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(573294526030559843)
+,p_plug_name=>'Salida'
+,p_region_name=>'GRILLA'
+,p_region_template_options=>'#DEFAULT#:margin-top-none'
+,p_plug_template=>wwv_flow_imp.id(40100032401263654)
+,p_plug_display_sequence=>60
+,p_plug_new_grid_row=>false
+,p_query_type=>'SQL'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select  cc.ser_comprobante,',
+'        cc.ser_comprobante||''  - ''||cc.nro_comprobante /*||decode(inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) ,null,'''',''        //         Posicion: ''||inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_com'
+||'probante, cc.ser_comprobante, cc.nro_comprobante) )*/nro_comprobante, ',
+'        A.DESCRIPCION, ',
+'        ---inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) POSICION ,',
+unistr('        decode(inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) ,null,'''',''POSICI\00D3N: ''||inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) )POSICION,'),
+'        O.GARANTIA_OT, ',
+'        CC.COD_USUARIO_PED,',
+'        CC.FEC_ALTA, ',
+'        CC.HORA_ALTA,',
+'        CASE WHEN NVL(O.IND_SNC,''N'') = ''S'' THEN ',
+'           ''SNC''',
+'        ELSE ',
+'          CASE WHEN CC.tipo=''E'' AND CC.COD_GRUPO=''TECNIC'' THEN',
+unistr('           ''ENTREGA T\00C9CNICO'''),
+'          ELSE ',
+'            CASE WHEN CC.COD_GRUPO=''TECNIC'' THEN ',
+unistr('              ''SOLICITUD T\00C9CNICO'''),
+'            ELSE ',
+'             CASE WHEN CC.tipo=''E'' THEN ',
+unistr('               ''INGRESO SAL\00D3N'''),
+'             ELSE ',
+'               ''SOLICITUD CAJA''',
+'             END',
+'            END ',
+'         END ',
+'        END /*||''.        <h2 class="clasot">''||cc.ser_comprobante||'' - ''||cc.nro_comprobante ||''</h2>'' */TIPO_DESC , ',
+'        E.NOMBRE PROVEEDOR, ',
+'        cc.id_solicitud ,',
+'        p.cod_proveedor, ',
+'        decode (ORIGEN, ''T'', ''TALLER'', ''R'',''RECEPCION'',''I'',''INGRESO'',''SIN ORIGEN'') ORIGEN, ',
+'        CC.tipo,',
+'       CASE',
+'         WHEN o.nro_ticket IS NULL THEN',
+'          (SELECT decode(a.tip_cliente, 1, ''Distribuidor'', ''Cliente Final'')',
+'             FROM cc_clientes a',
+'            WHERE a.cod_empresa = 1',
+'              AND a.cod_cliente = o.cod_cliente',
+'              AND rownum = 1)',
+'         ELSE',
+'             (select decode(a.cod_tipo_cliente,''1'', ''Distribuidor'', ''Cliente Final'')',
+'                  from ca_ticket_atencion a',
+'                  where a.id_ticket =  o.nro_ticket',
+'                  )',
+'       END tipo_client,',
+'       CASE WHEN NVL(O.IND_SNC,''N'') = ''S'' THEN ',
+'           ''SNC''',
+'        ELSE ',
+'          CASE WHEN CC.tipo=''E'' AND CC.COD_GRUPO=''TECNIC'' THEN',
+'           ''ENT_TEC''',
+'          ELSE ',
+'            CASE WHEN CC.COD_GRUPO=''TECNIC'' THEN ',
+'              ''SOL_TEC''',
+'            ELSE ',
+'             CASE WHEN CC.tipo=''E'' THEN ',
+'               ''ING_SAL''',
+'             ELSE ',
+'               ''SOL_CAJ''',
+'             END',
+'            END ',
+'         END ',
+'        END CLASE',
+'from CA_SOLICITUD_OT cc, ST_ARTICULOS A, VT_ORDENES_TRABAJO O, CM_PROVEEDORES P, PERSONAS E',
+'where CC.cod_empresa = ''1''',
+'AND NVL(CC.ESTADO,''N'')=''P''                    ',
+'AND (ORIGEN= :P574_ORIGENES OR :P574_ORIGENES IS NULL OR  :P574_ORIGENES  = ''TD'')',
+'AND A.COD_EMPRESA= CC.COD_EMPRESA',
+'AND A.COD_ARTICULO = o.cod_articulo',
+'AND O.COD_EMPRESA = CC.COD_EMPRESA',
+'AND O.TIP_COMPROBANTE= CC.TIP_COMPROBANTE',
+'AND O.SER_COMPROBANTE = CC.SER_COMPROBANTE ',
+'AND O.NRO_COMPROBANTE = CC.NRO_COMPROBANTE ',
+'AND P.COD_EMPRESA = CC.COD_EMPRESA',
+'AND P.COD_PROVEEDOR = O.COD_PROVEEDOR',
+'AND P.COD_PERSONA = E.COD_PERSONA',
+'AND (O.cod_proveedor=:P574_TECNICOS or :P574_TECNICOS=''T'')',
+'AND NVL(O.ANULADO,''N'')<>''S''',
+'AND nvl(nvl(O.ind_entrega,''N''),NVL(O.IND_RETIRADO,''N''))<>''S''',
+'AND (:P574_VER_SNC= ''T'' OR (:P574_VER_SNC = ''S'' AND NVL(O.IND_SNC,''N'') =''S'' ) OR (:P574_VER_SNC = ''N'' AND NVL(O.IND_SNC,''N'') =''N'' ))',
+'AND ((nvl(:P574_CHK_TKT,''N'')=''N'' AND COD_USUARIO_PED <>''TICKETS'') OR nvl(:P574_CHK_TKT,''N'')=''S'')',
+'AND ( CASE',
+'         WHEN o.nro_ticket IS NULL THEN',
+'          (SELECT decode(a.tip_cliente, 1, ''Distribuidor'', ''Cliente Final'')',
+'             FROM cc_clientes a',
+'            WHERE a.cod_empresa = 1',
+'              AND a.cod_cliente = o.cod_cliente',
+'              AND rownum = 1)',
+'         ELSE',
+'             (select decode(a.cod_tipo_cliente,''1'', ''Distribuidor'', ''Cliente Final'')',
+'                  from ca_ticket_atencion a',
+'                  where a.id_ticket =  o.nro_ticket',
+'                  )',
+'       END)=''Cliente Final''',
+'AND',
+'(     CASE WHEN NVL(O.IND_SNC,''N'') = ''S'' THEN ',
+'           ''SNC''',
+'        ELSE ',
+'          CASE WHEN CC.tipo=''E'' AND CC.COD_GRUPO=''TECNIC'' THEN',
+unistr('           ''ENTREGA T\00C9CNICO'''),
+'          ELSE ',
+'            CASE WHEN CC.COD_GRUPO=''TECNIC'' THEN ',
+unistr('              ''SOLICITUD T\00C9CNICO'''),
+'            ELSE ',
+'             CASE WHEN CC.tipo=''E'' THEN ',
+unistr('               ''INGRESO SAL\00D3N'''),
+'             ELSE ',
+'               ''SOLICITUD CAJA''',
+'             END',
+'            END ',
+'         END ',
+'        END) =''SOLICITUD CAJA'' ',
 '',
-'order by TIPO_DESC ,E.NOMBRE,CC.FEC_ALTA'))
+'order by CC.FEC_ALTA'))
 ,p_lazy_loading=>false
 ,p_plug_source_type=>'NATIVE_CARDS'
 ,p_plug_query_num_rows_type=>'SCROLL'
