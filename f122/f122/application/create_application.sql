@@ -55,8 +55,8 @@ wwv_flow_imp.create_flow(
 ,p_substitution_value_01=>'KAIROS'
 ,p_substitution_string_02=>'JASPERURL'
 ,p_substitution_value_02=>'http://192.168.15.98:8080/jasperserver/rest_v2/reports/reports'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230817115254'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230817161140'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>56
 ,p_ui_type_name => null
