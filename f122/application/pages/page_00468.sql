@@ -88,7 +88,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230816161933'
+,p_last_upd_yyyymmddhh24miss=>'20230818150220'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(139854475275908245)
@@ -681,7 +681,7 @@ wwv_flow_imp_page.create_page_da_action(
 '          FROM llamador_ticket a, ca_puesto_box b',
 '          where b.cod_box = a.box',
 '          and a.id_ticket = :P468_ID_TICKET',
-'          and a.fecha= to_date(to_char(SYSDATE, ''DD/MM/YYYY''), ''DD/MM/YYYY'')',
+'          and a.fecha= trunc(SYSDATE)',
 '          and a.cod_usuario  <> :app_user',
 '          and rownum = 1;',
 '  exception ',

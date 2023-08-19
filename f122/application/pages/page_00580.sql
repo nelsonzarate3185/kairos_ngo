@@ -53,7 +53,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230817115254'
+,p_last_upd_yyyymmddhh24miss=>'20230818091753'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(187805003220448446)
@@ -245,7 +245,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_report_columns=>'NOMBRE_DESCRIPCION:BASE_COMISION:PORC_PESO:OBJETIVO:VTA_TOTAL:PORC_LOGRADO:IMP_COMISION:'
-,p_sum_columns_on_break=>'IMP_COMISION'
+,p_sum_columns_on_break=>'IMP_COMISION:BASE_COMISION:PORC_PESO'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(188558645256494424)
@@ -417,7 +417,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_report_columns=>'NOMBRE_DESCRIPCION:BASE_COMISION:PORC_PESO:OBJETIVO:VAL_ALCANZADO:PORC_LOGRADO:IMP_COMISION:'
-,p_sum_columns_on_break=>'IMP_COMISION'
+,p_sum_columns_on_break=>'IMP_COMISION:BASE_COMISION:PORC_PESO'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(190082861136831017)

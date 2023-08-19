@@ -82,7 +82,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230816142051'
+,p_last_upd_yyyymmddhh24miss=>'20230818114809'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(106525111792760542)
@@ -4375,10 +4375,10 @@ wwv_flow_imp_page.create_page_button(
 '    RETURN FALSE;',
 'ELSE ',
 '    IF inv.catickets.pr_verifica_usuario(p_usuario => :APP_USER,',
-'                                        p_nro_ot => :P370_NRO_COMPROBANTE) = TRUE THEN ',
-'        RETURN FALSE;',
-'    ELSE ',
+'                                        p_nro_ot => :P370_PARAM_NRO_OT) THEN ',
 '        RETURN TRUE;',
+'    ELSE ',
+'        RETURN FALSE;',
 '    END IF;',
 'END IF;'))
 ,p_button_condition2=>'PLSQL'
@@ -5909,6 +5909,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P370_IND_CORREO_PRESU'
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(134811632818775510)
+,p_item_default=>'N'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -12328,6 +12329,16 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_button_id=>wwv_flow_imp.id(115740295233259221)
 ,p_server_condition_type=>'NEVER'
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(190746581076605911)
+,p_event_id=>wwv_flow_imp.id(110476896225213435)
+,p_event_result=>'FALSE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CLEAR'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P370_VERIFICADO_POR, P370_FEC_VERIFICADO, P370_HORA_VERIFICACION, P370_FEC_MODIF_VERIFICADO'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(110477537335213442)
 ,p_name=>'Validaciones delivery'
@@ -15277,9 +15288,10 @@ wwv_flow_imp_page.create_page_process(
 '    :P370_FEC_RECHAZO    := SYSDATE;',
 '    :P370_HORA_RECHAZADO := TO_CHAR(SYSDATE, ''HH24:MI:SS'');',
 '  ELSIF NVL(:P370_ESTADO_PRESU, ''P'') = ''V'' THEN',
-'    :P370_VERIFICADO_POR    := :APP_USER;',
+'    NULL;',
+'   /* :P370_VERIFICADO_POR    := :APP_USER;',
 '    :P370_FEC_VERIFICADO    := SYSDATE;',
-'    :P370_HORA_VERIFICACION := TO_CHAR(SYSDATE, ''HH24:MI:SS'');',
+'    :P370_HORA_VERIFICACION := TO_CHAR(SYSDATE, ''HH24:MI:SS'');*/',
 '  ELSIF NVL(:P370_ESTADO_PRESU, ''P'') = ''E'' THEN',
 '    :P370_ENTREGADO_POR  := :APP_USER;',
 '    :P370_FEC_ENTREGADO  := SYSDATE;',
