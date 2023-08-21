@@ -67,7 +67,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230726170426'
+,p_last_upd_yyyymmddhh24miss=>'20230821142708'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(148902252032312207)
@@ -703,7 +703,7 @@ wwv_flow_imp_page.create_page_da_action(
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(148049796188698101)
-,p_name=>'Nuevo_2'
+,p_name=>'Finaliza procesos'
 ,p_event_sequence=>140
 ,p_triggering_element_type=>'BUTTON'
 ,p_triggering_button_id=>wwv_flow_imp.id(143659957908222723)
@@ -740,12 +740,16 @@ wwv_flow_imp_page.create_page_da_action(
 '             :P0_MENSAJE_VALIDACION := ''Se debe completar los procesos antes de finalizar el Ticket'';',
 '             :P486_PROCESAR := 0;',
 '        ELSE ',
-'            :P486_PROCESAR :=  1;',
+'           ',
 '            update llamador_ticket set estado  = ''FINALIZADO''',
 '            WHERE ID_TICKET = :P486_ID_TICKET;',
 '',
 '            update ca_ticket_atencion set estado  = ''FINALIZADO'', fecha_cierre  = sysdate',
 '            WHERE ID_TICKET = :P486_ID_TICKET;',
+'',
+'            COMMIT;',
+'',
+'             :P486_PROCESAR :=  1;',
 '        END IF;',
 '',
 '    END;',
@@ -1235,10 +1239,12 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'var id_ticket = apex.item("P486_ID_TICKET").getValue();',
+'',
 'apex.navigation.redirect(apex.util.makeApplicationUrl({',
 '    pageId:370,',
-'    itemNames: ["P370_OPERACION","P370_NRO_PAGINA"],',
-'    itemValues: [''AGREGAR'', ''486'']}));'))
+'    itemNames: ["P370_OPERACION","P370_NRO_PAGINA","P370_NRO_TICKET"],',
+'    itemValues: [''AGREGAR'', ''486'',id_ticket]}));'))
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(148906019828312245)

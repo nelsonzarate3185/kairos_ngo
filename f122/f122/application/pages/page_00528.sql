@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230526103256'
+,p_last_upd_yyyymmddhh24miss=>'20230821154929'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(152760151330015842)
@@ -47,14 +47,33 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_data_cursor_behavior=>'auto'
 ,p_hide_and_show_behavior=>'withRescale'
 ,p_hover_behavior=>'dim'
+,p_stack=>'off'
+,p_stack_label=>'off'
+,p_connect_nulls=>'Y'
+,p_value_position=>'auto'
 ,p_value_format_scaling=>'auto'
+,p_sorting=>'label-asc'
+,p_fill_multi_series_gaps=>true
 ,p_tooltip_rendered=>'Y'
 ,p_show_series_name=>true
+,p_show_group_name=>true
 ,p_show_value=>true
+,p_show_label=>true
+,p_show_row=>true
+,p_show_start=>true
+,p_show_end=>true
+,p_show_progress=>true
+,p_show_baseline=>true
 ,p_legend_rendered=>'on'
 ,p_legend_position=>'top'
+,p_overview_rendered=>'off'
 ,p_pie_other_threshold=>0
 ,p_pie_selection_effect=>'highlightAndExplode'
+,p_horizontal_grid=>'auto'
+,p_vertical_grid=>'auto'
+,p_gauge_orientation=>'circular'
+,p_gauge_plot_area=>'on'
+,p_show_gauge_value=>true
 );
 wwv_flow_imp_page.create_jet_chart_series(
  p_id=>wwv_flow_imp.id(152760389535015844)
@@ -67,12 +86,14 @@ wwv_flow_imp_page.create_jet_chart_series(
 '       (SELECT COUNT(*)',
 '          FROM ca_ticket_atencion s',
 '         WHERE s.fecha = trunc(SYSDATE)',
-'           AND s.estado = ''PENDIENTE'') cantidad,',
-'       ''green'' series_colors,',
+'           AND s.estado = ''PENDIENTE''',
+'           AND s.cod_tipo_cliente IS NOT NULL) cantidad,',
+'       ''red'' series_colors,',
 '       ''Cantidad '' || (SELECT COUNT(*)',
 '                         FROM  ca_ticket_atencion s',
 '                        WHERE s.fecha = trunc(SYSDATE)',
-'                          AND s.estado = ''PENDIENTE'') cant_mostrar',
+'                          AND s.estado = ''PENDIENTE''',
+'                          AND s.cod_tipo_cliente IS NOT NULL) cant_mostrar',
 '',
 '  FROM dual',
 '  union all                ',
@@ -80,12 +101,14 @@ wwv_flow_imp_page.create_jet_chart_series(
 '                   from llamador_ticket a, ca_ticket_atencion  S',
 '                   where S.ID_TICKET  = A.ID_TICKET',
 '                   and s.fecha  = trunc (sysdate)',
-'                   AND s.ESTADO = ''ATENDIDO''), ''blue'',',
+'                   AND s.ESTADO = ''ATENDIDO''',
+'                   AND s.cod_tipo_cliente IS NOT NULL), ''blue'',',
 '                   ''Cantidad '' ||(select count(*)',
 '                   from llamador_ticket a, ca_ticket_atencion  S',
 '                   where S.ID_TICKET  = A.ID_TICKET',
 '                   and s.fecha  = trunc (sysdate)',
-'                   AND s.ESTADO = ''ATENDIDO'')',
+'                   AND s.ESTADO = ''ATENDIDO''',
+'                   AND s.cod_tipo_cliente IS NOT NULL)',
 '                   from dual',
 '                ',
 '',
@@ -94,12 +117,28 @@ wwv_flow_imp_page.create_jet_chart_series(
 '                 from llamador_ticket a, ca_ticket_atencion  S',
 '                 where S.ID_TICKET  = A.ID_TICKET',
 '                 and s.fecha  = trunc (sysdate)',
-'                 AND s.ESTADO = ''FINALIZADO''), ''yellow'',',
+'                 AND s.ESTADO = ''FINALIZADO''',
+'                 AND s.cod_tipo_cliente IS NOT NULL), ''green'',',
 '                 ''Cantidad '' ||(select count(*)',
 '                 from llamador_ticket a, ca_ticket_atencion  S',
 '                 where S.ID_TICKET  = A.ID_TICKET',
 '                 and s.fecha  = trunc (sysdate)',
-'                 AND s.ESTADO = ''FINALIZADO'')',
+'                 AND s.ESTADO = ''FINALIZADO''',
+'                 AND s.cod_tipo_cliente IS NOT NULL)',
+'                 from dual',
+'UNION ALL',
+'select ''CANCELADOS '', (select count(*)',
+'                 from llamador_ticket a, ca_ticket_atencion  S',
+'                 where S.ID_TICKET  = A.ID_TICKET',
+'                 and s.fecha  = trunc (sysdate)',
+'                 AND s.ESTADO = ''CANCELADO''',
+'                 AND s.cod_tipo_cliente IS NOT NULL), ''yellow'',',
+'                 ''Cantidad '' ||(select count(*)',
+'                 from llamador_ticket a, ca_ticket_atencion  S',
+'                 where S.ID_TICKET  = A.ID_TICKET',
+'                 and s.fecha  = trunc (sysdate)',
+'                 AND s.ESTADO = ''CANCELADO''',
+'                 AND s.cod_tipo_cliente IS NOT NULL)',
 '                 from dual',
 '',
 ''))
@@ -111,6 +150,7 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_items_label_rendered=>true
 ,p_items_label_position=>'outsideSlice'
 ,p_items_label_display_as=>'LBL_VAL'
+,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(152760603983015847)
@@ -137,7 +177,9 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_data_cursor_behavior=>'auto'
 ,p_hover_behavior=>'dim'
 ,p_stack=>'off'
+,p_stack_label=>'off'
 ,p_connect_nulls=>'Y'
+,p_value_position=>'auto'
 ,p_sorting=>'label-asc'
 ,p_fill_multi_series_gaps=>true
 ,p_zoom_and_scroll=>'off'
@@ -145,7 +187,20 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_show_series_name=>false
 ,p_show_group_name=>false
 ,p_show_value=>true
+,p_show_label=>true
+,p_show_row=>true
+,p_show_start=>true
+,p_show_end=>true
+,p_show_progress=>true
+,p_show_baseline=>true
 ,p_legend_rendered=>'off'
+,p_legend_position=>'auto'
+,p_overview_rendered=>'off'
+,p_horizontal_grid=>'auto'
+,p_vertical_grid=>'auto'
+,p_gauge_orientation=>'circular'
+,p_gauge_plot_area=>'on'
+,p_show_gauge_value=>true
 );
 wwv_flow_imp_page.create_jet_chart_series(
  p_id=>wwv_flow_imp.id(152760804368015849)
@@ -173,6 +228,8 @@ unistr('                                                       when C.DESCRIPCIO
 ,p_assigned_to_y2=>'off'
 ,p_items_label_rendered=>true
 ,p_items_label_position=>'auto'
+,p_items_label_display_as=>'PERCENT'
+,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(152760992226015850)
@@ -188,6 +245,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_tick_label_rendered=>'on'
 ,p_tick_label_rotation=>'auto'
 ,p_tick_label_position=>'outside'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(157930118176331801)
@@ -206,6 +271,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_minor_tick_rendered=>'on'
 ,p_tick_label_rendered=>'on'
 ,p_tick_label_font_color=>'#f33a3a'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(157855404505762101)
@@ -230,9 +303,11 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_data_cursor=>'auto'
 ,p_data_cursor_behavior=>'auto'
 ,p_hover_behavior=>'dim'
-,p_stack=>'off'
+,p_stack=>'on'
+,p_stack_label=>'on'
+,p_stack_font_color=>'#292978'
 ,p_connect_nulls=>'Y'
-,p_sorting=>'label-asc'
+,p_sorting=>'value-asc'
 ,p_fill_multi_series_gaps=>true
 ,p_zoom_and_scroll=>'off'
 ,p_tooltip_rendered=>'Y'
@@ -253,7 +328,15 @@ wwv_flow_imp_page.create_jet_chart_series(
 '                        from ca_ticket_atencion i',
 '                        where i.cod_usuario = s.cod_usuario',
 '                        and i.fecha  = trunc (sysdate)',
+'						and i.estado in(''ATENDIDO'',''FINALIZADO'')						',
 '                      ) cantidad_ticket,',
+'					   (',
+'                        select count(*)',
+'                        from ca_ticket_atencion i',
+'                        where i.cod_usuario = s.cod_usuario',
+'                        and i.fecha  = trunc (sysdate)',
+'						and i.estado in(''CANCELADO'')						',
+'                      ) cantidad_ticket_II,',
 '                      ''Cantidad '' || (',
 '                        select count(*)',
 '                        from ca_ticket_atencion i',
@@ -269,7 +352,6 @@ wwv_flow_imp_page.create_jet_chart_series(
 ' and u.cod_persona = p.cod_persona',
 ' group by s.cod_usuario, p.nombre'))
 ,p_items_value_column_name=>'CANTIDAD_TICKET'
-,p_items_z_column_name=>'CANTIDAD_TICKET'
 ,p_items_label_column_name=>'NOMBRE'
 ,p_items_short_desc_column_name=>'CAN_TOTAL'
 ,p_color=>'#e81414'
@@ -305,6 +387,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_tick_label_rendered=>'on'
 ,p_tick_label_rotation=>'auto'
 ,p_tick_label_position=>'outside'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(157855815620762105)
@@ -321,6 +411,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_major_tick_rendered=>'on'
 ,p_minor_tick_rendered=>'on'
 ,p_tick_label_rendered=>'on'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(157930286198331802)
@@ -347,7 +445,9 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_data_cursor_behavior=>'auto'
 ,p_hover_behavior=>'dim'
 ,p_stack=>'off'
+,p_stack_label=>'off'
 ,p_connect_nulls=>'Y'
+,p_value_position=>'auto'
 ,p_sorting=>'label-asc'
 ,p_fill_multi_series_gaps=>true
 ,p_zoom_and_scroll=>'off'
@@ -355,7 +455,20 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_show_series_name=>true
 ,p_show_group_name=>true
 ,p_show_value=>true
+,p_show_label=>true
+,p_show_row=>true
+,p_show_start=>true
+,p_show_end=>true
+,p_show_progress=>true
+,p_show_baseline=>true
 ,p_legend_rendered=>'off'
+,p_legend_position=>'auto'
+,p_overview_rendered=>'off'
+,p_horizontal_grid=>'auto'
+,p_vertical_grid=>'auto'
+,p_gauge_orientation=>'circular'
+,p_gauge_plot_area=>'on'
+,p_show_gauge_value=>true
 );
 wwv_flow_imp_page.create_jet_chart_series(
  p_id=>wwv_flow_imp.id(157930426592331804)
@@ -367,6 +480,7 @@ wwv_flow_imp_page.create_jet_chart_series(
 'SELECT COUNT(*) cantidad, to_char(s.fecha_alta, ''hh24'')  hora',
 '          FROM ca_ticket_atencion s',
 '         WHERE s.fecha = trunc(SYSDATE)',
+'         AND s.cod_tipo_cliente IS NOT NULL',
 '         group by to_char(s.fecha_alta, ''hh24'')',
 '         order by hora asc',
 '',
@@ -380,7 +494,9 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_assigned_to_y2=>'off'
 ,p_items_label_rendered=>true
 ,p_items_label_position=>'auto'
+,p_items_label_display_as=>'PERCENT'
 ,p_items_label_font_color=>'#0000ff'
+,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(157930594229331805)
@@ -396,6 +512,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_tick_label_rendered=>'on'
 ,p_tick_label_rotation=>'auto'
 ,p_tick_label_position=>'outside'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(157930621493331806)
@@ -412,6 +536,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_major_tick_rendered=>'on'
 ,p_minor_tick_rendered=>'off'
 ,p_tick_label_rendered=>'on'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(162610152187555706)
