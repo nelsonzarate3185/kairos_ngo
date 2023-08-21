@@ -36,7 +36,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230816151345'
+,p_last_upd_yyyymmddhh24miss=>'20230821111456'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(157931378613331813)
@@ -66,6 +66,7 @@ wwv_flow_imp_page.create_report_region(
 '        C013 ind_facturado,',
 '        C014 ind_retirado,',
 '        C015 SELE,',
+'        C027 ESTADO_PRESU,',
 '        case when C017   = ''S''  THEN ',
 '            APEX_ITEM.CHECKBOX(1,SEQ_ID, decode(C017,''S'',''CHECKED disabled'',''UNCHECKED'' )||'' onclick="seleccionar(''||SEQ_ID||'',''''''||C015||'''''')"'','' disabled'')',
 '        ELSE ',
@@ -255,8 +256,19 @@ wwv_flow_imp_page.create_report_columns(
 ,p_derived_column=>'N'
 );
 wwv_flow_imp_page.create_report_columns(
- p_id=>wwv_flow_imp.id(160860048740518812)
+ p_id=>wwv_flow_imp.id(103251945569652616)
 ,p_query_column_id=>17
+,p_column_alias=>'ESTADO_PRESU'
+,p_column_display_sequence=>180
+,p_column_heading=>'Estado'
+,p_use_as_row_header=>'N'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(160860048740518812)
+,p_query_column_id=>18
 ,p_column_alias=>'SELECCIONAR'
 ,p_column_display_sequence=>1
 ,p_column_heading=>'Seleccionar'
@@ -269,7 +281,7 @@ wwv_flow_imp_page.create_report_columns(
 );
 wwv_flow_imp_page.create_report_columns(
  p_id=>wwv_flow_imp.id(161014854957538841)
-,p_query_column_id=>18
+,p_query_column_id=>19
 ,p_column_alias=>'SE'
 ,p_column_display_sequence=>170
 ,p_hidden_column=>'Y'

@@ -19,11 +19,13 @@ wwv_flow_imp_page.create_page(
 ,p_step_title=>'Ordenes de Trabajo'
 ,p_autocomplete_on_off=>'OFF'
 ,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'var nro_ticket = apex.item("P400_ID_TICKET").getValue();',
+'',
 'function fn_actualiza_datos(p_cod_cliente, p_nro_comprobante, p_ser_comprobante, p_cod_articulo, p_origen, p_garantia) {',
 '    apex.navigation.redirect(apex.util.makeApplicationUrl({',
 '                    pageId:370,',
-'                    itemNames: ["P370_COD_CLIENTE", "P370_PARAM_NRO_OT", "P370_PARAM_SER_OT", "P370_OPERACION", "P370_COD_ARTICULO_OT", "P370_COD_ARTICULO_OT_1", "P370_NRO_COMPROBANTE_REF", "P370_COD_ORIGEN_AUX","P370_GARANT"],',
-'                    itemValues: [p_cod_cliente, p_nro_comprobante, p_ser_comprobante, "MODIFICAR", p_cod_articulo, p_cod_articulo, p_nro_comprobante,p_origen,p_garantia]',
+'                    itemNames: ["P370_COD_CLIENTE", "P370_PARAM_NRO_OT", "P370_PARAM_SER_OT", "P370_OPERACION", "P370_COD_ARTICULO_OT", "P370_COD_ARTICULO_OT_1", "P370_NRO_COMPROBANTE_REF", "P370_COD_ORIGEN_AUX","P370_GARANT","P370_NRO_TICKET"],',
+'                    itemValues: [p_cod_cliente, p_nro_comprobante, p_ser_comprobante, "MODIFICAR", p_cod_articulo, p_cod_articulo, p_nro_comprobante,p_origen,p_garantia,nro_ticket]',
 '                }));',
 '',
 '}'))
@@ -157,7 +159,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230810165907'
+,p_last_upd_yyyymmddhh24miss=>'20230821101030'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(128551196121042344)
@@ -574,7 +576,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Crear OT'
-,p_button_redirect_url=>'f?p=&APP_ID.:370:&SESSION.::&DEBUG.:CR,400,370:P370_OPERACION,P370_NRO_PAGINA:AGREGAR,&P400_PAGINA.'
+,p_button_redirect_url=>'f?p=&APP_ID.:370:&SESSION.::&DEBUG.:CR,400,370:P370_OPERACION,P370_NRO_PAGINA,P370_NRO_TICKET:AGREGAR,&P400_PAGINA.,&P400_ID_TICKET.'
 ,p_button_css_classes=>'u-color-1-bg'
 ,p_icon_css_classes=>'fa fa-pencil'
 ,p_grid_new_row=>'Y'
@@ -594,6 +596,14 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_css_classes=>'u-color-1-bg'
 ,p_grid_new_row=>'N'
 ,p_grid_column=>12
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(103251819664652615)
+,p_name=>'P400_ID_TICKET'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(128551196121042344)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(110476254598213429)
@@ -985,6 +995,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(131436213057373237)
 ,p_event_id=>wwv_flow_imp.id(112641029169008422)
@@ -1006,18 +1028,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'P400_ESTADO,P400_PARAM_CLIENTE,P400_FECHA_FIN,P400_FECHA_INI,P400_ORIGEN,P400_SER_OT,P400_NRO_OT,P400_PROVEEDOR,P400_CLIENTE'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(131436385501373238)

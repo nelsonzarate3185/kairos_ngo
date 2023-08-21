@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230717094901'
+,p_last_upd_yyyymmddhh24miss=>'20230821141354'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(182722747882395508)
@@ -34,10 +34,32 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select COD_USUARIO,  ',
 'DEPOSITO,',
-'ESTADO, a.rowid',
+'ESTADO, a.rowid, EMPRESA_ORIGEN,',
+'case when nvl(empresa_origen,''NGO'') =''NGO'' then ',
+'     (Select descripcion  ',
+'       from sucursales',
+'      where cod_empresa  = :P_cod_empresa',
+'        and cod_sucursal = deposito  )',
+'    when nvl(empresa_origen,''NGO'') =''CPH'' then ',
+'  ',
+'    ( Select descripcion ',
+'      ',
+'       from v_sucursales_cph',
+'      where cod_empresa  = :P_cod_empresa',
+'        and cod_sucursal = deposito )',
+'',
+'  when NVL(empresa_origen,''NGO'') =''TG'' then ',
+'     (Select descripcion ',
+'     ',
+'       from  INV.V_depositos_tf',
+'      where cod_empresa  = :P_cod_empresa',
+'        and cod_sucursal = deposito) ELSE  NULL END DESC_DEPOSITO',
+' ',
+'',
 '',
 'from MO_USUARIOS a'))
 ,p_plug_source_type=>'NATIVE_IR'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_page_header=>'Usuario Inventario Movil'
 );
 wwv_flow_imp_page.create_worksheet(
@@ -45,7 +67,6 @@ wwv_flow_imp_page.create_worksheet(
 ,p_name=>'Usuario Inventario Movil'
 ,p_max_row_count_message=>unistr('El recuento m\00E1ximo de filas de este informe es #MAX_ROW_COUNT# filas. Aplique un filtro para reducir el n\00FAmero de registros de la consulta.')
 ,p_no_data_found_message=>unistr('No se ha encontrado ning\00FAn dato.')
-,p_base_pk1=>'ROWID'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_report_list_mode=>'TABS'
@@ -100,10 +121,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_identifier=>'B'
 ,p_column_label=>'Deposito'
 ,p_column_type=>'STRING'
-,p_display_text_as=>'LOV_ESCAPE_SC'
 ,p_heading_alignment=>'LEFT'
-,p_rpt_named_lov=>wwv_flow_imp.id(41127354264101747)
-,p_rpt_show_filter_lov=>'1'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
@@ -119,6 +137,24 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_rpt_show_filter_lov=>'1'
 ,p_use_as_row_header=>'N'
 );
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(188214110397298039)
+,p_db_column_name=>'EMPRESA_ORIGEN'
+,p_display_order=>13
+,p_column_identifier=>'E'
+,p_column_label=>'Empresa Origen'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(188214215904298040)
+,p_db_column_name=>'DESC_DEPOSITO'
+,p_display_order=>23
+,p_column_identifier=>'F'
+,p_column_label=>'Desc Deposito'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(182726752908395204)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -126,7 +162,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_report_alias=>'1827268'
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
-,p_report_columns=>'ROWID:COD_USUARIO:DEPOSITO:ESTADO'
+,p_report_columns=>'COD_USUARIO:EMPRESA_ORIGEN:DEPOSITO:DESC_DEPOSITO:ESTADO:'
 ,p_sort_column_1=>'COD_USUARIO'
 ,p_sort_direction_1=>'ASC'
 );
