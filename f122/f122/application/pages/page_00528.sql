@@ -22,7 +22,129 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230821154929'
+,p_last_upd_yyyymmddhh24miss=>'20230822143115'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(94787835596106415)
+,p_plug_name=>'Tickets por usuario'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_component_template_options=>'#DEFAULT#'
+,p_escape_on_http_output=>'Y'
+,p_plug_template=>wwv_flow_imp.id(40125238939263661)
+,p_plug_display_sequence=>935
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_source_type=>'NATIVE_JET_CHART'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+);
+wwv_flow_imp_page.create_jet_chart(
+ p_id=>wwv_flow_imp.id(94787964361106416)
+,p_region_id=>wwv_flow_imp.id(94787835596106415)
+,p_chart_type=>'bar'
+,p_height=>'400'
+,p_animation_on_display=>'auto'
+,p_animation_on_data_change=>'auto'
+,p_orientation=>'vertical'
+,p_data_cursor=>'auto'
+,p_data_cursor_behavior=>'auto'
+,p_hide_and_show_behavior=>'withRescale'
+,p_hover_behavior=>'none'
+,p_stack=>'on'
+,p_stack_label=>'off'
+,p_connect_nulls=>'Y'
+,p_sorting=>'label-asc'
+,p_fill_multi_series_gaps=>true
+,p_zoom_and_scroll=>'off'
+,p_tooltip_rendered=>'Y'
+,p_show_series_name=>true
+,p_show_group_name=>true
+,p_show_value=>true
+,p_legend_rendered=>'on'
+,p_legend_position=>'auto'
+);
+wwv_flow_imp_page.create_jet_chart_series(
+ p_id=>wwv_flow_imp.id(94788005920106417)
+,p_chart_id=>wwv_flow_imp.id(94787964361106416)
+,p_seq=>10
+,p_name=>'New'
+,p_data_source_type=>'SQL'
+,p_data_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select	',
+'	s.cod_usuario as label, ',
+'	(',
+'                        select count(*)',
+'                        from ca_ticket_atencion i, llamador_ticket t',
+'                        where i.cod_usuario = s.cod_usuario',
+'						and i.id_ticket = t.id_ticket',
+'                        and i.fecha  = trunc (sysdate)',
+'						and (i.estado in(''ATENDIDO'',''FINALIZADO'') OR t.estado in(''ATENDIDO'',''FINALIZADO''))						',
+'                      ) as value,					   ',
+'                      ''ATENDIDOS'' as series,',
+'                      ''green'' as color',
+'       ',
+' from LLAMADOR_TICKET a, ca_ticket_atencion  S,  usuarios u, personas p',
+' where 1=1',
+' and S.ID_TICKET  = A.ID_TICKET',
+' and s.fecha  = trunc (sysdate)',
+' and u.cod_usuario = s.cod_usuario',
+' and u.cod_persona = p.cod_persona',
+' group by s.cod_usuario, p.nombre',
+' UNION ALL',
+' select',
+'	s.cod_usuario as label, ',
+'	(',
+'                        select count(*)',
+'                        from ca_ticket_atencion i, llamador_ticket t',
+'                        where i.cod_usuario = s.cod_usuario',
+'						and i.id_ticket = t.id_ticket',
+'                        and i.fecha  = trunc (sysdate)',
+'						and (i.estado in(''CANCELADO'') OR t.estado in(''CANCELADO''))												',
+'                      ) as value,					   ',
+'                      ''CANCELADOS'' as series,',
+'                      ''red'' as color',
+'       ',
+' from LLAMADOR_TICKET a, ca_ticket_atencion  S,  usuarios u, personas p',
+' where 1=1',
+' and S.ID_TICKET  = A.ID_TICKET',
+' and s.fecha  = trunc (sysdate)',
+' and u.cod_usuario = s.cod_usuario',
+' and u.cod_persona = p.cod_persona',
+' group by s.cod_usuario, p.nombre'))
+,p_series_name_column_name=>'SERIES'
+,p_items_value_column_name=>'VALUE'
+,p_group_short_desc_column_name=>'LABEL'
+,p_items_label_column_name=>'LABEL'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>true
+,p_items_label_position=>'auto'
+);
+wwv_flow_imp_page.create_jet_chart_axis(
+ p_id=>wwv_flow_imp.id(94788138742106418)
+,p_chart_id=>wwv_flow_imp.id(94787964361106416)
+,p_axis=>'x'
+,p_is_rendered=>'on'
+,p_format_scaling=>'auto'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'on'
+,p_minor_tick_rendered=>'off'
+,p_tick_label_rendered=>'on'
+,p_tick_label_rotation=>'auto'
+,p_tick_label_position=>'outside'
+);
+wwv_flow_imp_page.create_jet_chart_axis(
+ p_id=>wwv_flow_imp.id(94788278683106419)
+,p_chart_id=>wwv_flow_imp.id(94787964361106416)
+,p_axis=>'y'
+,p_is_rendered=>'on'
+,p_format_type=>'decimal'
+,p_decimal_places=>0
+,p_format_scaling=>'none'
+,p_scaling=>'linear'
+,p_baseline_scaling=>'zero'
+,p_position=>'auto'
+,p_major_tick_rendered=>'on'
+,p_minor_tick_rendered=>'off'
+,p_tick_label_rendered=>'on'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(152760151330015842)
@@ -30,7 +152,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
 ,p_escape_on_http_output=>'Y'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>1010
+,p_plug_display_sequence=>940
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_new_grid_row=>false
 ,p_plug_source_type=>'NATIVE_JET_CHART'
@@ -159,7 +281,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_component_template_options=>'#DEFAULT#'
 ,p_escape_on_http_output=>'Y'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>1020
+,p_plug_display_sequence=>950
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_new_grid_row=>false
 ,p_plug_source_type=>'NATIVE_JET_CHART'
@@ -427,7 +549,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_component_template_options=>'#DEFAULT#'
 ,p_escape_on_http_output=>'Y'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>1030
+,p_plug_display_sequence=>960
 ,p_plug_new_grid_row=>false
 ,p_plug_source_type=>'NATIVE_JET_CHART'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -550,7 +672,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_name=>unistr('Promedio de Atenci\00F3n por Funcionario')
 ,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>1050
+,p_plug_display_sequence=>970
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'

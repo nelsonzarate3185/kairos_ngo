@@ -23,7 +23,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'OSCARGO'
-,p_last_upd_yyyymmddhh24miss=>'20230810143940'
+,p_last_upd_yyyymmddhh24miss=>'20230822124336'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93763586381731842)
@@ -43,7 +43,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_template_options=>'#DEFAULT#'
 ,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(40123385688263660)
-,p_plug_display_sequence=>30
+,p_plug_display_sequence=>40
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select p.COD_EMPRESA,',
@@ -356,7 +356,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(190030151461876419)
-,p_button_sequence=>20
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_imp.id(93763586381731842)
 ,p_button_name=>'BTN_CREAR'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -384,9 +384,10 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P582_COD_EMPLEADO'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(93763586381731842)
-,p_prompt=>'Cod Empleado'
+,p_prompt=>unistr('C\00F3digo de empleado')
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -459,6 +460,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Fecha Inicio'
 ,p_display_as=>'NATIVE_DATE_PICKER_JET'
 ,p_cSize=>30
+,p_colspan=>6
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -478,6 +480,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Fecha Fin'
 ,p_display_as=>'NATIVE_DATE_PICKER_JET'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_colspan=>6
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -504,6 +508,7 @@ wwv_flow_imp_page.create_page_item(
 'order by i'))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
+,p_colspan=>6
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
@@ -526,6 +531,8 @@ wwv_flow_imp_page.create_page_item(
 'order by i'))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
+,p_begin_on_new_line=>'N'
+,p_colspan=>6
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
@@ -562,6 +569,24 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_03=>'N'
 ,p_attribute_04=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190137375553814028)
+,p_name=>'P582_AUTORIZADOR_NV1'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(93763586381731842)
+,p_prompt=>'Autorizador Nivel 1'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_colspan=>3
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(190030381914876421)
@@ -680,11 +705,21 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_name=>'CARGA_INICIAL'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'begin',
+unistr('    -------Obtener c\00F3digo de empleado del usuario que inicio sesi\00F3n-------'),
 '    if :P_COD_EMPLEADO is null then',
 '        select e.cod_empleado into :P582_COD_EMPLEADO  from ASP$USUA0100 u',
 '        inner join personas p on p.cod_persona = u.cod_persona and u.usrn = :P_COD_USUARIO',
 '        inner join rh_empleados e on e.cod_persona = p.cod_persona and e.cod_empresa = :P_COD_EMPRESA;',
 '    end if;',
+'    ---------//FIN//-----------',
+'',
+'    -------Obtener el autorizador nivel 1 (Jefe directo)------------',
+'    select pj.nombre into :P582_AUTORIZADOR_NV1 from INV.ASP$USUA0100 u',
+'      inner join personas p on p.cod_persona = u.cod_persona and u.usrn = :P_COD_USUARIO',
+'      inner join rh_empleados e on e.cod_persona = p.cod_persona and e.cod_empresa = :P_COD_EMPRESA',
+'      inner join rh_empleados j on j.cod_empleado = e.cod_superior and e.cod_empresa = j.cod_empresa',
+'      inner join personas pj on pj.cod_persona = j.cod_persona;',
+'    ---------//FIN//-----------',
 'exception when others then',
 '    :P582_COD_EMPLEADO := NULL;',
 'end;'))

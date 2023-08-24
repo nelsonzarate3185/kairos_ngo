@@ -127,7 +127,7 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230810135122'
+,p_last_upd_yyyymmddhh24miss=>'20230822140850'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21771034358343321)
@@ -6049,62 +6049,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P99_COD_CUSTODIO'
 );
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(98642158411582134)
-,p_event_id=>wwv_flow_imp.id(23501021908061434)
-,p_event_result=>'TRUE'
-,p_action_sequence=>20
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'begin ',
-'    SELECT cod_cliente,',
-'             cod_vendedor,',
-'             cod_condicion_venta,',
-'             cod_moneda,',
-'             cod_lista_precio,',
-'             nro_autorizacion,',
-'             tel_cliente,',
-'             ruc,',
-'             dir_cliente,',
-'             nom_cliente,',
-'             entrega_inicial',
-'        INTO :P99_COD_CLIENTE,',
-'             :P99_COD_VENDEDOR,',
-'             :P99_COD_CONDICION_VENTA,',
-'             :P99_COD_MONEDA,',
-'             :P99_COD_LISTA_PRECIO,',
-'             :P99_NRO_AUTORIZACION,',
-'             :P99_TEL_CLIENTE,',
-'             :P99_RUC,',
-'             :P99_DIR_CLIENTE,',
-'             :P99_NOM_CLIENTE,',
-'             :P99_ENTREGA_INICIAL',
-'        FROM vt_pedidos_cabecera',
-'       WHERE cod_empresa = ''1''',
-'         AND tip_comprobante = :P99_TIP_COMPROBANTE_REF',
-'         AND ser_comprobante = :P99_SER_COMPROBANTE_REF',
-'         AND nro_comprobante = :P99_NRO_COMPROBANTE_REF;',
-'     exception ',
-'        when others then ',
-'            :P99_COD_CLIENTE := null;',
-'         :P99_COD_VENDEDOR := null;',
-'         :P99_COD_CONDICION_VENTA := null;',
-'         :P99_COD_MONEDA := null;',
-'         :P99_COD_LISTA_PRECIO := null;',
-'         :P99_NRO_AUTORIZACION := null;',
-'         :P99_TEL_CLIENTE := null;',
-'         :P99_RUC := null;',
-'         :P99_DIR_CLIENTE := null;',
-'         :P99_NOM_CLIENTE := null;',
-'         :P99_ENTREGA_INICIAL  := null;',
-'     end;'))
-,p_attribute_02=>'P99_TIP_COMPROBANTE_REF,P99_SER_COMPROBANTE_REF,P99_NRO_COMPROBANTE_REF'
-,p_attribute_03=>'P99_COD_CLIENTE, P99_COD_VENDEDOR, P99_COD_CONDICION_VENTA, P99_COD_MONEDA, P99_COD_LISTA_PRECIO, P99_NRO_AUTORIZACION, P99_TEL_CLIENTE, P99_RUC, P99_DIR_CLIENTE, P99_NOM_CLIENTE, P99_ENTREGA_INICIAL'
-,p_attribute_04=>'N'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(23501321296061437)
 ,p_name=>'DA_VALIDA_TIP_COMPROBANTE'
@@ -6532,6 +6476,62 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'focusout'
 );
 wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(98642158411582134)
+,p_event_id=>wwv_flow_imp.id(24409000240161929)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'begin ',
+'    SELECT cod_cliente,',
+'             cod_vendedor,',
+'             cod_condicion_venta,',
+'             cod_moneda,',
+'             cod_lista_precio,',
+'             nro_autorizacion,',
+'             tel_cliente,',
+'             ruc,',
+'             dir_cliente,',
+'             nom_cliente,',
+'             entrega_inicial',
+'        INTO :P99_COD_CLIENTE,',
+'             :P99_COD_VENDEDOR,',
+'             :P99_COD_CONDICION_VENTA,',
+'             :P99_COD_MONEDA,',
+'             :P99_COD_LISTA_PRECIO,',
+'             :P99_NRO_AUTORIZACION,',
+'             :P99_TEL_CLIENTE,',
+'             :P99_RUC,',
+'             :P99_DIR_CLIENTE,',
+'             :P99_NOM_CLIENTE,',
+'             :P99_ENTREGA_INICIAL',
+'        FROM vt_pedidos_cabecera',
+'       WHERE cod_empresa = ''1''',
+'         AND tip_comprobante = :P99_TIP_COMPROBANTE_REF',
+'         AND ser_comprobante = :P99_SER_COMPROBANTE_REF',
+'         AND nro_comprobante = :P99_NRO_COMPROBANTE_REF;',
+'     exception ',
+'        when others then ',
+'            :P99_COD_CLIENTE := null;',
+'         :P99_COD_VENDEDOR := null;',
+'         :P99_COD_CONDICION_VENTA := null;',
+'         :P99_COD_MONEDA := null;',
+'         :P99_COD_LISTA_PRECIO := null;',
+'         :P99_NRO_AUTORIZACION := null;',
+'         :P99_TEL_CLIENTE := null;',
+'         :P99_RUC := null;',
+'         :P99_DIR_CLIENTE := null;',
+'         :P99_NOM_CLIENTE := null;',
+'         :P99_ENTREGA_INICIAL  := null;',
+'     end;'))
+,p_attribute_02=>'P99_TIP_COMPROBANTE_REF,P99_SER_COMPROBANTE_REF,P99_NRO_COMPROBANTE_REF'
+,p_attribute_03=>'P99_COD_CLIENTE, P99_COD_VENDEDOR, P99_COD_CONDICION_VENTA, P99_COD_MONEDA, P99_COD_LISTA_PRECIO, P99_NRO_AUTORIZACION, P99_TEL_CLIENTE, P99_RUC, P99_DIR_CLIENTE, P99_NOM_CLIENTE, P99_ENTREGA_INICIAL'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(31458131692510722)
 ,p_event_id=>wwv_flow_imp.id(24409000240161929)
 ,p_event_result=>'TRUE'
@@ -6609,7 +6609,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(122667229221248603)
 ,p_event_id=>wwv_flow_imp.id(24409000240161929)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>30
+,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -6722,7 +6722,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(98643587621582148)
 ,p_event_id=>wwv_flow_imp.id(24409000240161929)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>70
+,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -7432,7 +7432,8 @@ unistr('                                PI_DESCUENTO           => :P99_DESCUENTO
 '                                PO_DIV                 => :P99_DIV,',
 '                                PI_CARGA_DETALLE       => :P99_CARGA_DETALLE,',
 '                                PO_CARGA_DETALLE       => :P99_CARGA_DETALLE,',
-'                                pi_cod_moneda          => :P99_COD_MONEDA);   ',
+'                                pi_cod_moneda          => :P99_COD_MONEDA,',
+'                                p_mensaje              => :P99_AUX_MSJ);   ',
 '        ELSE',
 '            :P99_AUX_MSJ := ''Debe ingresar los datos del comprobante de referencia.'';',
 '        END IF;  ',
@@ -7619,6 +7620,17 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(103254342782652640)
+,p_event_id=>wwv_flow_imp.id(24409381993161932)
+,p_event_result=>'TRUE'
+,p_action_sequence=>110
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'$("#apex_wait_overlay").remove();',
+'$(".u-Processing").remove();'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(26364188735470544)
@@ -12251,6 +12263,28 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_SHOW'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P99_MENSAJE_PAGARE'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(103254419913652641)
+,p_name=>'Desactiva campos'
+,p_event_sequence=>1110
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P99_AUX_MSJ'
+,p_condition_element=>'P99_AUX_MSJ'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(103254581212652642)
+,p_event_id=>wwv_flow_imp.id(103254419913652641)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'$("#apex_wait_overlay").remove();',
+'$(".u-Processing").remove();'))
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(22846137601807416)

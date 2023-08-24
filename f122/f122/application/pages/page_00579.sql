@@ -35,7 +35,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230803091301'
+,p_last_upd_yyyymmddhh24miss=>'20230822081917'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(180887985661792617)
@@ -510,7 +510,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>50
 ,p_column_heading=>'Obejtivo'
 ,p_use_as_row_header=>'N'
-,p_column_format=>'999G90'
+,p_column_format=>'999G990'
 ,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'

@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230801124918'
+,p_last_upd_yyyymmddhh24miss=>'20230823084511'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(178664648472406633)
@@ -72,9 +72,9 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT ',
-'DESC_SUCURSAL,	COD_ENCARGADO	,COD_SUCURSAL,	COD_ARTICULO,	DESC_ART,	CANTIDAD_SISTEMA	,C1	,C2,	C3,	C4,	C5,	C6,	C7,	C8,	CU,	COSTO_STOCK,',
-'	NRO_COMPROBANTE	,SUCURSAL,	COD_ART_CORTO	,NRO_OT	,ENTRADA	SALIDA	,COSTO_PROM,	OBSERVACION	,USUARIO	,HORARIO,	ZONA	,COSTO_INVENTARIO	,',
-'  CANTIDAD_INVENTARIO	,OBSERVACION_DETALLE,	CLASIFICACION_REPUESTOS_ABC,	LOTE_1,	LOTE_2,	ORDEN	,CORRESPONDE_BLOQUE,',
+'DESC_SUCURSAL,	COD_ENCARGADO	,COD_SUCURSAL,	COD_ARTICULO,	DESC_ART,	CANTIDAD_SISTEMA	,C1	,C2,	C3,	C4,	C5,	C6,	C7,	C8,	CU,  COSTO_STOCK,',
+'  NRO_COMPROBANTE  ,SUCURSAL,  COD_ART_CORTO  ,NRO_OT  ,ENTRADA  SALIDA  ,COSTO_PROM,  OBSERVACION  ,USUARIO  ,HORARIO,  ZONA  ,COSTO_INVENTARIO  ,',
+'  CANTIDAD_INVENTARIO  ,OBSERVACION_DETALLE,  CLASIFICACION_REPUESTOS_ABC,  LOTE_1,  LOTE_2,  ORDEN  ,CORRESPONDE_BLOQUE,',
 '  CANTIDAD_SISTEMA- CU DIFERENCIA',
 '',
 ' FROM (  ',
@@ -215,7 +215,16 @@ wwv_flow_imp_page.create_page_plug(
 '   and gd.cod_articulo=b.cod_articulo',
 '   and g.cod_sucursal=b.cod_sucursal',
 '   and ( b.cod_bloque= :P558_P_BLOQUE or :P558_P_BLOQUE is null)',
-'   and (b.cod_sub_bloque=:P558_P_sub_bloque or :P558_P_sub_bloque is null) ) ',
+'   and (b.cod_sub_bloque=:P558_P_sub_bloque or :P558_P_sub_bloque is null)',
+'   union ALL ',
+'   SELECT ub.cod_articulo ',
+'   from st_ubic_articulos ub ',
+'   where ub.cod_empresa=gd.cod_empresa ',
+'   and ub.cod_sucursal=g.cod_sucursal',
+'    and ub.cod_articulo=gd.cod_articulo',
+'     and ( ub.cod_bloque= :P558_P_BLOQUE or :P558_P_BLOQUE is null)',
+'   and (ub.cod_sub_bloque=:P558_P_sub_bloque or :P558_P_sub_bloque is null)',
+'   )  ',
 '      and cod_rubro   in (''RE'',''PR'',''MUE'')   ',
 '    and (  :P558_P_BLOQUE is not null',
 '     or   :P558_P_sub_bloque is not null) ',
@@ -1493,30 +1502,32 @@ wwv_flow_imp_page.create_page_item(
 '     select cod_bloque||'' - ''||desc_bloque bloque, cod_bloque R',
 '      from st_bloques',
 '        where cod_empresa  = :P_COD_EMPRESA',
-'       and cod_sucursal = :P_COD_SUCURSAL  ',
+'       and cod_sucursal = :P558_P_COD_SUCURSAL  ',
 'AND NVL(:P558_P_IND_INVENTARIO_CPH,''N'')=''N'' ',
 'group by desc_bloque, cod_bloque',
 'union all',
 'select cod_bloque||'' - ''||cod_bloque bloque, cod_bloque from st_posiciones',
 '        where cod_empresa  = :P_COD_EMPRESA',
-'       and cod_sucursal = :P_COD_SUCURSAL  ',
+'       and cod_sucursal = :P558_P_COD_SUCURSAL  ',
 'AND NVL(:P558_P_IND_INVENTARIO_CPH,''N'')=''N'' ',
 'group by cod_bloque',
 'union all',
 'select cod_bloque||'' - ''||desc_bloque bloque, cod_bloque',
 '      from st_bloques@DBLINK_CPH',
 '           where cod_empresa  = :P_COD_EMPRESA',
-'       and cod_sucursal = :P_COD_SUCURSAL  ',
+'       and cod_sucursal = :P558_P_COD_SUCURSAL  ',
 'AND NVL(:P558_P_IND_INVENTARIO_CPH,''N'')=''S''  ',
 'group by desc_bloque, cod_bloque',
 ' union all',
 'select cod_bloque||'' - ''||cod_bloque bloque, cod_bloque from st_posiciones@DBLINK_CPH',
 '        where cod_empresa  = :P_COD_EMPRESA',
-'       and cod_sucursal = :P_COD_SUCURSAL  ',
+'       and cod_sucursal = :P558_P_COD_SUCURSAL  ',
 'AND NVL(:P558_P_IND_INVENTARIO_CPH,''N'')=''S'' ',
 'group by cod_bloque',
 '    order by 1  '))
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P558_P_COD_SUCURSAL'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
@@ -1571,7 +1582,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(178649692415544618)
 ,p_name=>'P558_P_NRO_COMPROBANTE'
-,p_item_sequence=>150
+,p_item_sequence=>160
 ,p_item_plug_id=>wwv_flow_imp.id(178647914917544601)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'Y'
@@ -1653,7 +1664,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(178664706925406634)
 ,p_name=>'P558_EJECUTAR_REPORTE_1'
-,p_item_sequence=>120
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(178647914917544601)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1661,7 +1672,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(178664801945406635)
 ,p_name=>'P558_EJECUTAR_REPORTE_2'
-,p_item_sequence=>140
+,p_item_sequence=>150
 ,p_item_plug_id=>wwv_flow_imp.id(178647914917544601)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1669,7 +1680,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(179092324780755007)
 ,p_name=>'P558_P_IND_INVENTARIO_CPH'
-,p_item_sequence=>110
+,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(178647914917544601)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1685,7 +1696,15 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(186566174769242625)
 ,p_name=>'P558_EJECUTAR'
-,p_item_sequence=>130
+,p_item_sequence=>140
+,p_item_plug_id=>wwv_flow_imp.id(178647914917544601)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(188214330646298041)
+,p_name=>'P558_P_COD_SUCURSAL'
+,p_item_sequence=>110
 ,p_item_plug_id=>wwv_flow_imp.id(178647914917544601)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'

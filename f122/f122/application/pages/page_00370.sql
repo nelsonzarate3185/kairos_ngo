@@ -82,11 +82,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-<<<<<<< HEAD
-,p_last_upd_yyyymmddhh24miss=>'20230817161140'
-=======
 ,p_last_upd_yyyymmddhh24miss=>'20230821104201'
->>>>>>> developer_2
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(106525111792760542)
