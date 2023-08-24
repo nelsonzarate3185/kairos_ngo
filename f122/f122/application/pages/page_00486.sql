@@ -62,12 +62,19 @@ wwv_flow_imp_page.create_page(
 '',
 '',
 '',
-''))
+'',
+'.card_css',
+'{background-color: #f7ce68;',
+'background-image: linear-gradient(0deg,#80D0C7 0%, #faf58e 100% );',
+'}',
+'',
+'#det{background-color: #1b628f11; ',
+'}'))
 ,p_step_template=>wwv_flow_imp.id(40085302490263650)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230726170426'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230823120358'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(148902252032312207)
@@ -136,6 +143,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(143659394147222717)
 ,p_plug_name=>'DATOS DEL CLIENTE'
+,p_region_name=>'dat_cli'
 ,p_parent_plug_id=>wwv_flow_imp.id(289994792704180728)
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
@@ -148,6 +156,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(143659652801222720)
 ,p_plug_name=>'DETALLES'
+,p_region_name=>'det'
 ,p_parent_plug_id=>wwv_flow_imp.id(143659394147222717)
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--accent10:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
@@ -189,6 +198,7 @@ wwv_flow_imp_page.create_card(
  p_id=>wwv_flow_imp.id(145412101068369702)
 ,p_region_id=>wwv_flow_imp.id(286052108780405857)
 ,p_layout_type=>'GRID'
+,p_card_css_classes=>'card_css'
 ,p_title_adv_formatting=>false
 ,p_title_column_name=>'DESCRIPCION'
 ,p_sub_title_adv_formatting=>false
@@ -342,8 +352,23 @@ wwv_flow_imp_page.create_page_button(
 ,p_grid_new_row=>'Y'
 );
 wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(143659957908222723)
+ p_id=>wwv_flow_imp.id(193661223015252006)
 ,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(143659843721222722)
+,p_button_name=>'PAUSAR'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--danger:t-Button--iconRight'
+,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Pausar'
+,p_warn_on_unsaved_changes=>null
+,p_icon_css_classes=>'fa-pause'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(143659957908222723)
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_imp.id(143659843721222722)
 ,p_button_name=>'FINALIZAR'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -354,7 +379,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-check'
 ,p_grid_new_row=>'N'
-,p_grid_column=>12
+,p_grid_new_column=>'Y'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(148902807232312213)
@@ -499,6 +524,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P486_ID_TICKET'
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(143659394147222717)
+,p_use_cache_before_default=>'NO'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -594,6 +620,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P486_PROCESAR'
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(143659652801222720)
+,p_use_cache_before_default=>'NO'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -703,7 +730,7 @@ wwv_flow_imp_page.create_page_da_action(
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(148049796188698101)
-,p_name=>'Nuevo_2'
+,p_name=>'Finaliza procesos'
 ,p_event_sequence=>140
 ,p_triggering_element_type=>'BUTTON'
 ,p_triggering_button_id=>wwv_flow_imp.id(143659957908222723)
@@ -740,12 +767,16 @@ wwv_flow_imp_page.create_page_da_action(
 '             :P0_MENSAJE_VALIDACION := ''Se debe completar los procesos antes de finalizar el Ticket'';',
 '             :P486_PROCESAR := 0;',
 '        ELSE ',
-'            :P486_PROCESAR :=  1;',
+'           ',
 '            update llamador_ticket set estado  = ''FINALIZADO''',
 '            WHERE ID_TICKET = :P486_ID_TICKET;',
 '',
 '            update ca_ticket_atencion set estado  = ''FINALIZADO'', fecha_cierre  = sysdate',
 '            WHERE ID_TICKET = :P486_ID_TICKET;',
+'',
+'            COMMIT;',
+'',
+'             :P486_PROCESAR :=  1;',
 '        END IF;',
 '',
 '    END;',
@@ -926,6 +957,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(148902666030312211)
 ,p_event_id=>wwv_flow_imp.id(148902549954312210)
@@ -959,18 +1002,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_condition_type=>'NOT_NULL'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(148903158608312216)
@@ -1235,10 +1266,12 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'var id_ticket = apex.item("P486_ID_TICKET").getValue();',
+'',
 'apex.navigation.redirect(apex.util.makeApplicationUrl({',
 '    pageId:370,',
-'    itemNames: ["P370_OPERACION","P370_NRO_PAGINA"],',
-'    itemValues: [''AGREGAR'', ''486'']}));'))
+'    itemNames: ["P370_OPERACION","P370_NRO_PAGINA","P370_NRO_TICKET"],',
+'    itemValues: [''AGREGAR'', ''486'',id_ticket]}));'))
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(148906019828312245)
@@ -1519,6 +1552,44 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P486_SERVICIOS'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(103254655821652643)
+,p_name=>'Pausar ticket'
+,p_event_sequence=>270
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(193661223015252006)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(103254747266652644)
+,p_event_id=>wwv_flow_imp.id(103254655821652643)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>unistr('\00BFDesea pausar el ticket?')
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(103254847119652645)
+,p_event_id=>wwv_flow_imp.id(103254655821652643)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'update inv.llamador_ticket  set estado = ''PAUSADO'', INICIO_PAUSA = SYSDATE',
+'WHERE  ID_TICKET  = :P486_ID_TICKET;',
+'',
+'commit;',
+'',
+':P486_PROCESAR := 1;'))
+,p_attribute_02=>'P486_ID_TICKET'
+,p_attribute_03=>'P486_PROCESAR'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(143660326461222727)

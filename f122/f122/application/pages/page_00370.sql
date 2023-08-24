@@ -82,7 +82,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230818114809'
+,p_last_upd_yyyymmddhh24miss=>'20230821104201'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(106525111792760542)
@@ -4415,7 +4415,7 @@ wwv_flow_imp_page.create_page_button(
 wwv_flow_imp_page.create_page_branch(
  p_id=>wwv_flow_imp.id(110476729013213434)
 ,p_branch_name=>unistr('Ir a P\00E1gina 400')
-,p_branch_action=>'f?p=&APP_ID.:400:&SESSION.::&DEBUG.:370:P400_NRO_COMPROBANTE,P400_SER_COMPROBANTE,P400_OPERACION,P400_PAGINA:&P370_NRO_COMPROBANTE.,&P370_SER_COMPROBANTE.,&P370_OPERACION.,&P370_NRO_PAGINA.&success_msg=#SUCCESS_MSG#'
+,p_branch_action=>'f?p=&APP_ID.:400:&SESSION.::&DEBUG.:370:P400_NRO_COMPROBANTE,P400_SER_COMPROBANTE,P400_OPERACION,P400_PAGINA,P400_ID_TICKET:&P370_NRO_COMPROBANTE.,&P370_SER_COMPROBANTE.,&P370_OPERACION.,&P370_NRO_PAGINA.,&P370_NRO_TICKET.&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_when_button_id=>wwv_flow_imp.id(110075081385167981)
@@ -4427,7 +4427,7 @@ wwv_flow_imp_page.create_page_branch(
 wwv_flow_imp_page.create_page_branch(
  p_id=>wwv_flow_imp.id(134814537741775539)
 ,p_branch_name=>unistr('Ir a P\00E1gina 370')
-,p_branch_action=>'f?p=&APP_ID.:370:&SESSION.::&DEBUG.:370:P370_OT_MULTIPLE,P370_COD_CLIENTE,P370_NOM_CLIENTE,P370_CI,P370_RUC,P370_TEL_CLIENTE,P370_DIR_CLIENTE,P370_EMAIL,P370_DEPARTAMENTO,P370_CIUDAD,P370_IND_ZONA,P370_COD_ORIGEN,P370_OPERACION,P370_IMPRIMIR,P370_NRO_COMPROBANTE:&P370_OT_MULTIPLE.,&P370_COD_CLIENTE.,&P370_NOM_CLIENTE.,&P370_CI.,&P370_RUC.,&P370_TEL_CLIENTE.,&P370_DIR_CLIENTE.,&P370_EMAIL.,&P370_DEPARTAMENTO.,&P370_CIUDAD.,&P370_IND_ZONA.,&P370_COD_ORIGEN.,&P370_OPERACION.,S,&P370_NRO_COMPROBANTE.&success_msg=#SUCCESS_MSG#'
+,p_branch_action=>'f?p=&APP_ID.:370:&SESSION.::&DEBUG.:370:P370_OT_MULTIPLE,P370_COD_CLIENTE,P370_NOM_CLIENTE,P370_CI,P370_RUC,P370_TEL_CLIENTE,P370_DIR_CLIENTE,P370_EMAIL,P370_DEPARTAMENTO,P370_CIUDAD,P370_IND_ZONA,P370_COD_ORIGEN,P370_OPERACION,P370_IMPRIMIR,P370_NRO_COMPROBANTE,P370_NRO_TICKET:&P370_OT_MULTIPLE.,&P370_COD_CLIENTE.,&P370_NOM_CLIENTE.,&P370_CI.,&P370_RUC.,&P370_TEL_CLIENTE.,&P370_DIR_CLIENTE.,&P370_EMAIL.,&P370_DEPARTAMENTO.,&P370_CIUDAD.,&P370_IND_ZONA.,&P370_COD_ORIGEN.,&P370_OPERACION.,S,&P370_NRO_COMPROBANTE.,&P370_NRO_TICKET.&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_when_button_id=>wwv_flow_imp.id(110075081385167981)
@@ -4460,6 +4460,24 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_default=>'N'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(103251737696652614)
+,p_name=>'P370_NRO_TICKET'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(134811773515775511)
+,p_prompt=>'Nro. Ticket'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_grid_column=>11
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(104444783921494203)
@@ -4859,6 +4877,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P370_NRO_COMPROBANTE'
 ,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_imp.id(110208123484399603)
+,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Numero de Orden'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
@@ -5033,6 +5052,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'Y'
 ,p_attribute_05=>'PLAIN'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(110079814546167985)
 ,p_name=>'P370_COD_DIRECCION'
@@ -5061,18 +5092,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(110080679061167985)
@@ -6069,6 +6088,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(112973958428099013)
 ,p_name=>'P370_FEC_PRESUPUESTADO'
@@ -6102,18 +6133,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(112974140722099015)
@@ -7142,6 +7161,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118835808533846408)
 ,p_name=>'P370_CONSULTA_FEC_CIERRE'
@@ -7173,18 +7204,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(117499326801342240)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118836268565846412)
@@ -9876,9 +9895,9 @@ wwv_flow_imp_page.create_page_da_action(
 'vproveedor varchar2(30);',
 'begin',
 'select ',
-'COD_SUCURSAL_DIST, OBSERV, usr_ind_snc, fec_ind_snc ',
+'COD_SUCURSAL_DIST, OBSERV, usr_ind_snc, fec_ind_snc, NRO_TICKET',
 'INTO ',
-':P370_COD_SUCURSAL_DIST, :P370_OBSERV, :P370_USR_IND_SNC, :P370_FEC_IND_SNC',
+':P370_COD_SUCURSAL_DIST, :P370_OBSERV, :P370_USR_IND_SNC, :P370_FEC_IND_SNC, :P370_NRO_TICKET',
 'from vt_ordenes_trabajo ot',
 'where OT.COD_EMPRESA=''1''',
 'AND OT.TIP_COMPROBANTE=''ORT''',
@@ -9890,7 +9909,7 @@ wwv_flow_imp_page.create_page_da_action(
 'END;',
 ''))
 ,p_attribute_02=>'P370_PARAM_SER_OT,P370_PARAM_NRO_OT'
-,p_attribute_03=>'P370_COD_SUCURSAL_DIST,P370_OBSERV,P370_USR_IND_SNC,P370_FEC_IND_SNC'
+,p_attribute_03=>'P370_COD_SUCURSAL_DIST,P370_OBSERV,P370_USR_IND_SNC,P370_FEC_IND_SNC,P370_NRO_TICKET'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -16115,7 +16134,8 @@ wwv_flow_imp_page.create_page_process(
 '                                             p_COD_USUARIO_ABANDONADO          => :P370_COD_USUARIO_ABANDONADO,',
 '                                             p_cod_sta                         => :P370_COD_STA,',
 '                                             P_COD_SUCURSAL_DIST                => :P370_COD_SUCURSAL_DIST,',
-'                                            P_IND_SNC                           => :P370_IND_SNC);  ',
+'                                            P_IND_SNC                           => :P370_IND_SNC,',
+'                                            p_id_ticket     => :P370_NRO_TICKET);  ',
 '                    :P370_NRO_COMPROBANTE := p_nro_ot;',
 '                   ',
 '                   ',
@@ -16259,7 +16279,8 @@ wwv_flow_imp_page.create_page_process(
 '                 p_COD_USUARIO_ABANDONADO          => :P370_COD_USUARIO_ABANDONADO,',
 '                 p_cod_sta                         => :P370_COD_STA,',
 '                 P_COD_SUCURSAL_DIST               => :P370_COD_SUCURSAL_DIST,',
-'                 P_IND_SNC                           => :P370_IND_SNC);',
+'                 P_IND_SNC                           => :P370_IND_SNC,',
+'                 p_id_ticket     => :P370_NRO_TICKET);',
 ' ',
 '                    if nvl(p_retorno,''OK'')<>''OK'' then',
 '                        raise error; ',

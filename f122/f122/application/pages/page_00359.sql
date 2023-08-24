@@ -21,8 +21,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230207090239'
+,p_last_updated_by=>'OSCARGO'
+,p_last_upd_yyyymmddhh24miss=>'20230822103510'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(99768573072877227)
@@ -414,7 +414,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>10
-,p_report_columns=>'NRO_MOVIMIENTO:COD_EMPLEADO:IND_TIPO:FEC_INICIAL:FEC_FINAL:HORA_INICIAL:HORA_FINAL:CANT_DIAS:CANT_HORAS:IND_DESCUENTO:IND_EXC_ALMUERZO:COD_MOTIVO:DETALLES:RECHAZAR:'
+,p_report_columns=>'NRO_MOVIMIENTO:COD_EMPLEADO:IND_TIPO:FEC_INICIAL:FEC_FINAL:HORA_INICIAL:HORA_FINAL:CANT_DIAS:CANT_HORAS:IND_EXC_ALMUERZO:COD_MOTIVO:DETALLES:RECHAZAR:'
 ,p_sort_column_1=>'NRO_MOVIMIENTO'
 ,p_sort_direction_1=>'ASC'
 );
@@ -437,8 +437,8 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(40096829222263653)
 ,p_plug_display_sequence=>10
-,p_plug_grid_column_span=>3
-,p_plug_display_column=>5
+,p_plug_grid_column_span=>4
+,p_plug_display_column=>3
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -451,8 +451,8 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(40096829222263653)
 ,p_plug_display_sequence=>20
 ,p_plug_new_grid_row=>false
-,p_plug_grid_column_span=>3
-,p_plug_display_column=>8
+,p_plug_grid_column_span=>4
+,p_plug_display_column=>7
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -474,7 +474,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_plug_id=>wwv_flow_imp.id(100784935310494441)
 ,p_button_name=>'BTN_NIVEL2'
 ,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#'
+,p_button_template_options=>'#DEFAULT#:t-Button--stretch'
 ,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Compensaciones NGO'
@@ -487,7 +487,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_plug_id=>wwv_flow_imp.id(100784631683494438)
 ,p_button_name=>'BTN_NIVEL1'
 ,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#'
+,p_button_template_options=>'#DEFAULT#:t-Button--stretch'
 ,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Superior Directo'
@@ -503,6 +503,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_tag_attributes=>'readonly'
+,p_colspan=>10
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -513,7 +514,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(99768711605877229)
 ,p_name=>'P359_COD_EMPLEADO'
-,p_item_sequence=>20
+,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(99768573072877227)
 ,p_prompt=>'Empleado'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -551,7 +552,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(99768801050877230)
 ,p_name=>'P359_COD_MOTIVO'
-,p_item_sequence=>40
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(99768573072877227)
 ,p_prompt=>'Motivo'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -688,13 +689,14 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P359_USUARIO_N1'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(100784631683494438)
-,p_prompt=>'Usuario N1'
+,p_prompt=>'Usuario Nivel 1'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
+,p_attribute_02=>'Y'
+,p_attribute_03=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
@@ -703,15 +705,29 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P359_USUARIO_N2'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(100784935310494441)
-,p_prompt=>'Usuario N2'
+,p_prompt=>'Usuario Nivel 2'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
+,p_attribute_02=>'Y'
+,p_attribute_03=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(190137253785814027)
+,p_name=>'P359_DESCONTAR'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(99768573072877227)
+,p_prompt=>'Descontar'
+,p_display_as=>'NATIVE_YES_NO'
+,p_begin_on_new_line=>'N'
+,p_colspan=>2
+,p_field_template=>wwv_flow_imp.id(40186576483263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(100783287800494424)

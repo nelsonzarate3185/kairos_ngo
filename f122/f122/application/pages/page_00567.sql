@@ -35,7 +35,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230803093407'
+,p_last_upd_yyyymmddhh24miss=>'20230823081716'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(587279739986862823)
@@ -47,9 +47,12 @@ wwv_flow_imp_page.create_report_region(
 ,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_query_type=>'SQL'
 ,p_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select s.USUARIO, s.FECHA_CARGA, s.COD_ARTICULO, s.CANTIDAD,',
 '',
-'CASE WHEN LENGTH(TRIM(TRANSLATE((substr(s.COD_ARTICULO,2,LENGTH(s.COD_ARTICULO))), '' +-.0123456789'', '' ''))) IS NULL THEN',
+'select s.USUARIO, s.FECHA_CARGA, s.COD_ARTICULO, s.CANTIDAD ,',
+'   ',
+'   ',
+'   ',
+'CASE WHEN LENGTH(TRIM(TRANSLATE(REPLACE(substr(s.COD_ARTICULO,2,LENGTH(s.COD_ARTICULO)),''.'',''A''), '' +-.0123456789'', '' ''))) IS NULL THEN',
 '   (select  CASE WHEN a.tipo_cierre IN',
 '                      (''CSR'', ''CSS'') AND',
 '                      a.nro_sol_conf IS NOT NULL THEN',
@@ -75,21 +78,19 @@ wwv_flow_imp_page.create_report_region(
 '   AND A.TIP_COMPROBANTE=''ORT''  ',
 '   AND A.SER_COMPROBANTE=substr(s.COD_ARTICULO,0,1)',
 'AND  (A.NRO_COMPROBANTE)= (substr(s.COD_ARTICULO,2,LENGTH(s.COD_ARTICULO)))',
-'   and rownum=1) ELSE null  END resolucion,',
-'      CASE WHEN LENGTH(TRIM(TRANSLATE((substr(s.COD_ARTICULO,2,LENGTH(s.COD_ARTICULO))), '' +-.0123456789'', '' ''))) IS NULL THEN',
-'   ',
+'   and rownum=1) ELSE null  END resolucion   ,',
+'   CASE WHEN LENGTH(TRIM(TRANSLATE(REPLACE(substr(s.COD_ARTICULO,2,LENGTH(s.COD_ARTICULO)),''.'',''A''), '' +-.0123456789'', '' ''))) IS NULL THEN',
 '   (select  estado_snc',
 'from estado_ord_trabajo a',
 '   where  A.SER_COMPROBANTE=substr(s.COD_ARTICULO,0,1)',
 'AND  A.NRO_COMPROBANTE= (substr(s.COD_ARTICULO,2,LENGTH(s.COD_ARTICULO)))',
 '   and rownum=1) ELSE null  END estado_snc   ',
-'',
-' from SM_INVENTARIO_DET s',
+'from',
+' SM_INVENTARIO_DET s',
 'WHERE  s.INVENTORY_AREA=:P567_NRO_INVENTARIO',
 'AND s.ZONA=:P567_ZONA',
 'and s.cod_articulo is not null',
-'ORDER BY FECHA_CARGA desc',
-' '))
+'ORDER BY FECHA_CARGA desc'))
 ,p_ajax_enabled=>'Y'
 ,p_ajax_items_to_submit=>'P567_ZONA,P567_NRO_INVENTARIO'
 ,p_lazy_loading=>false

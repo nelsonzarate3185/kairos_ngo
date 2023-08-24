@@ -32,7 +32,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230725105011'
+,p_last_upd_yyyymmddhh24miss=>'20230823101636'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(68939790323359517)
@@ -571,6 +571,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>unistr('Inserci\00F3n')
 ,p_button_position=>'EDIT'
 ,p_warn_on_unsaved_changes=>null
+,p_button_condition_type=>'NEVER'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(68939941453359519)

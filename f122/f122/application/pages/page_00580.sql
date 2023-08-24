@@ -53,7 +53,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230818091753'
+,p_last_upd_yyyymmddhh24miss=>'20230821143517'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(187805003220448446)
@@ -135,11 +135,9 @@ wwv_flow_imp_page.create_worksheet(
 ,p_max_row_count=>'1000000'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
-,p_report_list_mode=>'TABS'
+,p_show_search_bar=>'N'
 ,p_lazy_loading=>false
 ,p_show_detail_link=>'N'
-,p_show_notify=>'Y'
-,p_download_formats=>'CSV:HTML:XLSX:PDF'
 ,p_enable_mail_download=>'Y'
 ,p_owner=>'JUANSA'
 ,p_internal_uid=>188560711469494445
@@ -306,11 +304,9 @@ wwv_flow_imp_page.create_worksheet(
 ,p_max_row_count=>'1000000'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
-,p_report_list_mode=>'TABS'
+,p_show_search_bar=>'N'
 ,p_lazy_loading=>false
 ,p_show_detail_link=>'N'
-,p_show_notify=>'Y'
-,p_download_formats=>'CSV:HTML:XLSX:PDF'
 ,p_enable_mail_download=>'Y'
 ,p_owner=>'JUANSA'
 ,p_internal_uid=>190081681114831005
@@ -442,7 +438,8 @@ wwv_flow_imp_page.create_report_region(
 '       CANTIDAD, ',
 '       MONTO_TOTAL,',
 '       FLETE,',
-'       PERIODO',
+'       PERIODO, ',
+'       cod_marca',
 '  from VW_COMISION_VEND_DET_NP',
 '  where cod_vendedor = :P580_VENDEDOR',
 '  and   periodo= :P580_MES||:P580_ANIO'))
@@ -553,7 +550,7 @@ wwv_flow_imp_page.create_report_columns(
  p_id=>wwv_flow_imp.id(190083859655831027)
 ,p_query_column_id=>9
 ,p_column_alias=>'CANTIDAD'
-,p_column_display_sequence=>80
+,p_column_display_sequence=>90
 ,p_column_heading=>'Cant'
 ,p_use_as_row_header=>'N'
 ,p_column_alignment=>'CENTER'
@@ -593,6 +590,18 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>130
 ,p_hidden_column=>'Y'
 ,p_derived_column=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(192591079111827044)
+,p_query_column_id=>13
+,p_column_alias=>'COD_MARCA'
+,p_column_display_sequence=>80
+,p_column_heading=>'Marca'
+,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(188556430343494402)
@@ -775,6 +784,17 @@ wwv_flow_imp_page.create_report_columns(
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(192591239469827046)
+,p_plug_name=>'Modifica Peso'
+,p_region_template_options=>'#DEFAULT#:js-dialog-size600x400'
+,p_plug_template=>wwv_flow_imp.id(40117728043263659)
+,p_plug_display_sequence=>1030
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(188558087749494418)
 ,p_button_sequence=>40
@@ -797,11 +817,12 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>50
 ,p_button_plug_id=>wwv_flow_imp.id(187805003220448446)
 ,p_button_name=>'CONFIRMAR'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconRight:t-Button--stretch:t-Button--gapLeft:t-Button--gapRight:t-Button--gapTop'
 ,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Confirmar'
+,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-color-21-text'
 ,p_icon_css_classes=>'fa-check'
 ,p_grid_new_row=>'N'
@@ -992,6 +1013,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(190698096857286650)
 ,p_name=>'P580_TOT_COMISION'
@@ -1006,6 +1039,29 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(192591113126827045)
+,p_name=>'P580_SEQ_PESO'
+,p_item_sequence=>130
+,p_item_plug_id=>wwv_flow_imp.id(187805003220448446)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(192591324362827047)
+,p_name=>'P580_PESO'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(192591239469827046)
+,p_prompt=>unistr('Peso Facturaci\00F3n')
+,p_post_element_text=>'%'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'0'
+,p_attribute_02=>'100'
+,p_attribute_03=>'right'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(188558188330494419)
 ,p_name=>'da_valida_valores'
@@ -1016,18 +1072,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_condition_type=>'NOT_NULL'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(188558355616494421)
@@ -1085,7 +1129,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(190697000183286640)
 ,p_event_id=>wwv_flow_imp.id(188558188330494419)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>30
+,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>'var spinner = apex.util.showSpinner();'
@@ -1094,7 +1138,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(190697513922286645)
 ,p_event_id=>wwv_flow_imp.id(188558188330494419)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>40
+,p_action_sequence=>50
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -1126,7 +1170,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(190697174083286641)
 ,p_event_id=>wwv_flow_imp.id(188558188330494419)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>50
+,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -1138,7 +1182,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(188558206927494420)
 ,p_event_id=>wwv_flow_imp.id(188558188330494419)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>60
+,p_action_sequence=>70
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -1148,7 +1192,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(190697712179286647)
 ,p_event_id=>wwv_flow_imp.id(188558188330494419)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>70
+,p_action_sequence=>80
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -1158,7 +1202,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(190697849820286648)
 ,p_event_id=>wwv_flow_imp.id(188558188330494419)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>80
+,p_action_sequence=>90
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -1307,6 +1351,101 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(192590703580827041)
+,p_name=>'DA_Confirma'
+,p_event_sequence=>40
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(187805442439448450)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(192590982371827043)
+,p_event_id=>wwv_flow_imp.id(192590703580827041)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    VERROR EXCEPTION;',
+'    VMENSAJE VARCHAR2(500);',
+'    VTA_TOTAL NUMBER(12,2):=0;',
+'BEGIN',
+'    IF :P580_MES IS NULL THEN',
+'            VMENSAJE:=''Debe seleccionar el MES.'';',
+'            raise verror;',
+'    ELSE',
+'        IF :P580_ANIO IS NULL THEN',
+unistr('            VMENSAJE:=''Debe seleccionar el A\00D1O'';'),
+'            raise verror;',
+'        ELSE ',
+'                DECLARE',
+'                    VTOTAL NUMBER;',
+'                BEGIN   ',
+'                        select nvl(sum(comision),0)',
+'                        INTO VTOTAL',
+'                        from FV_COMISION_MENSUAL',
+'                        where cod_empresa=''1''',
+'                        and cod_vendedor=:P580_VENDEDOR',
+'                        and cod_periodo=:P580_MES||:P580_ANIO',
+'                        ;',
+'                        IF  VTOTAL<>0 THEN                        ',
+'                            VMENSAJE:=''El vendedor ya cuenta con una Comision generada para el periodo ''|| :P580_MES||:P580_ANIO;',
+'                            raise verror;',
+'                        END IF;',
+'',
+'',
+'',
+'                        SELECT NVL(SUM(to_number(C003)),0)',
+'                        INTO VTOTAL',
+'                        FROM APEX_COLLECTIONS  ',
+'                        WHERE COLLECTION_NAME IN (''FV_CALC_COM_FACT'' ,''FV_CALC_COM_CUMP'');',
+'                        IF  VTOTAL=0 THEN                        ',
+'                            VMENSAJE:=''El Total de Comision es 0 para el Vendedor ''|| :P580_VENDEDOR;',
+'                            raise verror;',
+'                        END IF;',
+'                EXCEPTION',
+'                    WHEN OTHERS THEN                ',
+'                        VMENSAJE:=SQLERRM;',
+'                raise verror;',
+'                END;',
+'        END IF;',
+'    END IF;',
+'EXCEPTION',
+'    WHEN VERROR THEN',
+'            raise_application_error(-20000, VMENSAJE );',
+'    WHEN OTHERS THEN',
+'        raise_application_error(-20000, ''Error intentar recuperar los datos.'' || sqlerrm );',
+'END;    ',
+'',
+''))
+,p_attribute_02=>'P580_VENDEDOR,P580_MES,P580_ANIO'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(192591414953827048)
+,p_name=>'New'
+,p_event_sequence=>50
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P580_SEQ_PESO'
+,p_condition_element=>'P580_SEQ_PESO'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(192591587853827049)
+,p_event_id=>wwv_flow_imp.id(192591414953827048)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_OPEN_REGION'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(192591239469827046)
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(188560454281494442)

@@ -74,8 +74,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230811160246'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230822093120'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(117611450062947315)
@@ -2886,6 +2886,7 @@ wwv_flow_imp_page.create_page_item(
 'AND A.ESTADO=''S'''))
 ,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P398_ORIGEN_ENTREGA,P_COD_EMPRESA'
+,p_ajax_items_to_submit=>'P398_ORIGEN_ENTREGA,P_COD_EMPRESA'
 ,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
