@@ -35,8 +35,8 @@ wwv_flow_imp_page.create_page(
 '}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'03'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230821111456'
+,p_last_updated_by=>'CHARBA'
+,p_last_upd_yyyymmddhh24miss=>'20230823145315'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(157931378613331813)
@@ -399,7 +399,7 @@ wwv_flow_imp_page.create_page_item(
 'and NVL(pi.cod_ident(+),''CI'')=''CI''',
 'and p.cod_persona = pR.cod_persona(+) ',
 'and NVL(pR.cod_ident(+),''RUC'')=''RUC''',
-'and nvl(c.estado,''X'') = ''A''',
+'AND (nvl(c.estado, ''X'') IN (''A'',''I'') OR c.estado IS null)',
 'AND ((:P532_TIPO_CLIENTE <> ''1'' AND c.tip_cliente <> ''1'' ) OR',
 '                       c.tip_cliente = :P532_TIPO_CLIENTE)',
 'union all',

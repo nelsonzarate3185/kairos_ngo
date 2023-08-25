@@ -159,7 +159,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230821101030'
+,p_last_upd_yyyymmddhh24miss=>'20230825090607'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(128551196121042344)
@@ -1114,29 +1114,54 @@ wwv_flow_imp_page.create_page_da_action(
 'params2.push({ name: ''p_ser_comprobante'', value: ser_comprobante}) ',
 'params2.push({ name: ''p_id_ticket'', value: comprobante}) ',
 '',
-unistr('var htmldb_delete_messag_agregar =''\00BFDesea Visualizar la OT Nro. '' + comprobante + '''';  '),
-'    apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
-'        if( okPressed ) {',
-'            createReportUrl("CAORDTRA", params)',
-unistr('            var htmldb_delete_messag_agregar =''\00BFDesea Visualizar la etiqueta Nro. '' + comprobante + '''';  '),
-'            apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
-'                if( okPressed ) {',
-'                    createReportUrl("ETIQUETAOT", params2)',
-'                } else {',
-'                    null;',
-'                }',
-'            });',
-'        } else {',
-unistr('           var htmldb_delete_messag_agregar =''\00BFDesea Visualizar la etiqueta Nro. '' + comprobante + '''';  '),
-'            apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
-'                if( okPressed ) {',
-'                    createReportUrl("ETIQUETAOT", params2)',
-'                } else {',
-'                    null;',
-'                }',
-'            });',
-'        }',
-'    });',
+'apex.server.process(',
+'                ''VERIFICA_CONTADOR'', ',
+'                { x01: comprobante,',
+'                  x02: ser_comprobante}, ',
+'                {',
+'                success: function (pData) { ',
+'                    if (pData.p_contador === 0) {',
+unistr('                        var htmldb_delete_messag_agregar =''\00BFDesea Visualizar la OT Nro. '' + comprobante + '''';  '),
+'                        apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
+'                            if( okPressed ) {',
+'                                apex.server.process(',
+'                                    ''CONTADOR_IMPRESION'', ',
+'                                    { x01: comprobante,',
+'                                    x02: ser_comprobante}, ',
+'                                    {',
+'                                    success: function (pData) { ',
+'                                        null;',
+'                                    }, ',
+'                                    });',
+'                                    ',
+'                                    createReportUrl("CAORDTRA", params)',
+unistr('                                var htmldb_delete_messag_agregar =''\00BFDesea Visualizar la etiqueta Nro. '' + comprobante + '''';  '),
+'                                apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
+'                                    if( okPressed ) {',
+'                                        createReportUrl("ETIQUETAOT", params2)',
+'                                    } else {',
+'                                        null;',
+'                                    }',
+'                                });',
+'                            } else {',
+unistr('                            var htmldb_delete_messag_agregar =''\00BFDesea Visualizar la etiqueta Nro. '' + comprobante + '''';  '),
+'                                apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
+'                                    if( okPressed ) {',
+'                                        createReportUrl("ETIQUETAOT", params2)',
+'                                    } else {',
+'                                        null;',
+'                                    }',
+'                                });',
+'                            }',
+'                        });',
+'                    }else  {',
+'                        null;',
+'                    }',
+'                }, ',
+'                });',
+'',
+'',
+'',
 '',
 '',
 '',
@@ -1181,6 +1206,82 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(128551196121042344)
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(194797530433105001)
+,p_process_sequence=>10
+,p_process_point=>'ON_DEMAND'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'CONTADOR_IMPRESION'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    v_nro_comprobante VARCHAR2(50);',
+'    v_ser_comprobante VARCHAR2(50);',
+'BEGIN',
+'    v_nro_comprobante := apex_application.g_x01;',
+'    v_ser_comprobante := apex_application.g_x02;',
+'',
+'        BEGIN ',
+'          INSERT INTO VT_CONTADOR_IMPRESION_ORT (COD_EMPRESA, TIP_COMPROBANTE, SER_COMPROBANTE, NRO_COMPROBANTE, DESCRIPCION, FECHA, COD_USUARIO)',
+'          VALUES(''1'', ''ORT'',v_ser_comprobante,v_nro_comprobante,''1'', SYSDATE, :APP_USER );',
+'        EXCEPTION ',
+'            WHEN OTHERS THEN ',
+'                RAISE_APPLICATION_ERROR(-20001, ''Error en la insercion en la tabla VT_CONTADOR_IMPRESION_ORT ''|| sqlerrm);',
+'        END;',
+'  apex_json.open_object;',
+'  apex_json.write(''success'', TRUE);',
+'  apex_json.close_object;',
+'EXCEPTION',
+'  WHEN OTHERS THEN',
+'    apex_json.open_object;',
+'    apex_json.write(''success'', FALSE);',
+'    apex_json.close_object;',
+'END;'))
+,p_process_clob_language=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(194797739342105003)
+,p_process_sequence=>20
+,p_process_point=>'ON_DEMAND'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'VERIFICA_CONTADOR'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    v_nro_comprobante VARCHAR2(50);',
+'    v_ser_comprobante VARCHAR2(50);',
+'    v_contador NUMBER := 0;',
+'BEGIN',
+'    v_nro_comprobante := apex_application.g_x01;',
+'    v_ser_comprobante := apex_application.g_x02;',
+'        BEGIN',
+'            select COUNT(*)',
+'            INTO v_contador',
+'            from VT_CONTADOR_IMPRESION_ORT   ',
+'             where cod_empresa =''1''',
+'             and TIP_COMPROBANTE =''ORT''',
+'             and SER_COMPROBANTE = v_ser_comprobante',
+'             and nro_comprobante = v_nro_comprobante;',
+'         EXCEPTION ',
+'             WHEN OTHERS THEN ',
+'                v_contador := 0;',
+'         END;',
+'          ',
+'  apex_json.open_object;',
+'  apex_json.write(''success'', TRUE);',
+'  apex_json.write(''p_contador'', v_contador);',
+'  apex_json.close_object;',
+'EXCEPTION',
+'  WHEN OTHERS THEN',
+'    apex_json.open_object;',
+'    apex_json.write(''success'', FALSE);',
+'    apex_json.write(''p_contador'', v_contador);',
+'    apex_json.close_object;',
+'END;',
+'',
+'',
+'',
+''))
+,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp.component_end;
 end;

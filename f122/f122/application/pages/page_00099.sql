@@ -127,7 +127,7 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230822140850'
+,p_last_upd_yyyymmddhh24miss=>'20230825075801'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21771034358343321)
@@ -6756,6 +6756,23 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194797689850105002)
+,p_event_id=>wwv_flow_imp.id(24409000240161929)
+,p_event_result=>'TRUE'
+,p_action_sequence=>70
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'IF :P99_TIP_COMPROBANTE_REF = ''ORT'' THEN ',
+'    :P99_COD_LISTA_PRECIO :=  1;',
+'END IF;'))
+,p_attribute_02=>'P99_TIP_COMPROBANTE_REF'
+,p_attribute_03=>'P99_COD_LISTA_PRECIO'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(25330660102948402)
 ,p_name=>'DA_VALIDA_COD_CLIENTE'
@@ -12764,7 +12781,7 @@ unistr('                raise_application_error(-20001, ''Condici\00F3n de Venta
 '    v_estado VARCHAR2(50) := ''N'';',
 '    v_permisos VARCHAR2(50) := ''N'';',
 'begin ',
-'    if :P99_TIP_COMPROBANTE = ''FCR'' THEN ',
+'    if :P99_TIP_COMPROBANTE = ''FCR'' AND :P99_TIP_COMPROBANTE_REF = ''PED'' THEN ',
 '        begin ',
 '            BEGIN',
 '                select AUTORIZADO',
@@ -12782,7 +12799,7 @@ unistr('                raise_application_error(-20001, ''Condici\00F3n de Venta
 '            END IF;',
 '        end;    ',
 '',
-'    ELSIF :P99_TIP_COMPROBANTE = ''FCO'' THEN ',
+'    ELSIF :P99_TIP_COMPROBANTE = ''FCO'' AND :P99_TIP_COMPROBANTE_REF = ''PED'' THEN ',
 '',
 '             BEGIN',
 '            select AUTORIZADO',

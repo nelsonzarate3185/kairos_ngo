@@ -145,10 +145,12 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_nom_tecnicos.sql
 @@application/shared_components/user_interface/lovs/lov_origenes_caordtra.sql
 @@application/shared_components/user_interface/lovs/lov_personas_vtrrancl.sql
+@@application/shared_components/user_interface/lovs/lov_problemas_caordtra.sql
 @@application/shared_components/user_interface/lovs/lov_problemas_reclamo.sql
 @@application/shared_components/user_interface/lovs/lov_rubros_vtrrancl.sql
 @@application/shared_components/user_interface/lovs/lov_seguimientos_caordtra.sql
 @@application/shared_components/user_interface/lovs/lov_servicios_tickets.sql
+@@application/shared_components/user_interface/lovs/lov_soluciones_caordtra.sql
 @@application/shared_components/user_interface/lovs/lov_sucursales_vtpedido.sql
 @@application/shared_components/user_interface/lovs/lov_sucursales_vtrrancl.sql
 @@application/shared_components/user_interface/lovs/lov_sucursal_cod.sql

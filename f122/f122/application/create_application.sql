@@ -20,8 +20,8 @@ wwv_flow_imp.create_flow(
 ,p_page_protection_enabled_y_n=>'Y'
 ,p_checksum_salt=>'9F0421DBCB724D65F2531913C611CC180F206F1FE762BF92151DF3A889E67102'
 ,p_bookmark_checksum_function=>'SH512'
-,p_max_session_idle_sec=>3600
-,p_on_max_idle_timeout_url=>'3600'
+,p_max_session_idle_sec=>360000
+,p_on_max_idle_timeout_url=>'360000'
 ,p_compatibility_mode=>'19.2'
 ,p_flow_language=>'es-py'
 ,p_flow_language_derived_from=>'FLOW_PRIMARY_LANGUAGE'
@@ -55,8 +55,8 @@ wwv_flow_imp.create_flow(
 ,p_substitution_value_01=>'KAIROS'
 ,p_substitution_string_02=>'JASPERURL'
 ,p_substitution_value_02=>'http://192.168.15.98:8080/jasperserver/rest_v2/reports/reports'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230823120358'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230825102138'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>56
 ,p_ui_type_name => null

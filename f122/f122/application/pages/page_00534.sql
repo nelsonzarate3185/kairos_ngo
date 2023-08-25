@@ -28,7 +28,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230511152803'
+,p_last_upd_yyyymmddhh24miss=>'20230824152617'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(52204159608560629)
@@ -76,7 +76,8 @@ wwv_flow_imp_page.create_page_plug(
 '  AND   CC.COD_EMPRESA=V.COD_EMPRESA',
 '  AND   CC.COD_VENDEDOR=V.COD_VENDEDOR',
 '  AND   V.COD_PERSONA=P.COD_PERSONA',
-''))
+'  order by nvl(CC.prom_mrgn,0) desc, CC.cod_vendedor',
+'       '))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_content_disposition=>'ATTACHMENT'

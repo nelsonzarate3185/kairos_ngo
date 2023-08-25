@@ -19,7 +19,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'D'
 ,p_page_component_map=>'14'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230804100044'
+,p_last_upd_yyyymmddhh24miss=>'20230824152008'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(12525684456514418)
@@ -154,7 +154,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(40096829222263653)
 ,p_plug_display_sequence=>930
-,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<script  type="text/javascript">',
 '',
@@ -993,18 +992,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P0_VALIDACION_FECHA'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(52349193902603243)
 ,p_name=>unistr('Validar a\00F1o')
@@ -1016,6 +1003,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_expression=>'3'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(52349288250603244)

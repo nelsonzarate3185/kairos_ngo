@@ -28,7 +28,7 @@ wwv_flow_imp_shared.create_list_of_values(
 'and NVL(pi.cod_ident(+),''CI'')=''CI''',
 'and p.cod_persona = pR.cod_persona(+) ',
 'and NVL(pR.cod_ident(+),''RUC'')=''RUC''',
-'and nvl(c.estado,''X'') = ''A''',
+'AND (nvl(c.estado, ''X'') IN (''A'',''I'') OR c.estado IS null)',
 'AND ((:P532_TIPO_CLIENTE <> ''1'' AND c.tip_cliente <> ''1'' ) OR',
 '                       c.tip_cliente = :P532_TIPO_CLIENTE)',
 'union all',

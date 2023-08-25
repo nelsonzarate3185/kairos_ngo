@@ -33,7 +33,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230807153605'
+,p_last_upd_yyyymmddhh24miss=>'20230824151439'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(12525879857514420)
@@ -3869,7 +3869,7 @@ wwv_flow_imp_page.create_page_da_action(
 '  ELSE',
 '    VDECIMALES := 2;',
 '  END IF;',
-'  Vdecimales:=50;',
+'  Vdecimales:=0;',
 '  BEGIN',
 '    SELECT NVL(TIPO_IMPUESTO, ''G'')',
 '      INTO VTIPO_IMPUESTO',
@@ -3919,7 +3919,7 @@ wwv_flow_imp_page.create_page_da_action(
 '  ',
 '  end if;',
 '  ',
-'  vdescuento   := vunitario * :P34_CANTIDAD * (:P34_PORC_DESCUENTO / 100);',
+'  vdescuento   := round(vunitario * :P34_CANTIDAD * (:P34_PORC_DESCUENTO / 100),vdecimales);',
 '  vrecargo     := NVL(vunitario * :P34_CANTIDAD * (:P34_PORC_recargo / 100),0);',
 '  VMONTO_TOTAL := round((VUNITARIO * :P34_CANTIDAD) - nvl(vdescuento, 0) + nvl(vrecargo, 0), nvl(Vdecimales, 0));',
 '  VTOTAL_IVA   := round(VMONTO_TOTAL * VPORC_IVA, nvl(Vdecimales, 0));',
@@ -4348,7 +4348,7 @@ wwv_flow_imp_page.create_page_da_action(
 '  ELSE',
 '    VDECIMALES := 2;',
 '  END IF;',
-'  Vdecimales:=50;',
+'  Vdecimales:=0;',
 '  BEGIN',
 '    SELECT NVL(TIPO_IMPUESTO, ''G'')',
 '      INTO VTIPO_IMPUESTO',
@@ -4398,7 +4398,7 @@ wwv_flow_imp_page.create_page_da_action(
 '  ',
 '  end if;',
 '  ',
-'  vdescuento   := vunitario * :P34_CANTIDAD * (:P34_PORC_DESCUENTO / 100);',
+'  vdescuento   := round(vunitario * :P34_CANTIDAD * (:P34_PORC_DESCUENTO / 100),vdecimales);',
 '  vrecargo     := NVL(vunitario * :P34_CANTIDAD * (:P34_PORC_recargo / 100),0);',
 '  VMONTO_TOTAL := round((VUNITARIO * :P34_CANTIDAD) - nvl(vdescuento, 0) + nvl(vrecargo, 0), nvl(Vdecimales, 0));',
 '  VTOTAL_IVA   := round(VMONTO_TOTAL * VPORC_IVA, nvl(Vdecimales, 0));',

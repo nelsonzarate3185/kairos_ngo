@@ -80,8 +80,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230614110222'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230824094218'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(58144667415171265)
@@ -746,19 +746,19 @@ wwv_flow_imp_page.create_page_plug(
 '       ''X''IMPRIMIR,',
 '       CASE WHEN C002 IN (''FCO'',''FCR'') THEN ',
 '                  CASE WHEN substr(C003,0,2) IN (''FE'') THEN ',
-'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2FVTIMPFAC_DUPLICADO_FE&standAlone=true&j_username=jasperadmin&j_password=jasperadm'
-||'in&output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012||''&P_REIMPRESO=N&P_IMPRIME_CONDICION=S&P_COD_USUARIO=''||:APP_USER',
+'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2F''||bs_busca_parametro(''VT'',''FACTURA_REP_DUPL_FE'')||''&standAlone=true&j_username=j'
+||'asperadmin&j_password=jasperadmin&output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012||''&P_REIMPRESO=N&P_IMPRIME_CONDICION=S&P_COD_USUARIO=''||:APP_USER',
 '                       ELSE ',
-'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2FVTIMPFAC_DUPLICADO&standAlone=true&j_username=jasperadmin&j_password=jasperadmin&'
-||'output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012||''&P_REIMPRESO=N&P_IMPRIME_CONDICION=S&P_COD_USUARIO=''||:APP_USER',
+'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2F''||bs_busca_parametro(''VT'',''FACTURA_REP_DUPL'')||''&standAlone=true&j_username=jasp'
+||'eradmin&j_password=jasperadmin&output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012||''&P_REIMPRESO=N&P_IMPRIME_CONDICION=S&P_COD_USUARIO=''||:APP_USER',
 '                  END',
 '              WHEN C002 IN (''NCR'') THEN ',
 '                 CASE WHEN substr(C003,0,2) IN (''FE'') THEN ',
-'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2FVTIMPNCR_DUPLICADO_FE&standAlone=true&j_username=jasperadmin&j_password=jasperadm'
-||'in&output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012',
+'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2F''||bs_busca_parametro(''VT'',''NCR_REP_DUPL_FE'')||''&standAlone=true&j_username=jaspe'
+||'radmin&j_password=jasperadmin&output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012',
 '                       ELSE ',
-'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2FVTIMPNCR_DUPLICADO&standAlone=true&j_username=jasperadmin&j_password=jasperadmin&'
-||'output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012',
+'                            ''https://ngosaeca.com.py/reportes/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&ParentFolderUri=%2Freports&reportUnit=%2Freports%2F''||bs_busca_parametro(''VT'',''NCR_REP_DUPL'')||''&standAlone=true&j_username=jasperad'
+||'min&j_password=jasperadmin&output=pdf&P_COD_EMPRESA=1&P_TIP_COMPROBANTE=''||C002||''&P_SER_COMPROBANTE=''||C003||''&P_NRO_COMPROBANTE=''||C004||''&P_COD_CLIENTE=''||C012',
 '                  END',
 '               ',
 '       END LINK_REP',

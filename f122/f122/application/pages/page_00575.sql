@@ -339,9 +339,10 @@ wwv_flow_imp_page.create_page(
 ,p_step_template=>wwv_flow_imp.id(40085302490263650)
 ,p_page_template_options=>'#DEFAULT#:js-pageStickyMobileHeader'
 ,p_page_is_public_y_n=>'Y'
+,p_rejoin_existing_sessions=>'N'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230816103818'
+,p_last_upd_yyyymmddhh24miss=>'20230823134743'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(188179930122669309)
