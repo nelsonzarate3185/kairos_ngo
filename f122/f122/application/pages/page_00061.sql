@@ -19,11 +19,11 @@ wwv_flow_imp_page.create_page(
 ,p_step_title=>'OTs Solicitadas'
 ,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
-,p_html_page_header=>'<meta http-equiv="refresh" content="40" >'
+,p_html_page_header=>'<meta http-equiv="refresh" content="60" >'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230324113940'
+,p_last_upd_yyyymmddhh24miss=>'20230825103054'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(386106358157962073)
@@ -94,6 +94,7 @@ wwv_flow_imp_page.create_page_plug(
 'AND nvl(nvl(O.ind_entrega,''N''),NVL(O.IND_RETIRADO,''N''))<>''S''',
 'AND (:P61_VER_SNC= ''T'' OR (:P61_VER_SNC = ''S'' AND NVL(O.IND_SNC,''N'') =''S'' ) OR (:P61_VER_SNC = ''N'' AND NVL(O.IND_SNC,''N'') =''N'' ))',
 'AND ((nvl(:P61_CHK_TKT,''N'')=''N'' AND COD_USUARIO_PED <>''TICKETS'') OR nvl(:P61_CHK_TKT,''N'')=''S'')',
+'AND cc.fec_alta >= trunc(sysdate-1)',
 'order by TIPO_DESC ,E.NOMBRE,CC.FEC_ALTA'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'

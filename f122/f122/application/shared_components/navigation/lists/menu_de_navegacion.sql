@@ -2723,6 +2723,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'594,595'
 );
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(195141691247515820)
+,p_list_item_display_sequence=>3070
+,p_list_item_link_text=>'COMISIONES GENERADAS'
+,p_list_item_link_target=>'f?p=&APP_ID.:586:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-layout-header-sidebar-left'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'586'
+);
 wwv_flow_imp.component_end;
 end;
 /

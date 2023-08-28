@@ -1869,6 +1869,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_link=>'f?p=&APP_ID.:594:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>594
 );
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(195142199342515808)
+,p_short_name=>'COMISIONES GENERADAS'
+,p_link=>'f?p=&APP_ID.:586:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>586
+);
 wwv_flow_imp.component_end;
 end;
 /

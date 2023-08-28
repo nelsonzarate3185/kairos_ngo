@@ -35,8 +35,8 @@ wwv_flow_imp_page.create_page(
 '}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'03'
-,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230823145315'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230828101612'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(157931378613331813)
@@ -101,8 +101,9 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>2
 ,p_column_alias=>'TIP_COMPROBANTE'
 ,p_column_display_sequence=>20
-,p_column_heading=>'Tip Comprobante'
+,p_column_heading=>'Tipo'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -112,8 +113,9 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>3
 ,p_column_alias=>'SER_COMPROBANTE'
 ,p_column_display_sequence=>30
-,p_column_heading=>'Ser Comprobante'
+,p_column_heading=>'Serie'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -123,8 +125,11 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>4
 ,p_column_alias=>'NRO_OT'
 ,p_column_display_sequence=>40
-,p_column_heading=>'Nro Ot'
+,p_column_heading=>unistr('N\00BA Ord. Trabajo')
 ,p_use_as_row_header=>'N'
+,p_column_link=>'f?p=&APP_ID.:588:&SESSION.::&DEBUG.:RR,588:P588_SER_COMPROBANTE,P588_NRO_COMPROBANTE:#SER_COMPROBANTE#,#NRO_OT#'
+,p_column_linktext=>'#NRO_OT#'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -136,6 +141,8 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>50
 ,p_column_heading=>'Fecha'
 ,p_use_as_row_header=>'N'
+,p_column_format=>'DD/MM/YYYY'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -145,8 +152,9 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>6
 ,p_column_alias=>'COD_CLIENTE'
 ,p_column_display_sequence=>60
-,p_column_heading=>'Cod Cliente'
+,p_column_heading=>'Codigo Cliente'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'RIGHT'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -164,7 +172,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>8
 ,p_column_alias=>'NOM_CLIENTE'
 ,p_column_display_sequence=>80
-,p_column_heading=>'Nom Cliente'
+,p_column_heading=>'Nombre del Cliente'
 ,p_use_as_row_header=>'N'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
@@ -175,7 +183,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>9
 ,p_column_alias=>'COD_ARTICULO'
 ,p_column_display_sequence=>90
-,p_column_heading=>'Cod Articulo'
+,p_column_heading=>'Codigo Articulo'
 ,p_use_as_row_header=>'N'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
@@ -188,6 +196,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>100
 ,p_column_heading=>'Cerrado'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -199,6 +208,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>110
 ,p_column_heading=>'Garantia'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -208,7 +218,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>12
 ,p_column_alias=>'IND_ENTREGA'
 ,p_column_display_sequence=>120
-,p_column_heading=>'Ind Entrega'
+,p_column_heading=>'Entregado'
 ,p_use_as_row_header=>'N'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
@@ -221,6 +231,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>130
 ,p_column_heading=>'Anulado'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -232,6 +243,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>140
 ,p_column_heading=>'Ind Facturado'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -241,8 +253,9 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>15
 ,p_column_alias=>'IND_RETIRADO'
 ,p_column_display_sequence=>150
-,p_column_heading=>'Ind Retirado'
+,p_column_heading=>'Retirado'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -262,6 +275,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>180
 ,p_column_heading=>'Estado'
 ,p_use_as_row_header=>'N'
+,p_column_alignment=>'CENTER'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'

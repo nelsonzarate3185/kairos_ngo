@@ -1449,6 +1449,9 @@ prompt --install
 @@application/pages/page_00582.sql
 @@application/pages/page_00583.sql
 @@application/pages/page_00584.sql
+@@application/pages/page_00586.sql
+@@application/pages/page_00587.sql
+@@application/pages/page_00588.sql
 @@application/pages/page_00589.sql
 @@application/pages/page_00590.sql
 @@application/pages/page_00591.sql

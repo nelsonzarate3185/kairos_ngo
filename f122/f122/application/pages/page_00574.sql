@@ -28,6 +28,12 @@ wwv_flow_imp_page.create_page(
 ' ',
 '  }',
 '',
+'     .t-Body, #GRILLA1,#GRILLA2 {',
+'     background-color: #001b3f;',
+'        background-image: linear-gradient(150deg, #001b3f 0%, #1d74b1 100%);',
+' ',
+'  }',
+'',
 ' .a-CardView-title {',
 '        font-size: 30px;',
 '        color: darkblue;',
@@ -94,15 +100,16 @@ wwv_flow_imp_page.create_page(
 '                    }'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230816090821'
+,p_last_updated_by=>'CHARBA'
+,p_last_upd_yyyymmddhh24miss=>'20230825101519'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(190696604506286636)
-,p_plug_name=>'Ingreso'
-,p_region_template_options=>'#DEFAULT#:margin-top-none'
+,p_plug_name=>'INGRESO SALON'
+,p_region_name=>'GRILLA1'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
 ,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(40100032401263654)
+,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>50
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -217,12 +224,13 @@ unistr('               ''INGRESO SAL\00D3N'''),
 '            END ',
 '         END ',
 unistr('        END) =''INGRESO SAL\00D3N'''),
-'',
-'order by CC.FEC_ALTA'))
+' AND cc.FEC_ALTA >= trunc(sysdate-1)',
+'order by  CC.FEC_ALTA ASC'))
 ,p_lazy_loading=>false
 ,p_plug_source_type=>'NATIVE_CARDS'
 ,p_plug_query_num_rows_type=>'SCROLL'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_query_no_data_found=>'SIN REGISTROS'
 ,p_show_total_row_count=>false
 );
 wwv_flow_imp_page.create_card(
@@ -231,13 +239,8 @@ wwv_flow_imp_page.create_card(
 ,p_layout_type=>'GRID'
 ,p_grid_column_count=>3
 ,p_card_css_classes=>'&CLASE.'
-,p_title_adv_formatting=>true
-,p_title_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'<div class="a-CardView-title">',
-'    <span >&TIPO_DESC.</span>',
-'    <strong style="float:right">&NRO_COMPROBANTE.</strong>',
-'</div> ',
-''))
+,p_title_adv_formatting=>false
+,p_title_column_name=>'NRO_COMPROBANTE'
 ,p_sub_title_adv_formatting=>false
 ,p_sub_title_column_name=>'PROVEEDOR'
 ,p_body_adv_formatting=>false
@@ -259,10 +262,10 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(573294526030559843)
-,p_plug_name=>'Salida'
-,p_region_name=>'GRILLA'
-,p_region_template_options=>'#DEFAULT#:margin-top-none'
-,p_plug_template=>wwv_flow_imp.id(40100032401263654)
+,p_plug_name=>'RETIRO DE PRODUCTOS'
+,p_region_name=>'GRILLA2'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>60
 ,p_plug_new_grid_row=>false
 ,p_query_type=>'SQL'
@@ -271,6 +274,10 @@ wwv_flow_imp_page.create_page_plug(
 '        cc.ser_comprobante||''  - ''||cc.nro_comprobante /*||decode(inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) ,null,'''',''        //         Posicion: ''||inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_com'
 ||'probante, cc.ser_comprobante, cc.nro_comprobante) )*/nro_comprobante, ',
 '        A.DESCRIPCION, ',
+'        CASE ',
+'	        WHEN NVL(O.IND_SNC,''N'') = ''S'' THEN  ',
+'           ''SNC'' ',
+'        END AS es_snc, ',
 '        ---inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) POSICION ,',
 unistr('        decode(inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) ,null,'''',''POSICI\00D3N: ''||inv.fnc_posicion_ot(cc.cod_empresa, cc.tip_comprobante, cc.ser_comprobante, cc.nro_comprobante) )POSICION,'),
 '        O.GARANTIA_OT, ',
@@ -378,12 +385,13 @@ unistr('               ''INGRESO SAL\00D3N'''),
 '            END ',
 '         END ',
 '        END) =''SOLICITUD CAJA'' ',
-'',
+'AND cc.FEC_ALTA >= trunc(sysdate-1)',
 'order by CC.FEC_ALTA'))
 ,p_lazy_loading=>false
 ,p_plug_source_type=>'NATIVE_CARDS'
 ,p_plug_query_num_rows_type=>'SCROLL'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_query_no_data_found=>'SIN REGISTROS'
 ,p_show_total_row_count=>false
 );
 wwv_flow_imp_page.create_card(
@@ -392,15 +400,12 @@ wwv_flow_imp_page.create_card(
 ,p_layout_type=>'GRID'
 ,p_grid_column_count=>3
 ,p_card_css_classes=>'&CLASE.'
-,p_title_adv_formatting=>true
-,p_title_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'<div class="a-CardView-title">',
-'    <span >&TIPO_DESC.</span>',
-'    <strong style="float:right">&NRO_COMPROBANTE.</strong>',
-'</div> ',
-''))
-,p_sub_title_adv_formatting=>false
-,p_sub_title_column_name=>'PROVEEDOR'
+,p_title_adv_formatting=>false
+,p_title_column_name=>'NRO_COMPROBANTE'
+,p_sub_title_adv_formatting=>true
+,p_sub_title_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<h4 class="a-CardView-subTitle">&PROVEEDOR.</h4> ',
+'<h5 class="a-CardView-subContent ">&ES_SNC.</h5> '))
 ,p_body_adv_formatting=>false
 ,p_body_column_name=>'DESCRIPCION'
 ,p_second_body_adv_formatting=>false
@@ -432,7 +437,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P574_ORIGENES'
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(572348153206370911)
-,p_item_default=>'T'
+,p_item_default=>'TD'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'

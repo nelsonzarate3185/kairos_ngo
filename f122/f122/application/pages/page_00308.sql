@@ -120,8 +120,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'21'
-,p_last_updated_by=>'FPONCE'
-,p_last_upd_yyyymmddhh24miss=>'20230202165905'
+,p_last_updated_by=>'CHARBA'
+,p_last_upd_yyyymmddhh24miss=>'20230825163417'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(76655436980945328)
@@ -4399,7 +4399,7 @@ wwv_flow_imp_page.create_page_plug(
 'AND NVL(ind_recepcionado,''N'')<>''S''',
 'AND FEC_COMPROBANTE>SYSDATE-60',
 'AND TIP_COMPROBANTE_REF=''ORT''',
-'AND AA.SER_COMPROBANTE_REF=''A''',
+'AND AA.SER_COMPROBANTE_REF IN(''A'',''P'')',
 'AND NRO_COMPROBANTE_REF IN (SELECT C.NRO_COMPROBANTE',
 'FROM VT_ORDENES_TRABAJO C',
 'WHERE C.COD_EMPRESA=:p_cod_empresa ',
