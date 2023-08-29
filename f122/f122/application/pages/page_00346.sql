@@ -232,8 +232,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230801114049'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230829113446'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(94035155548281250)
@@ -2551,9 +2551,6 @@ wwv_flow_imp_page.create_page_da_action(
 'BEGIN',
 'V_NRO_PLANILLA := :P346_NRO_PLANILLA_FAC;',
 '',
-'--:P346_SER_REMISION := ''A'';',
-'--apex_debug.error(:P346_TIPO_PEDIDO);',
-'--:P346_NRO_PLANILLA_FAC := 177572;',
 '',
 '    IF :P346_TIPO_PEDIDO = ''REPUESTOS'' THEN',
 '        BEGIN',
@@ -2566,6 +2563,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                                          p_retorno => :P346_ERROR);                                        ',
 '        EXCEPTION',
 '			WHEN OTHERS THEN',
+'        RAISE_APPLICATION_ERROR(-20000, ''Error en sp_CREA_FACTURA_ruteo_rep_vf. ''||sqlerrm);',
 '                APEX_DEBUG.ERROR(SQLERRM);',
 '        END;                                          ',
 '    ELSE    	',
@@ -2580,21 +2578,21 @@ wwv_flow_imp_page.create_page_da_action(
 '         ',
 '		EXCEPTION',
 '			WHEN OTHERS THEN',
+'              RAISE_APPLICATION_ERROR(-20000, ''Error en SP_CREA_FACTURA_RUTEO. ''||sqlerrm);',
 '                APEX_DEBUG.ERROR(SQLERRM);',
 '        END;',
 '    END IF;',
-'----------------------------------------',
 '',
 '	BEGIN',
 '    	UPDATE  RP_REPARTO_PEDIDO_CAB',
 '    	SET PLANILLA_FACTURADA = ''F''',
 '    	WHERE cod_empresa = :P_COD_EMPRESA',
 '    	AND nro_planilla = :P346_NRO_PLANILLA_FAC;',
-'',
 '        ',
 '        COMMIT;',
 '    EXCEPTION',
 '			WHEN OTHERS THEN',
+'      RAISE_APPLICATION_ERROR(-20000, ''Error en RP_REPARTO_PEDIDO_CAB. ''||sqlerrm);',
 '                APEX_DEBUG.ERROR(SQLERRM);',
 '                    ',
 '    END;',
@@ -2607,10 +2605,10 @@ wwv_flow_imp_page.create_page_da_action(
 '		           	                V_DETALLE_NRO_PEDIDO);',
 '		    EXCEPTION',
 '        WHEN OTHERS THEN',
+'        RAISE_APPLICATION_ERROR(-20000, ''Error en sp_crea_remision_masiva. ''||sqlerrm);',
 '            APEX_DEBUG.ERROR(SQLERRM);',
 '        END;',
-'    ',
-'    ',
+'        ',
 '    :P346_INDICADOR_REPORT_FACTURAS := ''1'';',
 '    ',
 '	BEGIN',
@@ -2640,6 +2638,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                                PI_COD_CUSTODIO => :P346_COD_CUSTODIO_FAC);',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
+'     RAISE_APPLICATION_ERROR(-20000, ''Error en RPFACMAS.PR_CREAR_COL_FAC. ''||sqlerrm);',
 '        APEX_DEBUG.ERROR(SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P_COD_EMPRESA,P346_SER_COMPROBANTE_FAC,P346_COD_CUSTODIO_FAC,P346_COD_SUCURSAL_FAC,P346_NRO_PLANILLA_FAC,P346_VARIOS_DEPOSITOS,P346_NRO_PLANILLA_FAC,P346_P_TIPO_ENTREGA,P346_COD_USUARIO,P346_P_TIPO_PEDIDO,P346_TIPO_PEDIDO,P346_SER_REMISION'

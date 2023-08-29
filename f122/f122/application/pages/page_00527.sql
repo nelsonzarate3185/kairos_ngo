@@ -18,15 +18,32 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'COCROAUD-BUSQ'
 ,p_step_title=>'Cronograma Auditoria - COCROAUD'
 ,p_autocomplete_on_off=>'OFF'
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'#parametros{',
+'    background: #487ab8!important;',
+'}',
+'',
+' .t-Form-label{',
+'    color:  darkblue !important;     ',
+'    } ',
+'',
+'     ',
+' .a-IRR-header  a  {color: yellow; }',
+' .a-IRR-header { background: #003a85!important;}',
+'',
+' .t-Report-colHead {color: yellow !important;',
+'                    background: #003a85!important;',
+'  }'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230516172656'
+,p_last_upd_yyyymmddhh24miss=>'20230828153536'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(156685073707798648)
 ,p_plug_name=>'FILTROS'
+,p_region_name=>'parametros'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(40096829222263653)
 ,p_plug_display_sequence=>1020
@@ -584,12 +601,11 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>70
 ,p_button_plug_id=>wwv_flow_imp.id(156685073707798648)
 ,p_button_name=>'BTN_LIMPIAR_CAMPOS'
-,p_button_action=>'DEFINED_BY_DA'
+,p_button_action=>'SUBMIT'
 ,p_button_template_options=>'#DEFAULT#:t-Button--simple:t-Button--iconRight:t-Button--gapTop'
 ,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Limpiar Campos'
-,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-trash-o'
 ,p_button_cattributes=>'style="margin-left:80px;width:130px;"'
 ,p_grid_new_row=>'N'
@@ -607,6 +623,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Volver'
 ,p_button_position=>'BOTTOM'
 ,p_button_redirect_url=>'f?p=&APP_ID.:525:&SESSION.::&DEBUG.:::'
+,p_button_condition_type=>'NEVER'
 ,p_icon_css_classes=>'fa-arrow-left'
 );
 wwv_flow_imp_page.create_page_branch(
@@ -624,16 +641,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P527_COD_EJERCICIO'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(156685073707798648)
+,p_item_default=>'to_char(sysdate,''YYYY'')'
+,p_item_default_type=>'EXPRESSION'
+,p_item_default_language=>'PLSQL'
 ,p_prompt=>unistr('A\00F1o')
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_colspan=>4
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>'select cod_ejercicio d, cod_ejercicio c from co_ejercicios where cod_empresa=:p_cod_empresa'
+,p_lov_display_null=>'YES'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
-,p_attribute_01=>'N'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(157618153825917001)
@@ -889,10 +908,27 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(157702199717482824)
+ p_id=>wwv_flow_imp.id(194842880409616031)
 ,p_event_id=>wwv_flow_imp.id(157702091141482823)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+':P527_EMPRESA_CPH:=''N'';',
+':P527_EMPRESA_NGO:=''N'';',
+':P527_EMPRESA_TF:=''N'';',
+''))
+,p_attribute_03=>'P527_EMPRESA_NGO,P527_EMPRESA_CPH,P527_EMPRESA_TF'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(157702199717482824)
+,p_event_id=>wwv_flow_imp.id(157702091141482823)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SUBMIT_PAGE'
 ,p_attribute_02=>'Y'
@@ -944,6 +980,16 @@ wwv_flow_imp_page.create_page_process(
 '        APEX_DEBUG.ERROR(SQLERRM);',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(194842747269616030)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'LIMPIAR'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(157701991505482822)
 );
 wwv_flow_imp.component_end;
 end;

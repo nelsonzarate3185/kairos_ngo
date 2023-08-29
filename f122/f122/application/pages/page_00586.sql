@@ -36,13 +36,22 @@ wwv_flow_imp_page.create_page(
 '.search-region {',
 '    border-bottom: 1px solid rgba(0,0,0,.1);',
 '    flex-shrink: 0;',
+'}',
+'',
+'.t-Body-side{',
+'    background-color: #6088b9cb ;',
+'}',
+'.t-Report-colHead{',
+'    color: #003A85 ;',
+'     background-color: #fff8b7ae;',
+'    background-image: linear-gradient(180deg, #fff8b79e 0%, #fffb7da2 100%);',
 '}'))
 ,p_step_template=>wwv_flow_imp.id(40071096862263645)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230828095945'
+,p_last_upd_yyyymmddhh24miss=>'20230828155829'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(195142309252515805)
@@ -307,10 +316,10 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>5
 ,p_column_alias=>'MES'
 ,p_column_display_sequence=>16
-,p_column_heading=>'Mes'
+,p_column_heading=>'MES'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'Month'
-,p_heading_alignment=>'LEFT'
+,p_column_alignment=>'CENTER'
 ,p_display_when_cond_type=>'EXISTS'
 ,p_display_when_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select 1 from "FV_COMISIONES_NP"',
@@ -324,9 +333,9 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>6
 ,p_column_alias=>'ANIO'
 ,p_column_display_sequence=>6
-,p_column_heading=>unistr('A\00F1o')
+,p_column_heading=>unistr('A\00D1O')
 ,p_use_as_row_header=>'N'
-,p_heading_alignment=>'LEFT'
+,p_column_alignment=>'CENTER'
 ,p_display_when_cond_type=>'EXISTS'
 ,p_display_when_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select 1 from "FV_COMISIONES_NP"',
@@ -340,7 +349,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>7
 ,p_column_alias=>'COD_VENDEDOR'
 ,p_column_display_sequence=>26
-,p_column_heading=>'Codigo'
+,p_column_heading=>'CODIGO'
 ,p_use_as_row_header=>'N'
 ,p_column_alignment=>'CENTER'
 ,p_display_when_cond_type=>'EXISTS'
@@ -356,7 +365,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>8
 ,p_column_alias=>'BASE_COMISION'
 ,p_column_display_sequence=>46
-,p_column_heading=>'Base Comision'
+,p_column_heading=>'BASE COMISION'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990'
 ,p_column_alignment=>'RIGHT'
@@ -373,7 +382,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>9
 ,p_column_alias=>'PESO_FACT'
 ,p_column_display_sequence=>56
-,p_column_heading=>'Peso Fact.%'
+,p_column_heading=>'PESO FACT.%'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
 ,p_column_alignment=>'RIGHT'
@@ -390,7 +399,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>10
 ,p_column_alias=>'PESO_CUMP'
 ,p_column_display_sequence=>66
-,p_column_heading=>'Peso Cump.%'
+,p_column_heading=>'PESO CUMP.%'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990D00'
 ,p_column_alignment=>'RIGHT'
@@ -407,7 +416,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>11
 ,p_column_alias=>'TOT_VENTA'
 ,p_column_display_sequence=>76
-,p_column_heading=>'Tot Venta'
+,p_column_heading=>'TOTAL VENTA'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990'
 ,p_column_alignment=>'RIGHT'
@@ -424,7 +433,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>12
 ,p_column_alias=>'TOT_COMISION'
 ,p_column_display_sequence=>86
-,p_column_heading=>'Tot Comision'
+,p_column_heading=>'TOTAL COMISION'
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G990'
 ,p_column_alignment=>'RIGHT'
@@ -441,7 +450,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>13
 ,p_column_alias=>'VENDEDOR'
 ,p_column_display_sequence=>36
-,p_column_heading=>'Vendedor'
+,p_column_heading=>'VENDEDOR'
 ,p_use_as_row_header=>'N'
 ,p_column_alignment=>'CENTER'
 ,p_derived_column=>'N'
@@ -466,7 +475,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(195164535284515629)
-,p_name=>'Detalle de Comisiones'
+,p_name=>'DETALLE DE COMISION'
 ,p_template=>wwv_flow_imp.id(40125238939263661)
 ,p_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -744,13 +753,13 @@ wwv_flow_imp_page.create_report_columns(
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(195195306974515568)
-,p_name=>'Detalle de Ventas'
+,p_name=>'DETALLE DE VENTAS'
 ,p_template=>wwv_flow_imp.id(40125238939263661)
 ,p_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_region_css_classes=>'js-detail-region'
 ,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--accent1:t-Region--scrollBody'
-,p_component_template_options=>'t-Report--stretch:#DEFAULT#:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--inline'
+,p_component_template_options=>'#DEFAULT#:t-Report--stretch:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--horizontalBorders'
 ,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_query_type=>'TABLE'
 ,p_query_table=>'FV_COMISIONES_NP_VTA'

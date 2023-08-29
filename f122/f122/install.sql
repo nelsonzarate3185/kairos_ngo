@@ -53,6 +53,8 @@ prompt --install
 @@application/plugin_settings.sql
 @@application/shared_components/security/authorizations/administration_rights.sql
 @@application/shared_components/security/authorizations/permiso_agregar.sql
+@@application/shared_components/security/authorizations/permiso_eliminar.sql
+@@application/shared_components/security/authorizations/permiso_modificar.sql
 @@application/shared_components/navigation/navigation_bar.sql
 @@application/shared_components/logic/application_processes/asigna_p_usuario.sql
 @@application/shared_components/logic/application_processes/param_gdrive.sql
@@ -1450,7 +1452,6 @@ prompt --install
 @@application/pages/page_00583.sql
 @@application/pages/page_00584.sql
 @@application/pages/page_00586.sql
-@@application/pages/page_00587.sql
 @@application/pages/page_00588.sql
 @@application/pages/page_00589.sql
 @@application/pages/page_00590.sql
@@ -1459,6 +1460,7 @@ prompt --install
 @@application/pages/page_00593.sql
 @@application/pages/page_00594.sql
 @@application/pages/page_00595.sql
+@@application/pages/page_00597.sql
 @@application/pages/page_00800.sql
 @@application/pages/page_00801.sql
 @@application/pages/page_00900.sql

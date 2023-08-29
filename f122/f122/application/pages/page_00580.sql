@@ -54,7 +54,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230828095516'
+,p_last_upd_yyyymmddhh24miss=>'20230828154823'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(187805003220448446)
@@ -1163,8 +1163,8 @@ unistr('            VMENSAJE:=''Debe seleccionar el A\00D1O'';'),
 '                    and   periodo=:P580_MES||:P580_ANIO;',
 '',
 '                    :P580_URL := apex_page.get_url(  p_page   => 586,',
-'                                                               p_items  => ''P586_VENDEDOR,P586_PERIODO'',',
-'                                                               p_values => :P580_VENDEDOR||'',''||:P580_MES||:P580_ANIO',
+'                                                               p_items  => ''P586_COD_EMPRESA,P586_VENDEDOR,P586_PERIODO'',',
+'                                                               p_values => :P_COD_EMPRESA||'',''||:P580_VENDEDOR||'',''||:P580_MES||:P580_ANIO',
 '                                                             );                                       ',
 '            EXCEPTION',
 '            WHEN OTHERS THEN',

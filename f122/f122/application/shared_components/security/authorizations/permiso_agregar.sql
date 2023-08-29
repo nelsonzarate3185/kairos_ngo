@@ -17,21 +17,23 @@ wwv_flow_imp_shared.create_security_scheme(
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'DECLARE',
-'VCONTROL NUMBER;',
+'    vcontrol NUMBER;',
 'BEGIN',
 '',
-'    VCONTROL := SEGURIDAD_GRANULAR.RETORNA_PERMISO_BOTON(ppage_id     => :APP_PAGE_ID,',
-'                                                         papli0100_id => :P_APLI0100_ID,',
-'                                                         pcod_empresa => :P_COD_EMPRESA,',
-'                                                         pusua0100_id => :P_USUA0100_ID,',
-'                                                         pdm_boto     => 1); ',
+'    vcontrol := seguridad_granular.retorna_permiso_boton(ppage_id     => :app_page_id,',
+'                                                         papli0100_id => :p_apli0100_id,',
+'                                                         pcod_empresa => :p_cod_empresa,',
+'                                                         pusua0100_id => :p_usua0100_id,',
+'                                                         pdm_boto     => 1);',
 '',
-'    IF VCONTROL = 0 THEN',
+'    IF vcontrol = 0 THEN',
 '        RETURN FALSE;',
 '    ELSE',
 '        RETURN TRUE;',
-'    END IF;                                                     ',
-'END;'))
+'    END IF;',
+'END;',
+''))
+,p_error_message=>'No tiene permiso para Agregar.'
 ,p_caching=>'BY_USER_BY_PAGE_VIEW'
 );
 wwv_flow_imp.component_end;

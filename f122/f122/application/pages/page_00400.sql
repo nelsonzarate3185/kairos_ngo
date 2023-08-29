@@ -159,7 +159,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230825090607'
+,p_last_upd_yyyymmddhh24miss=>'20230829105732'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(128551196121042344)
@@ -723,7 +723,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P400_FECHA_INI'
 ,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(314029640603514962)
-,p_item_default=>'trunc(sysdate-90)'
+,p_item_default=>'trunc(sysdate-10)'
 ,p_item_default_type=>'EXPRESSION'
 ,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Fecha desde'
