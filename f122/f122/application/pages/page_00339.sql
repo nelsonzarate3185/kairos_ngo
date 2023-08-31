@@ -66,7 +66,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230504154445'
+,p_last_upd_yyyymmddhh24miss=>'20230829122919'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(83626066913059733)
@@ -1908,11 +1908,12 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(93926617330645647)
 ,p_name=>'P339_OT_NRO_ORT'
-,p_item_sequence=>40
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(93029225955401740)
 ,p_prompt=>'NRO. ORT'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -1923,15 +1924,23 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(93926703057645648)
 ,p_name=>'P339_OT_SER_ORT'
-,p_item_sequence=>50
+,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(93029225955401740)
-,p_display_as=>'NATIVE_HIDDEN'
+,p_prompt=>'SERIE OT'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_colspan=>2
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(93926820388645649)
 ,p_name=>'P339_OT_TIP_ORT'
-,p_item_sequence=>60
+,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(93029225955401740)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1939,7 +1948,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(93926930794645650)
 ,p_name=>'P339_OT_SER_ENVIO'
-,p_item_sequence=>70
+,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(93029225955401740)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -2020,13 +2029,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(98369062571250032)
-,p_name=>'P339_P_COD_SUC_SAL'
-,p_item_sequence=>1010
-,p_display_as=>'NATIVE_HIDDEN'
-,p_attribute_01=>'N'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -2038,6 +2040,13 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(98369062571250032)
+,p_name=>'P339_P_COD_SUC_SAL'
+,p_item_sequence=>1010
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(98369193174250033)
@@ -3180,7 +3189,7 @@ wwv_flow_imp_page.create_page_da_action(
 '        raise_application_error(-20201,''EL REGISTRO QUE INTENTA INGRESAR YA EXISTE'');',
 '        APEX_DEBUG.ERROR (SQLERRM);',
 'end;'))
-,p_attribute_02=>'P339_OT_NRO_ORT,P339_SEQ_ID_EDITAR_OT'
+,p_attribute_02=>'P339_OT_NRO_ORT,P339_SEQ_ID_EDITAR_OT,P339_OT_SER_ORT'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
@@ -3279,37 +3288,60 @@ wwv_flow_imp_page.create_page_da_action(
 '    :P339_AUX_MSJ_CONTROL := ''INGRESE EL NRO. DE ORDEN'';',
 'else',
 '     :P339_AUX_MSJ_CONTROL := NULL;',
+'    DECLARE',
+'        VERROR EXCEPTION;',
+'        DUMMY VARCHAR2(1);',
 '    BEGIN --PRE-INSERT   ',
+'          BEGIN            ',
+'                select DISTINCT ''1''',
+'                INTO DUMMY ',
+'                from vt_ordenes_trabajo ot,',
+'                     ca_conformidad sc',
+'                where ot.cod_empresa = :P_COD_EMPRESA',
+'                and   ot.cod_empresa = sc.cod_empresa',
+'                and   ot.nro_sol_conf = sc.nro_solicitud',
+'                and   sc.ser_solicitud = ''A''',
+'                and   sc.tipo_solicitud = ''SNC''',
+'                and   sc.estado = ''AUTORIZADO''',
+'                and   ot.ser_comprobante = :P339_P_SER_OT',
+'                and   ot.nro_comprobante = :P339_OT_NRO_ORT',
+'                and   ot.tip_comprobante =''ORT'';',
+'          EXCEPTION ',
+'            WHEN NO_DATA_FOUND THEN',
+'                RAISE VERROR;',
+'            WHEN OTHERS THEN',
+'                NULL;',
+'          END; ',
+'                    insert into ST_NOTAS_ENVIO_DET_ORT(COD_EMPRESA,',
+'                                                        TIP_ENVIO,',
+'                                                        NRO_ENVIO,',
+'                                                        COD_ARTICULO,',
+'                                                        NRO_ORT,',
+'                                                        SER_ORT,',
+'                                                        TIP_ORT	,',
+'                                                        SER_ENVIO,	',
+'                                                        FECHA_CARGA',
+'                                                    )values(',
+'                                                        :P339_COD_EMPRESA,',
+'                                                        ''ENV'',--TIP_ENVIO',
+'                                                        TO_NUMBER(:P339_C_NRO_ENVIO),',
+'                                                        :P339_OT_COD_ARTICULO,',
+'                                                        TO_NUMBER(:P339_OT_NRO_ORT),',
+'                                                        nvl(:P339_P_SER_OT,''A''),',
+'                                                        nvl(:P339_P_TIP_OT,''ORT''),',
+'                                                        ''A'', --SER_ENVIO',
+'                                                        sysdate',
+'                                                    );',
 '',
-'    insert into ST_NOTAS_ENVIO_DET_ORT(COD_EMPRESA,',
-'            TIP_ENVIO,',
-'            NRO_ENVIO,',
-'            COD_ARTICULO,',
-'            NRO_ORT,',
-'            SER_ORT,',
-'            TIP_ORT	,',
-'            SER_ENVIO,	',
-'            FECHA_CARGA',
-'    )values(',
-'        :P339_COD_EMPRESA,',
-'        ''ENV'',--TIP_ENVIO',
-'        TO_NUMBER(:P339_C_NRO_ENVIO),',
-'        :P339_OT_COD_ARTICULO,',
-'        TO_NUMBER(:P339_OT_NRO_ORT),',
-'        nvl(:P339_P_SER_OT,''A''),',
-'        nvl(:P339_P_TIP_OT,''ORT''),',
-'        ''A'', --SER_ENVIO',
-'        sysdate',
-'',
-'    );',
 ' EXCEPTION',
-'      ',
+'    WHEN VERROR THEN',
+'        raise_application_error(-20201,''LA OT QUE INTENTA REGISTRAR NO CUENTA CON UNA SNC O LA MISMA NO ESTA AUTORIZADA.'');',
 '    WHEN OTHERS THEN',
 '        raise_application_error(-20201,''EL REGISTRO QUE INTENTA INGRESAR YA EXISTE'');',
 '        APEX_DEBUG.ERROR (SQLERRM);',
 '    END;',
 'end if;'))
-,p_attribute_02=>'P339_COD_EMPRESA,P339_C_NRO_ENVIO,P339_OT_NRO_ORT,P339_P_SER_OT,P339_P_TIP_OT,P339_OT_COD_ARTICULO'
+,p_attribute_02=>'P339_COD_EMPRESA,P339_C_NRO_ENVIO,P339_OT_NRO_ORT,P339_P_SER_OT,P339_P_TIP_OT,P339_OT_COD_ARTICULO,P339_OT_SER_ORT'
 ,p_attribute_03=>'P339_AUX_MSJ_CONTROL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -3385,7 +3417,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_CLEAR'
 ,p_affected_elements_type=>'ITEM'
-,p_affected_elements=>'P339_OT_NRO_ORT'
+,p_affected_elements=>'P339_OT_NRO_ORT,P339_OT_SER_ORT'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(94440103769007822)

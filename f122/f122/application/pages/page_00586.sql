@@ -51,7 +51,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230828155829'
+,p_last_upd_yyyymmddhh24miss=>'20230830154252'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(195142309252515805)
@@ -83,7 +83,7 @@ wwv_flow_imp_page.create_report_region(
 'select x.COD_EMPRESA,',
 '    null LINK_CLASS,',
 '    apex_page.get_url(p_items => ''P586_COD_EMPRESA'', p_values => x.COD_EMPRESA) LINK,',
-'    null ICON_CLASS,',
+'    NULL  ICON_CLASS,',
 '    null LINK_ATTR,',
 '    null ICON_COLOR_CLASS,',
 '    case when coalesce(:P586_COD_EMPRESA,''0'') = x.COD_EMPRESA',
@@ -238,7 +238,8 @@ wwv_flow_imp_page.create_report_region(
 '        where v.cod_empresa= cc.cod_empresa',
 '        and   v.cod_vendedor= cc.cod_vendedor',
 '        and   v.cod_persona=p.cod_persona',
-'        ),''NN'')vendedor       ',
+'        ),''NN'')vendedor,',
+'        null eliminar ',
 '  from FV_COMISIONES_NP cc',
 ' where COD_EMPRESA = :P586_COD_EMPRESA',
 ' and (:P586_VENDEDOR is null or cod_vendedor=:P586_VENDEDOR)',
@@ -250,7 +251,7 @@ wwv_flow_imp_page.create_report_region(
 ,p_query_row_template=>wwv_flow_imp.id(40147995650263667)
 ,p_query_num_rows=>15
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No Record Selected'
+,p_query_no_data_found=>'No se encuentran registros.'
 ,p_query_row_count_max=>500
 ,p_csv_output=>'N'
 ,p_prn_output=>'N'
@@ -456,6 +457,19 @@ wwv_flow_imp_page.create_report_columns(
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
 );
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(195727894512446406)
+,p_query_column_id=>14
+,p_column_alias=>'ELIMINAR'
+,p_column_display_sequence=>96
+,p_column_heading=>'Eliminar'
+,p_use_as_row_header=>'N'
+,p_column_link=>'javascript:$s(''P586_DEL_PERIODO'',''#PERIODO#'');$s(''P586_DEL_COD_VEND'',''#COD_VENDEDOR#'');'
+,p_column_linktext=>'<span class="fa fa-trash" aria-hidden="true"></span>'
+,p_column_alignment=>'CENTER'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(195164134449515629)
 ,p_plug_name=>'Region Display Selector'
@@ -508,18 +522,19 @@ unistr('            when ''2'' then  ''FINANCIACI\00D3N'''),
 '            when ''3'' then ''MARGEN NETO''',
 unistr('            WHEN ''4'' then ''DEVOLUCI\00D3N'''),
 '         ELSE',
-'                ''MARCAS''',
+'               nvl((select descripcion from st_marcas where cod_marca = COD_GRUPO),''NN'')',
 '         END GRUPO,',
 '',
 '         ',
 '        case WHEN COD_GRUPO IN (''1'',''2'',''3'',''4'') THEN ''CUMPLIMIENTO DE POLITICAS''',
 '         ELSE',
 '                ''POLITICA FACTURACION''',
-'         END POLITICA',
+'         END POLITICA         ',
 '  from FV_COMISIONES_NP_DET',
 ' where COD_EMPRESA = :P586_COD_EMPRESA ',
 ' and (:P586_VENDEDOR is null or cod_vendedor=:P586_VENDEDOR)',
-' and ( :P586_PERIODO is null or periodo = :P586_PERIODO)'))
+' and ( :P586_PERIODO is null or periodo = :P586_PERIODO)',
+' order by 1 desc '))
 ,p_display_when_condition=>'P586_COD_EMPRESA'
 ,p_display_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_ajax_enabled=>'Y'
@@ -527,12 +542,48 @@ unistr('            WHEN ''4'' then ''DEVOLUCI\00D3N'''),
 ,p_query_row_template=>wwv_flow_imp.id(40147995650263667)
 ,p_query_num_rows=>100
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
+,p_query_no_data_found=>'No existen detalles'
 ,p_query_num_rows_type=>'NEXT_PREVIOUS_LINKS'
 ,p_query_row_count_max=>5000
 ,p_pagination_display_position=>'BOTTOM_RIGHT'
-,p_csv_output=>'N'
-,p_prn_output=>'N'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'CSV'
+,p_prn_output=>'Y'
+,p_prn_format=>'PDF'
+,p_prn_output_link_text=>'PDF'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'MILLIMETERS'
+,p_prn_paper_size=>'A4'
+,p_prn_width_units=>'PERCENTAGE'
+,p_prn_width=>297
+,p_prn_height=>210
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DETALLE DE COMISION',
+'VENDEDOR: &P586_VENDEDOR.',
+'PERIODO: &P586_PERIODO. '))
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
 ,p_sort_null=>'L'
 ,p_plug_query_strip_html=>'Y'
 );
@@ -722,7 +773,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_query_column_id=>16
 ,p_column_alias=>'TOT_COMISION'
 ,p_column_display_sequence=>99
-,p_column_heading=>'Tot Comision'
+,p_column_heading=>unistr('Total Comisi\00F3n')
 ,p_use_as_row_header=>'N'
 ,p_column_format=>'999G999G999G999G999G999G990'
 ,p_column_alignment=>'RIGHT'
@@ -775,12 +826,51 @@ wwv_flow_imp_page.create_report_region(
 ,p_query_row_template=>wwv_flow_imp.id(40147995650263667)
 ,p_query_num_rows=>100
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_query_no_data_found=>'No data found.'
+,p_query_no_data_found=>'No se encuentran registros de Ventas'
 ,p_query_num_rows_type=>'NEXT_PREVIOUS_LINKS'
 ,p_query_row_count_max=>5000
 ,p_pagination_display_position=>'BOTTOM_RIGHT'
-,p_csv_output=>'N'
-,p_prn_output=>'N'
+,p_csv_output=>'Y'
+,p_csv_output_link_text=>'CSV'
+,p_supplemental_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'VENDEDOR: &P586_VENDEDOR.',
+'PERIODO: &P586_PERIODO. '))
+,p_prn_output=>'Y'
+,p_prn_format=>'PDF'
+,p_prn_output_link_text=>'PDF'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'MILLIMETERS'
+,p_prn_paper_size=>'A4'
+,p_prn_width_units=>'PERCENTAGE'
+,p_prn_width=>297
+,p_prn_height=>210
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DETALLE DE VENTAS',
+'VENDEDOR: &P586_VENDEDOR.',
+'PERIODO: &P586_PERIODO. '))
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
 ,p_sort_null=>'L'
 ,p_plug_query_strip_html=>'Y'
 );
@@ -908,6 +998,18 @@ wwv_flow_imp_page.create_report_columns(
 ,p_use_as_row_header=>'N'
 ,p_heading_alignment=>'LEFT'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_report_columns(
  p_id=>wwv_flow_imp.id(195200579816515529)
 ,p_query_column_id=>12
@@ -1022,18 +1124,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(195163729808515629)
 ,p_name=>'P586_COD_EMPRESA'
@@ -1043,6 +1133,22 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_extra=>'NO'
 ,p_protection_level=>'S'
 ,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(195727933253446407)
+,p_name=>'P586_DEL_COD_VEND'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_imp.id(195150795315515640)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(195728008158446408)
+,p_name=>'P586_DEL_PERIODO'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(195150795315515640)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(195229818676515513)
@@ -1156,6 +1262,66 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_CANCEL_EVENT'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(195728146291446409)
+,p_name=>'DA_ELIMINAR'
+,p_event_sequence=>160
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P586_DEL_COD_VEND'
+,p_condition_element=>'P586_DEL_COD_VEND'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(195728254039446410)
+,p_event_id=>wwv_flow_imp.id(195728146291446409)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>'Desea eliminar el registro de comisiones del vendedor &P586_DEL_COD_VEND. para el periodo &P586_DEL_PERIODO. ?'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(195728380890446411)
+,p_event_id=>wwv_flow_imp.id(195728146291446409)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    VMSJ VARCHAR2(3500);',
+'    VERROR EXCEPTION;',
+'begin',
+'  inv.fvcomisionp.pr_elimina_comision(p_cod_vendedor => :P586_DEL_COD_VEND,',
+'                                      p_periodo => :P586_DEL_PERIODO,',
+'                                      p_mensaje => VMSJ);',
+'',
+'    IF VMSJ IS NOT NULL THEN',
+'        RAISE VERROR;',
+'    END IF;',
+'EXCEPTION',
+'    WHEN VERROR THEN',
+'        raise_application_error(-20000, ''Error al intentar eliminar. '' || VMSJ );',
+'',
+'    WHEN OTHERS THEN',
+'        raise_application_error(-20000, ''No se pudo eliminar el registro. '' || sqlerrm );',
+'',
+'end;'))
+,p_attribute_02=>'P586_DEL_COD_VEND,P586_DEL_PERIODO'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(195728418233446412)
+,p_event_id=>wwv_flow_imp.id(195728146291446409)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SUBMIT_PAGE'
+,p_attribute_02=>'Y'
 );
 wwv_flow_imp.component_end;
 end;

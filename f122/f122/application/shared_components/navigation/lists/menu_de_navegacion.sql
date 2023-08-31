@@ -2741,6 +2741,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'597'
 );
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(198688025372911605)
+,p_list_item_display_sequence=>3090
+,p_list_item_link_text=>unistr('Permisos Aprobaci\00F3n SNC')
+,p_list_item_link_target=>'f?p=&APP_ID.:585:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'585'
+);
 wwv_flow_imp.component_end;
 end;
 /

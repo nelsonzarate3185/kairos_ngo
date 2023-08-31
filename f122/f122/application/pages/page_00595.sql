@@ -23,7 +23,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230811093048'
+,p_last_upd_yyyymmddhh24miss=>'20230829155938'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(190722821266790480)
@@ -116,10 +116,11 @@ wwv_flow_imp_page.create_page_item(
 ,p_source=>'COD_MOTIVO_PRINCIPAL'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'CRM_MOTIVO'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT DESCRIPCION , COD_MOTIVO',
-'FROM CRM_MOTIVO'))
+'FROM CRM_MOTIVO M',
+'WHERE NVL(M.ACTIVO,''S'')<>''N''',
+'AND NOT EXISTS ( select DISTINCT ''1'' from INV.CRM_MOTIVO_DERIVACION_PV T WHERE T.COD_MOTIVO_PRINCIPAL= COD_MOTIVO)'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -145,7 +146,11 @@ wwv_flow_imp_page.create_page_item(
 ,p_source=>'COD_MOTIVO_DERIVA'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'CRM_MOTIVO_DERIVACION.DESCRIPCION'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT DESCRIPCION , COD_MOTIVO',
+'FROM crm_motivo_derivacion M',
+'WHERE NVL(M.ACTIVO,''S'')<>''N''',
+'AND NOT EXISTS ( select DISTINCT ''1'' from INV.CRM_MOTIVO_DERIVACION_PV T WHERE T.COD_MOTIVO_DERIVA= COD_MOTIVO)'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)

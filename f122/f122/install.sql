@@ -113,6 +113,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_articulos_desde_vtrrancl.sql
 @@application/shared_components/user_interface/lovs/lov_articulos_hasta_vtrrancl.sql
 @@application/shared_components/user_interface/lovs/lov_articulos_largo_vtpedido.sql
+@@application/shared_components/user_interface/lovs/lov_articulos_presu.sql
 @@application/shared_components/user_interface/lovs/lov_asuntos_btl.sql
 @@application/shared_components/user_interface/lovs/lov_campania_cod.sql
 @@application/shared_components/user_interface/lovs/lov_categorias_vtrrancl.sql
@@ -725,6 +726,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_zona_fvproemp.sql
 @@application/shared_components/user_interface/lovs/pill_display_as1.sql
 @@application/shared_components/user_interface/lovs/pill_display_as_gc.sql
+@@application/shared_components/user_interface/lovs/prueba.sql
 @@application/shared_components/user_interface/lovs/rh_empleados_cod_persona.sql
 @@application/shared_components/user_interface/lovs/rh_empleados_cod_persona_1.sql
 @@application/shared_components/user_interface/lovs/rh_motivos_descripcion.sql
@@ -1451,6 +1453,7 @@ prompt --install
 @@application/pages/page_00582.sql
 @@application/pages/page_00583.sql
 @@application/pages/page_00584.sql
+@@application/pages/page_00585.sql
 @@application/pages/page_00586.sql
 @@application/pages/page_00588.sql
 @@application/pages/page_00589.sql

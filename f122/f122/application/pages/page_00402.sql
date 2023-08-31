@@ -24,7 +24,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'16'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230530140646'
+,p_last_upd_yyyymmddhh24miss=>'20230830113826'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(350928475166892850)
@@ -161,24 +161,103 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Codigo'
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select a.DESCRIPCION, COD_ARTICULO  from st_articulos a, VT_ORIGENes t ',
-'where a.cod_empresa=''1''',
-'and cod_rubro=''MO''',
-'AND T.COD_ORIGEN=:P402_ORIGEN',
-'AND T.COD_EMPRESA=A.COD_EMPRESA',
-'AND T.ORIGEN=''STNGO''',
-'and a.tipo_mo=t.origen',
-' and NVL(A.IND_PARTICULAR,''X'')<>  NVL(:P402_ORIGEN,''Z'')',
-'AND TIPO_MO IS NOT NULL',
-'AND NVL(ESTADO,''S'') NOT IN (''I'',''N'')',
-'AND (COD_LINEA =   nvl((select aa.cod_linea',
-'   ',
-'  from st_articulos aa',
-'  where aa.cod_empresa=''1''',
-'  and aa.cod_articulo=:P402_COD_ARTICULO_OT), cod_linea)  )',
-''))
-,p_lov_cascade_parent_items=>'P402_COD_ARTICULO_OT,P402_ORIGEN,P402_MARCA'
-,p_ajax_items_to_submit=>'P402_COD_ARTICULO_OT,P402_ORIGEN,P402_MARCA'
+'SELECT a.descripcion, cod_articulo',
+'  FROM st_articulos a, vt_origenes t',
+' WHERE a.cod_empresa = :P_COD_EMPRESA',
+'   AND cod_rubro = ''MO''',
+'   AND t.cod_origen = :P402_ORIGEN',
+'   AND t.cod_empresa = a.cod_empresa',
+'   AND t.origen = ''STNGO''',
+'   AND a.tipo_mo = t.origen',
+'   AND nvl(a.ind_particular, ''X'') <> nvl(:P402_GARANTIA, ''Z'')',
+'   AND tipo_mo IS NOT NULL',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA',
+'   AND nvl(estado, ''S'') NOT IN (''I'', ''N'')',
+'   AND (cod_linea = nvl((SELECT aa.cod_linea',
+'                        ',
+'                          FROM st_articulos aa',
+'                         WHERE aa.cod_empresa = :P_COD_EMPRESA',
+'                           AND aa.cod_articulo = :P402_COD_ARTICULO_OT),',
+'                        cod_linea))',
+'',
+'UNION ALL',
+'SELECT a.descripcion, cod_articulo',
+'  FROM st_articulos a, vt_origenes t',
+' WHERE a.cod_empresa = :P_COD_EMPRESA',
+'   AND cod_rubro = ''MO''',
+'   AND t.cod_origen = :P402_ORIGEN',
+'   AND t.cod_empresa = a.cod_empresa',
+'   AND t.origen = ''STNGO''',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA',
+'   AND nvl(a.ind_particular, ''X'') <> nvl(:P402_GARANTIA, ''Z'')',
+'   AND a.tipo_mo = t.origen',
+'   AND nvl(estado, ''S'') NOT IN (''I'', ''N'')',
+'      ',
+'   AND (cod_categoria =',
+'       nvl((SELECT aa.cod_categoria',
+'            ',
+'              FROM st_articulos aa',
+'             WHERE aa.cod_empresa = :P_COD_EMPRESA',
+'               AND aa.cod_articulo = :P402_COD_ARTICULO_OT),',
+'            cod_categoria))',
+'   AND a.cod_linea IS NULL',
+'   AND tipo_mo IS NOT NULL',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA',
+'',
+'UNION ALL',
+'SELECT a.descripcion, cod_articulo',
+'  FROM st_articulos a, vt_origenes t',
+' WHERE a.cod_empresa = :P_COD_EMPRESA',
+'   AND cod_rubro = ''MO''',
+'   AND t.cod_origen = :P402_ORIGEN',
+'   AND t.cod_empresa = a.cod_empresa',
+'   AND t.origen = ''STNGO''',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA',
+'   AND nvl(a.ind_particular, ''X'') <> nvl(:P402_GARANTIA, ''Z'')',
+'   AND a.tipo_mo = t.origen',
+'   AND nvl(estado, ''S'') NOT IN (''I'', ''N'')',
+'      ',
+'   AND (cod_familia = nvl((SELECT aa.cod_familia',
+'                          ',
+'                            FROM st_articulos aa',
+'                           WHERE aa.cod_empresa = :P_COD_EMPRESA',
+'                             AND aa.cod_articulo = :P402_COD_ARTICULO_OT),',
+'                          cod_familia))',
+'   AND a.cod_linea IS NULL',
+'   AND a.cod_categoria IS NULL',
+'   AND tipo_mo IS NOT NULL',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA',
+'',
+'UNION ALL',
+'SELECT a.descripcion, cod_articulo',
+'  FROM st_articulos a, vt_origenes t',
+' WHERE a.cod_empresa = :P_COD_EMPRESA',
+'   AND cod_rubro = ''MO''',
+'   AND nvl(estado, ''S'') NOT IN (''I'', ''N'')',
+'   AND t.cod_origen = :P402_ORIGEN',
+'   AND t.cod_empresa = a.cod_empresa',
+'   AND t.origen = ''STNGO''',
+'   AND nvl(a.ind_particular, ''X'') <> nvl(:P402_GARANTIA, ''Z'')',
+'   AND a.tipo_mo = ''STNGO''',
+'   AND tipo_mo IS NOT NULL',
+'   AND cod_categoria IS NULL',
+'   AND a.cod_linea IS NULL',
+'   AND a.cod_familia IS NULL',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA',
+'UNION ALL',
+'SELECT a.descripcion, cod_articulo',
+'  FROM st_articulos a, vt_origenes t',
+' WHERE a.cod_empresa = :P_COD_EMPRESA',
+'   AND cod_rubro = ''MO''',
+'   AND nvl(estado, ''S'') NOT IN (''I'', ''N'')',
+'   AND t.cod_origen = :P402_ORIGEN',
+'   AND t.cod_empresa = a.cod_empresa',
+'   AND nvl(t.origen, ''X'') NOT IN ''STNGO''',
+'   AND a.tipo_mo NOT IN ''STNGO''',
+'   AND tipo_mo IS NOT NULL',
+'   AND nvl(cod_marca, :P402_MARCA) = :P402_MARCA;'))
+,p_lov_cascade_parent_items=>'P402_COD_ARTICULO_OT,P402_ORIGEN,P402_MARCA,P402_GARANTIA'
+,p_ajax_items_to_submit=>'P402_COD_ARTICULO_OT,P402_ORIGEN,P402_MARCA,P402_GARANTIA'
 ,p_ajax_optimize_refresh=>'Y'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -406,7 +485,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                   );',
 '          ----    apex_application.g_print_success_message := ''<span class="notification">Error: ''||p_retorno||'' </span>'';',
 'end; '))
-,p_attribute_02=>'P402_GARANTIA,P402_COD_CLIENTE,P402_ORIGEN,P402_COD_ARTICULO_OT,P402_SER_COMPROBANTE,P402_NRO_COMPROBANTE,P402_COD_TECNICO,P402_IND_ADICIONAL,P402_COD_ARTICULO'
+,p_attribute_02=>'P402_COD_CLIENTE,P402_ORIGEN,P402_COD_ARTICULO_OT,P402_SER_COMPROBANTE,P402_NRO_COMPROBANTE,P402_COD_TECNICO,P402_IND_ADICIONAL,P402_COD_ARTICULO'
 ,p_attribute_03=>'P402_PRECIO_UNITARIO,P402_MONTO_TOTAL,P402_PORC_CLIENTE,P402_TIPO_CAMBIO,P402_COM_TEC,P402_COM_JEF,P402_MON_GAR,P402_MON_ADICIONAL,P402_ERROR,P402_COD_TECNICO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -438,7 +517,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_event_sequence=>40
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'ready'
-,p_display_when_type=>'NEVER'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(115738783520259206)

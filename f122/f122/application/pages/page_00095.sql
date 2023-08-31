@@ -113,7 +113,7 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230703171700'
+,p_last_upd_yyyymmddhh24miss=>'20230830122547'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(20998639937158201)
@@ -2880,17 +2880,25 @@ wwv_flow_imp_page.create_page_da_action(
 unistr('    RAISE_APPLICATION_ERROR(-20001, ''Debe seleccionar la transacci\00F3n'');'),
 'END IF;',
 '',
+' ',
+'',
 'IF :P95_SUB_TIPO_TRANS in (''15'',''17'',''18'') and :P95_NRO_TIMBRADO IS NULL  THEN ',
 '    RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar el numero de timbrado'');',
 'END IF;',
 'IF :P95_SUB_TIPO_TRANS not in (''15'',''17'',''18'') and :P95_NRO_TIMBRADO IS not NULL  THEN ',
 '    RAISE_APPLICATION_ERROR(-20001, ''El numero de timbrado es solo para las retenciones'');',
 'END IF;',
-'',
+'IF :P95_SUB_TIPO_TRANS in (''1'') and (  (:P95_COD_PER_JURIDICA IS  not NULL or :P95_NRO_VALOR IS not NULL ))  THEN ',
+'    RAISE_APPLICATION_ERROR(-20001, ''Debe eliminar el banco y valor para la forma de cobro efectivo'');',
+'END IF;',
 '',
 '',
 'IF NVL(:P95_CARGA_VALORES,''N'')=''S'' and (:P95_COD_PER_JURIDICA IS  NULL or :P95_NRO_VALOR IS NULL ) THEN ',
 '    RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar el banco y/o numero de valor'');',
+'END IF;',
+'',
+'IF NVL(:P95_CARGA_VALORES,''N'')=''S'' and (:P95_FEC_EMISION IS  NULL or :P95_FEC_VENCIMIENTO IS NULL ) THEN ',
+'    RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar las fechas para el comprobante'');',
 'END IF;',
 '',
 'IF :P95_TIP_DOCUMENTO IS NULL THEN ',
@@ -2919,8 +2927,8 @@ unistr('    RAISE_APPLICATION_ERROR(-20001, ''Debe seleccionar la transacci\00F3
 '  :P95_FEC_EMISION:=SYSDATE;',
 '  END IF;',
 '  END IF;'))
-,p_attribute_02=>'P95_SUB_TIPO_TRANS,P95_COD_PER_JURIDICA,P95_NRO_VALOR,P95_MONTO,P95_NRO_TIMBRADO,P95_CARGA_VALORES'
-,p_attribute_03=>'P95_COD_PER_JURIDICA,P95_NRO_VALOR'
+,p_attribute_02=>'P95_SUB_TIPO_TRANS,P95_COD_PER_JURIDICA,P95_NRO_VALOR,P95_MONTO,P95_NRO_TIMBRADO,P95_CARGA_VALORES,P95_FEC_EMISION,P95_FEC_VENCIMIENTO'
+,p_attribute_03=>'P95_COD_PER_JURIDICA,P95_NRO_VALOR,P95_FEC_EMISION,P95_FEC_VENCIMIENTO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -4823,7 +4831,7 @@ unistr('                ''No podr\00E1 grabar ning\00FAn registro hasta que teng
 '        :P95_SER_COMPROBANTE  := :P95_P_SER_COMPROBANTE;',
 '        :P95_NRO_COMPROBANTE  := :P95_P_NRO_COMPROBANTE;',
 '        :P95_MOVCAJ_COD_CLIENTE  := :P95_P_COD_CLIENTE;',
-'        :P95_FEC_MOV_CAJ  := nvl(:p_fecha,SYSDATE);',
+'        :P95_FEC_MOV_CAJ  := nvl(:P95_P_FECHA,SYSDATE);',
 '        :P95_MOVCAJ_COD_SUCURSAL := :P95_P_COD_SUCURSAL;',
 '		',
 '        IF :P95_MOVCAJ_COD_MONEDA IS NOT NULL THEN',

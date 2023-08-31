@@ -54,7 +54,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230828154823'
+,p_last_upd_yyyymmddhh24miss=>'20230830140649'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(187805003220448446)
@@ -70,6 +70,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(188556385889494401)
 ,p_plug_name=>'Calculos'
+,p_region_name=>'calculos'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>1000
@@ -818,6 +819,15 @@ wwv_flow_imp_page.create_page_button(
 ,p_grid_new_column=>'Y'
 ,p_grid_column_span=>2
 );
+wwv_flow_imp_page.create_page_branch(
+ p_id=>wwv_flow_imp.id(195728758097446415)
+,p_branch_name=>'Go To Page 586'
+,p_branch_action=>'f?p=&APP_ID.:586:&SESSION.::&DEBUG.::P586_VENDEDOR,P586_COD_EMPRESA,P586_PERIODO:&P580_VENDEDOR.,&P_COD_EMPRESA.,&P580_MES.&P580_ANIO.&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_when_button_id=>wwv_flow_imp.id(187805442439448450)
+,p_branch_sequence=>10
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(187805193561448447)
 ,p_name=>'P580_VENDEDOR'
@@ -1006,6 +1016,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(190698096857286650)
 ,p_name=>'P580_TOT_COMISION'
@@ -1019,18 +1041,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(192591113126827045)
@@ -1168,7 +1178,7 @@ unistr('            VMENSAJE:=''Debe seleccionar el A\00D1O'';'),
 '                                                             );                                       ',
 '            EXCEPTION',
 '            WHEN OTHERS THEN',
-'                NULL;',
+'                :P580_URL:=NULL;',
 '            END;',
 '',
 '',
@@ -1652,13 +1662,6 @@ wwv_flow_imp_page.create_page_process(
 '    vmensaje varchar2(500);',
 'begin',
 ' ',
-'inv.fvcomisionp.pr_genera_comision(p_cod_vendedor => :P580_vendedor,',
-'                                     p_mes => :P580_mes,',
-'                                     p_anio => :P580_anio,',
-'                                     p_mensaje => vmensaje);',
-'    if vmensaje is not null then',
-'        raise verror;',
-'    else',
 '        begin',
 '             insert into inv.fv_comisiones_np',
 '               (cod_empresa, cod_usuario, fecha_alta, periodo, mes, anio, cod_vendedor, ',
@@ -1666,12 +1669,20 @@ wwv_flow_imp_page.create_page_process(
 '             values',
 '               (''1'', :app_user, sysdate, :P580_mes||:P580_anio, :P580_mes,:P580_anio, :P580_vendedor, ',
 '               REPLACE(:P580_BASE_COMISION,''.'',''''), REPLACE(:P580_PORC_FACT,''.'',''''), REPLACE(:P580_PORC_CUMP,''.'',''''), ',
-'               REPLACE(:P580_VTA_TOTAL,''.'',''''), REPLACE(:P580_tot_comision,''.'',''''));             ',
+'               REPLACE(:P580_VTA_TOTAL,''.'',''''), REPLACE(:P580_tot_comision,''.'',''''));    ',
+'',
+'                ',
+'                inv.fvcomisionp.pr_genera_comision(p_cod_vendedor => :P580_vendedor,',
+'                                                     p_mes => :P580_mes,',
+'                                                     p_anio => :P580_anio,',
+'                                                     p_mensaje => vmensaje);',
+'                    if vmensaje is not null then',
+'                        raise verror;',
+'                    end if; ',
 '        exception',
 '           when others then',
 '                raise_application_error(-20000,  sqlerrm );',
 '        end;',
-'    end if; ',
 'exception',
 '    when verror then',
 '        raise_application_error(-20000, vmensaje);',

@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230822143115'
+,p_last_upd_yyyymmddhh24miss=>'20230822153621'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(94787835596106415)
@@ -46,11 +46,11 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_orientation=>'vertical'
 ,p_data_cursor=>'auto'
 ,p_data_cursor_behavior=>'auto'
-,p_hide_and_show_behavior=>'withRescale'
 ,p_hover_behavior=>'none'
 ,p_stack=>'on'
 ,p_stack_label=>'off'
 ,p_connect_nulls=>'Y'
+,p_value_position=>'auto'
 ,p_sorting=>'label-asc'
 ,p_fill_multi_series_gaps=>true
 ,p_zoom_and_scroll=>'off'
@@ -58,8 +58,20 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_show_series_name=>true
 ,p_show_group_name=>true
 ,p_show_value=>true
-,p_legend_rendered=>'on'
+,p_show_label=>true
+,p_show_row=>true
+,p_show_start=>true
+,p_show_end=>true
+,p_show_progress=>true
+,p_show_baseline=>true
+,p_legend_rendered=>'off'
 ,p_legend_position=>'auto'
+,p_overview_rendered=>'off'
+,p_horizontal_grid=>'auto'
+,p_vertical_grid=>'auto'
+,p_gauge_orientation=>'circular'
+,p_gauge_plot_area=>'on'
+,p_show_gauge_value=>true
 );
 wwv_flow_imp_page.create_jet_chart_series(
  p_id=>wwv_flow_imp.id(94788005920106417)
@@ -72,11 +84,10 @@ wwv_flow_imp_page.create_jet_chart_series(
 '	s.cod_usuario as label, ',
 '	(',
 '                        select count(*)',
-'                        from ca_ticket_atencion i, llamador_ticket t',
-'                        where i.cod_usuario = s.cod_usuario',
-'						and i.id_ticket = t.id_ticket',
+'                        from ca_ticket_atencion i',
+'                        where i.cod_usuario = s.cod_usuario						',
 '                        and i.fecha  = trunc (sysdate)',
-'						and (i.estado in(''ATENDIDO'',''FINALIZADO'') OR t.estado in(''ATENDIDO'',''FINALIZADO''))						',
+'						and i.estado in(''ATENDIDO'',''FINALIZADO'')				',
 '                      ) as value,					   ',
 '                      ''ATENDIDOS'' as series,',
 '                      ''green'' as color',
@@ -93,22 +104,28 @@ wwv_flow_imp_page.create_jet_chart_series(
 '	s.cod_usuario as label, ',
 '	(',
 '                        select count(*)',
-'                        from ca_ticket_atencion i, llamador_ticket t',
-'                        where i.cod_usuario = s.cod_usuario',
-'						and i.id_ticket = t.id_ticket',
+'                        from ca_ticket_atencion i',
+'                        where i.cod_usuario = s.cod_usuario						',
 '                        and i.fecha  = trunc (sysdate)',
-'						and (i.estado in(''CANCELADO'') OR t.estado in(''CANCELADO''))												',
+'						and i.estado in(''CANCELADO'')											',
 '                      ) as value,					   ',
 '                      ''CANCELADOS'' as series,',
 '                      ''red'' as color',
 '       ',
-' from LLAMADOR_TICKET a, ca_ticket_atencion  S,  usuarios u, personas p',
-' where 1=1',
-' and S.ID_TICKET  = A.ID_TICKET',
-' and s.fecha  = trunc (sysdate)',
-' and u.cod_usuario = s.cod_usuario',
-' and u.cod_persona = p.cod_persona',
-' group by s.cod_usuario, p.nombre'))
+' ',
+'FROM LLAMADOR_TICKET a,',
+'ca_ticket_atencion S,',
+'usuarios u,',
+'personas p',
+'WHERE',
+'1 = 1',
+'AND S.ID_TICKET = A.ID_TICKET',
+'AND s.fecha = trunc (sysdate)',
+'AND u.cod_usuario = s.cod_usuario',
+'AND u.cod_persona = p.cod_persona',
+'GROUP BY',
+'s.cod_usuario,',
+'p.nombre'))
 ,p_series_name_column_name=>'SERIES'
 ,p_items_value_column_name=>'VALUE'
 ,p_group_short_desc_column_name=>'LABEL'
@@ -116,6 +133,8 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_assigned_to_y2=>'off'
 ,p_items_label_rendered=>true
 ,p_items_label_position=>'auto'
+,p_items_label_display_as=>'PERCENT'
+,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(94788138742106418)
@@ -130,6 +149,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_tick_label_rendered=>'on'
 ,p_tick_label_rotation=>'auto'
 ,p_tick_label_position=>'outside'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(94788278683106419)
@@ -145,6 +172,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_major_tick_rendered=>'on'
 ,p_minor_tick_rendered=>'off'
 ,p_tick_label_rendered=>'on'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(152760151330015842)
@@ -429,6 +464,7 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_stack_label=>'on'
 ,p_stack_font_color=>'#292978'
 ,p_connect_nulls=>'Y'
+,p_value_position=>'auto'
 ,p_sorting=>'value-asc'
 ,p_fill_multi_series_gaps=>true
 ,p_zoom_and_scroll=>'off'
@@ -436,7 +472,20 @@ wwv_flow_imp_page.create_jet_chart(
 ,p_show_series_name=>true
 ,p_show_group_name=>true
 ,p_show_value=>true
+,p_show_label=>true
+,p_show_row=>true
+,p_show_start=>true
+,p_show_end=>true
+,p_show_progress=>true
+,p_show_baseline=>true
 ,p_legend_rendered=>'off'
+,p_legend_position=>'auto'
+,p_overview_rendered=>'off'
+,p_horizontal_grid=>'auto'
+,p_vertical_grid=>'auto'
+,p_gauge_orientation=>'circular'
+,p_gauge_plot_area=>'on'
+,p_show_gauge_value=>true
 );
 wwv_flow_imp_page.create_jet_chart_series(
  p_id=>wwv_flow_imp.id(157855620012762103)
@@ -480,6 +529,8 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_assigned_to_y2=>'off'
 ,p_items_label_rendered=>true
 ,p_items_label_position=>'auto'
+,p_items_label_display_as=>'PERCENT'
+,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(157855991494762106)
@@ -494,6 +545,14 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_minor_tick_rendered=>'on'
 ,p_tick_label_rendered=>'on'
 ,p_split_dual_y=>'auto'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
+,p_zoom_order_hours=>false
+,p_zoom_order_days=>false
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(157855721161762104)

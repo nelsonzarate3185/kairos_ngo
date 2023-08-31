@@ -89,8 +89,8 @@ wwv_flow_imp_page.create_page(
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'ETRINIDAD'
-,p_last_upd_yyyymmddhh24miss=>'20230322135708'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230829162008'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21759772459052333)
@@ -360,7 +360,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_display_order=>63
 ,p_column_identifier=>'S'
 ,p_column_label=>'Detalles'
-,p_column_link=>'f?p=&APP_ID.:145:&SESSION.::&DEBUG.::P145_ROWID,P145_BLOQUEADO:#ROWID#,#BLOQUEAR#'
+,p_column_link=>'f?p=&APP_ID.:145:&SESSION.::&DEBUG.::P145_ID_CASO,P145_BLOQUEADO,P145_ID_CONTACTO,P145_COD_EMPRESA:#ID_CASO#,#BLOQUEAR#,#ID_CONTACTO#,#COD_EMPRESA#'
 ,p_column_linktext=>'<img src="#APP_FILES#evaluacion.png" width="25" height="25">'
 ,p_column_type=>'STRING'
 ,p_column_alignment=>'CENTER'

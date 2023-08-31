@@ -233,7 +233,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230829113446'
+,p_last_upd_yyyymmddhh24miss=>'20230830164036'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(94035155548281250)
@@ -1051,7 +1051,7 @@ wwv_flow_imp_page.create_page_button(
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(97530611638270813)
-,p_button_sequence=>10
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_imp.id(104537230789693849)
 ,p_button_name=>'BTN_RESERVA_FAC'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -1066,7 +1066,7 @@ wwv_flow_imp_page.create_page_button(
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(97533640321270843)
-,p_button_sequence=>10
+,p_button_sequence=>40
 ,p_button_plug_id=>wwv_flow_imp.id(104537230789693849)
 ,p_button_name=>'BTN_PROCESA_CPH'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -1219,6 +1219,19 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Procesar Planilla'
+,p_button_position=>'LEFT_OF_TITLE'
+,p_warn_on_unsaved_changes=>null
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(194843232422616035)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(104534722136693824)
+,p_button_name=>'BTN_FACTURAR_1'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Procesar Planilla tesss'
 ,p_button_position=>'LEFT_OF_TITLE'
 ,p_warn_on_unsaved_changes=>null
 );
@@ -1539,10 +1552,14 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT DISTINCT SERIE A, SERIE',
 'FROM TALONARIOS A',
-'WHERE A.CODIGO_USUARIO = :APP_USER',
+'WHERE cod_empresa=:P_COD_EMPRESA',
+'--A.CODIGO_USUARIO = :APP_USER',
 'AND COD_SUCURSAL = :P_COD_SUCURSAL',
-'AND TIP_TALONARIO IN (''FCO'', ''FCR'')'))
+'AND TIP_TALONARIO IN (''FCO'', ''FCR'')  ',
+'and a.activo=''S'''))
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P_COD_EMPRESA,P_COD_SUCURSAL'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
@@ -1597,9 +1614,10 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT DISTINCT SERIE A, SERIE',
 'FROM TALONARIOS A',
-'WHERE A.CODIGO_USUARIO = :APP_USER',
-'AND COD_SUCURSAL = :P_COD_SUCURSAL',
-'AND TIP_TALONARIO IN (''REC'')'))
+'WHERE  COD_SUCURSAL = :P_COD_SUCURSAL',
+'AND TIP_TALONARIO IN (''REC'')',
+'and a.activo=''S''',
+'and cod_empresa=:P_COD_EMPRESA'))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
@@ -1619,10 +1637,10 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT DISTINCT SERIE, SERIE  A',
 'FROM TALONARIOS A',
-'WHERE A.CODIGO_USUARIO = :APP_USER',
-'AND COD_SUCURSAL = :P_COD_SUCURSAL',
+'WHERE  COD_SUCURSAL = :P_COD_SUCURSAL',
 'AND TIP_TALONARIO IN (''NCR'')',
-''))
+'and a.activo=''S''',
+'and cod_empresa=:P_COD_EMPRESA'))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1641,9 +1659,10 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT DISTINCT SERIE A, SERIE',
 'FROM TALONARIOS A',
-'WHERE A.CODIGO_USUARIO = :APP_USER',
-'AND COD_SUCURSAL = :P_COD_SUCURSAL',
-'AND TIP_TALONARIO IN (''REM'')'))
+'WHERE COD_SUCURSAL = :P_COD_SUCURSAL',
+'AND TIP_TALONARIO IN (''REM'')',
+'and a.activo=''S''',
+'and cod_empresa=:P_COD_EMPRESA'))
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
@@ -1907,6 +1926,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(108059577964266444)
 ,p_name=>'P346_DESCRIPCION_CUSTODIO_FAC'
@@ -1923,18 +1954,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(110779136729423532)
@@ -1986,14 +2005,24 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(95867971977277642)
+ p_id=>wwv_flow_imp.id(95868369469277646)
 ,p_event_id=>wwv_flow_imp.id(95867853492277641)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'var spinner = apex.util.showSpinner();'
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P346_INDICADOR_ALERT'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(95867971977277642)
+,p_event_id=>wwv_flow_imp.id(95867853492277641)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'',
 '',
 'BEGIN',
 '    ',
@@ -2031,7 +2060,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(96601060390832045)
 ,p_event_id=>wwv_flow_imp.id(95867853492277641)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>20
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_ALERT'
 ,p_attribute_01=>'&P346_INDICADOR_ALERT.'
@@ -2040,21 +2069,10 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_client_condition_element=>'P346_INDICADOR_ALERT'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(95868369469277646)
-,p_event_id=>wwv_flow_imp.id(95867853492277641)
-,p_event_result=>'TRUE'
-,p_action_sequence=>30
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_JAVASCRIPT_CODE'
-,p_attribute_01=>'var spinner = apex.util.showSpinner();'
-,p_client_condition_type=>'NULL'
-,p_client_condition_element=>'P346_INDICADOR_ALERT'
-);
-wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(95868025516277643)
 ,p_event_id=>wwv_flow_imp.id(95867853492277641)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>40
+,p_action_sequence=>50
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -2067,7 +2085,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(95868495280277647)
 ,p_event_id=>wwv_flow_imp.id(95867853492277641)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>50
+,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -2370,8 +2388,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(SQLERRM);',
-'         APEX_DEBUG.ERROR(''CUSTODIO FAC'');',
+'        NULL;',
 'END;'))
 ,p_attribute_02=>'P346_COD_SUCURSAL_FAC,P_COD_EMPRESA,P346_COD_CUSTODIO_ENT_FAC'
 ,p_attribute_03=>'P346_COD_CUSTODIO_ENT_FAC,P346_DESCRIPCION_CUSTODIO_FAC'
@@ -2489,10 +2506,19 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'Generacion de Facturas'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(93540374326153808)
+ p_id=>wwv_flow_imp.id(194843845722616041)
 ,p_event_id=>wwv_flow_imp.id(97529863899270805)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'var spinner = apex.util.showSpinner();'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(93540374326153808)
+,p_event_id=>wwv_flow_imp.id(97529863899270805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -2518,7 +2544,7 @@ unistr('    RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar la serie de nota de 
 '',
 '',
 ''))
-,p_attribute_02=>'P346_ESTADO_PLANILLA,P346_SER_COMPROBANTE_FAC,P346_SER_RECIBO_FAC,P346_SER_NC,P346_SER_REMISION'
+,p_attribute_02=>'P346_ESTADO_PLANILLA,P346_SER_COMPROBANTE_FAC,P346_SER_RECIBO_FAC,P346_SER_NC,P346_SER_REMISION,P346_SER_RECIBO_FAC'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
@@ -2526,7 +2552,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(111964490995898031)
 ,p_event_id=>wwv_flow_imp.id(97529863899270805)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>30
+,p_action_sequence=>50
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>'NULL;'
@@ -2540,18 +2566,15 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(107238245691843342)
 ,p_event_id=>wwv_flow_imp.id(97529863899270805)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>40
+,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'DECLARE',
-'    V_DETALLE_NRO_PEDIDO VARCHAR2(100);',
-'    V_NRO_PLANILLA VARCHAR2(8000);',
-'',
+' V_DETALLE_NRO_PEDIDO VARCHAR2(100);',
+' V_NRO_PLANILLA VARCHAR2(8000);',
 'BEGIN',
 'V_NRO_PLANILLA := :P346_NRO_PLANILLA_FAC;',
-'',
-'',
 '    IF :P346_TIPO_PEDIDO = ''REPUESTOS'' THEN',
 '        BEGIN',
 '            sp_CREA_FACTURA_ruteo_rep_vf (p_cod_empresa => :P_COD_EMPRESA,',
@@ -2562,12 +2585,13 @@ wwv_flow_imp_page.create_page_da_action(
 '                                          p_VARIOS_DEPOSITO => nvl(:P346_VARIOS_DEPOSITOS,''N''),',
 '                                          p_retorno => :P346_ERROR);                                        ',
 '        EXCEPTION',
-'			WHEN OTHERS THEN',
-'        RAISE_APPLICATION_ERROR(-20000, ''Error en sp_CREA_FACTURA_ruteo_rep_vf. ''||sqlerrm);',
-'                APEX_DEBUG.ERROR(SQLERRM);',
+'			WHEN OTHERS THEN    ',
+'         :P346_ERROR:=''sp_CREA_FACTURA_ruteo_rep_vf. ''|| sqlerrm ;               ',
+'         ROLLBACK;',
 '        END;                                          ',
 '    ELSE    	',
 '       	BEGIN',
+'            out_out( ''entro ''||  '' P_NRO_PLANILLA''||'' => ''||:P346_NRO_PLANILLA_FAC  );    ',
 '				SP_CREA_FACTURA_RUTEO(p_cod_empresa => :P_COD_EMPRESA,',
 '                                      P_SER_FACTURA => :P346_SER_COMPROBANTE_FAC,',
 '                                      P_COD_CUSTODIO => :P346_COD_CUSTODIO_FAC,',
@@ -2575,56 +2599,43 @@ wwv_flow_imp_page.create_page_da_action(
 '                                      P_NRO_PLANILLA => :P346_NRO_PLANILLA_FAC,',
 '                                      p_VARIOS_DEPOSITO => nvl(:P346_VARIOS_DEPOSITOS,''N''),',
 '                                      p_retorno => :P346_ERROR);',
-'         ',
 '		EXCEPTION',
 '			WHEN OTHERS THEN',
-'              RAISE_APPLICATION_ERROR(-20000, ''Error en SP_CREA_FACTURA_RUTEO. ''||sqlerrm);',
-'                APEX_DEBUG.ERROR(SQLERRM);',
-'        END;',
+'      out_out( ''p_retorno ''||'' => ''||:P346_ERROR ||'' => ''|| '' P_NRO_PLANILLA''||'' => ''||:P346_NRO_PLANILLA_FAC  );         ',
+'           :P346_ERROR:=''Error en SP_CREA_FACTURA_RUTEO. ''||sqlerrm;',
+'           ROLLBACK;',
+'       RAISE_APPLICATION_ERROR(-20000, ''SP_CREA_FACTURA_RUTEO. ''||sqlerrm);     ',
+'       END;',
 '    END IF;',
-'',
 '	BEGIN',
 '    	UPDATE  RP_REPARTO_PEDIDO_CAB',
 '    	SET PLANILLA_FACTURADA = ''F''',
 '    	WHERE cod_empresa = :P_COD_EMPRESA',
-'    	AND nro_planilla = :P346_NRO_PLANILLA_FAC;',
-'        ',
+'    	AND nro_planilla = :P346_NRO_PLANILLA_FAC;        ',
 '        COMMIT;',
 '    EXCEPTION',
 '			WHEN OTHERS THEN',
-'      RAISE_APPLICATION_ERROR(-20000, ''Error en RP_REPARTO_PEDIDO_CAB. ''||sqlerrm);',
-'                APEX_DEBUG.ERROR(SQLERRM);',
-'                    ',
+'      :P346_ERROR:=  ''Error en RP_REPARTO_PEDIDO_CAB. ''||sqlerrm;  ',
+'      ROLLBACK;',
 '    END;',
-'',
 '    IF :P346_SER_REMISION IS NOT NULL THEN',
 '		BEGIN',
-'		  	sp_crea_remision_masiva(:P_COD_EMPRESA,',
-'		       		                :P346_NRO_PLANILLA_FAC,',
-'		         		            :P346_SER_REMISION,',
-'		           	                V_DETALLE_NRO_PEDIDO);',
+'		  	sp_crea_remision_masiva(:P_COD_EMPRESA,:P346_NRO_PLANILLA_FAC,:P346_SER_REMISION, V_DETALLE_NRO_PEDIDO);',
 '		    EXCEPTION',
 '        WHEN OTHERS THEN',
-'        RAISE_APPLICATION_ERROR(-20000, ''Error en sp_crea_remision_masiva. ''||sqlerrm);',
-'            APEX_DEBUG.ERROR(SQLERRM);',
-'        END;',
-'        ',
-'    :P346_INDICADOR_REPORT_FACTURAS := ''1'';',
-'    ',
+'        :P346_ERROR:= ''sp_crea_remision_masiva. ''||sqlerrm; ',
+'        ROLLBACK;         ',
+'        END;        ',
+'    :P346_INDICADOR_REPORT_FACTURAS := ''1'';    ',
 '	BEGIN',
 '		UPDATE  RP_REPARTO_PEDIDO_CAB',
 '		SET PLANILLA_FACTURADA = ''F''',
 '		where cod_empresa= :P_COD_EMPRESA',
-'		and nro_planilla = :P346_NRO_PLANILLA_FAC;',
-'		',
+'		and nro_planilla = :P346_NRO_PLANILLA_FAC;		',
 '		sp_reposicion_pla_fact(:P346_NRO_PLANILLA_FAC);',
-'        COMMIT;',
-'    EXCEPTION',
-'        WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(SQLERRM);',
+'        COMMIT;  ',
 '    END;',
-' END IF;',
-' ',
+' END IF; ',
 'RPFACMAS.PR_CREAR_COL_FAC  (PI_COD_EMPRESA => :P_COD_EMPRESA,',
 '                                PI_NRO_PLANILLA => :P346_NRO_PLANILLA_FAC,',
 '                                PI_COD_CUSTODIO_FAC => :P346_COD_CUSTODIO_FAC,',
@@ -2635,13 +2646,15 @@ wwv_flow_imp_page.create_page_da_action(
 '                                PI_COD_COBRADOR => :P346_COD_COBRADOR_FAC,',
 '                                PI_SERIE_NC => :P346_SER_NC,',
 '                                PI_TIPO_PEDIDO => :P346_P_TIPO_ENTREGA,',
-'                                PI_COD_CUSTODIO => :P346_COD_CUSTODIO_FAC);',
+'                                PI_COD_CUSTODIO => :P346_COD_CUSTODIO_FAC,',
+'                                PI_SERIE_RECIBO  => :P346_SER_RECIBO_FAC);',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'     RAISE_APPLICATION_ERROR(-20000, ''Error en RPFACMAS.PR_CREAR_COL_FAC. ''||sqlerrm);',
-'        APEX_DEBUG.ERROR(SQLERRM);',
+'    :P346_ERROR:=''RPFACMAS.PR_CREAR_COL_FAC. ''||sqlerrm;',
+'    ROLLBACK;',
 'END;'))
-,p_attribute_02=>'P_COD_EMPRESA,P346_SER_COMPROBANTE_FAC,P346_COD_CUSTODIO_FAC,P346_COD_SUCURSAL_FAC,P346_NRO_PLANILLA_FAC,P346_VARIOS_DEPOSITOS,P346_NRO_PLANILLA_FAC,P346_P_TIPO_ENTREGA,P346_COD_USUARIO,P346_P_TIPO_PEDIDO,P346_TIPO_PEDIDO,P346_SER_REMISION'
+,p_attribute_02=>'P_COD_EMPRESA,P346_SER_COMPROBANTE_FAC,P346_COD_CUSTODIO_FAC,P346_COD_SUCURSAL_FAC,P346_NRO_PLANILLA_FAC,P346_VARIOS_DEPOSITOS,P346_NRO_PLANILLA_FAC,P346_P_TIPO_ENTREGA,P346_COD_USUARIO,P346_P_TIPO_PEDIDO,P346_TIPO_PEDIDO,P346_SER_REMISION,P346_SER_R'
+||'ECIBO_FAC'
 ,p_attribute_03=>'P346_ERROR,P346_SER_REMISION,P346_INDICADOR_REPORT_FACTURAS'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -2651,11 +2664,113 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(108055836827266407)
 ,p_event_id=>wwv_flow_imp.id(97529863899270805)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>50
+,p_action_sequence=>70
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(97530995479270816)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194843416694616037)
+,p_event_id=>wwv_flow_imp.id(97529863899270805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>80
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+' V_DETALLE_NRO_PEDIDO VARCHAR2(100);',
+' V_NRO_PLANILLA VARCHAR2(8000);',
+'BEGIN',
+'V_NRO_PLANILLA := :P346_NRO_PLANILLA_FAC;',
+'    ',
+' ',
+'     ',
+'RPFACMAS.PR_CREAR_COL_FAC  (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'                                PI_NRO_PLANILLA => :P346_NRO_PLANILLA_FAC,',
+'                                PI_COD_CUSTODIO_FAC => :P346_COD_CUSTODIO_FAC,',
+'                                PI_COD_CUSTODIO_ENT_FAC => :P346_COD_CUSTODIO_ENT_FAC,',
+'                                PI_APP_USER => :P346_COD_USUARIO,',
+'                                PO_NRO_PLANILLA_TRASLADO => :P346_NRO_PLANILLA_TRASLADO,',
+'                                PI_COD_SUCURSAL => :P346_COD_SUCURSAL_FAC,',
+'                                PI_COD_COBRADOR => :P346_COD_COBRADOR_FAC,',
+'                                PI_SERIE_NC => :P346_SER_NC,',
+'                                PI_TIPO_PEDIDO => :P346_P_TIPO_ENTREGA,',
+'                                PI_COD_CUSTODIO => :P346_COD_CUSTODIO_FAC,',
+'                                PI_SERIE_RECIBO  => :P346_SER_RECIBO_FAC);',
+'',
+'',
+'                           ',
+'EXCEPTION',
+'    WHEN OTHERS THEN',
+'    :P346_ERROR:=''RPFACMAS.PR_CREAR_COL_FAC. ''||sqlerrm;',
+'    ROLLBACK;',
+'END;'))
+,p_attribute_02=>'P_COD_EMPRESA,P346_SER_COMPROBANTE_FAC,P346_COD_CUSTODIO_FAC,P346_COD_SUCURSAL_FAC,P346_NRO_PLANILLA_FAC,P346_VARIOS_DEPOSITOS,P346_NRO_PLANILLA_FAC,P346_P_TIPO_ENTREGA,P346_COD_USUARIO,P346_P_TIPO_PEDIDO,P346_TIPO_PEDIDO,P346_SER_REMISION,P346_SER_R'
+||'ECIBO_FAC'
+,p_attribute_03=>'P346_ERROR,P346_SER_REMISION,P346_INDICADOR_REPORT_FACTURAS'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194843784444616040)
+,p_event_id=>wwv_flow_imp.id(97529863899270805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>90
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'BEGIN',
+'',
+'     RPFACMAS.PR_BUSCAR_FAC (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'                             PI_NRO_PLANILLA => :P346_NRO_PLANILLA_FAC);',
+'',
+'     :P346_INDICADOR_REPORT_FACTURAS := ''1'';',
+':P346_ERROR:=''Proceso Finalizado'';',
+'EXCEPTION',
+'    WHEN OTHERS THEN',
+'        APEX_DEBUG.ERROR(SQLERRM);',
+'END;'))
+,p_attribute_02=>'P_COD_EMPRESA,P346_NRO_PLANILLA_FAC'
+,p_attribute_03=>'P346_INDICADOR_REPORT_FACTURAS,P346_ERROR'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194843513909616038)
+,p_event_id=>wwv_flow_imp.id(97529863899270805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>100
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(97530995479270816)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194843945455616042)
+,p_event_id=>wwv_flow_imp.id(97529863899270805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>110
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'$("#apex_wait_overlay").remove();',
+'$(".u-Processing").remove();'))
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194842900602616032)
+,p_event_id=>wwv_flow_imp.id(97529863899270805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>120
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_ALERT'
+,p_attribute_01=>'&P346_ERROR.'
+,p_attribute_02=>'ALerta'
+,p_attribute_03=>'warning'
+,p_client_condition_type=>'NOT_NULL'
+,p_client_condition_element=>'P346_ERROR'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(97532729939270834)
@@ -2689,16 +2804,28 @@ wwv_flow_imp_page.create_page_da_action(
 '                             PI_NRO_PLANILLA => :P346_NRO_PLANILLA_FAC);',
 '',
 '     :P346_INDICADOR_REPORT_FACTURAS := ''1'';',
-'',
+':P346_ERROR:=''Busqueda Realizada'';',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
 '        APEX_DEBUG.ERROR(SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P_COD_EMPRESA,P346_NRO_PLANILLA_FAC'
-,p_attribute_03=>'P346_INDICADOR_REPORT_FACTURAS'
+,p_attribute_03=>'P346_INDICADOR_REPORT_FACTURAS,P346_ERROR'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(111965185373898038)
@@ -2715,11 +2842,21 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(97533017624270837)
 ,p_event_id=>wwv_flow_imp.id(97532729939270834)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>50
+,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(97530995479270816)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194843015489616033)
+,p_event_id=>wwv_flow_imp.id(97532729939270834)
+,p_event_result=>'TRUE'
+,p_action_sequence=>70
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_ALERT'
+,p_attribute_01=>'&P346_ERROR.'
+,p_attribute_02=>'PRUEBA'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(97533191290270838)
@@ -2864,18 +3001,6 @@ wwv_flow_imp_page.create_page_da_action(
 '    '))
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(108056643595266415)
@@ -3687,6 +3812,18 @@ unistr('    raise_application_error(-20001,''No se encuentra c\00F3digo de custo
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(110779349081423534)
 ,p_name=>'Cambiar_Cobrador'
@@ -3763,6 +3900,28 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(194843393190616036)
+,p_name=>'New_1'
+,p_event_sequence=>270
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(194843232422616035)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(194843608100616039)
+,p_event_id=>wwv_flow_imp.id(194843393190616036)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_ALERT'
+,p_attribute_01=>'&P346_ERROR.'
+,p_attribute_02=>'ALerta'
+,p_attribute_03=>'warning'
+,p_client_condition_type=>'NOT_NULL'
+,p_client_condition_element=>'P346_ERROR'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(96598502611832020)

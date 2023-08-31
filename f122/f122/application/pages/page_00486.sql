@@ -73,8 +73,8 @@ wwv_flow_imp_page.create_page(
 ,p_step_template=>wwv_flow_imp.id(40085302490263650)
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230823120358'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230831091145'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(148902252032312207)
@@ -240,7 +240,7 @@ wwv_flow_imp_page.create_card_action(
 ,p_button_display_type=>'TEXT'
 ,p_is_hot=>true
 ,p_condition_type=>'EXPRESSION'
-,p_condition_expr1=>':CODIGO = ''01'' and :P486_COD_CLIENTE IS NOT NULL  and NVL(:ESTADO, ''ACTIVO'') NOT IN  (''FINALIZADO'', ''CANCELADO'', ''DERIVADO'')'
+,p_condition_expr1=>':CODIGO = ''01''/* and :P486_COD_CLIENTE IS NOT NULL  and NVL(:ESTADO, ''ACTIVO'') NOT IN  (''FINALIZADO'', ''CANCELADO'', ''DERIVADO'')*/'
 ,p_condition_expr2=>'PLSQL'
 ,p_exec_cond_for_each_row=>true
 );
@@ -304,7 +304,7 @@ wwv_flow_imp_page.create_card_action(
 ,p_button_display_type=>'TEXT'
 ,p_is_hot=>true
 ,p_condition_type=>'EXPRESSION'
-,p_condition_expr1=>':P486_COD_CLIENTE IS NOT NULL AND NVL(:ESTADO, ''ACTIVO'') NOT IN  (''FINALIZADO'', ''CANCELADO'', ''DERIVADO'')'
+,p_condition_expr1=>':CODIGO = ''01'' OR (:P486_COD_CLIENTE IS NOT NULL AND NVL(:ESTADO, ''ACTIVO'') NOT IN  (''FINALIZADO'', ''CANCELADO'', ''DERIVADO''))'
 ,p_condition_expr2=>'PLSQL'
 ,p_exec_cond_for_each_row=>true
 );
@@ -320,7 +320,7 @@ wwv_flow_imp_page.create_card_action(
 ,p_button_display_type=>'TEXT'
 ,p_is_hot=>true
 ,p_condition_type=>'EXPRESSION'
-,p_condition_expr1=>':P486_COD_CLIENTE IS NOT NULL AND NVL(:ESTADO, ''ACTIVO'') NOT IN  (''FINALIZADO'', ''CANCELADO'', ''DERIVADO'')'
+,p_condition_expr1=>':CODIGO = ''01'' OR (:P486_COD_CLIENTE IS NOT NULL AND NVL(:ESTADO, ''ACTIVO'') NOT IN  (''FINALIZADO'', ''CANCELADO'', ''DERIVADO''))'
 ,p_condition_expr2=>'PLSQL'
 ,p_exec_cond_for_each_row=>true
 );
@@ -752,38 +752,50 @@ wwv_flow_imp_page.create_page_da_action(
 '            where a.id_ticket = :P486_ID_TICKET;',
 '    V_CONTADOR  number :=  0;',
 'BEGIN ',
-'    :P0_MENSAJE_VALIDACION := NULL;',
-'    :P486_PROCESAR :=  0;',
-'    BEGIN',
-'        FOR a IN cur_detalles LOOP',
-'            if a.estado not in (''FINALIZADO'', ''CANCELADO'', ''DERIVADO'')  THEN ',
-'                V_CONTADOR  :=  V_CONTADOR  + 1;',
-'                exit;',
-'            end if;',
-'        END LOOP;',
+'    if :P486_COD_CLIENTE is not null then ',
+'        :P0_MENSAJE_VALIDACION := NULL;',
+'        :P486_PROCESAR :=  0;',
+'        BEGIN',
+'            FOR a IN cur_detalles LOOP',
+'                if a.estado not in (''FINALIZADO'', ''CANCELADO'', ''DERIVADO'')  THEN ',
+'                    V_CONTADOR  :=  V_CONTADOR  + 1;',
+'                    exit;',
+'                end if;',
+'            END LOOP;',
 '',
 '',
-'        if V_CONTADOR >  0 then ',
-'             :P0_MENSAJE_VALIDACION := ''Se debe completar los procesos antes de finalizar el Ticket'';',
-'             :P486_PROCESAR := 0;',
-'        ELSE ',
-'           ',
-'            update llamador_ticket set estado  = ''FINALIZADO''',
-'            WHERE ID_TICKET = :P486_ID_TICKET;',
+'            if V_CONTADOR >  0 then ',
+'                 :P0_MENSAJE_VALIDACION := ''Se debe completar los procesos antes de finalizar el Ticket'';',
+'                 :P486_PROCESAR := 0;',
+'            ELSE ',
+'               ',
+'                update llamador_ticket set estado  = ''FINALIZADO''',
+'                WHERE ID_TICKET = :P486_ID_TICKET;',
 '',
-'            update ca_ticket_atencion set estado  = ''FINALIZADO'', fecha_cierre  = sysdate',
-'            WHERE ID_TICKET = :P486_ID_TICKET;',
+'                update ca_ticket_atencion set estado  = ''FINALIZADO'', fecha_cierre  = sysdate',
+'                WHERE ID_TICKET = :P486_ID_TICKET;',
 '',
-'            COMMIT;',
+'                COMMIT;',
 '',
-'             :P486_PROCESAR :=  1;',
-'        END IF;',
+'                 :P486_PROCESAR :=  1;',
+'            END IF;',
 '',
-'    END;',
+'        END;',
+'    else ',
+'        update llamador_ticket set estado  = ''FINALIZADO''',
+'                WHERE ID_TICKET = :P486_ID_TICKET;',
+'',
+'                update ca_ticket_atencion set estado  = ''FINALIZADO'', fecha_cierre  = sysdate',
+'                WHERE ID_TICKET = :P486_ID_TICKET;',
+'',
+'                COMMIT;',
+'',
+'                 :P486_PROCESAR :=  1;',
+'    end if;',
 '',
 'END;',
 ''))
-,p_attribute_02=>'P486_ID_TICKET'
+,p_attribute_02=>'P486_ID_TICKET,P486_COD_CLIENTE'
 ,p_attribute_03=>'P0_MENSAJE_VALIDACION,P486_PROCESAR'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -938,6 +950,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_wait_for_result=>'Y'
 ,p_server_condition_type=>'NEVER'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(149023317770268812)
 ,p_event_id=>wwv_flow_imp.id(148901711361312202)
@@ -956,18 +980,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_button_id=>wwv_flow_imp.id(148902102263312206)
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(148902666030312211)

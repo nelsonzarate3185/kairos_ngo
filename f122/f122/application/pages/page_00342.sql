@@ -56,7 +56,7 @@ unistr('//Realizamos la validaci\00F3n de la tecla ingresada'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230629142143'
+,p_last_upd_yyyymmddhh24miss=>'20230830153215'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(82564852671905823)
@@ -641,49 +641,24 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P342_UNIDAD_MED_DET'
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(91077868959718733)
-,p_prompt=>'U. Medida'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91078153759718736)
 ,p_name=>'P342_PORC_IVA_COMPRA_DET'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(91077868959718733)
-,p_prompt=>'IVA Compra'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91078208254718737)
 ,p_name=>'P342_PRECIO_LISTA_DET'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(91077868959718733)
-,p_prompt=>'Precio de Lista'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_begin_on_new_line=>'N'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91078441944718739)
@@ -723,83 +698,40 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P342_CANTIDAD_S_G_DET'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(91078378903718738)
-,p_prompt=>'Subtotal Cantidad'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91078740906718742)
 ,p_name=>'P342_TOT_IMPORTE_S_G_DET'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(91078378903718738)
-,p_prompt=>'Subtotal Importe'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_begin_on_new_line=>'N'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91078862972718743)
 ,p_name=>'P342_CANTIDAD_C_G_DET'
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(91078378903718738)
-,p_prompt=>unistr('Subtotal Garant\00EDa Cantidad')
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91078957993718744)
 ,p_name=>'P342_HORA_ALTA_DET'
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(91077868959718733)
-,p_prompt=>'Hora'
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_colspan=>6
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91079064629718745)
 ,p_name=>'P342_TOT_IMPORTE_C_G_DET'
 ,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_imp.id(91078378903718738)
-,p_prompt=>unistr('Subtotal Garant\00EDa Importe')
-,p_display_as=>'NATIVE_TEXT_FIELD'
-,p_cSize=>30
-,p_tag_attributes=>'readonly'
-,p_begin_on_new_line=>'N'
-,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-,p_attribute_02=>'N'
-,p_attribute_04=>'TEXT'
-,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(91079494841718749)
@@ -808,40 +740,41 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(91079305996718748)
 ,p_prompt=>unistr('Art\00EDculo')
 ,p_display_as=>'NATIVE_POPUP_LOV'
+,p_named_lov=>'LOV_ARTICULOS_PRESU'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select a.cod_articulo||'' - ''||a.descripcion d, a.cod_articulo ',
-'  from st_articulos a ',
-' where a.cod_empresa = :P_COD_EMPRESA',
-'   and cod_rubro = ''MO''',
-'   AND NVL(ESTADO, ''S'') NOT IN (''I'', ''N'')',
-'    AND (a.cod_linea = :P342_LINEA OR NOT EXISTS',
-'        (SELECT a.cod_articulo || '' - '' || a.descripcion d, a.cod_articulo',
-'           FROM st_articulos a',
-'          WHERE a.cod_empresa = ''1''',
-'            AND cod_rubro = ''MO''',
-'            AND nvl(estado, ''S'') NOT IN (''I'', ''N'')',
-'            AND a.cod_categoria = :P342_CATEGORIA))',
-'union all',
-'',
-'select a.cod_articulo||'' - ''||a.descripcion d, a.cod_articulo ',
-'  from st_articulos a, st_existencia_art e, vt_ordenes_trabajo v, st_equivalencia_art s',
-' where a.cod_empresa = :P_COD_EMPRESA',
-'   and (a.estado is null or a.estado <> ''I'')',
-'   and a.cod_empresa = e.cod_empresa(+)',
-'   and a.cod_articulo = e.cod_articulo(+)',
-'   and :P342_COD_SUCURSAL = e.cod_sucursal(+)',
-'   and v.cod_empresa = a.cod_empresa',
-'   and v.tip_comprobante = :P342_TIP_COMPROBANTE_REF',
-'   and v.ser_comprobante =:P342_SER_COMPROBANTE_REF',
-'   and v.nro_comprobante = :P342_NRO_COMPROBANTE_REF',
-'   and v.cod_articulo = s.cod_articulo',
-'   and v.cod_empresa = s.cod_empresa',
-'   and s.cod_articulo_equi = a.cod_articulo',
-'   AND s.cod_articulo = :P342_COD_ARTICULO',
-' group by a.descripcion, a.cod_articulo'))
+'SELECT A.DESCRIPCION,A.COD_ARTICULO,NVL(SUM(E.CANT_DISPON),0) CANTIDAD,A.COD_RUBRO',
+'FROM ST_ARTICULOS A,ST_EXISTENCIA_ART E,VT_ORDENES_TRABAJO V,ST_EQUIVALENCIA_ART S',
+'WHERE A.COD_EMPRESA=:P_COD_EMPRESA AND (A.ESTADO IS NULL OR A.ESTADO<>''I'') AND A.COD_EMPRESA=E.COD_EMPRESA(+) AND A.COD_ARTICULO=E.COD_ARTICULO(+) AND :P342_COD_SUCURSAL=E.COD_SUCURSAL(+) AND V.COD_EMPRESA=A.COD_EMPRESA AND V.TIP_COMPROBANTE=:P342_TI'
+||'P_COMPROBANTE_REF AND V.SER_COMPROBANTE=:P342_SER_COMPROBANTE_REF AND V.NRO_COMPROBANTE=:P342_NRO_COMPROBANTE_REF',
+'AND V.COD_ARTICULO=S.COD_ARTICULO AND V.COD_EMPRESA=S.COD_EMPRESA AND S.COD_ARTICULO_EQUI=A.COD_ARTICULO',
+'GROUP BY A.DESCRIPCION,A.COD_ARTICULO,A.COD_RUBRO',
+'UNION ALL',
+'SELECT A.DESCRIPCION,A.COD_ARTICULO,1 CANTIDAD,COD_RUBRO',
+'FROM ST_ARTICULOS A,VT_ORIGENES T,VT_ORDENES_TRABAJO V',
+'WHERE A.COD_EMPRESA=:P_COD_EMPRESA AND COD_RUBRO=''MO'' AND T.COD_ORIGEN=V.COD_ORIGEN AND T.COD_EMPRESA=V.COD_EMPRESA AND V.COD_EMPRESA=A.COD_EMPRESA AND V.TIP_COMPROBANTE=:P342_TIP_COMPROBANTE_REF AND V.SER_COMPROBANTE=:P342_SER_COMPROBANTE_REF AND V.'
+||'NRO_COMPROBANTE=:P342_NRO_COMPROBANTE_REF AND A.TIPO_MO=T.ORIGEN AND T.ORIGEN=''STNGO'' AND TIPO_MO IS NOT NULL AND NVL(ESTADO,''S'') NOT IN (''I'',''N'') AND NVL(A.IND_PARTICULAR,''X'')<>NVL(V.IND_GARANTIA,''Z'') AND (COD_LINEA=NVL((SELECT AA.COD_LINEA FROM ST_'
+||'ARTICULOS AA WHERE AA.COD_EMPRESA=:P_COD_EMPRESA AND AA.COD_ARTICULO=V.COD_ARTICULO),COD_LINEA)) AND NVL(COD_MARCA,:P342_COD_MARCA)=:P342_COD_MARCA',
+'UNION ALL',
+'SELECT A.DESCRIPCION,A.COD_ARTICULO,1 CANTIDAD,COD_RUBRO',
+'FROM ST_ARTICULOS A,VT_ORIGENES T,VT_ORDENES_TRABAJO V',
+'WHERE A.COD_EMPRESA=:P_COD_EMPRESA AND COD_RUBRO=''MO'' AND T.COD_ORIGEN=V.COD_ORIGEN AND T.COD_EMPRESA=V.COD_EMPRESA AND V.COD_EMPRESA=A.COD_EMPRESA AND V.TIP_COMPROBANTE=:P342_TIP_COMPROBANTE_REF AND V.SER_COMPROBANTE=:P342_SER_COMPROBANTE_REF AND V.'
+||'NRO_COMPROBANTE=:P342_NRO_COMPROBANTE_REF AND T.ORIGEN=''STNGO'' AND A.TIPO_MO=T.ORIGEN AND NVL(ESTADO,''S'') NOT IN (''I'',''N'') AND NVL(A.IND_PARTICULAR,''X'')<>NVL(V.IND_GARANTIA,''Z'') AND (COD_CATEGORIA=NVL((SELECT AA.COD_CATEGORIA FROM ST_ARTICULOS AA WHE'
+||'RE AA.COD_EMPRESA=:P_COD_EMPRESA AND AA.COD_ARTICULO=V.COD_ARTICULO),COD_CATEGORIA)) AND A.COD_LINEA IS NULL AND TIPO_MO IS NOT NULL AND NVL(COD_MARCA,:P342_COD_MARCA)=:P342_COD_MARCA',
+'UNION ALL',
+'SELECT A.DESCRIPCION,A.COD_ARTICULO,1 CANTIDAD,COD_RUBRO',
+'FROM ST_ARTICULOS A,VT_ORIGENES T,VT_ORDENES_TRABAJO V',
+'WHERE A.COD_EMPRESA=:P_COD_EMPRESA AND COD_RUBRO=''MO'' AND NVL(ESTADO,''S'') NOT IN (''I'',''N'') AND T.COD_ORIGEN=V.COD_ORIGEN AND T.COD_EMPRESA=V.COD_EMPRESA AND V.COD_EMPRESA=A.COD_EMPRESA AND V.TIP_COMPROBANTE=:P342_TIP_COMPROBANTE_REF AND V.SER_COMPROB'
+||'ANTE=:P342_SER_COMPROBANTE_REF AND V.NRO_COMPROBANTE=:P342_NRO_COMPROBANTE_REF AND NVL(A.IND_PARTICULAR,''X'')<>NVL(V.IND_GARANTIA,''Z'') AND T.ORIGEN=''STNGO'' AND A.TIPO_MO=''STNGO'' AND TIPO_MO IS NOT NULL AND COD_CATEGORIA IS NULL AND A.COD_LINEA IS NULL'
+||' AND NVL(COD_MARCA,:P342_COD_MARCA)=:P342_COD_MARCA',
+'UNION ALL',
+'SELECT A.DESCRIPCION,A.COD_ARTICULO,1 CANTIDAD,COD_RUBRO',
+'FROM ST_ARTICULOS A,VT_ORIGENES T,VT_ORDENES_TRABAJO V',
+'WHERE A.COD_EMPRESA=:P_COD_EMPRESA AND COD_RUBRO=''MO'' AND NVL(ESTADO,''S'') NOT IN (''I'',''N'') AND T.COD_ORIGEN=V.COD_ORIGEN AND T.COD_EMPRESA=V.COD_EMPRESA AND V.COD_EMPRESA=A.COD_EMPRESA AND V.TIP_COMPROBANTE=:P342_TIP_COMPROBANTE_REF AND V.SER_COMPROB'
+||'ANTE=:P342_SER_COMPROBANTE_REF AND V.NRO_COMPROBANTE=:P342_NRO_COMPROBANTE_REF AND NVL(T.ORIGEN,''X'') NOT IN ''STNGO'' AND A.TIPO_MO NOT IN ''STNGO'' AND TIPO_MO IS NOT NULL AND NVL(COD_MARCA,:P342_COD_MARCA)=:P342_COD_MARCA',
+'ORDER BY 3;'))
 ,p_lov_display_null=>'YES'
-,p_lov_cascade_parent_items=>'P342_LINEA,P342_CATEGORIA,P_COD_EMPRESA,P342_TIP_COMPROBANTE_REF,P342_SER_COMPROBANTE_REF,P342_NRO_COMPROBANTE_REF,P342_COD_ARTICULO'
-,p_ajax_items_to_submit=>'P342_LINEA,P342_CATEGORIA,P_COD_EMPRESA,P342_TIP_COMPROBANTE_REF,P342_SER_COMPROBANTE_REF,P342_NRO_COMPROBANTE_REF,P342_COD_ARTICULO'
+,p_lov_cascade_parent_items=>'P342_LINEA,P342_CATEGORIA,P_COD_EMPRESA,P342_TIP_COMPROBANTE_REF,P342_SER_COMPROBANTE_REF,P342_NRO_COMPROBANTE_REF,P342_COD_ARTICULO,P342_COD_SUCURSAL,P342_COD_MARCA'
+,p_ajax_items_to_submit=>'P342_LINEA,P342_CATEGORIA,P_COD_EMPRESA,P342_TIP_COMPROBANTE_REF,P342_SER_COMPROBANTE_REF,P342_NRO_COMPROBANTE_REF,P342_COD_ARTICULO,P342_COD_SUCURSAL,P342_COD_MARCA'
 ,p_ajax_optimize_refresh=>'Y'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -984,6 +917,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(92140428980022019)
 ,p_name=>'P342_PORCENTAJE_SSP'
@@ -999,18 +944,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(91079305996718748)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(92140696825022021)

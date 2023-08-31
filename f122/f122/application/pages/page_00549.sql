@@ -53,7 +53,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230626114031'
+,p_last_upd_yyyymmddhh24miss=>'20230830090742'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(174990578223969502)
@@ -259,7 +259,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_report_alias=>'1750171'
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
-,p_report_columns=>'COD_VENDEDOR:NOMBRE_VENDEDOR:CLIENTE:DIVISION:VER'
+,p_report_columns=>'COD_VENDEDOR:NOMBRE_VENDEDOR:DIVISION:TOTAL_VENTA:META:PORC_COMISION:MONTO_COMISION:VER:'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(174990604517969503)
@@ -471,8 +471,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>1000
 ,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_grid_column_span=>6
-,p_plug_display_column=>3
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'

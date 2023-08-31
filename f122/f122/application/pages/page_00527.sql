@@ -38,7 +38,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230828153536'
+,p_last_upd_yyyymmddhh24miss=>'20230831111551'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(156685073707798648)
@@ -575,6 +575,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Crear Control'
 ,p_button_redirect_url=>'f?p=&APP_ID.:525:&SESSION.::&DEBUG.::P525_P_ROW_ID_EJERCICIO:'
+,p_button_css_classes=>'u-color-19-bg'
 ,p_icon_css_classes=>'fa-plus-square-o'
 ,p_button_cattributes=>'style="width:130px;"'
 ,p_grid_new_row=>'N'
