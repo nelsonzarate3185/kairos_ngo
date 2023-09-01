@@ -128,6 +128,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_condicion_venta_vtpedido.sql
 @@application/shared_components/user_interface/lovs/lov_corporacion_vtrrancl.sql
 @@application/shared_components/user_interface/lovs/lov_distribuidor_caordtra.sql
+@@application/shared_components/user_interface/lovs/lov_existencias_presu.sql
 @@application/shared_components/user_interface/lovs/lov_familia_vtrrancl.sql
 @@application/shared_components/user_interface/lovs/lov_fletes_vtped.sql
 @@application/shared_components/user_interface/lovs/lov_flete_vtpedido.sql
@@ -327,6 +328,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_clientes_vtrcarte.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_vtrepdet.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_vtrpeaut.sql
+@@application/shared_components/user_interface/lovs/lv_cliente_cagevipr.sql
 @@application/shared_components/user_interface/lovs/lv_cliente_cavispro.sql
 @@application/shared_components/user_interface/lovs/lv_cliente_ccrecibo.sql
 @@application/shared_components/user_interface/lovs/lv_cliente_smasisga.sql
@@ -543,6 +545,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_promociones.sql
 @@application/shared_components/user_interface/lovs/lv_promos_rep_stcanpun.sql
 @@application/shared_components/user_interface/lovs/lv_promos_stcanpun.sql
+@@application/shared_components/user_interface/lovs/lv_promotor_cagevipr.sql
 @@application/shared_components/user_interface/lovs/lv_promotor_cavispro.sql
 @@application/shared_components/user_interface/lovs/lv_propietarios.sql
 @@application/shared_components/user_interface/lovs/lv_proveedores.sql
@@ -1463,6 +1466,7 @@ prompt --install
 @@application/pages/page_00593.sql
 @@application/pages/page_00594.sql
 @@application/pages/page_00595.sql
+@@application/pages/page_00596.sql
 @@application/pages/page_00597.sql
 @@application/pages/page_00800.sql
 @@application/pages/page_00801.sql

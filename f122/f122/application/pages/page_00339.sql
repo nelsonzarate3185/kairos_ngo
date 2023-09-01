@@ -61,12 +61,17 @@ wwv_flow_imp_page.create_page(
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '.tipo-rub-ico {',
 '      opacity: 0.5;',
-'      pointer-events: none;}'))
+'      pointer-events: none;}',
+'',
+'.uppercase',
+'{',
+'        text-transform: uppercase;',
+'}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230829122919'
+,p_last_upd_yyyymmddhh24miss=>'20230901094017'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(83626066913059733)
@@ -1936,6 +1941,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
+,p_attribute_06=>'UPPER'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(93926820388645649)
@@ -3302,7 +3308,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                and   ot.nro_sol_conf = sc.nro_solicitud',
 '                and   sc.ser_solicitud = ''A''',
 '                and   sc.tipo_solicitud = ''SNC''',
-'                and   sc.estado = ''AUTORIZADO''',
+'                and   sc.estado = ''PROCESADO''',
 '                and   ot.ser_comprobante = :P339_P_SER_OT',
 '                and   ot.nro_comprobante = :P339_OT_NRO_ORT',
 '                and   ot.tip_comprobante =''ORT'';',
@@ -3335,10 +3341,14 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 ' EXCEPTION',
 '    WHEN VERROR THEN',
-'        raise_application_error(-20201,''LA OT QUE INTENTA REGISTRAR NO CUENTA CON UNA SNC O LA MISMA NO ESTA AUTORIZADA.'');',
+'        :P339_AUX_MSJ_CONTROL:=''LA OT QUE INTENTA REGISTRAR NO CUENTA CON UNA SNC O LA MISMA NO ESTA PROCESADA.'';',
+'        ----raise_application_error(-20201,''LA OT QUE INTENTA REGISTRAR NO CUENTA CON UNA SNC O LA MISMA NO ESTA PROCESADA.'');',
 '    WHEN OTHERS THEN',
+'        :P339_AUX_MSJ_CONTROL:=''EL REGISTRO QUE INTENTA INGRESAR YA EXISTE'';',
+'        /*',
 '        raise_application_error(-20201,''EL REGISTRO QUE INTENTA INGRESAR YA EXISTE'');',
 '        APEX_DEBUG.ERROR (SQLERRM);',
+'        */',
 '    END;',
 'end if;'))
 ,p_attribute_02=>'P339_COD_EMPRESA,P339_C_NRO_ENVIO,P339_OT_NRO_ORT,P339_P_SER_OT,P339_P_TIP_OT,P339_OT_COD_ARTICULO,P339_OT_SER_ORT'

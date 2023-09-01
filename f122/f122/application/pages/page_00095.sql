@@ -113,7 +113,7 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230830122547'
+,p_last_upd_yyyymmddhh24miss=>'20230831143330'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(20998639937158201)
@@ -2812,36 +2812,6 @@ unistr('            RAISE_APPLICATION_ERROR(-20000,''La fecha de emisi\00F3n no 
 ,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(20145768444839931)
-,p_name=>'DA_NEW_ITEM_FEC_VENC'
-,p_event_sequence=>100
-,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P95_FEC_VENCIMIENTO'
-,p_condition_element=>'P95_FEC_VENCIMIENTO'
-,p_triggering_condition_type=>'NULL'
-,p_bind_type=>'bind'
-,p_bind_event_type=>'focusout'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(20145860269839932)
-,p_event_id=>wwv_flow_imp.id(20145768444839931)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'IF :P95_SUB_TIPO_TRANS = :P95_CHEQUE_COBRO OR :P95_SUB_TIPO_TRANS = :P95_TARJETA_COBRO THEN',
-'    IF :P95_FEC_VENCIMIENTO IS NULL THEN',
-'        :P95_FEC_VENCIMIENTO := :P95_FEC_MOV_CAJ;',
-'    END IF;',
-'END IF;'))
-,p_attribute_02=>'P95_SUB_TIPO_TRANS,P95_CHEQUE_COBRO,P95_TARJETA_COBRO,P95_FEC_VENCIMIENTO,P95_FEC_MOV_CAJ'
-,p_attribute_03=>'P95_FEC_VENCIMIENTO'
-,p_attribute_04=>'N'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
-wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20146785423839941)
 ,p_name=>'DA_INSERTA_FORMA_COBRO'
 ,p_event_sequence=>110
@@ -2933,18 +2903,6 @@ unistr('    RAISE_APPLICATION_ERROR(-20001, ''Debe seleccionar la transacci\00F3
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(20146896618839942)
 ,p_event_id=>wwv_flow_imp.id(20146785423839941)
@@ -2991,6 +2949,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(20469724669383624)
@@ -3748,18 +3718,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(21003038684158245)
 ,p_name=>'DA_REFRESH_COMP'
@@ -3828,6 +3786,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(24031209484736904)
@@ -4517,18 +4487,6 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_when_type=>'REQUEST_EQUALS_CONDITION'
 ,p_process_success_message=>'&P0_MENSAJE.'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(149026499230268843)
 ,p_process_sequence=>20
@@ -4614,6 +4572,18 @@ wwv_flow_imp_page.create_page_process(
 ''))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(21001115448158226)

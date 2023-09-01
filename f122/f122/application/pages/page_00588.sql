@@ -43,7 +43,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230828151428'
+,p_last_upd_yyyymmddhh24miss=>'20230831135408'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(195925026896368413)
@@ -4073,57 +4073,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(196023315963368346)
-,p_name=>'P588_USUARIO_AUTORIZA_FLETE_AD'
-,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>2020
-,p_item_plug_id=>wwv_flow_imp.id(195925026896368413)
-,p_item_source_plug_id=>wwv_flow_imp.id(195925026896368413)
-,p_source=>'USUARIO_AUTORIZA_FLETE_AD'
-,p_source_type=>'REGION_SOURCE_COLUMN'
-,p_display_as=>'NATIVE_HIDDEN'
-,p_is_persistent=>'N'
-,p_attribute_01=>'Y'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(196023759474368346)
-,p_name=>'P588_FECHA_AUTORIZA_FLETE_AD'
-,p_source_data_type=>'DATE'
-,p_item_sequence=>2030
-,p_item_plug_id=>wwv_flow_imp.id(195925026896368413)
-,p_item_source_plug_id=>wwv_flow_imp.id(195925026896368413)
-,p_source=>'FECHA_AUTORIZA_FLETE_AD'
-,p_source_type=>'REGION_SOURCE_COLUMN'
-,p_display_as=>'NATIVE_HIDDEN'
-,p_is_persistent=>'N'
-,p_attribute_01=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(196024152139368346)
-,p_name=>'P588_HORA_AUTORIZA_FLETE_AD'
-,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>2040
-,p_item_plug_id=>wwv_flow_imp.id(195925026896368413)
-,p_item_source_plug_id=>wwv_flow_imp.id(195925026896368413)
-,p_source=>'HORA_AUTORIZA_FLETE_AD'
-,p_source_type=>'REGION_SOURCE_COLUMN'
-,p_display_as=>'NATIVE_HIDDEN'
-,p_is_persistent=>'N'
-,p_attribute_01=>'Y'
-);
-wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(196024532871368345)
 ,p_name=>'P588_USR_IND_SNC'
 ,p_source_data_type=>'VARCHAR2'
@@ -4157,6 +4106,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_button_id=>wwv_flow_imp.id(196100770341368305)
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(196101629477368304)

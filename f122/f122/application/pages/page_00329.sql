@@ -16,6 +16,7 @@ wwv_flow_imp_page.create_page(
 ,p_user_interface_id=>wwv_flow_imp.id(40210426655263685)
 ,p_name=>'Agenda de Visita  - CAVISPRO'
 ,p_alias=>'CAVISPRO'
+,p_page_mode=>'MODAL'
 ,p_step_title=>'CAVISPRO'
 ,p_autocomplete_on_off=>'OFF'
 ,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -27,8 +28,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'EMILIANOP'
-,p_last_upd_yyyymmddhh24miss=>'20230131160041'
+,p_last_updated_by=>'FCARDOZO'
+,p_last_upd_yyyymmddhh24miss=>'20230901102820'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(79902535578686307)

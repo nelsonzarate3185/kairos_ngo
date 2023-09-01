@@ -56,7 +56,7 @@ unistr('//Realizamos la validaci\00F3n de la tecla ingresada'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230830153215'
+,p_last_upd_yyyymmddhh24miss=>'20230901114120'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(82564852671905823)
@@ -146,7 +146,7 @@ wwv_flow_imp_page.create_page_plug(
 '       NULL EDITAR,',
 '       NULL BORRAR',
 '  FROM CA_ENTSAL_DET DET',
-' WHERE DET.COD_EMPRESA = :P_COD_EMPRESA',
+' WHERE DET.COD_EMPRESA = ''1''',
 '   AND DET.SER_ENT_SAL = :P342_SER_ENT_SAL',
 '   AND DET.TIP_ENT_SAL = :P342_TIP_ENT_SAL',
 '   AND DET.NUM_ENT_SAL = :P342_NUM_ENT_SAL'))
@@ -783,7 +783,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_01=>'POPUP'
 ,p_attribute_02=>'FIRST_ROWSET'
 ,p_attribute_03=>'N'
-,p_attribute_04=>'N'
+,p_attribute_04=>'Y'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'0'
 );
@@ -808,6 +808,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P342_NRO_LOTE'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(91079305996718748)
+,p_item_default=>'1'
 ,p_prompt=>'Lote'
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -1112,6 +1113,37 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(199316284824590119)
+,p_name=>'P342_STOCK'
+,p_item_sequence=>190
+,p_item_plug_id=>wwv_flow_imp.id(91079305996718748)
+,p_prompt=>'Stock'
+,p_display_as=>'NATIVE_POPUP_LOV'
+,p_named_lov=>'LOV_EXISTENCIAS_PRESU'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select cod_sucursal, cant_dispon, nro_lote',
+' from st_existencia_art',
+'where COD_EMPRESA =''1''',
+'and CANT_DISPON  > 0',
+'and cod_articulo = :P342_COD_ARTICULO_ADD',
+''))
+,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P342_COD_ARTICULO_ADD'
+,p_ajax_items_to_submit=>'P342_COD_ARTICULO_ADD'
+,p_ajax_optimize_refresh=>'N'
+,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'POPUP'
+,p_attribute_02=>'FIRST_ROWSET'
+,p_attribute_03=>'N'
+,p_attribute_04=>'N'
+,p_attribute_05=>'Y'
+,p_attribute_06=>'0'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(91077587873718730)
 ,p_name=>'DA_SELECCIONAR'
@@ -1199,7 +1231,7 @@ wwv_flow_imp_page.create_page_da_action(
 'begin',
 'SELECT count(*)',
 'into v_contador',
-'from st_entsal_cab ',
+'from ca_entsal_det',
 'where NUM_ENT_SAL =  :P342_NUM_ENT_SAL',
 'and SER_ENT_SAL = :P342_SER_ENT_SAL ',
 'and cod_empresa  = :P_COD_EMPRESA;',
@@ -1213,32 +1245,28 @@ wwv_flow_imp_page.create_page_da_action(
 ':P342_SER_ENT_SAL := ''A'';',
 ':P342_COD_MOTIVO_ENT_SAL := ''8'';',
 ':P342_COD_MONEDA := ''1'';',
-'',
-'INSERT INTO st_entsal_cab (COD_EMPRESA,',
-'       COD_SUCURSAL,',
-'       NUM_ENT_SAL,',
-'       FEC_ENT_SAL,',
-'       COD_MOTIVO_ENT_SAL,',
-'       COD_MONEDA,',
-'       SER_ENT_SAL,',
-'       TIP_ENT_SAL,',
-'       COSTO_TOTAL_DESPACHO,',
-'       FEC_ALTA,',
-'       COD_PROVEEDOR,',
-'       OBSERVACION,',
-'       TIP_COMPROBANTE_REF,',
-'       SER_COMPROBANTE_REF,',
-'       NRO_COMPROBANTE_REF,',
-'       TIP_CAMBIO_US,',
-'       HORA_ALTA,',
-'       COD_USUARIO,',
-'       COD_POTRERO,',
-'       COD_ESTABLE,',
-'       COD_CLIENTE,',
-'       COD_VENDEDOR,',
-'       TIPO,',
-'       IND_WEB,',
-'       COD_MOTIVO_DEV )',
+'/*',
+'insert into ca_entsal_cab (cod_empresa,',
+'                     cod_sucursal,',
+'                     num_ent_sal,',
+'                     fec_ent_sal,',
+'                     cod_motivo_ent_sal,',
+'                     cod_moneda,',
+'                     ser_ent_sal,',
+'                     tip_ent_sal,',
+'                     costo_total_despacho,',
+'                     fec_alta,',
+'                     cod_proveedor,',
+'                     observacion,',
+'                     tip_comprobante_ref,',
+'                     ser_comprobante_ref,',
+'                     nro_comprobante_ref,',
+'                     tip_cambio_us,',
+'                     hora_alta,',
+'                     cod_tecnico,',
+'                     cod_usuario,',
+'                     ind_procesado,',
+'                     comentario)',
 'VALUES (:P_COD_EMPRESA,',
 '       :P342_COD_SUCURSAL,',
 '       :P342_NUM_ENT_SAL,',
@@ -1257,14 +1285,10 @@ wwv_flow_imp_page.create_page_da_action(
 '       :P342_TIPO_CANBIO_US_DET,',
 '       TO_CHAR(SYSDATE, ''HH24:MI''),',
 '       :APP_USER,',
+'      :APP_USER,',
 '       NULL,',
-'       NULL,',
-'       NULL,',
-'       NULL,',
-'       NULL,',
-'       NULL,',
-'        NULL);',
-'',
+'       NULL);',
+'*/',
 'for a in cur_detalles loop',
 'begin ',
 'select count(*) ',
@@ -1281,7 +1305,7 @@ wwv_flow_imp_page.create_page_da_action(
 '        v_con := 0;',
 'end;',
 '',
-'IF v_con = 0 THEN ',
+'',
 'INSERT INTO ca_entsal_det',
 '  (cod_empresa,',
 '   tip_ent_sal,',
@@ -1336,8 +1360,6 @@ wwv_flow_imp_page.create_page_da_action(
 '   NULL,',
 '   NULL,',
 '   NULL);     ',
-'',
-' END IF;',
 '',
 'end loop;',
 'end if;',
@@ -2022,6 +2044,23 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_DIALOG_CLOSE'
 ,p_attribute_01=>'P342_TOT_IMPORTE_DET'
 );
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(199315828800590115)
+,p_name=>'Nuevo_1'
+,p_event_sequence=>130
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(199315928125590116)
+,p_event_id=>wwv_flow_imp.id(199315828800590115)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(82566401073905839)
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(91079204208718747)
 ,p_process_sequence=>10
@@ -2081,7 +2120,46 @@ wwv_flow_imp_page.create_page_process(
 'DECLARE',
 'VCONTROL NUMBER;',
 'BEGIN',
-'    VCONTROL := CAENTSAL.BUSCAR_CABECERA(pcod_empresa         => :P_COD_EMPRESA,',
+'   /* begin ',
+'            select a.num_ent_sal, TIP_ENT_SAL, SER_ENT_SAL',
+'              into :P342_NUM_ENT_SAL, :P342_TIP_ENT_SAL, :P342_SER_ENT_SAL',
+'            from ca_entsal_cab a',
+'            where a.nro_comprobante_ref = :P342_NRO_COMPROBANTE_REF',
+'            and a.ser_comprobante_ref = :P342_SER_COMPROBANTE_REF',
+'            and a.tip_comprobante_ref  = :P342_TIP_COMPROBANTE_REF;',
+'        exception ',
+'            when others then ',
+'                :P342_NUM_ENT_SAL := null;',
+'         end;',
+'',
+'',
+'    if :P342_NUM_ENT_SAL is not null then',
+'         CAENTSAL.CARGAR_DATOS_CAB(pcod_empresa        => :P_COD_EMPRESA,',
+'                                  pnum_ent_sal        => :P342_NUM_ENT_SAL,',
+'                                  pcod_sucursal       => :P342_COD_SUCURSAL,',
+'                                  pcod_motivo_ent_sal => :P342_COD_MOTIVO_ENT_SAL,',
+'                                  pcod_moneda         => :P342_COD_MONEDA,',
+'                                  pser_ent_sal        => :P342_SER_ENT_SAL,',
+'                                  ptip_ent_sal        => :P342_TIP_ENT_SAL,',
+'                                  pcod_tecnico        => :P342_COD_TECNICO,',
+'                                  phora_alta          => :P342_HORA_ALTA_DET,',
+'                                  pfec_ent_sal        => :P342_FEC_ENT_SAL,',
+'                                  pind_ent_sal        => :P342_IND_ENT_SAL);',
+'',
+'        begin ',
+'            select a.num_ent_sal, TIP_ENT_SAL, SER_ENT_SAL',
+'              into :P342_NUM_ENT_SAL, :P342_TIP_ENT_SAL, :P342_SER_ENT_SAL',
+'            from ca_entsal_cab a',
+'            where a.nro_comprobante_ref = :P342_NRO_COMPROBANTE_REF',
+'            and a.ser_comprobante_ref = :P342_SER_COMPROBANTE_REF',
+'            and a.tip_comprobante_ref  = :P342_TIP_COMPROBANTE_REF;',
+'        exception ',
+'            when others then ',
+'                :P342_NUM_ENT_SAL := null;',
+'         end; ',
+'    else */',
+'',
+'    VCONTROL := CAENTSAL.BUSCAR_CABECERA(pcod_empresa         => ''1'',',
 '                                         ptip_comprobante_ref => :P342_TIP_COMPROBANTE_REF,',
 '                                         pser_comprobante_ref => :P342_SER_COMPROBANTE_REF,',
 '                                         pnro_comprobante_ref => :P342_NRO_COMPROBANTE_REF);',
@@ -2116,7 +2194,7 @@ wwv_flow_imp_page.create_page_process(
 '        :P342_COD_MOTIVO_ENT_SAL := ''8'';',
 '        :P342_COD_MONEDA := ''1'';',
 '',
-'    ELSE',
+'    else ',
 '        :P342_NUM_ENT_SAL := VCONTROL;',
 '',
 '        CAENTSAL.CARGAR_DATOS_CAB(pcod_empresa        => :P_COD_EMPRESA,',
@@ -2130,8 +2208,10 @@ wwv_flow_imp_page.create_page_process(
 '                                  phora_alta          => :P342_HORA_ALTA_DET,',
 '                                  pfec_ent_sal        => :P342_FEC_ENT_SAL,',
 '                                  pind_ent_sal        => :P342_IND_ENT_SAL);',
+'   ',
 '    END IF;',
 '',
+'  --  end if;',
 '    CAENTSAL.CARGAR_TIPO_CAM_US(pcod_moneda_us => :P342_COD_MONEDA_US,',
 '                                pfec_ent_sal   => :P342_FEC_ENT_SAL,',
 '                                ptip_cambio_us => :P342_TIPO_CANBIO_US_DET);',
@@ -2171,6 +2251,28 @@ wwv_flow_imp_page.create_page_process(
 '    APEX_DEBUG.ERROR(''PR_CALCULO ''||SQLERRM);',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(199316020475590117)
+,p_process_sequence=>50
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Nuevo'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'',
+'        CAENTSAL.CARGAR_DATOS_CAB(pcod_empresa        => :P_COD_EMPRESA,',
+'                                  pnum_ent_sal        => :P342_NUM_ENT_SAL,',
+'                                  pcod_sucursal       => :P342_COD_SUCURSAL,',
+'                                  pcod_motivo_ent_sal => :P342_COD_MOTIVO_ENT_SAL,',
+'                                  pcod_moneda         => :P342_COD_MONEDA,',
+'                                  pser_ent_sal        => :P342_SER_ENT_SAL,',
+'                                  ptip_ent_sal        => :P342_TIP_ENT_SAL,',
+'                                  pcod_tecnico        => :P342_COD_TECNICO,',
+'                                  phora_alta          => :P342_HORA_ALTA_DET,',
+'                                  pfec_ent_sal        => :P342_FEC_ENT_SAL,',
+'                                  pind_ent_sal        => :P342_IND_ENT_SAL);'))
+,p_process_clob_language=>'PLSQL'
+,p_process_when_type=>'NEVER'
 );
 wwv_flow_imp.component_end;
 end;

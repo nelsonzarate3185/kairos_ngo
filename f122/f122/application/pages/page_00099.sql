@@ -122,12 +122,31 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 '    background-color: white;',
 '    color: red;',
 '    font-weight: bold;',
-'}'))
+'}',
+'',
+' .t-Body-contentInner{    background: #c0d0e6!important;}',
+' ',
+'',
+'.t-Form-label, .t-Form-itemText--pre{',
+'    color:  #003A85 !important;     ',
+'    font-weight: bold;',
+'    } ',
+'',
+'',
+'',
+'    .a-IRR-toolbar, .a-IRR-content',
+'    {    background: #d0e0f783!important;}',
+'',
+'',
+'.t-Report-colHead, .a-IRR-headerLink {',
+'      background: #003a85!important;',
+'       color: yellow; ',
+' }'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230825075801'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230901143215'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21771034358343321)
@@ -143,7 +162,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21771534139343326)
 ,p_plug_name=>'Carga de Facturas'
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody:t-Form--noPadding'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>50
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -920,18 +939,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(27327993967312345)
-,p_plug_name=>unistr('Debe ingresar un motivo de anulaci\00F3n')
-,p_parent_plug_id=>wwv_flow_imp.id(27327850789312344)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
-,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>10
-,p_plug_display_point=>'SUB_REGIONS'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -943,6 +950,18 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(27327993967312345)
+,p_plug_name=>unistr('Debe ingresar un motivo de anulaci\00F3n')
+,p_parent_plug_id=>wwv_flow_imp.id(27327850789312344)
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(40125238939263661)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'SUB_REGIONS'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(29128892270274603)
@@ -1427,6 +1446,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Buscar'
 ,p_button_position=>'EDIT'
 ,p_warn_on_unsaved_changes=>null
+,p_button_css_classes=>'u-color-21-bg u-color-13-text'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(23498759414061411)
@@ -1458,6 +1478,7 @@ wwv_flow_imp_page.create_page_button(
 'END;'))
 ,p_button_condition2=>'PLSQL'
 ,p_button_condition_type=>'FUNCTION_BODY'
+,p_button_css_classes=>'u-color-21-bg u-color-13-text'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(23498898281061412)
@@ -1489,6 +1510,7 @@ wwv_flow_imp_page.create_page_button(
 'END;'))
 ,p_button_condition2=>'PLSQL'
 ,p_button_condition_type=>'FUNCTION_BODY'
+,p_button_css_classes=>'u-color-21-bg u-color-13-text'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(23498456223061408)
@@ -1520,6 +1542,7 @@ wwv_flow_imp_page.create_page_button(
 'END;'))
 ,p_button_condition2=>'PLSQL'
 ,p_button_condition_type=>'FUNCTION_BODY'
+,p_button_css_classes=>'u-color-21-bg u-color-13-text'
 );
 wwv_flow_imp_page.create_page_branch(
  p_id=>wwv_flow_imp.id(106524733074760538)
@@ -1800,6 +1823,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(21772807627343339)
 ,p_name=>'P99_NRO_COMPROBANTE_REF'
@@ -1831,18 +1866,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(21773030057343341)
@@ -2863,6 +2886,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(22847084944807425)
 ,p_name=>'P99_MODIFICA_PRECIOS'
@@ -2894,18 +2929,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(21771034358343321)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(22847499913807429)
@@ -3916,6 +3939,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(25332908802948425)
 ,p_name=>'P99_DECIMALES'
@@ -3948,18 +3983,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_06=>'NONE'
 ,p_attribute_09=>'N'
 ,p_attribute_11=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(26473779904310211)
@@ -4981,6 +5004,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(114140609863544428)
 ,p_name=>'P99_NRO_COMPROBANTE_AUX'
@@ -5024,18 +5059,6 @@ unistr('        return ''Debe ingresar el n\00FAmero de factura'';'),
 ,p_validation_type=>'FUNC_BODY_RETURNING_ERR_TEXT'
 ,p_when_button_pressed=>wwv_flow_imp.id(23498759414061411)
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_validation(
  p_id=>wwv_flow_imp.id(171717819606910450)

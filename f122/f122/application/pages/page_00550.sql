@@ -34,8 +34,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'17'
-,p_last_updated_by=>'JUANASIS'
-,p_last_upd_yyyymmddhh24miss=>'20230628100249'
+,p_last_updated_by=>'OSCARGO'
+,p_last_upd_yyyymmddhh24miss=>'20230831143934'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(120170434884388523)
@@ -394,9 +394,11 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>unistr('Nro. Liquidaci\00F3n')
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select l.fec_liquid||'' - ''||l.ser_liquid||'' - ''||c.tip_liquid||'' - ''||l.nro_liquid d,l.nro_liquid r',
-'       --c.mes        mes,',
-'      -- c.anio       anio',
+'select --l.fec_liquid||'' - ''||l.ser_liquid||'' - ''||c.tip_liquid||'' - ''||l.nro_liquid d',
+'c.anio||''-''||c.mes d',
+',l.nro_liquid r',
+'--c.mes        mes,',
+'-- c.anio       anio',
 '  from rh_cabecera_liq c, rh_liquidaciones l',
 ' where c.cod_empresa = :P550_COD_EMPRESA',
 '   and (:P550_TIPO is null or c.tip_liquid = :P550_TIPO)',
@@ -404,6 +406,7 @@ wwv_flow_imp_page.create_page_item(
 '   and c.nro_liquid = l.nro_liquid',
 '   and c.ser_liquid = l.ser_liquid',
 '   and c.fec_liquid = l.fec_liquid',
+'   and c.cod_empleado = :P550_COD_EMPLEADO',
 ' group by l.fec_liquid,',
 '          l.nro_liquid,',
 '          l.ser_liquid,',
@@ -412,6 +415,8 @@ wwv_flow_imp_page.create_page_item(
 '          c.anio',
 ' order by l.fec_liquid desc'))
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P550_COD_EMPLEADO'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -448,6 +453,45 @@ wwv_flow_imp_page.create_page_da_action(
 ',apex.item(''P550_COD_CATEGORIA'').getValue(),apex.item(''P550_COD_SUCURSAL'').getValue()',
 ',apex.item(''P550_COD_AREA'').getValue(),apex.item(''P550_COD_DEPARTAMENTO'').getValue()',
 ',apex.item(''P550_COD_CENTRO_COSTO'').getValue(),apex.item(''P550_IND_FIRMADO'').getValue())'))
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(105124608885658920)
+,p_name=>'DA_SELECCCIONA_EMPLEADO'
+,p_event_sequence=>20
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P550_COD_EMPLEADO'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(105124773419658921)
+,p_event_id=>wwv_flow_imp.id(105124608885658920)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select cod_sucursal, cod_area, cod_departamento, cod_categoria_emp, cod_centro_pago,',
+'cod_centro_costo',
+'into :P550_COD_SUCURSAL, :P550_COD_AREA, :P550_COD_DEPARTAMENTO, :P550_COD_CATEGORIA, :P550_COD_CENTRO,',
+':P550_COD_CENTRO_COSTO',
+'from rh_empleados e ',
+'where e.cod_empresa = :P550_COD_EMPRESA and e.cod_empleado = :P550_COD_EMPLEADO;'))
+,p_attribute_02=>'P550_COD_EMPRESA,P550_COD_EMPLEADO'
+,p_attribute_03=>'P550_COD_SUCURSAL,P550_COD_AREA,P550_COD_CATEGORIA,P550_COD_DEPARTAMENTO,P550_COD_CENTRO,P550_COD_CENTRO_COSTO'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(105124816122658922)
+,p_event_id=>wwv_flow_imp.id(105124608885658920)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P550_NRO_LIQUID'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(120170675333388525)

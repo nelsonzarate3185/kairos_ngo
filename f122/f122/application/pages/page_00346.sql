@@ -233,7 +233,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230830164036'
+,p_last_upd_yyyymmddhh24miss=>'20230901091932'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(94035155548281250)
@@ -2023,10 +2023,9 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'',
 'BEGIN',
 '    ',
-'    IF :P346_FECHA_INI > :P346_FECHA_FIN THEN',
+'    IF to_date(:P346_FECHA_INI,''DD/MM/YYYY'') > to_date(:P346_FECHA_FIN ,''DD/MM/YYYY'')THEN',
 '        :P346_INDICADOR_ALERT := ''La fecha inicial no puede ser mayor a la fecha final.'';',
 '        :P346_INDICADOR_REPORT_PLANILLA := ''0'';',
 '    ELSE',

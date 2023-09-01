@@ -93,7 +93,7 @@ wwv_flow_imp_page.create_page(
 '        border-color: darkblue; ',
 '}',
 '',
-'#btn2{ ',
+'#btn2, #btn3{ ',
 '       ',
 '        background:white;',
 '        background-image: linear-gradient(180deg, rgb(1, 1, 131)  0%, #003a85de 100%);',
@@ -174,7 +174,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230831094539'
+,p_last_upd_yyyymmddhh24miss=>'20230831154810'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(128551196121042344)
@@ -628,6 +628,22 @@ wwv_flow_imp_page.create_page_button(
 ,p_grid_new_row=>'N'
 ,p_grid_new_column=>'Y'
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(199315306111590110)
+,p_button_sequence=>120
+,p_button_plug_id=>wwv_flow_imp.id(314029640603514962)
+,p_button_name=>'Limpiar'
+,p_button_static_id=>'btn3'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Limpiar'
+,p_warn_on_unsaved_changes=>null
+,p_button_css_classes=>'u-color-1-bg'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(103251819664652615)
 ,p_name=>'P400_ID_TICKET'
@@ -993,6 +1009,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(131436052631373235)
 ,p_event_id=>wwv_flow_imp.id(112640113356008422)
@@ -1014,18 +1042,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'P400_ESTADO,P400_PARAM_CLIENTE,P400_FECHA_FIN,P400_FECHA_INI,P400_ORIGEN,P400_SER_OT,P400_NRO_OT,P400_PROVEEDOR,P400_CLIENTE'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(131436179372373236)
@@ -1247,6 +1263,25 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(128551196121042344)
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(199315409774590111)
+,p_name=>'Limpia datos'
+,p_event_sequence=>100
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(199315306111590110)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(199315588833590112)
+,p_event_id=>wwv_flow_imp.id(199315409774590111)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CLEAR'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P400_CLIENTE, P400_ESTADO, P400_ORIGEN, P400_FECHA_INI, P400_FECHA_FIN, P400_NRO_OT'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(194797530433105001)

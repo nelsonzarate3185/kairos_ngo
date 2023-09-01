@@ -401,6 +401,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_label=>'Seq Id Detalle'
 ,p_column_type=>'NUMBER'
 ,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(109105336522262558)
@@ -670,6 +671,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_label=>'Row Id Articulo'
 ,p_column_type=>'OTHER'
 ,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(113395970546769562)

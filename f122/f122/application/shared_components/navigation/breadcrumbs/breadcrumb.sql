@@ -1875,6 +1875,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_link=>'f?p=&APP_ID.:586:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>586
 );
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(199537850263537650)
+,p_short_name=>'CAGEVIPR'
+,p_link=>'f?p=&APP_ID.:596:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>596
+);
 wwv_flow_imp.component_end;
 end;
 /
