@@ -306,6 +306,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_clientes_casegrp.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_casos.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_casoseup.sql
+@@application/shared_components/user_interface/lovs/lv_clientes_ccautrec.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_cccancuo.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_ccdebito.sql
 @@application/shared_components/user_interface/lovs/lv_clientes_ccingegr.sql
@@ -482,6 +483,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_monedas1.sql
 @@application/shared_components/user_interface/lovs/lv_monedas_bstipcam.sql
 @@application/shared_components/user_interface/lovs/lv_monedas_caentsal.sql
+@@application/shared_components/user_interface/lovs/lv_monedas_ccautrec.sql
 @@application/shared_components/user_interface/lovs/lv_monedas_ccdebito.sql
 @@application/shared_components/user_interface/lovs/lv_monedas_ccingegr.sql
 @@application/shared_components/user_interface/lovs/lv_monedas_fvmrgprm.sql
@@ -1458,6 +1460,7 @@ prompt --install
 @@application/pages/page_00584.sql
 @@application/pages/page_00585.sql
 @@application/pages/page_00586.sql
+@@application/pages/page_00587.sql
 @@application/pages/page_00588.sql
 @@application/pages/page_00589.sql
 @@application/pages/page_00590.sql

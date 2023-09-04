@@ -2759,6 +2759,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'596'
 );
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(201011802932386728)
+,p_list_item_display_sequence=>3110
+,p_list_item_link_text=>'Consulta recibos pendientes de Cobro'
+,p_list_item_link_target=>'f?p=&APP_ID.:587:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'587'
+);
 wwv_flow_imp.component_end;
 end;
 /

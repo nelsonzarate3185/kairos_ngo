@@ -95,7 +95,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'21'
 ,p_last_updated_by=>'PBOGADO'
-,p_last_upd_yyyymmddhh24miss=>'20230830090022'
+,p_last_upd_yyyymmddhh24miss=>'20230904101636'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(66651280406004425)

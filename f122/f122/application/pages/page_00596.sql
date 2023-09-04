@@ -26,7 +26,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'FCARDOZO'
-,p_last_upd_yyyymmddhh24miss=>'20230901123419'
+,p_last_upd_yyyymmddhh24miss=>'20230904103716'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(104819600044095920)
@@ -434,7 +434,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_display_order=>210
 ,p_column_identifier=>'U'
 ,p_column_label=>'Editar'
-,p_column_link=>'javascript:$s(''P596_EDITAR'',''#ROWID#'');'
+,p_column_link=>'f?p=&APP_ID.:329:&SESSION.::&DEBUG.:RP,329:P329_P_NRO_MOVIMIENTO,P329_ACCION_CONSULTA:#NRO_MOVIMIENTO#,1'
 ,p_column_linktext=>'<span aria-hidden="true" class="fa fa-edit"></span>'
 ,p_column_type=>'STRING'
 ,p_column_alignment=>'CENTER'
@@ -497,7 +497,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>5
-,p_report_columns=>'CREAR:EDITAR:FEC_VISITA:DIA:HORA_VISITA:CLIENTE_FINAL:COD_PROMOTOR:NOM_PROMOTOR:ESTADO:'
+,p_report_columns=>'EDITAR:FEC_VISITA:DIA:HORA_VISITA:CLIENTE_FINAL:COD_PROMOTOR:NOM_PROMOTOR:ESTADO:DATOS:'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(104819708864095921)
@@ -554,12 +554,13 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_imp.id(104819440422095918)
 ,p_button_name=>'BT_CREAR_VISITA'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#:t-Button--iconRight'
 ,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Crear Visita'
 ,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-plus-square'
 );
 wwv_flow_imp_page.create_page_item(
@@ -1009,6 +1010,14 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(201059713849163718)
+,p_name=>'P596_ACTUALIZAR'
+,p_item_sequence=>210
+,p_item_plug_id=>wwv_flow_imp.id(104819708864095921)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(200081199217660203)
 ,p_name=>'DA_CREAR'
@@ -1017,6 +1026,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_element=>'P596_CREAR'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(200082318449660215)
@@ -1043,51 +1064,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(200081362775660205)
-,p_event_id=>wwv_flow_imp.id(200081199217660203)
-,p_event_result=>'TRUE'
-,p_action_sequence=>30
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT APEX_PAGE.GET_URL (  p_page   => 329,',
-'                            p_items  => ''P329_P_NRO_MOVIMIENTO'',',
-'                            p_values => (''''||:P596_NRO_MOVIMIENTO||'''')) f_url_1',
-'    INTO :P596_URL',
-'     FROM DUAL;',
-''))
-,p_attribute_02=>'P596_NRO_MOVIMIENTO'
-,p_attribute_03=>'P596_URL'
-,p_attribute_04=>'N'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(200081574218660207)
-,p_event_id=>wwv_flow_imp.id(200081199217660203)
-,p_event_result=>'TRUE'
-,p_action_sequence=>40
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_JAVASCRIPT_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'var url = apex.item("P596_URL").getValue();',
-'',
-'apex.navigation.redirect (url);',
-''))
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(200081805409660210)
@@ -1330,7 +1306,7 @@ wwv_flow_imp_page.create_page_da_action(
 'begin',
 '    BEGIN',
 '            SELECT COD_CLIENTE,MOTIVO,COD_ARTICULO,DIRECCION,OBSERVACION,COD_USUARIO',
-'            INTO   :P596_COD_CLIENTE,:P596_MOTIVO_AUX,:P596_COD_ARTICULO,:P596_DIRECCION,:P596_OBSERVACION,:P596_COD_USUARIO',
+'            INTO   :P596_COD_CLIENTE,:P596_MOTIVO_AUX,:P596_COD_ARTICULO,:P596_DIRECCION,:P596_OBSERVACION,:P596_COD_USUARIO_AUX',
 '            FROM   CA_VISITA_PROMOTOR',
 '            WHERE   ROWID = :P596_DATOS;',
 '',
@@ -1342,10 +1318,158 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 ''))
 ,p_attribute_02=>'P596_DATOS'
-,p_attribute_03=>'P596_COD_CLIENTE,P596_MOTIVO_AUX,P596_COD_ARTICULO,P596_DIRECCION,P596_OBSERVACION,P596_COD_USUARIO'
+,p_attribute_03=>'P596_COD_CLIENTE,P596_MOTIVO_AUX,P596_COD_ARTICULO,P596_DIRECCION,P596_OBSERVACION,P596_COD_USUARIO_AUX'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(199628658975447037)
+,p_name=>'DA_CREAR_VISITA'
+,p_event_sequence=>90
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(200084594308660237)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(200081362775660205)
+,p_event_id=>wwv_flow_imp.id(199628658975447037)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT APEX_PAGE.GET_URL (  p_page   => 329,',
+'                            p_items  => ''P329_P_NRO_MOVIMIENTO,P329_ACCION_CONSULTA'',',
+'                            p_values => (''''||:P596_NRO_MOVIMIENTO||'',''||3||'''')) f_url_1',
+'    INTO :P596_URL',
+'     FROM DUAL;',
+''))
+,p_attribute_02=>'P596_NRO_MOVIMIENTO'
+,p_attribute_03=>'P596_URL'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(200081574218660207)
+,p_event_id=>wwv_flow_imp.id(199628658975447037)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'var url = apex.item("P596_URL").getValue();',
+'',
+'apex.navigation.redirect (url);',
+''))
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(199628864236447039)
+,p_name=>'DA_COD_CLIENTE'
+,p_event_sequence=>100
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P596_COD_CLIENTE'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(199628957068447040)
+,p_event_id=>wwv_flow_imp.id(199628864236447039)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'IF :P596_COD_CLIENTE IS NOT NULL THEN',
+'        BEGIN',
+'        select ltrim(rtrim(nvl(p.nombre, p.nomb_fantasia)))',
+'        INTO :P596_NOM_CLIENTE',
+'          from cc_clientes c, personas p',
+'         where c.cod_empresa = :P_cod_empresa',
+'           AND c.cod_cliente = :P596_COD_CLIENTE',
+'           and c.cod_persona = p.cod_persona',
+'         ;',
+'        EXCEPTION            ',
+'            WHEN OTHERS THEN',
+'                :P596_NOM_CLIENTE:=    NULL;',
+'        END;',
+'END IF;'))
+,p_attribute_02=>'P596_COD_CLIENTE'
+,p_attribute_03=>'P596_NOM_CLIENTE'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(199629032253447041)
+,p_name=>'DA_COD_ARTICULO'
+,p_event_sequence=>110
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P596_COD_ARTICULO'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(199629133557447042)
+,p_event_id=>wwv_flow_imp.id(199629032253447041)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'if :P596_cod_articulo IS NOT NULL then',
+'     BEGIN',
+'     select a.DESCRIPCION',
+'       into :P596_DESC_ARTICULO',
+'       from st_articulos a',
+'      where a.cod_empresa = :P_cod_empresa ',
+'        and a.cod_articulo = :P596_cod_articulo;',
+'     exception',
+'         when others then ',
+'         null;',
+'        end;',
+'end if;    '))
+,p_attribute_02=>'P596_COD_ARTICULO'
+,p_attribute_03=>'P596_DESC_ARTICULO'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(201059868214163719)
+,p_name=>'DA_SET_ACTUALIZAR'
+,p_event_sequence=>120
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P596_ACTUALIZAR'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(201059912761163720)
+,p_event_id=>wwv_flow_imp.id(201059868214163719)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'NULL;'
+,p_attribute_02=>'P596_ACTUALIZAR'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(201060077584163721)
+,p_event_id=>wwv_flow_imp.id(201059868214163719)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'var url = apex.item("P329_URL").getValue();',
+'',
+'apex.navigation.redirect (url);',
+''))
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(199628576085447036)

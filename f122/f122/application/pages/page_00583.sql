@@ -98,11 +98,28 @@ wwv_flow_imp_page.create_page(
 '           .SNC{',
 '                    background-color: #faec35;',
 '                    background-image: linear-gradient(45deg, #ffe6e8 0%,   #b56576 90%);',
-'                    }'))
+'                    }',
+'',
+'                         .BLANCO{',
+'                background-color: #FFFFFF;',
+'                background-image: linear-gradient(45deg, #ffffff, #CCE1F0);',
+'            }      ',
+'             .AMARILLO{',
+'                background-color: #FFFFFF;',
+'                background-image: linear-gradient(45deg, #ffffff, #DEE949);',
+'            }     ',
+'              .NARANJA{',
+'                background-color: #FFFFFF;',
+'                background-image: linear-gradient(45deg, #ffffff, #E8BB48);',
+'            }     ',
+'            .ROJO{',
+'                background-color: #FFFFFF;',
+'                background-image: linear-gradient(45deg, #ffffff, #E20C0C);',
+'            }  '))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230825100815'
+,p_last_upd_yyyymmddhh24miss=>'20230901104105'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(190696857801286638)
@@ -175,7 +192,22 @@ unistr('               ''INGRESO SAL\00D3N'''),
 '             END',
 '            END ',
 '         END ',
-'        END CLASE',
+'        END CLASE,',
+'        CASE',
+'        WHEN trunc((sysdate - cc.fec_alta)) > 0 THEN',
+'            ''ROJO''',
+'        ELSE',
+'            CASE',
+'                    WHEN trunc(mod((sysdate - cc.fec_alta) *(60 * 24), 60)) BETWEEN 0 AND 5  THEN',
+'                        ''AMARILLO''',
+'                    WHEN trunc(mod((sysdate - cc.fec_alta) *(60 * 24), 60)) BETWEEN 5 AND 10 THEN',
+'                        ''NARANJA''',
+'                    WHEN trunc(mod((sysdate - cc.fec_alta) *(60 * 24), 60)) > 10             THEN',
+'                        ''ROJO''',
+'                    ELSE',
+'                        ''BLANCO''',
+'            END',
+'    END                                                                                                 urgencia',
 'from CA_SOLICITUD_OT cc, ST_ARTICULOS A, VT_ORDENES_TRABAJO O, CM_PROVEEDORES P, PERSONAS E',
 'where CC.cod_empresa = ''1''',
 'AND NVL(CC.ESTADO,''N'')=''P''                    ',
@@ -240,7 +272,7 @@ wwv_flow_imp_page.create_card(
 ,p_region_id=>wwv_flow_imp.id(190696857801286638)
 ,p_layout_type=>'GRID'
 ,p_grid_column_count=>3
-,p_card_css_classes=>'&CLASE.'
+,p_card_css_classes=>'&URGENCIA.'
 ,p_title_adv_formatting=>false
 ,p_title_column_name=>'NRO_COMPROBANTE'
 ,p_sub_title_adv_formatting=>false
@@ -335,7 +367,22 @@ unistr('               ''INGRESO SAL\00D3N'''),
 '             END',
 '            END ',
 '         END ',
-'        END CLASE',
+'        END CLASE,',
+'        CASE',
+'        WHEN trunc((sysdate - cc.fec_alta)) > 0 THEN',
+'            ''ROJO''',
+'        ELSE',
+'            CASE',
+'                    WHEN trunc(mod((sysdate - cc.fec_alta) *(60 * 24), 60)) BETWEEN 0 AND 5  THEN',
+'                        ''AMARILLO''',
+'                    WHEN trunc(mod((sysdate - cc.fec_alta) *(60 * 24), 60)) BETWEEN 5 AND 10 THEN',
+'                        ''NARANJA''',
+'                    WHEN trunc(mod((sysdate - cc.fec_alta) *(60 * 24), 60)) > 10             THEN',
+'                        ''ROJO''',
+'                    ELSE',
+'                        ''BLANCO''',
+'            END',
+'    END                                                                                                 urgencia',
 'from CA_SOLICITUD_OT cc, ST_ARTICULOS A, VT_ORDENES_TRABAJO O, CM_PROVEEDORES P, PERSONAS E',
 'where CC.cod_empresa = ''1''',
 'AND NVL(CC.ESTADO,''N'')=''P''                    ',
@@ -400,7 +447,7 @@ wwv_flow_imp_page.create_card(
 ,p_region_id=>wwv_flow_imp.id(763047804698289471)
 ,p_layout_type=>'GRID'
 ,p_grid_column_count=>3
-,p_card_css_classes=>'&CLASE.'
+,p_card_css_classes=>'&URGENCIA.'
 ,p_title_adv_formatting=>false
 ,p_title_column_name=>'NRO_COMPROBANTE'
 ,p_sub_title_adv_formatting=>true
