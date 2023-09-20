@@ -1,0 +1,204 @@
+prompt --application/shared_components/data_loads/facturacion_xml
+begin
+--   Manifest
+--     DATA LOAD: FACTURACION_XML
+--   Manifest End
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
+wwv_flow_imp_shared.create_data_profile(
+ p_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'FACTURACION_XML'
+,p_format=>'JSON'
+,p_encoding=>'utf-8'
+,p_row_selector=>'documento'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165544766312016566)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'ID'
+,p_sequence=>1
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>200
+,p_decimal_char=>'.'
+,p_selector=>'id'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165545073544016566)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'CDC'
+,p_sequence=>2
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>200
+,p_decimal_char=>'.'
+,p_selector=>'cdc'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165545397354016566)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'NUMERO'
+,p_sequence=>3
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'numero'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165545625515016566)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'TIPODOCUMENTO'
+,p_sequence=>4
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'tipoDocumento'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165545926972016566)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'TIMBRADO'
+,p_sequence=>5
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'timbrado'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165546235402016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'ESTABLECIMIENTO'
+,p_sequence=>6
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'establecimiento'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165546551846016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'PUNTOEXPEDICION'
+,p_sequence=>7
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'puntoExpedicion'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165546806390016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'NUMEROSERIE'
+,p_sequence=>8
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_selector=>'numeroSerie'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165547122950016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'FECHAINGRESO'
+,p_sequence=>9
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'fechaIngreso'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165547483449016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'FECHAEMISION'
+,p_sequence=>10
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'fechaEmision'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165547782391016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'ESTADO'
+,p_sequence=>11
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_selector=>'estado'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165548000468016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'ESTADOENVIO'
+,p_sequence=>12
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_selector=>'estadoEnvio'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165548301317016565)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'ESTADOANULACION'
+,p_sequence=>13
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_selector=>'estadoAnulacion'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165548677983016564)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'SECUENCIA'
+,p_sequence=>14
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_decimal_char=>'.'
+,p_selector=>'secuencia'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165548952134016564)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'KUDE'
+,p_sequence=>15
+,p_column_type=>'DATA'
+,p_data_type=>'VARCHAR2'
+,p_max_length=>4000
+,p_selector=>'kuDE'
+);
+wwv_flow_imp_shared.create_data_profile_col(
+ p_id=>wwv_flow_imp.id(165549267642016564)
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_name=>'XMLFIRMADO'
+,p_sequence=>16
+,p_column_type=>'DATA'
+,p_data_type=>'CLOB'
+,p_selector=>'xmlFirmado'
+);
+wwv_flow_imp_shared.create_load_table(
+ p_id=>wwv_flow_imp.id(165549433978016564)
+,p_name=>'FACTURACION_XML'
+,p_static_id=>'FACTURACION_XML'
+,p_target_type=>'TABLE'
+,p_table_name=>'FACTURACION_XML'
+,p_data_profile_id=>wwv_flow_imp.id(165544497002016578)
+,p_loading_method=>'APPEND'
+,p_commit_interval=>200
+,p_error_handling=>'ABORT'
+,p_skip_validation=>'N'
+);
+wwv_flow_imp.component_end;
+end;
+/
