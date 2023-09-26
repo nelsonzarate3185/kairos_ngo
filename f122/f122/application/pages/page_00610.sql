@@ -53,8 +53,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'JUANASIS'
-,p_last_upd_yyyymmddhh24miss=>'20230919143940'
+,p_last_updated_by=>'AIBANEZ'
+,p_last_upd_yyyymmddhh24miss=>'20230920123018'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(206370007723755642)
@@ -232,7 +232,7 @@ wwv_flow_imp_page.create_page_plug(
 '       END recibo',
 '       ',
 'FROM view_saldos_empleados a ',
-'WHERE a.cod_cliente =  :P610_COD_CLIENTE --102362 ------------------- TEST ',
+'WHERE a.cod_cliente = :P610_COD_CLIENTE --102362 ------------------- TEST ',
 'AND ((:P610_TIPO = ''PG'' AND a.numero_canje = :P610_NUMERO)',
 '      or (a.numero = :P610_NUMERO))',
 'ORDER BY a.NRO_CUOTA',

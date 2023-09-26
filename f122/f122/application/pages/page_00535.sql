@@ -37,7 +37,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230816151530'
+,p_last_upd_yyyymmddhh24miss=>'20230926091202'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(160860838192518820)
@@ -751,7 +751,10 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>'inv.catickets.pr_carga_proceso_ot(p_usuario => :APP_USER);'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'inv.catickets.pr_carga_proceso_ot(p_usuario => :APP_USER,',
+'                                  p_cod_cliente => :P535_COD_CLIENTE);'))
+,p_attribute_02=>'P535_COD_CLIENTE'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
@@ -775,10 +778,24 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(72426300159335715)
+ p_id=>wwv_flow_imp.id(64602294563457121)
 ,p_event_id=>wwv_flow_imp.id(72426203466335714)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'inv.catickets.pr_carga_proceso_ot(p_usuario => :APP_USER,',
+'                                 p_cod_cliente => :P535_COD_CLIENTE);'))
+,p_attribute_02=>'P535_COD_CLIENTE'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(72426300159335715)
+,p_event_id=>wwv_flow_imp.id(72426203466335714)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -788,7 +805,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(72426442822335716)
 ,p_event_id=>wwv_flow_imp.id(72426203466335714)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>20
+,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'

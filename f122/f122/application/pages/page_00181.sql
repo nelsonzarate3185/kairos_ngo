@@ -18,11 +18,21 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'VTRVTMVE'
 ,p_step_title=>'VTRVTMVE'
 ,p_autocomplete_on_off=>'OFF'
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'#COL_FACT .a-IRR-table td {',
+'    background-color:#dd5600; ',
+'    color:#ffffff; ',
+'    font-weight: bolder; ',
+'}',
+'',
+'.a-IRR-controlsContainer{',
+'    display:none;',
+'}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'JUANASIS'
-,p_last_upd_yyyymmddhh24miss=>'20230918094155'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230925093207'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(35461253719564319)
@@ -2891,23 +2901,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(35461683877564323)
 ,p_prompt=>'Cliente desde'
 ,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'LV_CLIENTES1'
+,p_named_lov=>'LV_CLIENTES_PERSONA'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT nombre,',
-'       nomb_fantasia,',
-'       cod_cliente,',
-'       codigo_area,',
-'       num_telefono,',
-'       cod_ident,',
-'       numero,',
-'       cod_ident||'' - ''||nombre DESCRI,',
-'       c.cod_cliente codi',
-'  FROM cc_clientes c, personas p, telef_personas pt, ident_personas pi',
+'SELECT nombre||'' - ''||COD_CLIENTE D,',
+'     ',
+'       cod_cliente',
+'  FROM cc_clientes c, personas p ',
 ' WHERE c.cod_empresa = ''1''',
 '   AND c.cod_persona = p.cod_persona',
-'   AND p.cod_persona = pt.cod_persona(+)',
-'   AND p.cod_persona = pi.cod_persona(+)',
-'   AND nvl(c.estado, ''X'') in(''A'',''B'',''C'')',
+'  ',
 ' ORDER BY nombre'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
@@ -2928,23 +2930,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(35461683877564323)
 ,p_prompt=>'Cliente hasta'
 ,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'LV_CLIENTES1'
+,p_named_lov=>'LV_CLIENTES_PERSONA'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT nombre,',
-'       nomb_fantasia,',
-'       cod_cliente,',
-'       codigo_area,',
-'       num_telefono,',
-'       cod_ident,',
-'       numero,',
-'       cod_ident||'' - ''||nombre DESCRI,',
-'       c.cod_cliente codi',
-'  FROM cc_clientes c, personas p, telef_personas pt, ident_personas pi',
+'SELECT nombre||'' - ''||COD_CLIENTE D,',
+'     ',
+'       cod_cliente',
+'  FROM cc_clientes c, personas p ',
 ' WHERE c.cod_empresa = ''1''',
 '   AND c.cod_persona = p.cod_persona',
-'   AND p.cod_persona = pt.cod_persona(+)',
-'   AND p.cod_persona = pi.cod_persona(+)',
-'   AND nvl(c.estado, ''X'') in(''A'',''B'',''C'')',
+'  ',
 ' ORDER BY nombre'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
@@ -3636,18 +3630,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(42375300802157835)
 ,p_event_id=>wwv_flow_imp.id(42372226997157804)
@@ -3691,6 +3673,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(42375548171157837)

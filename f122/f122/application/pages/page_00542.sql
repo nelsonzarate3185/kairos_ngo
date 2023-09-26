@@ -29,7 +29,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230726154526'
+,p_last_upd_yyyymmddhh24miss=>'20230922091807'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(52358298371223323)
@@ -474,7 +474,8 @@ wwv_flow_imp_page.create_page_plug(
 '          N003  comision     ,',
 '          APEX_ITEM.CHECKBOX(1,C006,decode(C006,''S'',''CHECKED'',''UNCHECKED'' )||'' disabled'') ind_interior,',
 '          C007  nom_cliente  ,',
-'          C008  nom_articulo ',
+'          C008  nom_articulo ,',
+'          C009 lista_precio',
 'FROM APEX_COLLECTIONS  ',
 'WHERE COLLECTION_NAME = ''COM_DETALLE_FAC''  ',
 'AND C001= :P542_COD_VENDEDOR',
@@ -625,6 +626,16 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_type=>'STRING'
 ,p_use_as_row_header=>'N'
 );
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(209703781755309507)
+,p_db_column_name=>'LISTA_PRECIO'
+,p_display_order=>110
+,p_column_identifier=>'K'
+,p_column_label=>'Lista'
+,p_column_type=>'STRING'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(57015598310790326)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -632,7 +643,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_report_alias=>'570156'
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
-,p_report_columns=>'FECHA:COMPROBANTE:COD_CLIENTE:NOM_CLIENTE:COD_ARTICULO:NOM_ARTICULO:IMPORTE:PORC_COMISION:COMISION:IND_INTERIOR:'
+,p_report_columns=>'FECHA:COMPROBANTE:LISTA_PRECIO:COD_CLIENTE:NOM_CLIENTE:COD_ARTICULO:NOM_ARTICULO:IMPORTE:PORC_COMISION:COMISION:IND_INTERIOR:'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(52359322474223334)
@@ -1000,18 +1011,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
 );
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(57006740652815414)
-,p_event_id=>wwv_flow_imp.id(57006629678815413)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>'null;'
-,p_attribute_02=>'P542_COD_VENDEDOR,P542_COD_MARCA'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -1023,6 +1022,18 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(57006740652815414)
+,p_event_id=>wwv_flow_imp.id(57006629678815413)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P542_COD_VENDEDOR,P542_COD_MARCA'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(57006899015815415)

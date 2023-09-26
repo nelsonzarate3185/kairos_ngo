@@ -19,7 +19,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'D'
 ,p_page_component_map=>'14'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230920090308'
+,p_last_upd_yyyymmddhh24miss=>'20230920160028'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(12525684456514418)

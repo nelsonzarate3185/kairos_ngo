@@ -20,6 +20,17 @@ wwv_flow_imp_page.create_page(
 ,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
 ,p_html_page_header=>'<meta http-equiv="refresh" content="40" >'
+,p_javascript_code_onload=>wwv_flow_string.join(wwv_flow_t_varchar2(
+unistr(' // Selecciona todas las tarjetas en la p\00E1gina por su clase CSS (ajusta la clase seg\00FAn tu dise\00F1o).'),
+'    var cards = $(''.a-CardView-item''); // Reemplaza ''mi-clase-de-tarjeta'' con la clase de tus tarjetas.',
+'',
+'    // Obtiene la cantidad de tarjetas encontradas.',
+'    var cardCount = cards.length;',
+'',
+'    // Muestra el total de tarjetas en el elemento HTML con el ID ''cardCount''.',
+'    $(''#P574_TOTAL_INGRESO_SALON'').val(''Total de Solicitudes: '' + cardCount);',
+'	//$(''#cardCount'').text(''Total de Tarjetas: '' + cardCount);',
+'	//console.log(''Total de Tarjetas: '' + cardCount);'))
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '  .t-Header-branding, #floating-menu,#t_Body_content_offset ,  .t-Footer-topButton{ display:none;} ',
 ' .t-Body {',
@@ -118,7 +129,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'23'
 ,p_last_updated_by=>'CHARBA'
-,p_last_upd_yyyymmddhh24miss=>'20230901104208'
+,p_last_upd_yyyymmddhh24miss=>'20230921141723'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(190696604506286636)
@@ -459,6 +470,20 @@ wwv_flow_imp_page.create_card(
 ,p_second_body_column_name=>'POSICION'
 ,p_media_adv_formatting=>false
 ,p_pk1_column_name=>'NRO_COMPROBANTE'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(185086114450060729)
+,p_name=>'P574_TOTAL_INGRESO_SALON'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(190696604506286636)
+,p_prompt=>'New'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'PLAIN'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(186242369102408822)

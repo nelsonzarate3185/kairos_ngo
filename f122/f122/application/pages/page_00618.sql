@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'FCARDOZO'
-,p_last_upd_yyyymmddhh24miss=>'20230919142649'
+,p_last_upd_yyyymmddhh24miss=>'20230921091631'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(208455828436669302)
@@ -141,7 +141,8 @@ wwv_flow_imp_page.create_page_plug(
 '       OBS_COBRANZAS,',
 '       FECHA_SEGUIMIENTO_CLIENTE,',
 '       FECHA_LIMITE_FACTURACION,',
-'       NULL EDITAR',
+'       NULL EDITAR,',
+'       ROWID',
 '  from CC_CLIENTES'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -1076,9 +1077,59 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_display_order=>960
 ,p_column_identifier=>'CR'
 ,p_column_label=>'Editar'
-,p_column_link=>'f?p=&APP_ID.:613:&SESSION.::&DEBUG.:RP,613:P613_COD_CLIENTE,P613_ACCION_CONSULTA,P613_TIP_CLIENTE,P613_COD_PERSONA:#COD_CLIENTE#,1,#TIP_CLIENTE#,#COD_PERSONA#'
+,p_column_link=>'f?p=&APP_ID.:613:&SESSION.::&DEBUG.:RP,613:P613_COD_CLIENTE,P613_ACCION_CONSULTA,P613_TIP_CLIENTE,P613_COD_PERSONA,P613_ROWID_SELECT:#COD_CLIENTE#,1,#TIP_CLIENTE#,#COD_PERSONA#,#ROWID#'
 ,p_column_linktext=>'<span aria-hidden="true" class="fa fa-edit"></span>'
 ,p_column_type=>'STRING'
+,p_display_condition_type=>'FUNCTION_BODY'
+,p_display_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'VCONTROL NUMBER;',
+'BEGIN',
+'',
+'    VCONTROL := SEGURIDAD_GRANULAR.RETORNA_PERMISO_BOTON(ppage_id     => :APP_PAGE_ID,',
+'                                                         papli0100_id => :P_APLI0100_ID,',
+'                                                         pcod_empresa => :P_COD_EMPRESA,',
+'                                                         pusua0100_id => :P_USUA0100_ID,',
+'                                                         pdm_boto     => 2); ',
+'',
+'    IF VCONTROL = 0 THEN',
+'        RETURN FALSE;',
+'    ELSE',
+'        RETURN TRUE;',
+'    END IF;',
+'END;'))
+,p_display_condition2=>'PLSQL'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(209217863655462119)
+,p_db_column_name=>'ROWID'
+,p_display_order=>970
+,p_column_identifier=>'CS'
+,p_column_label=>'Rowid'
+,p_allow_sorting=>'N'
+,p_allow_filtering=>'N'
+,p_allow_highlighting=>'N'
+,p_allow_ctrl_breaks=>'N'
+,p_allow_aggregations=>'N'
+,p_allow_computations=>'N'
+,p_allow_charting=>'N'
+,p_allow_group_by=>'N'
+,p_allow_pivot=>'N'
+,p_column_type=>'OTHER'
+,p_rpt_show_filter_lov=>'N'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_rpt(

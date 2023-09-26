@@ -34,7 +34,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JANDERSON'
-,p_last_upd_yyyymmddhh24miss=>'20230907075606'
+,p_last_upd_yyyymmddhh24miss=>'20230922113710'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(199542487007478407)
@@ -1013,8 +1013,8 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT APEX_PAGE.GET_URL (  p_page   => 378,',
-'                            p_items  => ''P378_NRO_RECIBO,P378_SER_RECIBO'',',
+'SELECT APEX_PAGE.GET_URL (  p_page   => 394,',
+'                            p_items  => ''P394_NRO_RECIBO,P394_SER_RECIBO'',',
 '                            p_values => (''''||:P587_NRO_RECIBO||'',''||:P587_SER_RECIBO||'''')) f_url_1',
 '    INTO :P587_URL',
 '    FROM DUAL;'))

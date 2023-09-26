@@ -16,7 +16,7 @@ wwv_flow_imp_page.create_page(
 ,p_user_interface_id=>wwv_flow_imp.id(40210426655263685)
 ,p_name=>'STENVPE'
 ,p_alias=>'STENVPE'
-,p_step_title=>'STENVPE'
+,p_step_title=>'NOTAS DE ENVIOS PENDIENTES  - STENVPE'
 ,p_autocomplete_on_off=>'OFF'
 ,p_javascript_file_urls=>'#APP_FILES#util_generico.js'
 ,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -71,7 +71,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230920104818'
+,p_last_upd_yyyymmddhh24miss=>'20230920160046'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(83626066913059733)
@@ -1555,6 +1555,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_SINGLE_CHECKBOX'
 ,p_begin_on_new_line=>'N'
 ,p_begin_on_new_field=>'N'
+,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--xlarge'
 ,p_attribute_01=>'N'
@@ -2021,13 +2022,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(98368888604250030)
-,p_name=>'P339_REPOSICION'
-,p_item_sequence=>1020
-,p_display_as=>'NATIVE_HIDDEN'
-,p_attribute_01=>'N'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -2039,6 +2033,13 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(98368888604250030)
+,p_name=>'P339_REPOSICION'
+,p_item_sequence=>1020
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(98368963113250031)

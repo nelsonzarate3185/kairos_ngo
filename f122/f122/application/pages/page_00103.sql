@@ -75,8 +75,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230711075647'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230923092249'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(15762364761998214)
@@ -722,27 +722,8 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Guardar'
 ,p_button_position=>'EDIT'
 ,p_warn_on_unsaved_changes=>null
-,p_button_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'DECLARE',
-'VCONTROL NUMBER := 0;',
-'BEGIN',
-'',
-'    VCONTROL := SEGURIDAD_GRANULAR.RETORNA_PERMISO_BOTON(ppage_id     => :APP_PAGE_ID,',
-'                                                         papli0100_id => :P_APLI0100_ID,',
-'                                                         pcod_empresa => :P_COD_EMPRESA,',
-'                                                         pusua0100_id => :P_USUA0100_ID,',
-'                                                         pdm_boto     => 1); ',
-'',
-'    ',
-'    IF VCONTROL = 0 THEN',
-'        RETURN FALSE;',
-'    ELSE',
-'        RETURN TRUE;',
-'    END IF;                                                     ',
-'END;'))
-,p_button_condition2=>'PLSQL'
-,p_button_condition_type=>'FUNCTION_BODY'
 ,p_button_css_classes=>'u-color-21-bg u-color-13-text'
+,p_security_scheme=>wwv_flow_imp.id(54258922546073523)
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(18374251101390538)
@@ -789,26 +770,8 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_position=>'EDIT'
 ,p_button_execute_validations=>'N'
 ,p_warn_on_unsaved_changes=>null
-,p_button_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'DECLARE',
-'VCONTROL NUMBER;',
-'BEGIN',
-'',
-'    VCONTROL := SEGURIDAD_GRANULAR.RETORNA_PERMISO_BOTON(ppage_id     => :APP_PAGE_ID,',
-'                                                         papli0100_id => :P_APLI0100_ID,',
-'                                                         pcod_empresa => :P_COD_EMPRESA,',
-'                                                         pusua0100_id => :P_USUA0100_ID,',
-'                                                         pdm_boto     => 3); ',
-'',
-'    IF VCONTROL = 0 THEN',
-'        RETURN FALSE;',
-'    ELSE',
-'        RETURN TRUE;',
-'    END IF;                                                     ',
-'END;'))
-,p_button_condition2=>'PLSQL'
-,p_button_condition_type=>'FUNCTION_BODY'
 ,p_button_css_classes=>'u-color-21-bg u-color-13-text'
+,p_security_scheme=>wwv_flow_imp.id(197610112326084282)
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(75544607547544134)
@@ -839,6 +802,20 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Cerrar'
 ,p_button_position=>'EDIT'
 ,p_button_css_classes=>'u-color-21-bg u-color-13-text'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(210019593915258520)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(15762364761998214)
+,p_button_name=>'BT_VOLVER'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--simple:t-Button--gapRight'
+,p_button_template_id=>wwv_flow_imp.id(40187078917263678)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Volver'
+,p_button_position=>'LEFT_OF_TITLE'
+,p_button_redirect_url=>'f?p=&APP_ID.:622:&SESSION.::&DEBUG.:::'
+,p_icon_css_classes=>'fa-arrow-left'
 );
 wwv_flow_imp_page.create_page_branch(
  p_id=>wwv_flow_imp.id(118953795520105323)
@@ -977,18 +954,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(15764269905998233)
 ,p_name=>'P103_VARIACION_MENOS_VAR'
@@ -1020,6 +985,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(15762579314998216)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(15764690925998237)
@@ -1196,6 +1173,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Numero'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>5
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1304,6 +1282,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_pre_element_text=>'Comprobante Referencia:&nbsp &nbsp'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_colspan=>4
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
@@ -1320,6 +1299,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Serie'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1337,6 +1317,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Numero'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>3
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1698,6 +1679,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Recargo'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1776,6 +1758,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'&nbsp'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>1
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1793,6 +1776,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'&nbsp'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -2057,18 +2041,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(17139370896007735)
 ,p_name=>'P103_COD_USUARIO_IMP'
@@ -2101,6 +2073,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(17461448016813303)
@@ -2166,6 +2150,7 @@ wwv_flow_imp_page.create_page_item(
 '     AND nvl( estado, ''S'' ) <> ''N'' ',
 'ORDER BY descripcion'))
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
@@ -2189,7 +2174,7 @@ wwv_flow_imp_page.create_page_item(
 'where s.cod_empresa = :P103_COD_EMPRESA_VAR',
 ' and s.cod_articulo = :P103_COD_ARTICULO_DETALLE',
 ' and s.cod_sucursal = :P103_COD_SUCURSAL',
-' and nvl( s.cant_dispon, 0 ) > 0 ',
+' --and nvl( s.cant_dispon, 0 ) > 0 ',
 ' and s.cod_empresa = l.cod_empresa ',
 ' and s.cod_articulo = l.cod_articulo ',
 ' and s.nro_lote = l.nro_lote ',
@@ -2515,10 +2500,11 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P103_AUX_RECARGO_DET'
 ,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(16602920961666804)
-,p_prompt=>'Gravadas'
+,p_prompt=>'Recargos'
 ,p_format_mask=>'999G999G999G999G990D00'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>40
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -2580,6 +2566,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_format_mask=>'999G999G999G999G990D00'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -2687,6 +2674,14 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P103_TOTAL'
 ,p_item_sequence=>280
 ,p_item_plug_id=>wwv_flow_imp.id(16602920961666804)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(210018521117258510)
+,p_name=>'P103_ACCION_CONSULTA'
+,p_item_sequence=>450
+,p_item_plug_id=>wwv_flow_imp.id(15762579314998216)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -2824,17 +2819,6 @@ wwv_flow_imp_page.create_page_validation(
 ,p_when_button_pressed=>wwv_flow_imp.id(18374251101390538)
 ,p_associated_item=>wwv_flow_imp.id(16575495965428208)
 ,p_error_display_location=>'INLINE_WITH_FIELD'
-);
-wwv_flow_imp_page.create_page_validation(
- p_id=>wwv_flow_imp.id(180068465250113237)
-,p_validation_name=>'New'
-,p_validation_sequence=>140
-,p_validation=>'P103_TOTAL'
-,p_validation2=>'0'
-,p_validation_type=>'ITEM_IN_VALIDATION_EQ_STRING2'
-,p_error_message=>'El total del comprobante no puede ser igual a 0.'
-,p_associated_item=>wwv_flow_imp.id(180067751158113230)
-,p_error_display_location=>'INLINE_WITH_FIELD_AND_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(16574897823428202)
@@ -3039,18 +3023,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'focusout'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(16606368235666838)
 ,p_event_id=>wwv_flow_imp.id(16606239245666837)
@@ -3078,6 +3050,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_element=>'P103_SER_COMPROBANTE'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'focusout'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(16606902516666844)
@@ -3107,10 +3091,10 @@ wwv_flow_imp_page.create_page_da_action(
 '                                        P_AUTO_IMPRESO    => :P103_AUTO_IMPRESO,',
 '                                        P_SER_COMPROBANTE => :P103_SER_COMPROBANTE,',
 '                                        P_FEC_COMPROBANTE => :P103_FEC_COMPROBANTE);',
-'    vtnotcre.valida_ser_comp_nro_comp(P_COD_EMPRESA     => :P103_COD_EMPRESA_VAR,',
+'    /*vtnotcre.valida_ser_comp_nro_comp(P_COD_EMPRESA     => :P103_COD_EMPRESA_VAR,',
 '                                      P_TIP_COMPROBANTE => :P103_TIP_COMPROBANTE,',
 '                                      P_NRO_COMPROBANTE => :P103_NRO_COMPROBANTE,',
-'                                      P_SER_COMPROBANTE => :P103_SER_COMPROBANTE);                                        ',
+'                                      P_SER_COMPROBANTE => :P103_SER_COMPROBANTE);   */                                     ',
 'END;                                      '))
 ,p_attribute_02=>'P103_FEC_COMPROBANTE,P103_COD_SUCURSAL,P103_SER_COMPROBANTE,P103_COD_EMPRESA_VAR,P103_TIP_COMPROBANTE'
 ,p_attribute_03=>'P103_NRO_COMPROBANTE,P103_AUTO_IMPRESO,P103_CALCULA_IVA,P103_SER_COMPROBANTE_VAR'
@@ -3214,7 +3198,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'P013_CONFORMIDAD,P103_COD_EMPRESA_VAR,P103_TIP_COMPROBANTE_REF,P103_DESCUENTO,P103_RECARGO_VAR,P103_MULT,P103_DIV,P103_SER_COMPROBANTE_REF,P103_NRO_COMPROBANTE_REF,P103_DECIMALES,P103_TIP_CONTADO_VAR,P103_TIP_CREDITO_VAR,P103_TIP_CVENTA_VAR,P103_TIP_'
 ||'COMPROBANTE,P103_COD_ARTICULO,P103_SER_VALE,P103_NRO_VALE,P103_TIP_OT,P103_SER_OT,P103_NRO_OT'
 ,p_attribute_03=>'P103_COD_CLIENTE,P103_TEL_CLIENTE,P103_RUC,P_COD_VENDEDOR,P103_COD_CONDICION_VENTA,P103_CONDICION_VENTA_FAC,P103_COD_MONEDA,P103_COD_LISTA_PRECIO,P103_CAMBIO_MONEDA_PRECIO,P103_RECARGO,P103_COD_SECTOR,P103_CARGA_ITEMS,P103_CALCULA_IVA,P103_MULT,P103_'
-||'DIV,P103_IVA_PARCIAL,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC'
+||'DIV,P103_IVA_PARCIAL,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC,P103_TOTAL_IVA,P103_SUBTOTAL,P103_GRAVADAS,P103_EXENTAS,P103_RECARGO_DET,P103_DESCUENTO_DET,P103_TOTAL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -3336,7 +3320,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'P013_CONFORMIDAD,P103_COD_EMPRESA_VAR,P103_TIP_COMPROBANTE_REF,P103_DESCUENTO,P103_RECARGO_VAR,P103_MULT,P103_DIV,P103_SER_COMPROBANTE_REF,P103_NRO_COMPROBANTE_REF,P103_DECIMALES,P103_TIP_CONTADO_VAR,P103_TIP_CREDITO_VAR,P103_TIP_CVENTA_VAR,P103_TIP_'
 ||'COMPROBANTE,P103_COD_ARTICULO,P103_SER_VALE,P103_NRO_VALE,P103_TIP_OT,P103_SER_OT,P103_NRO_OT'
 ,p_attribute_03=>'P103_COD_CLIENTE,P103_TEL_CLIENTE,P103_RUC,P_COD_VENDEDOR,P103_COD_CONDICION_VENTA,P103_CONDICION_VENTA_FAC,P103_COD_MONEDA,P103_COD_LISTA_PRECIO,P103_CAMBIO_MONEDA_PRECIO,P103_RECARGO,P103_COD_SECTOR,P103_CARGA_ITEMS,P103_CALCULA_IVA,P103_MULT,P103_'
-||'DIV,P103_IVA_PARCIAL,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC'
+||'DIV,P103_IVA_PARCIAL,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC,P103_TOTAL,,P103_RECARGO_DET,P103_DESCUENTO_DET,P103_TOTAL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -3452,10 +3436,20 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_button_id=>wwv_flow_imp.id(118953588371105321)
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(17137118169007713)
+ p_id=>wwv_flow_imp.id(208558010027354619)
 ,p_event_id=>wwv_flow_imp.id(17136882001007710)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(17136521258007707)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(17137118169007713)
+,p_event_id=>wwv_flow_imp.id(17136882001007710)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SUBMIT_PAGE'
 ,p_attribute_01=>'GUARDAR'
@@ -3572,16 +3566,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_DISABLE'
 ,p_affected_elements_type=>'BUTTON'
 ,p_affected_button_id=>wwv_flow_imp.id(17138328996007725)
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(118953822684105324)
-,p_event_id=>wwv_flow_imp.id(17138559570007727)
-,p_event_result=>'TRUE'
-,p_action_sequence=>60
-,p_execute_on_page_init=>'Y'
-,p_action=>'NATIVE_DISABLE'
-,p_affected_elements_type=>'BUTTON'
-,p_affected_button_id=>wwv_flow_imp.id(118953588371105321)
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(20407816675847822)
@@ -3768,18 +3752,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_client_condition_element=>'P103_IMPRIME_REPORTE'
 ,p_client_condition_expression=>'1'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(17140732762007749)
 ,p_event_id=>wwv_flow_imp.id(17139840598007740)
@@ -3791,6 +3763,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements=>'P103_SER_COMPROBANTE'
 ,p_client_condition_type=>'JAVASCRIPT_EXPRESSION'
 ,p_client_condition_expression=>'apex.item(''P103_SER_COMPROBANTE'').getValue() == '''' && apex.item(''P103_NRO_COMPROBANTE'').getValue() != '''''
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(17461533031813304)
@@ -4008,7 +3992,7 @@ unistr('        RAISE_APPLICATION_ERROR(-20000, ''Ocurri\00F3 un error al cargar
 ,p_attribute_02=>'P103_COD_EMPRESA_VAR,P103_TIP_COMPROBANTE,P103_SER_COMPROBANTE,P103_NRO_COMPROBANTE'
 ,p_attribute_03=>'P103_SUBTOTAL_PARCIAL,P103_IVA_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_TIPO_IMPUESTO,P103_ESTADO_ANT,P103_COD_SUCURSAL,P103_FEC_COMPROBANTE,P103_COD_CLIENTE,P103_COD_VENDEDOR,P103_TIP_COMPROBANTE_REF,P103_SER_COMPROBANTE_REF,P103_NRO_'
 ||'COMPROBANTE_REF, P103_COD_CONDICION_VENTA,P103_COD_LISTA_PRECIO,P103_DESCUENTO,P103_COD_MONEDA,P103_TIP_CAMBIO,P103_NRO_MOV_CAJ,P103_ESTADO,P103_FEC_ESTADO,P103_COD_USUARIO, P103_CAMBIO_MONEDA_PRECIO,P103_TIP_CAMBIO_COMPRA,P103_COMENTARIO,P103_GRU_CO'
-||'MPROBANTE,P103_COD_SECTOR,P103_TEL_CLIENTE, P103_COLUMNA,P103_RUC,P103_DIR_CLIENTE,P103_COD_DIRECCION,P103_COD_CUSTODIO,P103_CONDICION_VENTA_FAC,P103_IND_EXENTO_AD,P103_HORA_ALTA,P103_RECARGO,P103_TIP_OT,P103_SER_OT,P103_NRO_OT'
+||'MPROBANTE,P103_COD_SECTOR,P103_TEL_CLIENTE, P103_COLUMNA,P103_RUC,P103_DIR_CLIENTE,P103_COD_DIRECCION,P103_COD_CUSTODIO,P103_CONDICION_VENTA_FAC,P103_IND_EXENTO_AD,P103_HORA_ALTA,P103_RECARGO,P103_TIP_OT,P103_SER_OT,P103_NRO_OT,P103_SUBTOTAL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -4039,10 +4023,22 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_client_condition_element=>'P103_SER_COMPROBANTE'
 );
 wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(17463065697813319)
+,p_event_id=>wwv_flow_imp.id(17462599867813314)
+,p_event_result=>'FALSE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SET_FOCUS'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P103_NRO_COMPROBANTE'
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P103_NRO_COMPROBANTE'
+);
+wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(17463173235813320)
 ,p_event_id=>wwv_flow_imp.id(17462599867813314)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>20
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -4051,6 +4047,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    VCOD_GRUPO_ART VARCHAR2(5); ',
 '    VCOD_MONEDA_BASE VARCHAR2(5);',
 'BEGIN',
+'APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION(P_COLLECTION_NAME => ''DET_COM'');',
 '    FOR CC IN (SELECT COD_ARTICULO,CANTIDAD,PRECIO_UNITARIO,PRECIO_LISTA,DESCUENTO,MONTO_TOTAL,TOTAL_IVA,COSTO_PROMEDIO,COSTO_PROMEDIO_REF, ',
 '                      CANTIDAD_UB,PORC_DESCUENTO,COD_UNIDAD_MEDIDA,NRO_LOTE,PORC_RECARGO,RECARGO,PORC_IVA,IND_RENTA,COD_IVA,PORC_IVA_AD,NRO_PROMO,SER_PEDIDO,NRO_PEDIDO,',
 '                      MONTO_EXENTA,MONTO_GRAVADA_5,MONTO_GRAVADA_10',
@@ -4093,8 +4090,8 @@ wwv_flow_imp_page.create_page_da_action(
 '                                               P_C021 => CC.RECARGO,',
 '                                               P_C022 => CC.DESCUENTO,',
 '                                               P_C024 => VDESC_ARTICULO,',
-'                                               P_C025 => VCOD_GRUPO_ART, --(POST-QUERY BLOQUE DETALLE)',
-'                                               P_C026 => VCOD_MONEDA_BASE, --(POST-QUERY BLOQUE DETALLE)',
+'                                               P_C025 => VCOD_GRUPO_ART,',
+'                                               P_C026 => VCOD_MONEDA_BASE,',
 '                                               P_C027 => CC.MONTO_TOTAL,',
 '                                               P_C028 => CC.MONTO_EXENTA,',
 '                                               P_C029 => CC.MONTO_GRAVADA_10, ',
@@ -4114,22 +4111,10 @@ unistr('        RAISE_APPLICATION_ERROR(-20000, ''Ocurri\00F3 un error al cargar
 ,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(17463065697813319)
-,p_event_id=>wwv_flow_imp.id(17462599867813314)
-,p_event_result=>'FALSE'
-,p_action_sequence=>30
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_SET_FOCUS'
-,p_affected_elements_type=>'ITEM'
-,p_affected_elements=>'P103_NRO_COMPROBANTE'
-,p_client_condition_type=>'NULL'
-,p_client_condition_element=>'P103_NRO_COMPROBANTE'
-);
-wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(17463309909813322)
 ,p_event_id=>wwv_flow_imp.id(17462599867813314)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>30
+,p_action_sequence=>50
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_DISABLE'
 ,p_affected_elements_type=>'ITEM'
@@ -4142,7 +4127,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(17463212239813321)
 ,p_event_id=>wwv_flow_imp.id(17462599867813314)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>40
+,p_action_sequence=>130
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -4152,7 +4137,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(18374697076390542)
 ,p_event_id=>wwv_flow_imp.id(17462599867813314)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>50
+,p_action_sequence=>140
 ,p_execute_on_page_init=>'Y'
 ,p_action=>'NATIVE_ENABLE'
 ,p_affected_elements_type=>'BUTTON'
@@ -4162,7 +4147,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(18375173988390547)
 ,p_event_id=>wwv_flow_imp.id(17462599867813314)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>60
+,p_action_sequence=>150
 ,p_execute_on_page_init=>'Y'
 ,p_action=>'NATIVE_ENABLE'
 ,p_affected_elements_type=>'BUTTON'
@@ -4172,7 +4157,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(20408038917847824)
 ,p_event_id=>wwv_flow_imp.id(17462599867813314)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>70
+,p_action_sequence=>160
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_DISABLE'
 ,p_affected_elements_type=>'BUTTON'
@@ -4283,7 +4268,7 @@ unistr('        RAISE_APPLICATION_ERROR(-20000, ''Ha ocurrido un error al recupe
 ,p_attribute_02=>'P103_AUX_ABRE_DETALLE'
 ,p_attribute_03=>'P103_AUX_CANTIDAD_ANT,P103_AUX_NRO_PROMO,P103_AUX_IMPORTE_ANT,P103_AUX_IVA_ANT,P103_COD_ARTICULO_DETALLE,P103_LOTE,P103_CANTIDAD,P103_AUX_CANT_VENDIDA,P103_PRECIO_UNITARIO,P103_AUX_PORC_IVA, P103_AUX_IND_RENTA,P103_PORC_DESCUENTO_DETALLE, P103_PORC_R'
 ||'ECARGO_DETALLE,P103_AUX_TOTAL_IVA,P103_AUX_RECARGO,P103_AUX_DESCUENTO,P103_AUX_PORC_DESCUENTO_ANT,P103_AUX_MONTO_TOTAL,P103_AUX_MONTO_EXENTA, P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB,P103_AUX_PORC_IVA_AD,P103_AUX_COD_AR'
-||'TICULO_REL_BON,P103_AUX_DESCUENTO_MAXIMO,P103_AUX_PORC_RECARGO_ANT'
+||'TICULO_REL_BON,P103_AUX_DESCUENTO_MAXIMO,P103_AUX_PORC_RECARGO_ANT,,P103_RECARGO_DET,P103_DESCUENTO_DET'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -4610,7 +4595,7 @@ wwv_flow_imp_page.create_page_da_action(
 ||'103_AUX_IVA_ANT, P103_DESCUENTO,P103_AUX_RECARGO,P103_RECARGO,P103_PRECIO_UNITARIO,P103_AUX_PORC_IVA,P103_AUX_PORC_IVA_AD P103_PORC_DESCUENTO_DETALLE, P103_EXENTAS_PARCIAL, P103_PORC_RECARGO_DETALLE,P103_CANTIDAD,P103_AUX_DESCUENTO,P103_AUX_TOTAL_IVA'
 ||',P103_AUX_IMPORTE_ANT,P103_IVA_PARCIAL,P103_GRAVADAS_PARCIAL'
 ,p_attribute_03=>'P103_AUX_COD_IVA,P103_AUX_PORC_IVA,P103_AUX_IND_RENTA,P103_AUX_CANTIDAD_UB, P103_AUX_MONTO_GRAVADA_5,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_EXENTA, P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_TOTAL,  P103_AUX_IMPORTE_ANT,P103_AUX_TOTAL_IVA,P103_RECARGO_PO'
-||'RC, P103_PORCENTAJE_DESCUENTO, P103_EXENTAS_PARCIAL, P103_GRAVADAS_PARCIAL,P103_SUBTOTAL_PARCIAL,P103_AUX_IVA_ANT,P103_IVA_PARCIAL'
+||'RC, P103_PORCENTAJE_DESCUENTO, P103_EXENTAS_PARCIAL, P103_GRAVADAS_PARCIAL,P103_SUBTOTAL_PARCIAL,P103_AUX_IVA_ANT,P103_IVA_PARCIAL,P103_SUBTOTAL,,P103_GRAVADAS,P103_EXENTAS'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -4790,7 +4775,7 @@ wwv_flow_imp_page.create_page_da_action(
 ||'ENDIDA, P103_MULT,P103_DIV,P103_DECIMALES,P103_RECARGO_VAR,P103_IVA_PARCIAL,P103_AUX_IVA_ANT,P103_SUBTOTAL_PARCIAL, P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_DESCUENTO,P103_AUX_RECARGO,P103_RECARGO,P103_PRECIO_UNITARIO, P103_AUX_PORC_IVA,P103_A'
 ||'UX_PORC_IVA_AD,P103_PORC_RECARGO_DETALLE,P103_CANTIDAD,P103_AUX_DESCUENTO, P103_COD_ARTICULO_DETALLE,P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT'
 ,p_attribute_03=>'P103_AUX_PORC_DESCUENTO_ANT,P103_AUX_DESCUENTO,P103_AUX_RECARGO,P103_AUX_PORC_RECARGO_ANT, P103_IVA_PARCIAL,P103_AUX_IVA_ANT,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC,P103_AUX_TOTAL_I'
-||'VA,P103_AUX_IMPORTE_ANT,P103_AUX_MONTO_TOTAL,P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB'
+||'VA,P103_AUX_IMPORTE_ANT,P103_AUX_MONTO_TOTAL,P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB,P103_TOTAL_IVA,P103_SUBTOTAL,P103_SUBTOTAL,P103_TOTAL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -4944,7 +4929,7 @@ unistr('                    :P103_AUX_MSJ := ''El porcentaje de descuento m\00E1
 ||'_PARCIAL,P103_EXENTAS_PARCIAL,P103_DESCUENTO,P103_AUX_RECARGO,P103_RECARGO,P103_PRECIO_UNITARIO, P103_AUX_PORC_IVA,P103_AUX_PORC_IVA_AD,P103_PORC_DESCUENTO_DETALLE, P103_PORC_RECARGO_DETALLE,P103_CANTIDAD,P103_AUX_DESCUENTO,P103_COD_ARTICULO_DETALLE,'
 ||'P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT'
 ,p_attribute_03=>'P103_AUX_PORC_DESCUENTO_ANT,P103_AUX_MSJ,P103_AUX_DESCUENTO,P103_IVA_PARCIAL,P103_AUX_IVA_ANT,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC,P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT,P103_AU'
-||'X_MONTO_TOTAL,P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB'
+||'X_MONTO_TOTAL,P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB,P103_SUBTOTAL,,P103_GRAVADAS,P103_EXENTAS,P103_TOTAL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -5024,9 +5009,11 @@ wwv_flow_imp_page.create_page_da_action(
 '    END IF;',
 'END;                                             ',
 ''))
-,p_attribute_02=>'P103_AUX_ABRE_DETALLE,,P103_AUX_IMPORTE_ANT,P103_AUX_IVA_ANT,P103_COD_ARTICULO_DETALLE,P103_LOTE,P103_CANTIDAD,P103_AUX_CANT_VENDIDA,P103_PRECIO_UNITARIO, P103_AUX_PORC_DESCUENTO_ANT,P103_AUX_MONTO_TOTAL, P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_'
-||'10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB, P103_AUX_PORC_IVA_AD,P103_AUX_COD_ARTICULO_REL_BON,P103_AUX_DESCUENTO_MAXIMO,P103_AUX_PORC_RECARGO_ANT, P103_AUX_PORC_IVA,P103_AUX_IND_RENTA,P103_PORC_DESCUENTO_DETALLE,P103_PORC_RECARGO_DETALLE,P103_'
-||'AUX_NRO_PROMO,P103_AUX_TOTAL_IVA,P103_AUX_RECARGO,P103_AUX_DESCUENTO'
+,p_attribute_02=>'P103_AUX_ABRE_DETALLE,P103_AUX_IMPORTE_ANT,P103_AUX_IVA_ANT,P103_COD_ARTICULO_DETALLE,P103_LOTE,P103_CANTIDAD,P103_AUX_CANT_VENDIDA,P103_PRECIO_UNITARIO, P103_AUX_PORC_DESCUENTO_ANT,P103_AUX_MONTO_TOTAL, P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_1'
+||'0,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB, P103_AUX_PORC_IVA_AD,P103_AUX_COD_ARTICULO_REL_BON,P103_AUX_DESCUENTO_MAXIMO,P103_AUX_PORC_RECARGO_ANT, P103_AUX_PORC_IVA,P103_AUX_IND_RENTA,P103_PORC_DESCUENTO_DETALLE,P103_PORC_RECARGO_DETALLE,P103_A'
+||'UX_NRO_PROMO,P103_AUX_TOTAL_IVA,P103_AUX_RECARGO,P103_AUX_DESCUENTO'
+,p_attribute_03=>'P103_RECARGO_DET ,P103_DESCUENTO_DET'
+,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 ,p_client_condition_type=>'NULL'
@@ -5113,7 +5100,7 @@ unistr('                :P103_AUX_MSJ := ''Error en el c\00E1lculo de recargo ''
 ,p_attribute_02=>'P103_AUX_ABRE_DETALLE,P103_AUX_PORC_RECARGO_ANT,P103_MULT,P103_DIV,P103_DECIMALES,P103_RECARGO_VAR,P103_IVA_PARCIAL,P103_AUX_IVA_ANT,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_DESCUENTO,P103_AUX_RECARGO,P103_RECARGO,P103_PR'
 ||'ECIO_UNITARIO, P103_AUX_PORC_IVA,P103_AUX_PORC_IVA_AD,P103_PORC_DESCUENTO_DETALLE,P103_PORC_RECARGO_DETALLE,P103_CANTIDAD,P103_AUX_DESCUENTO,P103_COD_ARTICULO_DETALLE,P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT'
 ,p_attribute_03=>'P103_AUX_MSJ,P103_AUX_RECARGO,P103_IVA_PARCIAL,P103_AUX_IVA_ANT,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC,P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT,P103_AUX_MONTO_TOTAL,P103_AUX_MONTO_E'
-||'XENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB'
+||'XENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB,,P103_GRAVADAS,P103_EXENTAS'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -5256,7 +5243,7 @@ unistr('            :P103_AUX_DESCUENTO := 0; --si cambio el precio unitario no 
 '    END IF;',
 'END;        ',
 '',
-'apex_debug.error(''apex: ''||:P103_AUX_TOTAL_IVA);',
+'',
 '',
 '',
 '',
@@ -5264,7 +5251,7 @@ unistr('            :P103_AUX_DESCUENTO := 0; --si cambio el precio unitario no 
 ,p_attribute_02=>'P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_DESCUENTO,P103_AUX_RECARGO,P103_RECARGO,P103_PRECIO_UNITARIO, P103_AUX_PORC_IVA,P103_AUX_PORC_IVA_AD,P103_PORC_DESCUENTO_DETALLE, P103_PORC_RECARGO_DETALLE,P103_CANTIDAD,P103_AUX_DESCUENTO,P103_COD_ARTI'
 ||'CULO_DETALLE,P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT'
 ,p_attribute_03=>'P103_AUX_DESCUENTO,P103_AUX_PORC_DESCUENTO_ANT,P103_AUX_RECARGO,P103_IVA_PARCIAL,P103_AUX_IVA_ANT,P103_SUBTOTAL_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_PORCENTAJE_DESCUENTO,P103_RECARGO_PORC,P103_AUX_TOTAL_IVA,P103_AUX_IMPORTE_ANT,P10'
-||'3_AUX_MONTO_TOTAL,P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB'
+||'3_AUX_MONTO_TOTAL,P103_AUX_MONTO_EXENTA,P103_AUX_MONTO_GRAVADA_10,P103_AUX_MONTO_GRAVADA_5,P103_AUX_CANTIDAD_UB,P103_SUBTOTAL,P103_TOTAL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -5349,7 +5336,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(18371569507390511)
 ,p_name=>'DA_PROMO'
-,p_event_sequence=>320
+,p_event_sequence=>330
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_PORC_DESCUENTO_DETALLE'
 ,p_bind_type=>'bind'
@@ -5397,7 +5384,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(18372215220390518)
 ,p_name=>'DA_NRO_PROMO'
-,p_event_sequence=>330
+,p_event_sequence=>340
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_NRO_PROMO'
 ,p_condition_element=>'P103_NRO_PROMO'
@@ -5503,7 +5490,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(18372684668390522)
 ,p_name=>'DA_MUESTRA_PROMO'
-,p_event_sequence=>340
+,p_event_sequence=>350
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_AUX_MUESTRA_PROMO'
 ,p_condition_element=>'P103_AUX_MUESTRA_PROMO'
@@ -5535,7 +5522,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(18372970215390525)
 ,p_name=>'DA_DIR_CLIENTE'
-,p_event_sequence=>350
+,p_event_sequence=>360
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_DIR_CLIENTE'
 ,p_bind_type=>'bind'
@@ -5556,7 +5543,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(18375495772390550)
 ,p_name=>'DA_ASIGNA_VALOR_DESCUENTO_DET'
-,p_event_sequence=>360
+,p_event_sequence=>370
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_DESCUENTO_DET'
 ,p_bind_type=>'bind'
@@ -5579,7 +5566,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20405825099847802)
 ,p_name=>'DA_ASIGNA_VALOR_RECARGO_DET'
-,p_event_sequence=>370
+,p_event_sequence=>380
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_RECARGO_DET'
 ,p_bind_type=>'bind'
@@ -5602,17 +5589,29 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20406144214847805)
 ,p_name=>'DA_ASIGNA_VALOR_TOTAL'
-,p_event_sequence=>380
+,p_event_sequence=>390
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_TOTAL'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(20406251532847806)
+ p_id=>wwv_flow_imp.id(208556628881354605)
 ,p_event_id=>wwv_flow_imp.id(20406144214847805)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P103_TOTAL'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(20406251532847806)
+,p_event_id=>wwv_flow_imp.id(20406144214847805)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>':P103_AUX_TOTAL := :P103_TOTAL;'
@@ -5625,7 +5624,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20406414620847808)
 ,p_name=>'DA_ASIGNA_VALOR_AJUSTE_IVA'
-,p_event_sequence=>390
+,p_event_sequence=>400
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_AJUSTE_IVA'
 ,p_bind_type=>'bind'
@@ -5648,11 +5647,23 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20406841763847812)
 ,p_name=>'DA_ASIGNA_VALOR_TOTAL_IVA'
-,p_event_sequence=>400
+,p_event_sequence=>410
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_TOTAL_IVA'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(20406949128847813)
@@ -5668,22 +5679,10 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20407097433847814)
 ,p_name=>'DA_ASIGNA_VALOR_SUBTOTAL'
-,p_event_sequence=>410
+,p_event_sequence=>420
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_SUBTOTAL'
 ,p_bind_type=>'bind'
@@ -5706,7 +5705,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20407481937847818)
 ,p_name=>'DA_ASIGNA_VALOR_EXENTAS'
-,p_event_sequence=>420
+,p_event_sequence=>430
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_EXENTAS'
 ,p_bind_type=>'bind'
@@ -5729,7 +5728,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(20407630679847820)
 ,p_name=>'DA_ASIGNA_VALOR_GRAVADAS'
-,p_event_sequence=>430
+,p_event_sequence=>440
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_GRAVADAS'
 ,p_bind_type=>'bind'
@@ -5752,11 +5751,12 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(21769095313343301)
 ,p_name=>'DA_SOLO_NUM1'
-,p_event_sequence=>440
+,p_event_sequence=>450
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_CANTIDAD,P103_PRECIO_UNITARIO,P103_PORC_DESCUENTO_DETALLE,P103_PORC_RECARGO_DETALLE'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'keypress'
+,p_display_when_type=>'NEVER'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(21769107571343302)
@@ -5773,7 +5773,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180066608079113219)
 ,p_name=>'DA_ASIGNA_VALOR_DESCUENTO_DET'
-,p_event_sequence=>450
+,p_event_sequence=>460
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_DESCUENTO_DET'
 ,p_bind_type=>'bind'
@@ -5796,7 +5796,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180066804848113221)
 ,p_name=>'DA_ASIGNA_VALOR_RECARGO_DET'
-,p_event_sequence=>460
+,p_event_sequence=>470
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_RECARGO_DET'
 ,p_bind_type=>'bind'
@@ -5819,7 +5819,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180067006847113223)
 ,p_name=>'DA_ASIGNA_VALOR_EXENTAS'
-,p_event_sequence=>470
+,p_event_sequence=>480
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_EXENTAS'
 ,p_bind_type=>'bind'
@@ -5842,7 +5842,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180067260211113225)
 ,p_name=>'DA_ASIGNA_VALOR_GRAVADAS'
-,p_event_sequence=>480
+,p_event_sequence=>490
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_GRAVADAS'
 ,p_bind_type=>'bind'
@@ -5865,7 +5865,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180067428057113227)
 ,p_name=>'DA_ASIGNA_VALOR_SUBTOTAL'
-,p_event_sequence=>490
+,p_event_sequence=>500
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_SUBTOTAL'
 ,p_bind_type=>'bind'
@@ -5888,7 +5888,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180067806658113231)
 ,p_name=>'DA_ASIGNA_VALOR_TOTAL_IVA'
-,p_event_sequence=>500
+,p_event_sequence=>510
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_TOTAL_IVA'
 ,p_bind_type=>'bind'
@@ -5911,7 +5911,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180068060746113233)
 ,p_name=>'DA_ASIGNA_VALOR_AJUSTE_IVA'
-,p_event_sequence=>510
+,p_event_sequence=>520
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_AJUSTE_IVA'
 ,p_bind_type=>'bind'
@@ -5934,17 +5934,29 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(180068208623113235)
 ,p_name=>'DA_ASIGNA_VALOR_TOTAL'
-,p_event_sequence=>520
+,p_event_sequence=>530
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P103_TOTAL'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(180068307377113236)
+ p_id=>wwv_flow_imp.id(208556784764354606)
 ,p_event_id=>wwv_flow_imp.id(180068208623113235)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P103_TOTAL'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(180068307377113236)
+,p_event_id=>wwv_flow_imp.id(180068208623113235)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>':P103_AUX_TOTAL := :P103_TOTAL;'
@@ -5954,15 +5966,289 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(16604642418666821)
-,p_process_sequence=>10
-,p_process_point=>'AFTER_HEADER'
-,p_process_type=>'NATIVE_SESSION_STATE'
-,p_process_name=>'CLEAR_SESSION'
-,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
-,p_process_when=>'P103_INDICADOR_VOLVER'
-,p_process_when_type=>'ITEM_IS_NULL'
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(208556812000354607)
+,p_name=>'New'
+,p_event_sequence=>540
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P103_AUX_TOTAL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(208556998478354608)
+,p_event_id=>wwv_flow_imp.id(208556812000354607)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'null;'
+,p_attribute_02=>'P103_AUX_TOTAL'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(210018624921258511)
+,p_name=>'DA_ACCION_CONSULTA'
+,p_event_sequence=>540
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P103_ACCION_CONSULTA'
+,p_condition_element=>'P103_ACCION_CONSULTA'
+,p_triggering_condition_type=>'EQUALS'
+,p_triggering_expression=>'1'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210551538010102716)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'BEGIN',
+'    SELECT COD_SUCURSAL,FEC_COMPROBANTE,COD_CLIENTE,COD_VENDEDOR,TIP_COMPROBANTE_REF,SER_COMPROBANTE_REF,NRO_COMPROBANTE_REF,COD_CONDICION_VENTA, ',
+'           COD_LISTA_PRECIO,DESCUENTO,COD_MONEDA,TIP_CAMBIO,TOT_COMPROBANTE,TOT_GRAVADAS,TOT_EXENTAS,TOT_IVA,NRO_MOV_CAJ,ESTADO,FEC_ESTADO,',
+'           COD_USUARIO,CAMBIO_MONEDA_PRECIO,TIP_CAMBIO_COMPRA,COMENTARIO,GRU_COMPROBANTE,COD_SECTOR,TEL_CLIENTE,COLUMNA,RUC,DIR_CLIENTE,',
+'           COD_DIRECCION,AJUSTE_IVA,COD_CUSTODIO,COD_CONDICION_VENTA_FAC,IND_EXENTO_AD,HORA_ALTA,RECARGO,TIP_OT,SER_OT,NRO_OT',
+'    INTO :P103_COD_SUCURSAL,:P103_FEC_COMPROBANTE,:P103_COD_CLIENTE, :P103_COD_VENDEDOR, :P103_TIP_COMPROBANTE_REF, :P103_SER_COMPROBANTE_REF, :P103_NRO_COMPROBANTE_REF,',
+'         :P103_COD_CONDICION_VENTA, :P103_COD_LISTA_PRECIO, :P103_DESCUENTO, :P103_COD_MONEDA, :P103_TIP_CAMBIO, :P103_TOTAL, :P103_GRAVADAS, :P103_EXENTAS, ',
+'         :P103_TOTAL_IVA, :P103_NRO_MOV_CAJ, :P103_ESTADO, :P103_FEC_ESTADO, :P103_COD_USUARIO,',
+'         :P103_CAMBIO_MONEDA_PRECIO, :P103_TIP_CAMBIO_COMPRA, :P103_COMENTARIO, :P103_GRU_COMPROBANTE, :P103_COD_SECTOR, :P103_TEL_CLIENTE,',
+'         :P103_COLUMNA, :P103_RUC, :P103_DIR_CLIENTE, :P103_COD_DIRECCION, :P103_AJUSTE_IVA, :P103_COD_CUSTODIO, :P103_CONDICION_VENTA_FAC, ',
+'         :P103_IND_EXENTO_AD,:P103_HORA_ALTA,:P103_RECARGO,:P103_TIP_OT, :P103_SER_OT, :P103_NRO_OT',
+'    FROM VT_COMPROBANTES_CABECERA',
+'    WHERE cod_empresa = :P103_COD_EMPRESA_VAR ',
+'    and tip_comprobante = :P103_TIP_COMPROBANTE ',
+'    and ser_comprobante = :P103_SER_COMPROBANTE ',
+'    and nro_comprobante = :P103_NRO_COMPROBANTE;',
+'',
+'    :P103_ESTADO_ANT := :P103_ESTADO;',
+'',
+'    BEGIN',
+'        select cl.tipo_impuesto ',
+'          into :P103_TIPO_IMPUESTO',
+'          from cc_clientes cl, personas pe',
+'         where cl.cod_empresa = :P103_COD_EMPRESA_VAR',
+'           and cl.cod_cliente = :P103_COD_CLIENTE',
+'           and cl.cod_persona = pe.cod_persona;',
+'    EXCEPTION',
+'        when others then',
+'            NULL ;',
+'    END;',
+'    :P103_SUBTOTAL := nvl( :P103_TOTAL, 0 ) - nvl( :P103_TOTAL_IVA, 0 ) - nvl( :P103_AJUSTE_IVA, 0 ); ',
+'    :P103_SUBTOTAL_PARCIAL := :P103_SUBTOTAL ;',
+'    :P103_IVA_PARCIAL := :P103_TOTAL_IVA ;',
+'    :P103_GRAVADAS_PARCIAL := :P103_GRAVADAS ;',
+'    :P103_EXENTAS_PARCIAL := :P103_EXENTAS;',
+'    ',
+'EXCEPTION',
+'    WHEN OTHERS THEN',
+unistr('        RAISE_APPLICATION_ERROR(-20000, ''Ocurri\00F3 un error al cargar la cabecera snc. ''||sqlerrm);'),
+'END;            '))
+,p_attribute_02=>'P103_COD_EMPRESA_VAR,P103_TIP_COMPROBANTE,P103_SER_COMPROBANTE,P103_NRO_COMPROBANTE'
+,p_attribute_03=>'P103_SUBTOTAL_PARCIAL,P103_IVA_PARCIAL,P103_GRAVADAS_PARCIAL,P103_EXENTAS_PARCIAL,P103_TIPO_IMPUESTO,P103_ESTADO_ANT,P103_COD_SUCURSAL,P103_FEC_COMPROBANTE,P103_COD_CLIENTE,P103_COD_VENDEDOR,P103_TIP_COMPROBANTE_REF,P103_SER_COMPROBANTE_REF,P103_NRO_'
+||'COMPROBANTE_REF, P103_COD_CONDICION_VENTA,P103_COD_LISTA_PRECIO,P103_DESCUENTO,P103_COD_MONEDA,P103_TIP_CAMBIO,P103_NRO_MOV_CAJ,P103_ESTADO,P103_FEC_ESTADO,P103_COD_USUARIO, P103_CAMBIO_MONEDA_PRECIO,P103_TIP_CAMBIO_COMPRA,P103_COMENTARIO,P103_GRU_CO'
+||'MPROBANTE,P103_COD_SECTOR,P103_TEL_CLIENTE, P103_COLUMNA,P103_RUC,P103_DIR_CLIENTE,P103_COD_DIRECCION,P103_COD_CUSTODIO,P103_CONDICION_VENTA_FAC,P103_IND_EXENTO_AD,P103_HORA_ALTA,P103_RECARGO,P103_TIP_OT,P103_SER_OT,P103_NRO_OT,P103_SUBTOTAL'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210551604095102717)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    VDESC_ARTICULO VARCHAR2(100);',
+'    VCOD_GRUPO_ART VARCHAR2(5); ',
+'    VCOD_MONEDA_BASE VARCHAR2(5);',
+'BEGIN',
+'APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION(P_COLLECTION_NAME => ''DET_COM'');',
+'    FOR CC IN (SELECT COD_ARTICULO,CANTIDAD,PRECIO_UNITARIO,PRECIO_LISTA,DESCUENTO,MONTO_TOTAL,TOTAL_IVA,COSTO_PROMEDIO,COSTO_PROMEDIO_REF, ',
+'                      CANTIDAD_UB,PORC_DESCUENTO,COD_UNIDAD_MEDIDA,NRO_LOTE,PORC_RECARGO,RECARGO,PORC_IVA,IND_RENTA,COD_IVA,PORC_IVA_AD,NRO_PROMO,SER_PEDIDO,NRO_PEDIDO,',
+'                      MONTO_EXENTA,MONTO_GRAVADA_5,MONTO_GRAVADA_10',
+'                 FROM VT_COMPROBANTES_DETALLE',
+'                WHERE cod_empresa = :P103_COD_EMPRESA_VAR ',
+'                  and tip_comprobante = :P103_TIP_COMPROBANTE ',
+'                  and ser_comprobante = :P103_SER_COMPROBANTE ',
+'                  and nro_comprobante = :P103_NRO_COMPROBANTE) ',
+'    LOOP',
+'        Begin',
+'            select descripcion, cod_grupo_art, cod_moneda_base',
+'              into VDESC_ARTICULO, VCOD_GRUPO_ART, VCOD_MONEDA_BASE',
+'              from st_articulos',
+'             where cod_empresa = :P103_COD_EMPRESA_VAR',
+'               and cod_articulo = CC.COD_ARTICULO;',
+'        exception',
+'            when others then',
+'                VDESC_ARTICULO := NULL; ',
+'                VCOD_GRUPO_ART := NULL;      ',
+'        end;',
+'        APEX_COLLECTION.ADD_MEMBER (P_COLLECTION_NAME => ''DET_COM'',    ',
+'                                               P_C001 => CC.MONTO_TOTAL, --IMPORTE_ANT (POST-QUERY BLOQUE DETALLE)',
+'                                               P_C002 => CC.TOTAL_IVA,  --IVA_ANT (POST-QUERY BLOQUE DETALLE)',
+'                                               P_C003 => CC.COD_ARTICULO, ',
+'                                               P_C004 => CC.COSTO_PROMEDIO,',
+'                                               P_C005 => CC.COSTO_PROMEDIO_REF,',
+'                                               P_C006 => CC.NRO_LOTE,',
+'                                               P_C007 => CC.CANTIDAD,',
+'                                               P_C010 => CC.PRECIO_UNITARIO, ',
+'                                               P_C011 => CC.PORC_IVA,',
+'                                               P_C012 => CC.IND_RENTA,',
+'                                               P_C013 => CC.PRECIO_LISTA,',
+'                                               P_C014 => CC.PORC_DESCUENTO,  ',
+'                                               P_C015 => CC.PORC_RECARGO, ',
+'                                               P_C016 => CC.COD_IVA,',
+'                                               P_C017 => CC.NRO_PROMO,',
+'                                               P_C018 => CC.TOTAL_IVA,',
+'                                               P_C019 => CC.SER_PEDIDO,',
+'                                               P_C020 => CC.NRO_PEDIDO, ',
+'                                               P_C021 => CC.RECARGO,',
+'                                               P_C022 => CC.DESCUENTO,',
+'                                               P_C024 => VDESC_ARTICULO,',
+'                                               P_C025 => VCOD_GRUPO_ART,',
+'                                               P_C026 => VCOD_MONEDA_BASE,',
+'                                               P_C027 => CC.MONTO_TOTAL,',
+'                                               P_C028 => CC.MONTO_EXENTA,',
+'                                               P_C029 => CC.MONTO_GRAVADA_10, ',
+'                                               P_C030 => CC.MONTO_GRAVADA_5,',
+'                                               P_C031 => CC.CANTIDAD_UB,',
+'                                               P_C032 => CC.PORC_IVA_AD,',
+'                                               P_C033 => CC.COD_UNIDAD_MEDIDA); ',
+'        :P103_RECARGO_DET := CC.RECARGO;',
+'        :P103_DESCUENTO_DET := CC.DESCUENTO;                                        ',
+'    END LOOP;                                             ',
+'EXCEPTION',
+'    WHEN OTHERS THEN',
+unistr('        RAISE_APPLICATION_ERROR(-20000, ''Ocurri\00F3 un error al cargar el detalle. ''||sqlerrm);'),
+'END; '))
+,p_attribute_02=>'P103_COD_EMPRESA_VAR,P103_TIP_COMPROBANTE,P103_SER_COMPROBANTE,P103_NRO_COMPROBANTE'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210551778720102718)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P103_ESTADO'
+,p_client_condition_type=>'NOT_EQUALS'
+,p_client_condition_element=>'P103_PERMITE_ANULAR'
+,p_client_condition_expression=>'S'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210551880422102719)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(16603320138666808)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210551923905102720)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_ENABLE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(18374251101390538)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210552090095102721)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>60
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_ENABLE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(17138328996007725)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210552116354102722)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>70
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(17136521258007707)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210019740912258522)
+,p_event_id=>wwv_flow_imp.id(210018624921258511)
+,p_event_result=>'TRUE'
+,p_action_sequence=>80
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>':P103_ACCION_CONSULTA:=NULL;'
+,p_attribute_03=>'P103_ACCION_CONSULTA'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(210018846004258513)
+,p_name=>'DA_SET_CONSULTA'
+,p_event_sequence=>550
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P103_ACCION_CONSULTA'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(210019034308258515)
+,p_event_id=>wwv_flow_imp.id(210018846004258513)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'NULL;'
+,p_attribute_02=>'P103_ACCION_CONSULTA'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(208557647470354615)
+,p_name=>'da_permiso_descuento'
+,p_event_sequence=>560
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P103_CARGA_DESCUENTOS'
+,p_condition_element=>'P103_CARGA_DESCUENTOS'
+,p_triggering_condition_type=>'EQUALS'
+,p_triggering_expression=>'N'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(208557765026354616)
+,p_event_id=>wwv_flow_imp.id(208557647470354615)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P103_AUX_PORC_DESCUENTO_ANT,P103_PORC_DESCUENTO_DETALLE'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(208557930999354618)
+,p_event_id=>wwv_flow_imp.id(208557647470354615)
+,p_event_result=>'FALSE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_ENABLE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P103_AUX_PORC_DESCUENTO_ANT,P103_PORC_DESCUENTO_DETALLE'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(15762490774998215)
@@ -6038,6 +6324,7 @@ wwv_flow_imp_page.create_page_process(
 '                                   :P103_COD_USUARIO_VAR, ',
 '                                   ''REIMPRIME_NCR'' ) ; ',
 '                                   ',
+'                                  ',
 ':P103_COD_SUCURSAL_CENTRAL_VAR := vtnotcre.codigo_sucursal_central(:P103_COD_EMPRESA_VAR, :P103_COD_SUCURSAL_VAR);',
 '                                 ',
 '/* FALTA-------------',
@@ -6089,16 +6376,49 @@ wwv_flow_imp_page.create_page_process(
 ':P103_GRU_COMPROBANTE := ''NCR'' ;',
 ':P103_FEC_COMPROBANTE := trae_fecha( :P103_COD_EMPRESA_VAR, :P103_COD_MODULO_VAR);',
 ':P103_SER_COMPROBANTE := ''A'';',
+'',
+'-------------------------',
+':P103_AUX_MONTO_TOTAL:= 0;',
+':P103_PRECIO_UNITARIO:= 0;',
+':P103_AUX_TOTAL_IVA:= 0;',
+':P103_AUX_PORC_DESCUENTO_ANT:= 0;',
+':P103_AUX_MONTO_GRAVADA_10:= 0;',
+':P103_AUX_IVA_ANT:= 0;',
+':P103_AUX_IMPORTE_ANT:= 0;',
+':P103_AUX_DESCUENTO:= 0;',
+':P103_AUX_MONTO_GRAVADA_10:= 0;',
+' :P103_PORC_DESCUENTO_DETALLE:= 0;',
+':P103_IVA_PARCIAL:= 0;',
+':P103_SUBTOTAL_PARCIAL:= 0;',
+':P103_GRAVADAS_PARCIAL:= 0;',
+':P103_EXENTAS_PARCIAL:= 0;',
+':P103_PORCENTAJE_DESCUENTO:= 0;',
+':P103_DESCUENTO:= 0;',
+':P103_TOTAL_IVA:= 0;',
+':P103_AJUSTE_IVA:= 0;',
+':P103_SUBTOTAL:= 0;',
+':P103_GRAVADAS:= 0;',
+':P103_EXENTAS:= 0;',
+':P103_RECARGO_PORC:= 0;',
+':P103_TOTAL:= 0;',
+':P103_DESCUENTO_DET:= 0;',
+':P103_RECARGO_DET:= 0;',
 '-------------------------',
 ':P103_TOTAL := 0;',
+':P103_AUX_SUBTOTAL:= 0;',
+':P103_AUX_GRAVADAS:= 0;',
+':P103_AUX_EXENTAS:= 0;',
 ':P103_TOTAL_IVA := 0;',
 ':P103_IVA_PARCIAL := 0;',
 ':P103_SUBTOTAL := 0;',
+':P103_AUX_TOTAL:= 0;',
 ':P103_SUBTOTAL_PARCIAL := 0;',
 ':P103_GRAVADAS := 0;',
 ':P103_GRAVADAS_SUBTOTAL := 0;',
+':P103_AUX_TOTAL_IVA1:= 0;',
 ':P103_EXENTAS := 0;',
 ':P103_EXENTAS_PARCIAL := 0;',
+':P103_AUX_DESCUENTO_DET:= 0;',
 ':P103_CALCULA_IVA:=''S'';',
 '',
 'vtnotcre.tipo_cambio_dia(P_CAMBIO_MONEDA_PRECIO => :P103_CAMBIO_MONEDA_PRECIO,',
@@ -6112,8 +6432,11 @@ wwv_flow_imp_page.create_page_process(
 '',
 ':P103_COD_CUSTODIO := vtnotcre.busca_custodio_cabecera(P_COD_EMPRESA => :P103_COD_EMPRESA_VAR,',
 '                                                       P_COD_USUARIO => :P103_COD_USUARIO_VAR);                                             ',
-'   '))
+'   ',
+'    APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION(P_COLLECTION_NAME => ''DET_COM'');'))
 ,p_process_clob_language=>'PLSQL'
+,p_process_when=>'P103_ACCION_CONSULTA'
+,p_process_when_type=>'ITEM_IS_NULL'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(75705753461194326)
@@ -6139,10 +6462,31 @@ wwv_flow_imp_page.create_page_process(
 '    if v_contador = 0 then ',
 unistr('        RAISE_APPLICATION_ERROR(-20001, ''No se puede procesar nota de cr\00E9dito sin detalles'');'),
 '    end if;',
+'',
+'     if NVL(:P103_TOTAL,0) = 0 then ',
+'        RAISE_APPLICATION_ERROR(-20001, ''El total no puede ser igual a 0'');',
+'    end if;',
+'',
+'    ',
+'       if :P103_COLUMNA is null then ',
+'        RAISE_APPLICATION_ERROR(-20001, ''El motivo no puede ser nulo'');',
+'    end if;',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(17136521258007707)
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(16607106337666846)

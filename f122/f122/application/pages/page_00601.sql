@@ -20,16 +20,49 @@ wwv_flow_imp_page.create_page(
 ,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
 ,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'    function soloNumeros(e){',
+'    var key = e.charCode;',
+'    return key >= 48 && key <= 57}',
 '',
-'function soloNumeros(e){',
-'var key = e.charCode;',
-'return key >= 48 && key <= 57}',
-''))
+'    function seleccionar(cb) { ',
+'   ',
+'    if (cb.checked == true){',
+'        $s(''P601_SEQ_ID'', cb.value, false);',
+'        $s(''P601_AUX_AUTORIZACION_OP_I'',''S'');',
+'',
+'    } else {',
+'        $s(''P1066_SEQ_ID'', cb.value, false);',
+'        $s(''P601_AUX_AUTORIZACION_OP_I'',''N'');',
+'    }',
+'    }',
+'',
+'    function seleccionar2(cb) { ',
+'    if (cb.checked == true){',
+'        $s(''P601_SEQ_ID'', cb.value,false);',
+'        $s(''P601_AUX_AUTORIZACION_F1_I'',''S'');',
+'',
+'    } else {',
+'        $s(''P1_066_SEQ_ID'', cb.value, false);',
+'        $s(''P601_AUX_AUTORIZACION_F1_I'',''N'');',
+'    }',
+'    }',
+'',
+'    function seleccionar3(cb) { ',
+'',
+'    if (cb.checked == true){',
+'    $s(''P601_SEQ_ID'', cb.value,false);',
+'    $s(''P601_AUX_AUTORIZACION_F2_I'',''S'');',
+'',
+'    } else {',
+'    $s(''P1066_SEQ_ID'', cb.value,false);',
+'    $s(''P601_AUX_AUTORIZACION_F2_I'',''N'');',
+'    }',
+'    }'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'AIBANEZ'
-,p_last_upd_yyyymmddhh24miss=>'20230920094905'
+,p_last_upd_yyyymmddhh24miss=>'20230926131445'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(108526476119587032)
@@ -37,7 +70,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_css_classes=>'u-color-45-border'
 ,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>1290
+,p_plug_display_sequence=>1340
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -84,7 +117,7 @@ wwv_flow_imp_page.create_page_plug(
 '        C018 IND_VERIFICADO,',
 '        C019 USR_SA_FMA,	',
 '        C020 USR_PR_FMA,	',
-'        C021 USUARIO	,',
+'        C021 USUARIO,',
 '        C022 NRO_LOTE_TRANSF,	',
 '        C023 IND_BANDEJA_MSG,',
 '        C024 PROVEEDOR, ',
@@ -100,23 +133,22 @@ wwv_flow_imp_page.create_page_plug(
 '        D004 FEC_AUTORIZACION,',
 '        D005 FEC_VERIFICACION,',
 '        NULL TODOS,',
-'        NULL INFO',
+'        NULL INFO,',
+'        SEQ_ID,',
+'        APEX_ITEM.CHECKBOX (p_idx => 1 , ',
+'        				   p_value => seq_id,',
+'        				   p_attributes => (case when nvl(c011, ''N'') = ''S'' then ''checked'' ',
+'	 									  else null end ) ||''onclick="seleccionar(this)"'' )as OP,',
+'        APEX_ITEM.CHECKBOX (p_idx => 1 , ',
+'            				p_value => seq_id,',
+'            			    p_attributes => (case  when nvl(c014, ''N'') =''S'' then ''checked'' ',
+'	 									  else null end ) ||''onclick="seleccionar2(this)"'' )as F1,',
+'        APEX_ITEM.CHECKBOX (p_idx => 1 , ',
+'        				    p_value => seq_id,',
+'        				    p_attributes => (case when  nvl(c015, ''N'') = ''S'' then ''checked'' ',
+'	 									  else null end ) ||''onclick="seleccionar3(this)"'' )as F2',
 'FROM APEX_COLLECTIONS',
-'WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT'' /*',
-'AND C013 BETWEEN :P601_R1_FECHA_INI AND :P601_R1_FECHA_FIN',
-'and (:P601_R1_COD_PROVEEDOR is null OR C006 = :P601_R1_COD_PROVEEDOR)',
-'and (:P601_R1_MONEDA =''T'' or :P601_R1_MONEDA = C007)',
-'and (:P601_R1_TIPO_COMPROBANTE=''T''   or :P601_R1_TIPO_COMPROBANTE = C002)',
-'and (:P601_R1_NRO_OP IS NULL or :P601_R1_NRO_OP = N004)',
-'and (:P601_R1_NRO_LOTE IS NULL or :P601_R1_NRO_LOTE = N002)',
-'and nvl(C009,''X'') is not null',
-'and (:P601_R1_COD_AUTORIZANTE IS NULL OR NVL(C009,''X'') = :P601_R1_COD_AUTORIZANTE)',
-'and (:P601_AUTORIZADO is null OR nvl(C011,''N'') = :P601_AUTORIZADO) ',
-'AND (:P601_USUARIO_FIRMA IS NULL OR NVL(C020,''X'') <> :P601_USUARIO_FIRMA)',
-'AND (:P601_USUARIO_FIRMA IS NULL OR NVL(C019,''X'') <> :P601_USUARIO_FIRMA)',
-'and (:P601_R1_USUARIO =''T'' OR nvl(C010,''N'') = :P601_R1_USUARIO)*/',
-'',
-''))
+'WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT'' '))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_ajax_items_to_submit=>'P601_R1_FECHA_INI,P601_R1_FECHA_FIN,P601_R1_COD_PROVEEDOR,P601_R1_MONEDA,P601_R1_TIPO_COMPROBANTE,P601_R1_NRO_OP,P601_R1_NRO_LOTE,P601_COD_AUTORIZANTE,P601_AUTORIZADO,P601_USUARIO_FIRMA,P601_R1_USUARIO,P601_AUX_CAB'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -263,6 +295,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_label=>'Total'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
@@ -519,6 +552,49 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
 );
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(211151630326135202)
+,p_db_column_name=>'SEQ_ID'
+,p_display_order=>410
+,p_column_identifier=>'AP'
+,p_column_label=>'Seq Id'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(211151932430135205)
+,p_db_column_name=>'OP'
+,p_display_order=>420
+,p_column_identifier=>'AQ'
+,p_column_label=>'Op'
+,p_column_type=>'STRING'
+,p_display_text_as=>'WITHOUT_MODIFICATION'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(211152060478135206)
+,p_db_column_name=>'F1'
+,p_display_order=>430
+,p_column_identifier=>'AR'
+,p_column_label=>'F1'
+,p_column_type=>'STRING'
+,p_display_text_as=>'WITHOUT_MODIFICATION'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(211152173519135207)
+,p_db_column_name=>'F2'
+,p_display_order=>440
+,p_column_identifier=>'AS'
+,p_column_label=>'F2'
+,p_column_type=>'STRING'
+,p_display_text_as=>'WITHOUT_MODIFICATION'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(204104894422437876)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -527,7 +603,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>10
-,p_report_columns=>'INFO:TIP_MOV_CAJ:SER_ORDEN_PAGO:NUM_ORDEN_PAGO:FEC_MOV_CAJ:NRO_MOV_CAJ:PROVEEDOR:MONEDA:TOT_NRO_MOV_CAJ:TODOS'
+,p_report_columns=>'INFO:TIP_MOV_CAJ:SER_ORDEN_PAGO:NUM_ORDEN_PAGO:FEC_MOV_CAJ:NRO_MOV_CAJ:PROVEEDOR:MONEDA:TOT_NRO_MOV_CAJ:OP:F1:F2:TODOS:'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(204072378929549319)
@@ -669,6 +745,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_worksheet(
  p_id=>wwv_flow_imp.id(204884393420551627)
 ,p_max_row_count=>'1000000'
+,p_no_data_found_message=>'No se encontraron registros.'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_report_list_mode=>'TABS'
@@ -809,7 +886,7 @@ wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(108527919055587047)
 ,p_button_sequence=>140
 ,p_button_plug_id=>wwv_flow_imp.id(108526589588587033)
-,p_button_name=>'BT_DETALLE'
+,p_button_name=>'BT_NRO_OP'
 ,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--simple:t-Button--hoverIconPush:t-Button--padLeft:t-Button--padRight'
 ,p_button_template_id=>wwv_flow_imp.id(40187078917263678)
@@ -880,21 +957,6 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-search'
 );
-wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(208179994893458103)
-,p_button_sequence=>40
-,p_button_plug_id=>wwv_flow_imp.id(108526589588587033)
-,p_button_name=>'BT_GUARDAR_CAMBIOS'
-,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--simple:t-Button--iconRight:t-Button--hoverIconPush'
-,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
-,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Guardar '
-,p_button_position=>'NEXT'
-,p_warn_on_unsaved_changes=>null
-,p_button_condition_type=>'NEVER'
-,p_icon_css_classes=>'fa-save-as'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(108526638697587034)
 ,p_name=>'P601_R1_MONEDA'
@@ -929,6 +991,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_extra=>'NO'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(108526851683587036)
@@ -977,18 +1051,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(108527016120587038)
@@ -1456,6 +1518,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Comentario '
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -1572,22 +1635,6 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(204883095391551614)
 ,p_name=>'P601_MONEDA'
 ,p_item_sequence=>1000
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(204883100338551615)
-,p_name=>'P601_FEC_INI'
-,p_item_sequence=>1010
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(204883256365551616)
-,p_name=>'P601_FEC_FIN'
-,p_item_sequence=>1020
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -1741,7 +1788,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(204886504948551649)
 ,p_name=>'P601_AUX_AUTORIZACION_F1'
-,p_item_sequence=>1200
+,p_item_sequence=>1210
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -1749,7 +1796,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(204886632525551650)
 ,p_name=>'P601_AUX_AUTORIZACION_F2'
-,p_item_sequence=>1210
+,p_item_sequence=>1230
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -1757,7 +1804,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(206378953439699203)
 ,p_name=>'P601_ERR'
-,p_item_sequence=>1220
+,p_item_sequence=>1250
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -1765,47 +1812,15 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(206380501338699219)
 ,p_name=>'P601_AUX_CAB'
-,p_item_sequence=>1230
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(206381483119699228)
-,p_name=>'P601_AUX_BLOQUEO_CONSULTA'
-,p_item_sequence=>1240
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(206381557880699229)
-,p_name=>'P601_ERR_BLOQUEO'
-,p_item_sequence=>1280
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(206381619598699230)
-,p_name=>'P601_AUX_BLOQUEO_DELETE'
-,p_item_sequence=>1250
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'N'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(206381721845699231)
-,p_name=>'P601_AUX_BLOQUEO_INSERT'
 ,p_item_sequence=>1260
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(206381883620699232)
-,p_name=>'P601_AUX_BLOQUEO_EDIT'
-,p_item_sequence=>1270
+ p_id=>wwv_flow_imp.id(206381557880699229)
+,p_name=>'P601_AUX_OP'
+,p_item_sequence=>1310
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -1814,6 +1829,46 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(208181191779458115)
 ,p_name=>'P601_INIT'
 ,p_item_sequence=>950
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(211151547264135201)
+,p_name=>'P601_ERR_BLOQUEO'
+,p_item_sequence=>1320
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(211151746777135203)
+,p_name=>'P601_SEQ_ID'
+,p_item_sequence=>1330
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(211152211478135208)
+,p_name=>'P601_AUX_AUTORIZACION_OP_I'
+,p_item_sequence=>1200
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(211152391675135209)
+,p_name=>'P601_AUX_AUTORIZACION_F1_I'
+,p_item_sequence=>1220
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(211152457074135210)
+,p_name=>'P601_AUX_AUTORIZACION_F2_I'
+,p_item_sequence=>1240
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -1856,10 +1911,10 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'BEGIN',
-'		--	APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION( p_collection_name => ''COL_CAB_CPAUTPAT'');',
+'    :P601_ERR := NULL;',
 '',
-'',
-'    CPAUTPAT.PR_CARGAR_CABECERA (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION( p_collection_name => ''COL_CAB_CPAUTPAT'');',
+'  CPAUTPAT.PR_CARGAR_CABECERA (PI_COD_EMPRESA => :P_COD_EMPRESA,',
 '                                PI_COD_PROVEEDOR=> :P601_R1_COD_PROVEEDOR,',
 '                                PI_MONEDA => :P601_R1_MONEDA ,',
 '                                PI_TIPO_COMPROBANTE=> :P601_R1_TIPO_COMPROBANTE,',
@@ -1872,9 +1927,11 @@ wwv_flow_imp_page.create_page_da_action(
 '                                PI_FECHA_INI => :P601_R1_FECHA_INI,',
 '                                PI_FECHA_FIN => :P601_R1_FECHA_FIN ,',
 '                                PO_ERR => :P601_ERR);',
-'                            --  apex_Debug.error(''fecha i ''|| :P601_R1_FECHA_INI ||'' fecha f ''||:P601_R1_FECHA_FIN||'' autorizado por''||:P601_R1_COD_AUTORIZANTE||'' tipo ''||:P601_TIPO_COMPROBANTE||'' Moneda ''|| :P601_R1_MONEDA);',
 ' :P601_AUX_CAB := ''S'';',
-'    ',
+'',
+'    EXCEPTION',
+'        WHEN OTHERS THEN',
+'            :P601_ERR := ''ERROR BUSQUEDA: ''||SQLERRM;',
 'END;',
 '',
 ''))
@@ -1973,6 +2030,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(206383207835699246)
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(204130558732227746)
 ,p_name=>'da_buscar_por_nro_lote'
@@ -2021,18 +2090,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(204130767886227748)
@@ -2167,28 +2224,21 @@ wwv_flow_imp_page.create_page_da_action(
 ' ',
 ' BEGIN',
 '    APEX_DEBUG.ERROR(''DETALLE'');',
-'    FOR R IN (SELECT C002 TIPO,  ',
-'                     C003 SERIE,',
-'                     N001 NRO',
-'              FROM APEX_COLLECTIONS ',
-'              WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT'')',
-'',
-' -- COLLECCION CAB',
-'    LOOP',
-'',
+'    ',
+'    ',
 '      --  APEX_DEBUG.ERROR(''DETALLE CARGA: ''|| R.TIPO ||'' ''|| R.SERIE|| '' ''|| R.NRO);',
 '        CPAUTPAT.PR_CARGAR_DETALLE (PI_COD_EMPRESA => :P_COD_EMPRESA ,',
-'                                     PI_TIPO => R.TIPO,',
-'                                     PI_SERIE => R.SERIE,',
-'                                     PI_NUMERO=> R.NRO,',
+'                                     PI_TIPO => :P601_AUX_TIPO,',
+'                                     PI_SERIE => :P601_AUX_SER,',
+'                                     PI_NUMERO=> :P601_AUX_NRO ,',
 '                                     PO_ERR => :P601_ERR);',
 '',
-'    END LOOP;',
 '',
 '   EXCEPTION',
 '        WHEN OTHERS THEN',
 '                :P601_ERR := ''ERROR: ''||SQLERRM;',
 'END;'))
+,p_attribute_02=>'P601_AUX_TIPO,P601_AUX_SER,P601_AUX_NRO'
 ,p_attribute_03=>'P601_ERR'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -2233,106 +2283,89 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'BEGIN',
+'---- CONDICIONALES PARA EJECUTAR LOS PROCESOS.',
+'apex_debug.error(''dentro del apex'');',
 '',
-'   ---- CONDICIONALES PARA EJECUTAR LOS PROCESOS.',
-'    apex_debug.error(''dentro del apex'');',
-'           FOR R IN (SELECT C001 COD_EMPRESA,',
-'                    C002 TIPO,',
-'                    C003 SERIE,',
-'                    C008 ANULADO,',
-'                    C009 COD_AUTORIZA_PAGO,',
-'                    C010 COD_USUARIO,',
-'                    C011 AUTORIZADO,',
-'                    C012 AUTORIZADO_POR,',
-'                    C013 FEC_MOV_CAJ, -- HABRA QUE PASARLA A DATE LUEGO',
-'                    C014 PR_FMA,',
-'                    C015 SA_FMA,',
-'                    C016 USER_RECHAZO,',
-'                    C017 COMENTARIO_RECHAZO,',
-'                    C018 IND_VERIFICADO,',
-'                    C019 USR_SA_FMA,	',
-'                    C020 USR_PR_FMA,	',
-'                    C021 USUARIO	,',
-'                    N001 NRO,',
-'                    N002 NRO_LOTE_PAGO,',
-'                    N003 TOT_NRO_MOV_CAJ,',
-'                    N004 NUM_ORDEN_PAGO,',
-'                    N005 TOT_RETENCION,',
-'                    D001 FEC_RECHAZO,',
-'                    D002 FCH_PR_FMA,',
-'                    D003 FCH_SA_FMA,',
-'                    D004 FEC_AUTORIZACION,',
-'                    D005 FEC_VERIFICACION ',
-'                    FROM APEX_COLLECTIONS',
-'                    WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT'')',
-'           ',
+' FOR R IN(SELECT COD_EMPRESA,	',
+'            TIP_MOV_CAJ TIPO,	',
+'            SER_MOV_CAJ SERIE,	',
+'            NRO_MOV_CAJ NRO,	',
+'            AUTORIZADO,	',
+'            PR_FMA,	',
+'            SA_FMA,	',
+'            FCH_SA_FMA,	',
+'            USR_SA_FMA,	',
+'            USR_PR_FMA,',
+'            AUTORIZADO_POR',
+'FROM V_AUTORIZACION_PAGO R',
+'WHERE COD_EMPRESA = :P_COD_EMPRESA',
+'    AND TO_DATE(TO_CHAR(FEC_MOV_CAJ, ''DD/MM/YYYY''), ''DD/MM/YYYY'') BETWEEN :P601_R1_FECHA_INI  AND :P601_R1_FECHA_FIN ',
+'    and (:P601_R1_COD_PROVEEDOR is null OR COD_PROVEEDOR = :P601_R1_COD_PROVEEDOR)',
+'    and (:P601_R1_MONEDA =''T'' or :P601_R1_MONEDA = COD_MONEDA)',
+'    and (:P601_R1_TIPO_COMPROBANTE= ''T'' or :P601_R1_TIPO_COMPROBANTE = TIP_MOV_CAJ)',
+'    and (:P601_R1_NRO_OP IS NULL or :P601_R1_NRO_OP = NUM_ORDEN_PAGO)',
+'    and (:P601_R1_NRO_LOTE IS NULL or :P601_R1_NRO_LOTE = NRO_LOTE_PAGO)',
+'    and nvl(COD_AUTORIZA_PAGO,''X'') is not null',
+'    and (:P601_R1_COD_AUTORIZANTE IS NULL OR NVL(COD_AUTORIZA_PAGO,''X'') = :P601_R1_COD_AUTORIZANTE)',
+'    and (:P601_AUTORIZADO is null OR nvl(AUTORIZADO,''N'') = :P601_AUTORIZADO) ',
+'    AND (:P601_USUARIO_FIRMA IS NULL OR NVL(USR_PR_FMA,''X'') <> :P601_USUARIO_FIRMA)',
+'    AND (:P601_USUARIO_FIRMA IS NULL OR NVL(USR_SA_FMA,''X'') <> :P601_USUARIO_FIRMA)',
+'    and (:P601_R1_USUARIO =''T'' OR nvl(COD_USUARIO,''N'') = :P601_R1_USUARIO))',
+'    LOOP',
 '',
-'            LOOP',
-'            APEX_DEBUG.ERROR(''DATOS: ''||R.TIPO || '' '' ||R.SERIE || '' '' ||R.NRO);',
-'          IF :P601_AUX_AUTORIZACION_OP = ''S'' THEN',
-'        apex_debug.error(''OP'');',
-'              CPAUTPAT.PR_AUTORIZAR_OP(PI_COD_EMPRESA => :P_COD_EMPRESA , ',
-'        						  PI_OP_TODOS => :P601_R2_OP ,',
-'        						  PI_AUTORIZADO => R.AUTORIZADO,',
-'        						  PI_COD_USUARIO => ''INV'', --R.COD_USUARIO,',
-'        						  PI_AUTORIZADO_POR => :APP_USER,',
-'        						  PI_TIP_MOV_CAJ => R.TIPO ,',
-'        						  PI_SER_MOV_CAJ => R.SERIE ,',
-'        						  PI_NRO_MOV_CAJ => R.NRO,',
-'        						  PO_ERR => :P601_ERR);',
-'                                  --null;',
-'',
-'        END IF;',
-'       IF :P601_AUX_AUTORIZACION_F1 = ''S'' THEN',
-'                apex_debug.error(''f1 autoriza'');',
-'',
-'          --  IF :P601_AUX_FIRMA1 = ''S'' THEN',
-'                    apex_debug.error(''f1'');',
-'            null;',
-'               CPAUTPAT.PR_AUTORIZAR_F1 (PI_COD_EMPRESA => :P_COD_EMPRESA,',
-'                                       PI_F1_TODOS => :P601_R2_F1 ,',
-'                                       PI_PR_FMA => R.PR_FMA,',
-'                                       PI_USR_PR_FMA => R.USR_PR_FMA,',
-'                                       PI_COD_USUARIO => ''INV'', --R.COD_USUARIO ,',
-'                                       PI_TIP_MOV_CAJ => R.TIPO ,',
-'                                       PI_SER_MOV_CAJ => R.SERIE,',
-'                                       PI_NRO_MOV_CAJ => R.NRO,',
-'                                       PO_ERR => :P601_ERR);',
-'          --   ELSE ',
-'',
-'           --  NULL;',
-'',
-'          --   END IF;',
-'        END IF;',
-'',
-'       IF :P601_AUX_AUTORIZACION_F2 = ''S'' THEN',
-'               apex_debug.error(''f2 autorizacion'');',
-'',
-'          --  IF :P601_AUX_FIRMA2 = ''S'' THEN',
-'                    apex_debug.error(''f2'');',
-'',
-'                CPAUTPAT.PR_AUTORIZAR_F2 (PI_COD_EMPRESA => :P_COD_EMPRESA,',
-'                                           PI_COD_USUARIO => ''INV'', --R.COD_USUARIO,',
-'                                           PI_F2_TODOS => :P601_R2_F2,',
-'                                           PI_TIP_MOV_CAJ =>R.TIPO ,',
-'                                           PI_SER_MOV_CAJ => R.SERIE,',
-'                                           PI_NRO_MOV_CAJ => R.NRO ,',
-'                                           PI_SA_FMA => R.SA_FMA ,',
-'                                           PI_USR_SA_FMA =>R.USR_SA_FMA,',
-'                                           PO_ERR => :P601_ERR);',
-'          --   ELSE ',
-'              --      NULL;',
-'',
-'            -- END IF;',
-'       END IF;',
-'      END LOOP;',
+' --   APEX_DEBUG.ERROR(''DATOS: ''||R.TIPO || '' '' ||R.SERIE || '' '' ||R.NRO);',
+'  IF :P601_AUX_AUTORIZACION_OP = ''S'' THEN',
+'BEGIN',
+'    CPAUTPAT.PR_AUTORIZAR_OP(PI_COD_EMPRESA => :P_COD_EMPRESA , ',
+'						  PI_OP_TODOS => :P601_R2_OP ,',
+'						  PI_AUTORIZADO => R.AUTORIZADO,',
+'						  PI_COD_USUARIO => :APP_USER, --INV,',
+'						  PI_AUTORIZADO_POR => R.AUTORIZADO_POR,',
+'						  PI_TIP_MOV_CAJ => R.TIPO ,',
+'						  PI_SER_MOV_CAJ => R.SERIE ,',
+'						  PI_NRO_MOV_CAJ => R.NRO,',
+'						  PO_ERR => :P601_ERR); ',
+'     EXCEPTION  WHEN OTHERS THEN APEX_DEBUG.ERROR(''ERROR OP APEX ''||SQLERRM);',
+'END;',
+'END IF;',
+'IF :P601_AUX_AUTORIZACION_F1 = ''S'' THEN',
+'    BEGIN',
+'    CPAUTPAT.PR_AUTORIZAR_F1 (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'                                PI_F1_TODOS => :P601_R2_F1 ,',
+'                                PI_PR_FMA => R.PR_FMA,',
+'                                PI_USR_PR_FMA => R.USR_PR_FMA,',
+'                                PI_COD_USUARIO => :APP_USER, --INV ,',
+'                                PI_TIP_MOV_CAJ => R.TIPO ,',
+'                                PI_SER_MOV_CAJ => R.SERIE,',
+'                                PI_NRO_MOV_CAJ => R.NRO,',
+'                                PO_ERR => :P601_ERR); ',
+'         EXCEPTION  WHEN OTHERS THEN APEX_DEBUG.ERROR(''ERROR F1 APEX ''||SQLERRM);',
+'    END;',
+'END IF;',
+'IF :P601_AUX_AUTORIZACION_F2 = ''S'' THEN',
+'    BEGIN',
+'    CPAUTPAT.PR_AUTORIZAR_F2 (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'                                PI_COD_USUARIO => :APP_USER, -- INV',
+'                                PI_F2_TODOS => :P601_R2_F2,',
+'                                PI_TIP_MOV_CAJ =>R.TIPO ,',
+'                                PI_SER_MOV_CAJ => R.SERIE,',
+'                                PI_NRO_MOV_CAJ => R.NRO ,',
+'                                PI_SA_FMA => R.SA_FMA ,',
+'                                PI_USR_SA_FMA =>R.USR_SA_FMA,',
+'                                PO_ERR => :P601_ERR); ',
+'    EXCEPTION  WHEN OTHERS THEN APEX_DEBUG.ERROR(''ERROR F2 APEX ''||SQLERRM);',
+'    END;',
+'END IF;',
+'END LOOP;',
 '',
 '    EXCEPTION',
 '        WHEN OTHERS THEN',
+'                    apex_debug.error(''ERROR PRUEBA ''||sqlerrm);',
 '                :P601_ERR := ''ERROR: ''||SQLERRM ;',
 'END;',
 ''))
-,p_attribute_02=>'P601_R2_OP,P601_R2_F1,P601_R2_F2,P601_AUX_AUTORIZACION_F1,P601_AUX_AUTORIZACION_F2,P601_AUX_AUTORIZACION_OP'
+,p_attribute_02=>'P601_R2_OP,P601_R2_F1,P601_R2_F2,P601_AUX_AUTORIZACION_F1,P601_AUX_AUTORIZACION_F2,P601_AUX_AUTORIZACION_OP,P601_R1_FECHA_INI,P601_R1_FECHA_FIN,P601_R1_COD_PROVEEDOR,P601_R1_MONEDA,P601_R1_TIPO_COMPROBANTE,P601_R1_NRO_OP,P601_R1_NRO_LOTE,P601_R1_COD_'
+||'AUTORIZANTE,P601_AUTORIZADO,P601_R1_USUARIO,P601_USUARIO_FIRMA'
 ,p_attribute_03=>'P601_ERR'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -2345,7 +2378,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action_sequence=>50
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_ALERT'
-,p_attribute_01=>'Registros autorizados, recuerde guardar los cambios realizados. '
+,p_attribute_01=>'Registros autorizados correctamente.'
 ,p_attribute_03=>'success'
 ,p_client_condition_type=>'NULL'
 ,p_client_condition_element=>'P601_ERR'
@@ -2543,49 +2576,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_region_id=>wwv_flow_imp.id(204884165656551625)
 );
 wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(208180070468458104)
-,p_name=>'da_confirmar_cambios'
-,p_event_sequence=>160
-,p_triggering_element_type=>'BUTTON'
-,p_triggering_button_id=>wwv_flow_imp.id(208179994893458103)
-,p_bind_type=>'bind'
-,p_bind_event_type=>'click'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(208180120909458105)
-,p_event_id=>wwv_flow_imp.id(208180070468458104)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_CONFIRM'
-,p_attribute_01=>unistr('\00BFDesea guardar los cambios realizados?')
-,p_attribute_03=>'information'
-,p_attribute_04=>'fa-lg fa-save'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(208180216165458106)
-,p_event_id=>wwv_flow_imp.id(208180070468458104)
-,p_event_result=>'TRUE'
-,p_action_sequence=>20
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>'null;'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(208180388128458107)
-,p_event_id=>wwv_flow_imp.id(208180070468458104)
-,p_event_result=>'TRUE'
-,p_action_sequence=>30
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_ALERT'
-,p_attribute_01=>'Los cambios se han guardardo correctamente.'
-,p_attribute_03=>'success'
-,p_client_condition_type=>'NULL'
-,p_client_condition_element=>'P601_ERR'
-);
-wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(208180622941458110)
 ,p_name=>'da_limpiar'
 ,p_event_sequence=>170
@@ -2639,7 +2629,10 @@ wwv_flow_imp_page.create_page_da_action(
 ':P601_R3_FEC_VERIFICACION := null;',
 ':P601_R3_FCH_PR_FMA := null;',
 ':P601_R3_FCH_SA_FMA := null;',
-':P601_R3_FEC_RECHAZO := null;'))
+':P601_R3_FEC_RECHAZO := null;',
+'',
+'       APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION( p_collection_name => ''COL_CAB_CPAUTPAT'');',
+'        APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION( p_collection_name => ''COL_DET_CPAUTPAT'');'))
 ,p_attribute_03=>'P601_R1_NRO_OP,P601_R1_NRO_LOTE,P601_R1_COD_PROVEEDOR,P601_R1_COD_AUTORIZANTE,P601_R1_FECHA_INI,P601_R1_FECHA_FIN,P601_R2_OP,P601_R2_F1 ,P601_R2_F2 ,P601_R3_AUTORIZADO,P601_R3_LOTE_PAGO,P601_R3_COD_AUTORIZA_PAGO,P601_R3_DESC_AUTORIZANTE,P601_R3_TOT_G'
 ||'S,P601_R3_COMENTARIO_RECHAZO,P601_R3_DESC_EMPRESA,P601_R3_TOT_RET,P601_R3_AUTORIZADO_POR,P601_R3_USER_VERIFICACION,P601_R3_USR_PR_FMA,P601_R3_USR_SA_FMA,P601_R3_USER_RECHAZO,P601_R3_FEC_AUTORIZACION,P601_R3_FEC_VERIFICACION,P601_R3_FCH_PR_FMA,P601_R3'
 ||'_FCH_SA_FMA,P601_R3_FEC_RECHAZO'
@@ -2657,6 +2650,345 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_01=>'BORRAR'
 ,p_attribute_02=>'N'
 );
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(211152596624135211)
+,p_name=>'da_autorizar_op'
+,p_event_sequence=>180
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P601_AUX_AUTORIZACION_OP_I'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(212240432160755301)
+,p_event_id=>wwv_flow_imp.id(211152596624135211)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>unistr('\00BFAutorizar?')
+,p_attribute_03=>'information'
+,p_attribute_04=>'fa-lg fa-info-circle-o'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(211152685864135212)
+,p_event_id=>wwv_flow_imp.id(211152596624135211)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    VF1 VARCHAR2(1);',
+'    VTIPO VARCHAR2(5);',
+'    VSERIE VARCHAR2(10);',
+'    VNRO NUMBER;',
+'    vautorizado varchar2(1);',
+'    VAUTORIZADO_POR VARCHAR2(50);',
+'BEGIN',
+'        :P601_ERR := NULL;',
+'        ',
+'            BEGIN',
+'                SELECT C002 TIP_MOV_CAJ,	',
+'                       C003 SER_MOV_CAJ,	',
+'                       N001 NRO_MOV_CAJ,',
+'                       C012 AUTORIZADO_POR,',
+'                       C011  AUTORIZADO',
+'                INTO VTIPO,',
+'                     VSERIE,',
+'                     VNRO,',
+'                     VAUTORIZADO_POR,',
+'                     VAUTORIZADO',
+'                FROM APEX_COLLECTIONS',
+'                WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT''',
+'                AND SEQ_ID = :P601_SEQ_ID;',
+'',
+'            EXCEPTION',
+'                WHEN OTHERS THEN',
+'                    :P601_ERR := ''ERROR: ''||SQLERRM;',
+'            END;',
+'',
+'    APEX_COLLECTION.UPDATE_MEMBER_ATTRIBUTE (p_collection_name => ''COL_CAB_CPAUTPAT'',',
+'                                             p_seq => :P601_SEQ_ID,',
+'                                             p_attr_number => 11,',
+'                                             p_attr_value => :P601_AUX_AUTORIZACION_OP_I);',
+'          ',
+'    CPAUTPAT.PR_AUTORIZAR_OP(PI_COD_EMPRESA => :P_COD_EMPRESA , ',
+'						  PI_OP_TODOS => :P601_AUX_AUTORIZACION_OP_I ,',
+'						  PI_AUTORIZADO => vautorizado ,',
+'						  PI_COD_USUARIO => :APP_USER, --''INV''',
+'						  PI_AUTORIZADO_POR => VAUTORIZADO_POR,',
+'						  PI_TIP_MOV_CAJ => VTIPO ,',
+'						  PI_SER_MOV_CAJ => VSERIE ,',
+'						  PI_NRO_MOV_CAJ => VNRO,',
+'						  PO_ERR => :P601_ERR); ',
+'',
+'',
+'    EXCEPTION',
+'        WHEN OTHERS THEN :P601_ERR := ''ERROR: ''||SQLERRM;',
+'END;'))
+,p_attribute_02=>'P601_SEQ_ID,P601_AUX_AUTORIZACION_OP_I'
+,p_attribute_03=>'P601_ERR'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(212241007555755307)
+,p_event_id=>wwv_flow_imp.id(211152596624135211)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(204070591863549301)
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P601_ERR'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(211267211697158901)
+,p_event_id=>wwv_flow_imp.id(211152596624135211)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_ALERT'
+,p_attribute_01=>'Registro autorizado correctamente.'
+,p_attribute_03=>'success'
+,p_attribute_04=>'fa-lg fa-check-square-o'
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P601_ERR'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(211152732267135213)
+,p_name=>'da_autorizar_f1'
+,p_event_sequence=>190
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P601_AUX_AUTORIZACION_F1_I'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(212240549655755302)
+,p_event_id=>wwv_flow_imp.id(211152732267135213)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>unistr('\00BFAutorizar?')
+,p_attribute_03=>'information'
+,p_attribute_04=>'fa-lg fa-info-circle-o'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(211152847216135214)
+,p_event_id=>wwv_flow_imp.id(211152732267135213)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'    VF1 VARCHAR2(1);',
+'    VTIPO VARCHAR2(5);',
+'    VSERIE VARCHAR2(10);',
+'    VNRO NUMBER;',
+'    VPR_FMA VARCHAR2(50);',
+'    VUSR_PR_FMA VARCHAR2(200);',
+'',
+'BEGIN',
+'            BEGIN',
+'                SELECT C002 TIP_MOV_CAJ,	',
+'                       C003 SER_MOV_CAJ,	',
+'                       N001 NRO_MOV_CAJ,',
+'                       C014 PR_FMA,',
+'                       C020 USR_PR_FMA',
+'                INTO VTIPO,',
+'                     VSERIE,',
+'                     VNRO,',
+'                     VPR_FMA,',
+'                     VUSR_PR_FMA',
+'                FROM APEX_COLLECTIONS',
+'                WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT''',
+'                AND SEQ_ID = :P601_SEQ_ID;',
+'',
+'            EXCEPTION',
+'                WHEN OTHERS THEN',
+'                    :P601_ERR := ''ERROR: ''||SQLERRM;',
+'            END;',
+'    ',
+'    APEX_COLLECTION.UPDATE_MEMBER_ATTRIBUTE (p_collection_name => ''COL_CAB_CPAUTPAT'',',
+'                                             p_seq => :P601_SEQ_ID,',
+'                                             p_attr_number => 14,',
+'                                             p_attr_value => :P601_AUX_AUTORIZACION_F1_I);',
+'',
+'    CPAUTPAT.PR_AUTORIZAR_F1 (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'                                PI_F1_TODOS => :P601_AUX_AUTORIZACION_F1_I ,',
+'                                PI_PR_FMA => VPR_FMA,',
+'                                PI_USR_PR_FMA => VUSR_PR_FMA,',
+'                                PI_COD_USUARIO => :APP_USER , --''INV'', -- ',
+'                                PI_TIP_MOV_CAJ => VTIPO ,',
+'                                PI_SER_MOV_CAJ => VSERIE,',
+'                                PI_NRO_MOV_CAJ => VNRO,',
+'                                PO_ERR => :P601_ERR); ',
+'',
+'',
+'    EXCEPTION',
+'        WHEN OTHERS THEN',
+'                :P601_ERR := ''ERROR: ''||SQLERRM;',
+'END;'))
+,p_attribute_02=>'P601_SEQ_ID,P601_AUX_AUTORIZACION_F1_I'
+,p_attribute_03=>'P601_ERR'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(212240978139755306)
+,p_event_id=>wwv_flow_imp.id(211152732267135213)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(204070591863549301)
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P601_ERR'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(211267390975158902)
+,p_event_id=>wwv_flow_imp.id(211152732267135213)
+,p_event_result=>'TRUE'
+,p_action_sequence=>60
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_ALERT'
+,p_attribute_01=>'Registro autorizado correctamente.'
+,p_attribute_03=>'success'
+,p_attribute_04=>'fa-lg fa-check-square-o'
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P601_ERR'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(211152999370135215)
+,p_name=>'da_autorizar_f2'
+,p_event_sequence=>200
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P601_AUX_AUTORIZACION_F2_I'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(212240647752755303)
+,p_event_id=>wwv_flow_imp.id(211152999370135215)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>unistr('\00BFAutorizar?')
+,p_attribute_03=>'information'
+,p_attribute_04=>'fa-lg fa-info-circle-o'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(211153034739135216)
+,p_event_id=>wwv_flow_imp.id(211152999370135215)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'',
+'VTIPO VARCHAR2(5);',
+'VSERIE VARCHAR2(5);',
+'VNRO NUMBER;',
+'VSA_FMA VARCHAR2(50);',
+'VUSR_SA_FMA VARCHAR2(50);',
+'VF2 VARCHAR2(1);',
+'BEGIN',
+':P601_ERR := NULL;',
+'',
+'    VF2 := :P601_AUX_AUTORIZACION_F2_I;',
+'    ',
+'    BEGIN',
+'        SELECT C002 TIP_MOV_CAJ,	',
+'               C003 SER_MOV_CAJ,	',
+'               N001 NRO_MOV_CAJ,',
+'               C015 SA_FMA,',
+'               C019 USR_SA_FMA',
+'        INTO VTIPO,',
+'             VSERIE,',
+'             VNRO,',
+'             VSA_FMA,',
+'             VUSR_SA_FMA',
+'        FROM APEX_COLLECTIONS',
+'        WHERE COLLECTION_NAME = ''COL_CAB_CPAUTPAT''',
+'        AND SEQ_ID = :P601_SEQ_ID;',
+'',
+'        EXCEPTION',
+'            WHEN OTHERS THEN',
+'                :P601_ERR := ''ERROR: ''||SQLERRM;',
+'    END;',
+'    ',
+'    APEX_COLLECTION.UPDATE_MEMBER_ATTRIBUTE (p_collection_name => ''COL_CAB_CPAUTPAT'',',
+'                                             p_seq => :P601_SEQ_ID,',
+'                                             p_attr_number => 15,',
+'                                             p_attr_value => :P601_AUX_AUTORIZACION_OP_I);',
+'',
+'     CPAUTPAT.PR_AUTORIZAR_F2 (PI_COD_EMPRESA => :P_COD_EMPRESA,',
+'                                PI_COD_USUARIO => :APP_USER, -- ''INV'', --',
+'                                PI_F2_TODOS => VF2 ,',
+'                                PI_TIP_MOV_CAJ =>VTIPO ,',
+'                                PI_SER_MOV_CAJ => VSERIE,',
+'                                PI_NRO_MOV_CAJ => VNRO ,',
+'                                PI_SA_FMA => VSA_FMA ,',
+'                                PI_USR_SA_FMA =>VUSR_SA_FMA,',
+'                                PO_ERR => :P601_ERR); ',
+'',
+'    EXCEPTION',
+'        WHEN OTHERS THEN',
+'                :P601_ERR := ''ERROR''||SQLERRM;',
+'END;'))
+,p_attribute_02=>'P601_SEQ_ID,P601_AUX_AUTORIZACION_F2_I'
+,p_attribute_03=>'P601_ERR'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(212240801633755305)
+,p_event_id=>wwv_flow_imp.id(211152999370135215)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(204070591863549301)
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P601_ERR'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(211267402662158903)
+,p_event_id=>wwv_flow_imp.id(211152999370135215)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_ALERT'
+,p_attribute_01=>'Registro autorizado correctamente.'
+,p_attribute_03=>'success'
+,p_attribute_04=>'fa-lg fa-check-square-o'
+,p_client_condition_type=>'NULL'
+,p_client_condition_element=>'P601_ERR'
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(108526377590587031)
 ,p_process_sequence=>10
@@ -2672,7 +3004,7 @@ wwv_flow_imp_page.create_page_process(
 '    :P601_COD_MODULO := ''CP'';',
 '    :P601_COD_FORMA := ''CPAUTPAT'';',
 '    :P601_ERR_BLOQUEO := null;',
-'',
+'--test',
 '',
 '    IF :P601_INIT = 1 THEN',
 '        APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION( p_collection_name => ''COL_CAB_CPAUTPAT'');',
@@ -2681,20 +3013,22 @@ wwv_flow_imp_page.create_page_process(
 '    END IF;',
 '    ',
 '     :P601_VER_OTRAS_AUTORIZACION  := busca_permiso( :p_cod_empresa, ',
-'                                                   :P601_COD_FORMA, ',
-'                                                   ''INV'',-- :APP_USER, ',
+'                                                   ''CPAUTPAT'', ',
+'                                                    :APP_USER,--''INV'',-- ',
 '                                                   ''VER_OTRAS_AUTORIZACION'' ) ;',
+'',
+'',
 '     :P601_PERMITE_AUTORIZAR_OTRAS := busca_permiso( :p_cod_empresa, ',
 '                                                      :P601_COD_FORMA, ',
-'                                                      ''INV'',--:APP_USER, ',
+'                                                      :APP_USER, --''INV'',--',
 '                                                      ''PERMITE_AUTORIZAR_OTRAS'' ) ;   ',
 '    VFIRMA1 := busca_permiso( :p_cod_empresa, ',
 '                              :P601_COD_FORMA, ',
-'                              ''INV'',--:APP_USER, ',
+'                              :APP_USER, --''INV'',--',
 '                              ''PERIMTE_FIRMA1'' ) ;  ',
 '    VFIRMA2  := busca_permiso( :p_cod_empresa, ',
 '                              :P601_COD_FORMA, ',
-'                              ''INV'',--:APP_USER, ',
+'                              :APP_USER, --''INV'',--',
 '                              ''PERIMTE_FIRMA2'' ) ;                           ',
 '',
 '    IF NVL(VFIRMA1,''N'') 	<>''S'' THEN',
@@ -2739,10 +3073,8 @@ wwv_flow_imp_page.create_page_process(
 '    :P601_TIPO_COMPROBANTE:=''T'';',
 '    :P601_COD_EMPRESA:=''1'';',
 '    :P601_MONEDA:=''T'';',
-'    :P601_R1_FECHA_INI :=sysdate-5;',
-'    :P601_FEC_INI:=sysdate-5;',
+'    :P601_R1_FECHA_INI:=sysdate-5;',
 '    :P601_R1_FECHA_FIN := last_day(sysdate);',
-'    :P601_FEC_FIN:=last_day(sysdate);',
 '',
 'if user=''REINALDOSA'' THEN',
 '	:P601_AUTORIZADO:=''S'';',
@@ -2752,25 +3084,19 @@ wwv_flow_imp_page.create_page_process(
 '',
 'IF :P601_ESTADO=''FIRMA'' THEN',
 '		:P601_AUTORIZADO:=''V'';',
-'		:P601_USUARIO_FIRMA:=  ''INV'';--:P_COD_USUARIO;',
+'		:P601_USUARIO_FIRMA:=  :APP_USER; -- INV',
 '		:P601_R1_COD_AUTORIZANTE:=null;',
 'END IF;                     ',
 '    :P601_AUX_CAB := ''S'';',
 '        IF  busca_permiso( :P_COD_EMPRESA, ',
 '                       :P601_COD_FORMA, ',
-'                       ''INV'',--:P_COD_USUARIO, ',
+'                       :APP_USER, -- INV ',
 '                       ''PERIMTE_FIRMA_MASIVA'' ) =''N'' THEN',
 '',
 '        :P601_AUX_CAB := ''N'';',
 '        ',
 '    	END IF;	',
-'        ',
-'     CPAUTPAT.PR_BLOQUEO (PI_COD_USUARIO => ''INV'', -- :APP_USER,',
-'                              PO_BLOQUEOI => :P601_AUX_BLOQUEO_INSERT,',
-'                              PO_BLOQUEOE => :P601_AUX_BLOQUEO_EDIT,',
-'                              PO_BLOQUEOD => :P601_AUX_BLOQUEO_DELETE,',
-'                              PO_BLOQUEOC => :P601_AUX_BLOQUEO_CONSULTA,',
-'                              PO_ERR => :P601_ERR_BLOQUEO );',
+'  ',
 'END;                 ',
 '',
 ''))

@@ -158,7 +158,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230523124319'
+,p_last_upd_yyyymmddhh24miss=>'20230925093207'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(5924370326379011)
@@ -1194,23 +1194,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(5924450042379012)
 ,p_prompt=>'Cliente'
 ,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'LV_CLIENTES1'
+,p_named_lov=>'LV_CLIENTES_PERSONA'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT nombre,',
-'       nomb_fantasia,',
-'       cod_cliente,',
-'       codigo_area,',
-'       num_telefono,',
-'       cod_ident,',
-'       numero,',
-'       cod_ident||'' - ''||nombre DESCRI,',
-'       c.cod_cliente codi',
-'  FROM cc_clientes c, personas p, telef_personas pt, ident_personas pi',
+'SELECT nombre||'' - ''||COD_CLIENTE D,',
+'     ',
+'       cod_cliente',
+'  FROM cc_clientes c, personas p ',
 ' WHERE c.cod_empresa = ''1''',
 '   AND c.cod_persona = p.cod_persona',
-'   AND p.cod_persona = pt.cod_persona(+)',
-'   AND p.cod_persona = pi.cod_persona(+)',
-'   AND nvl(c.estado, ''X'') in(''A'',''B'',''C'')',
+'  ',
 ' ORDER BY nombre'))
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'TODOS'

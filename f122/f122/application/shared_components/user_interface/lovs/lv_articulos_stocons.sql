@@ -15,8 +15,7 @@ wwv_flow_imp_shared.create_list_of_values(
  p_id=>wwv_flow_imp.id(209743315066228155)
 ,p_lov_name=>'LV_ARTICULOS_STOCONS'
 ,p_lov_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'select ',
-'descripcion, cod_articulo, cod_origen_art, cod_alterno, cod_art_corto ',
+'select descripcion, cod_articulo',
 'from st_articulos ',
 'where cod_empresa = :P_COD_EMPRESA',
 'order by 1'))

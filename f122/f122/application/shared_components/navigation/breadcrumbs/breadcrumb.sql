@@ -802,8 +802,9 @@ wwv_flow_imp_shared.create_menu_option(
 );
 wwv_flow_imp_shared.create_menu_option(
  p_id=>wwv_flow_imp.id(108953821174031380)
+,p_parent_id=>wwv_flow_imp.id(208969651270360287)
 ,p_short_name=>'NOTAS DE ENVIOS PENDIENTES - STENVPE'
-,p_link=>'f?p=&APP_ID.:369:&APP_SESSION.::&DEBUG.:::'
+,p_link=>'f?p=&APP_ID.:369:&SESSION.::&DEBUG.:::'
 ,p_page_id=>369
 );
 wwv_flow_imp_shared.create_menu_option(
@@ -1574,12 +1575,6 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_page_id=>517
 );
 wwv_flow_imp_shared.create_menu_option(
- p_id=>wwv_flow_imp.id(155285214666692182)
-,p_short_name=>'Cierre De Pedidos - VTACIEPE'
-,p_link=>'f?p=&APP_ID.:519:&APP_SESSION.::&DEBUG.:::'
-,p_page_id=>519
-);
-wwv_flow_imp_shared.create_menu_option(
  p_id=>wwv_flow_imp.id(155358550278786501)
 ,p_short_name=>'CAAPRSNC'
 ,p_link=>'f?p=&APP_ID.:515:&APP_SESSION.::&DEBUG.:::'
@@ -1968,6 +1963,69 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_short_name=>unistr('NOTAS DE ENV\00CDO')
 ,p_link=>'f?p=&APP_ID.:323:&SESSION.::&DEBUG.:::'
 ,p_page_id=>323
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(209954693931678017)
+,p_parent_id=>wwv_flow_imp.id(108953821174031380)
+,p_short_name=>'NOTAS DE ENVIOS PENDIENTES - STENVPE'
+,p_link=>'f?p=&APP_ID.:339:&SESSION.::&DEBUG.:::'
+,p_page_id=>339
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(210015461800308726)
+,p_parent_id=>wwv_flow_imp.id(208969651270360287)
+,p_short_name=>'CONSULTA DE STOCK CON COSTOS - STCOSOPN'
+,p_link=>'f?p=&APP_ID.:251:&SESSION.::&DEBUG.:::'
+,p_page_id=>251
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(210466980401685959)
+,p_short_name=>'Carga de Notas de Credito'
+,p_link=>'f?p=&APP_ID.:616:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>616
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(210543419381124503)
+,p_short_name=>unistr('Carga de Notas de Cr\00E9dito')
+,p_link=>'f?p=&APP_ID.:622:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>622
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(210700483705916325)
+,p_short_name=>'Reporte Detalles - STOCONS'
+,p_link=>'f?p=&APP_ID.:623:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>623
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(212116393433929939)
+,p_short_name=>'INFORME DE REMISIONES'
+,p_link=>'f?p=&APP_ID.:624:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>624
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(212817758425359569)
+,p_short_name=>'cccomcuo-busq'
+,p_link=>'f?p=&APP_ID.:628:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>628
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(212949933044822238)
+,p_parent_id=>wwv_flow_imp.id(111399681645461489)
+,p_short_name=>'Cierre de Pedidos de Ventas'
+,p_link=>'f?p=&APP_ID.:519:&SESSION.::&DEBUG.:::'
+,p_page_id=>519
 );
 wwv_flow_imp.component_end;
 end;

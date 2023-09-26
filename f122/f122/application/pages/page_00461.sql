@@ -54,8 +54,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230916100954'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230925101258'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(135827907137788801)
@@ -2451,6 +2451,21 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64602673310457125)
+,p_event_id=>wwv_flow_imp.id(137673652400319430)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'if :P461_NEW_CANTIDAD is null or :P461_NEW_CANTIDAD = ''0'' then ',
+'        raise_application_error(-20001, ''Debe agregar la cantidad'');',
+'    end if;'))
+,p_attribute_02=>'P461_NEW_CANTIDAD'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(137673794407319431)
 ,p_event_id=>wwv_flow_imp.id(137673652400319430)
 ,p_event_result=>'TRUE'
@@ -2462,6 +2477,9 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'V_EXISTE NUMBER;',
 'BEGIN',
+'    if :P461_NEW_CANTIDAD is null or :P461_NEW_CANTIDAD = ''0'' then ',
+'        raise_application_error(-20001, ''Debe agregar la cantidad'');',
+'    end if;',
 '',
 '      :P461_MENSAJE :=null;',
 '        ',
@@ -2505,7 +2523,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 '    EXCEPTION',
 '        WHEN OTHERS THEN',
-'            APEX_DEBUG.ERROR(''Error Guardar'' || SQLERRM);',
+'            raise_application_error(-20001, SQLERRM);',
 '',
 'END;'))
 ,p_attribute_02=>'P461_EDITAR,P461_LIST_COD_ARTICULO,P461_NEW_CANTIDAD,P461_NEW_OBSERVACION,P461_NEW_COD_UNIDAD_MEDIDA'
@@ -2518,7 +2536,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(137674023129319434)
 ,p_event_id=>wwv_flow_imp.id(137673652400319430)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>40
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -2530,7 +2548,7 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(137673880838319432)
 ,p_event_id=>wwv_flow_imp.id(137673652400319430)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>50
+,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_CLOSE_REGION'
 ,p_affected_elements_type=>'REGION'

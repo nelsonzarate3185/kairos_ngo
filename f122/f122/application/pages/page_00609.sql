@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'16'
 ,p_last_updated_by=>'MBLANCO'
-,p_last_upd_yyyymmddhh24miss=>'20230920111716'
+,p_last_upd_yyyymmddhh24miss=>'20230925120057'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(97751838883503629)
@@ -37,14 +37,14 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(97752937351503640)
-,p_button_sequence=>150
+,p_button_sequence=>190
 ,p_button_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_button_name=>'BT_LIMPIAR_ADJUNTO'
 ,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(40187078917263678)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Bt Limpiar Adjunto'
+,p_button_image_alt=>'Limpiar Adjunto'
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-eraser'
 ,p_button_cattributes=>'style="margin-top:32px;"'
@@ -141,7 +141,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(97752384773503634)
 ,p_name=>'P609_TEMA'
-,p_item_sequence=>90
+,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_prompt=>'Tema'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
@@ -157,7 +157,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(97752443533503635)
 ,p_name=>'P609_INSTITUCION'
-,p_item_sequence=>100
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_prompt=>unistr('Instituci\00F3n')
 ,p_display_as=>'NATIVE_TEXT_FIELD'
@@ -174,7 +174,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(97752590902503636)
 ,p_name=>'P609_TIPO_CAPACITACION'
-,p_item_sequence=>110
+,p_item_sequence=>140
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_prompt=>unistr('Tipo Capacitaci\00F3n')
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -196,7 +196,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(97752686290503637)
 ,p_name=>'P609_TIPO_MODALIDAD'
-,p_item_sequence=>120
+,p_item_sequence=>150
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_prompt=>'Tipo Modalidad'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -219,7 +219,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(97752706779503638)
 ,p_name=>'P609_MOTIVO'
-,p_item_sequence=>130
+,p_item_sequence=>160
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_prompt=>'Motivo de solicitud'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -242,7 +242,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(97752837635503639)
 ,p_name=>'P609_ADJUNTO'
-,p_item_sequence=>140
+,p_item_sequence=>170
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_prompt=>'Archivo adjunto'
 ,p_display_as=>'NATIVE_FILE'
@@ -290,7 +290,41 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(206369069869755632)
 ,p_name=>'P609_MENSAJE'
-,p_item_sequence=>80
+,p_item_sequence=>110
+,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(207191987236594017)
+,p_name=>'P609_VER_ADJUNTO'
+,p_item_sequence=>180
+,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
+,p_prompt=>'Ver Adjunto'
+,p_display_as=>'NATIVE_DISPLAY_IMAGE'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'SQL'
+,p_attribute_06=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT SOLICITUD_CAPACITACIONES.FN_GET_BLOB_FROM_FILE(P_DIR => ''DIRECTORIO'',',
+'                                                                P_FILE_NAME  => a.nombre_archivo ) adjunto                       ',
+'FROM RH_SOLICITUDES_CAPACITACION a ',
+'WHERE a.cod_empleado = :P_COD_EMPLEADO ',
+'AND a.NRO_SOLICITUD = :P609_NRO_SOLICITUD;',
+''))
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(207193295623594030)
+,p_name=>'P609_NOMBRE_ADJUNTO'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(207193560534594033)
+,p_name=>'P609_CAMBIO_ADJUNTO'
+,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_imp.id(97751838883503629)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -372,6 +406,30 @@ wwv_flow_imp_page.create_page_validation(
 ,p_validation_condition_type=>'REQUEST_EQUALS_CONDITION'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
+wwv_flow_imp_page.create_page_validation(
+ p_id=>wwv_flow_imp.id(207191812596594016)
+,p_validation_name=>'VA_ADJUNTO'
+,p_validation_sequence=>70
+,p_validation=>'P609_ADJUNTO'
+,p_validation_type=>'ITEM_NOT_NULL'
+,p_error_message=>'Debe adjuntar un archivo.'
+,p_when_button_pressed=>wwv_flow_imp.id(97753258399503643)
+,p_associated_item=>wwv_flow_imp.id(97752837635503639)
+,p_error_display_location=>'INLINE_WITH_FIELD'
+);
+wwv_flow_imp_page.create_page_validation(
+ p_id=>wwv_flow_imp.id(207193623483594034)
+,p_validation_name=>'VA_ADJUNTO_1'
+,p_validation_sequence=>80
+,p_validation=>'P609_ADJUNTO'
+,p_validation_type=>'ITEM_NOT_NULL'
+,p_error_message=>'Debe adjuntar un archivo.'
+,p_validation_condition=>'P609_CAMBIO_ADJUNTO'
+,p_validation_condition2=>'1'
+,p_validation_condition_type=>'VAL_OF_ITEM_IN_COND_EQ_COND2'
+,p_associated_item=>wwv_flow_imp.id(97752837635503639)
+,p_error_display_location=>'INLINE_WITH_FIELD'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(97753037569503641)
 ,p_name=>'DA_LIMPIAR_ADJUNTO'
@@ -382,14 +440,76 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(97753160445503642)
+ p_id=>wwv_flow_imp.id(207191769705594015)
 ,p_event_id=>wwv_flow_imp.id(97753037569503641)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>unistr('\00BFDesea reemplazar el archivo adjunto?')
+,p_attribute_02=>unistr('Atenci\00F3n')
+,p_attribute_03=>'warning'
+,p_attribute_06=>'Aceptar'
+,p_attribute_07=>'Cancelar'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(97753160445503642)
+,p_event_id=>wwv_flow_imp.id(97753037569503641)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_CLEAR'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P609_ADJUNTO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207193020187594028)
+,p_event_id=>wwv_flow_imp.id(97753037569503641)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'BEGIN',
+'    UPDATE RH_SOLICITUDES_CAPACITACION',
+'    SET BLOB_ARCHIVO = EMPTY_BLOB(),',
+'        NOMBRE_ARCHIVO = NULL,',
+'        MIME_TYPE = NULL,',
+'        URL_ARCHIVO = NULL',
+'    WHERE NRO_SOLICITUD = :P609_NRO_SOLICITUD',
+'    AND COD_EMPRESA = ''1'';',
+unistr('    :P609_MENSAJE := ''El adjunto se elimin\00F3 correctamente. Debe adjuntar otro archivo para guardar la solicitud.'';'),
+'    :P609_CAMBIO_ADJUNTO := 1;',
+'EXCEPTION',
+'    WHEN OTHERS THEN',
+unistr('        :P609_MENSAJE := ''Ocurri\00F3 un error al borrar el adjunto. Intente nuevamente.'';'),
+'        apex_Debug.error(''Error al limpiar datos del adjunto en la tabla de capacitaciones: ''||sqlerrm);',
+'END;            '))
+,p_attribute_02=>'P609_NRO_SOLICITUD'
+,p_attribute_03=>'P609_MENSAJE,P609_CAMBIO_ADJUNTO'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192666398594024)
+,p_event_id=>wwv_flow_imp.id(97753037569503641)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SHOW'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P609_ADJUNTO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192798516594025)
+,p_event_id=>wwv_flow_imp.id(97753037569503641)
+,p_event_result=>'TRUE'
+,p_action_sequence=>60
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P609_VER_ADJUNTO'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(206366177228755603)
@@ -508,6 +628,75 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'Aceptar'
 ,p_attribute_06=>'Cancelar'
 );
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(207192065672594018)
+,p_name=>'DA_VER_ADJUNTO'
+,p_event_sequence=>60
+,p_condition_element=>'P609_NOMBRE_ADJUNTO'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192194294594019)
+,p_event_id=>wwv_flow_imp.id(207192065672594018)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_SHOW'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P609_VER_ADJUNTO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192911080594027)
+,p_event_id=>wwv_flow_imp.id(207192065672594018)
+,p_event_result=>'FALSE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(97752937351503640)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192204161594020)
+,p_event_id=>wwv_flow_imp.id(207192065672594018)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P609_ADJUNTO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192465295594022)
+,p_event_id=>wwv_flow_imp.id(207192065672594018)
+,p_event_result=>'FALSE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_SHOW'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P609_ADJUNTO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192344101594021)
+,p_event_id=>wwv_flow_imp.id(207192065672594018)
+,p_event_result=>'FALSE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P609_VER_ADJUNTO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(207192819421594026)
+,p_event_id=>wwv_flow_imp.id(207192065672594018)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_SHOW'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(97752937351503640)
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(206367841975755620)
 ,p_process_sequence=>10
@@ -516,6 +705,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_name=>'PR_INIT_SOLICITUD'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '--:P_COD_EMPLEADO := 1207;----------------------------------------TEST ------------------------------',
+'DECLARE',
+'VNOMBRE_ARCHIVO VARCHAR2(200);',
 'BEGIN',
 '    IF :P609_NRO_SOLICITUD IS NOT NULL THEN',
 '        BEGIN',
@@ -527,14 +718,15 @@ wwv_flow_imp_page.create_page_process(
 '                   a.OBS_INSTITUTO,',
 '                   a.IND_TIPO,',
 '                   a.IND_MODALIDAD,',
-'                   a.IND_MOTIVO',
-'                   --b.nombre_archivo ',
+'                   a.IND_MOTIVO,                   ',
+'                   a.nombre_archivo ',
 '              INTO :P609_COD_SUPERIOR, :P609_COD_SUCURSAL, :P609_COD_AREA, :P609_COD_DEPARTAMENTO, :P609_TEMA,',
-'                   :P609_INSTITUCION, :P609_TIPO_CAPACITACION, :P609_TIPO_MODALIDAD, :P609_MOTIVO    ',
+'                   :P609_INSTITUCION, :P609_TIPO_CAPACITACION, :P609_TIPO_MODALIDAD, :P609_MOTIVO, :P609_NOMBRE_ADJUNTO    ',
 '            FROM RH_SOLICITUDES_CAPACITACION a ',
 '            --LEFT JOIN RH_SOLICITUDES_CAP_ARCHIVOS b ON (a.nro_solicitud = b.nro_solicitud)',
 '            WHERE a.cod_empleado = :P_COD_EMPLEADO ',
 '              AND a.NRO_SOLICITUD = :P609_NRO_SOLICITUD;',
+'  ',
 '        EXCEPTION',
 '            WHEN NO_DATA_FOUND THEN      ',
 '                apex_error.add_error (p_message          => ''No se han encontrado los datos de la solicitud. Contacte al administrador.'',',
@@ -579,7 +771,9 @@ wwv_flow_imp_page.create_page_process(
 '        END;                ',
 '    END IF;      ',
 'END;',
-''))
+'',
+'-- BANDERA PARA SABER SI HAY UN CAMBIO EN EL ADJUNTO',
+':P609_CAMBIO_ADJUNTO := 0;'))
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
@@ -614,43 +808,108 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(206367217868755614)
-,p_process_sequence=>10
+,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'PR_ENVIAR'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SOLICITUD_CAPACITACIONES.PR_ENVIAR(PI_TEMA => :P609_TEMA, ',
-'                                    PI_INSTITUCION => :P609_INSTITUCION,',
-'                                    PI_TIPO_CAPACITACION => :P609_TIPO_CAPACITACION,',
-'                                    PI_TIPO_MODALIDAD    => :P609_TIPO_MODALIDAD,',
-'                                    PI_MOTIVO            => :P609_MOTIVO,',
-'                                    PI_COD_SUCURSAL => :P609_COD_SUCURSAL, ',
-'                                    PI_COD_AREA => :P609_COD_AREA,',
-'                                    PI_COD_DEPARTAMENTO => :P609_COD_DEPARTAMENTO,',
-'                                    PI_COD_SUPERIOR => :P609_COD_SUPERIOR,',
-'                                    PI_COD_EMPLEADO => :P_COD_EMPLEADO); ',
+'DECLARE',
+'VNRO_SOLICITUD NUMBER;',
+'UPLOAD_BLOB BLOB;  ',
+'V_FILENAME VARCHAR2(350);',
+'V_MIME_TYPE VARCHAR2(350);',
+'VDIR VARCHAR2(100);',
+'BEGIN',
+'    SOLICITUD_CAPACITACIONES.PR_ENVIAR(PI_TEMA => :P609_TEMA, ',
+'                                       PI_INSTITUCION => :P609_INSTITUCION,',
+'                                       PI_TIPO_CAPACITACION => :P609_TIPO_CAPACITACION,',
+'                                       PI_TIPO_MODALIDAD    => :P609_TIPO_MODALIDAD,',
+'                                       PI_MOTIVO            => :P609_MOTIVO,',
+'                                       PI_COD_SUCURSAL => :P609_COD_SUCURSAL, ',
+'                                       PI_COD_AREA => :P609_COD_AREA,',
+'                                       PI_COD_DEPARTAMENTO => :P609_COD_DEPARTAMENTO,',
+'                                       PI_COD_SUPERIOR => :P609_COD_SUPERIOR,',
+'                                       PI_COD_EMPLEADO => :P_COD_EMPLEADO,',
+'                                       PO_NRO_SOLICITUD => VNRO_SOLICITUD); ',
+'',
+'    IF VNRO_SOLICITUD IS NOT NULL AND :P609_ADJUNTO IS NOT NULL THEN',
+'        -- UPDATE SOBRE TABLA PARA GUARDAR EL ARCHIVO',
+'        SELECT BLOB_CONTENT,',
+'               FILENAME, ',
+'               MIME_TYPE  ',
+'          INTO UPLOAD_BLOB,',
+'               V_FILENAME,',
+'               V_MIME_TYPE       ',
+'          FROM APEX_APPLICATION_TEMP_FILES   ',
+'         WHERE NAME = :P609_ADJUNTO;',
+'',
+'        UPDATE RH_SOLICITUDES_CAPACITACION',
+'        SET BLOB_ARCHIVO = UPLOAD_BLOB,',
+'            NOMBRE_ARCHIVO = V_FILENAME,',
+'            MIME_TYPE = V_MIME_TYPE',
+'        WHERE NRO_SOLICITUD = VNRO_SOLICITUD',
+'        AND COD_EMPRESA = ''1'';',
+'',
+'        SOLICITUD_CAPACITACIONES.WRITE_BLOB_TO_FILE(P_NRO_SOLICITUD => VNRO_SOLICITUD, ',
+'                                                    P_DIR => VDIR); ',
+'    END IF;    ',
+'END;',
+'',
+'',
+'',
 '',
 '',
 ''))
 ,p_process_clob_language=>'PLSQL'
+,p_process_error_message=>'Ha ocurrido un error.'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when=>'ENVIAR'
 ,p_process_when_type=>'REQUEST_EQUALS_CONDITION'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(206368954052755631)
-,p_process_sequence=>20
+,p_process_sequence=>30
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'PR_GUARDAR'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SOLICITUD_CAPACITACIONES.PR_GUARDAR(PI_TEMA => :P609_TEMA, ',
-'                                    PI_INSTITUCION => :P609_INSTITUCION,',
-'                                    PI_TIPO_CAPACITACION => :P609_TIPO_CAPACITACION,',
-'                                    PI_TIPO_MODALIDAD    => :P609_TIPO_MODALIDAD,',
-'                                    PI_MOTIVO            => :P609_MOTIVO,',
-'                                    PI_NRO_SOLICITUD     => TO_NUMBER(:P609_NRO_SOLICITUD));'))
+'DECLARE',
+'UPLOAD_BLOB BLOB;  ',
+'V_FILENAME VARCHAR2(350);',
+'V_MIME_TYPE VARCHAR2(350);',
+'VDIR VARCHAR2(100);',
+'BEGIN',
+'    SOLICITUD_CAPACITACIONES.PR_GUARDAR(PI_TEMA => :P609_TEMA, ',
+'                                        PI_INSTITUCION => :P609_INSTITUCION,',
+'                                        PI_TIPO_CAPACITACION => :P609_TIPO_CAPACITACION,',
+'                                        PI_TIPO_MODALIDAD    => :P609_TIPO_MODALIDAD,',
+'                                        PI_MOTIVO            => :P609_MOTIVO,',
+'                                        PI_NRO_SOLICITUD     => TO_NUMBER(:P609_NRO_SOLICITUD));',
+'',
+'    IF :P609_CAMBIO_ADJUNTO = 1 THEN',
+'        -- UPDATE SOBRE TABLA PARA GUARDAR EL ARCHIVO',
+'        SELECT BLOB_CONTENT,',
+'               FILENAME, ',
+'               MIME_TYPE  ',
+'          INTO UPLOAD_BLOB,',
+'               V_FILENAME,',
+'               V_MIME_TYPE       ',
+'          FROM APEX_APPLICATION_TEMP_FILES   ',
+'         WHERE NAME = :P609_ADJUNTO;',
+'',
+'        UPDATE RH_SOLICITUDES_CAPACITACION',
+'        SET BLOB_ARCHIVO = UPLOAD_BLOB,',
+'            NOMBRE_ARCHIVO = V_FILENAME,',
+'            MIME_TYPE = V_MIME_TYPE',
+'        WHERE NRO_SOLICITUD = TO_NUMBER(:P609_NRO_SOLICITUD)',
+'        AND COD_EMPRESA = ''1'';',
+'',
+'        SOLICITUD_CAPACITACIONES.WRITE_BLOB_TO_FILE(P_NRO_SOLICITUD => TO_NUMBER(:P609_NRO_SOLICITUD), ',
+'                                                    P_DIR => VDIR); ',
+'    END IF;',
+'END;'))
 ,p_process_clob_language=>'PLSQL'
+,p_process_error_message=>'Ha ocurrido un error.'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when=>'GUARDAR'
 ,p_process_when_type=>'REQUEST_EQUALS_CONDITION'

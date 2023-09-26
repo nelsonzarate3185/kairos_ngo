@@ -50,7 +50,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230912095632'
+,p_last_upd_yyyymmddhh24miss=>'20230922103605'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(19174019260232420)
@@ -2937,7 +2937,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_lov=>'STATIC:ADMINISTRACION;ADMINISTRACION,COMERCIAL;COMERCIAL,DIRECTORIO;DIRECTORIO,OPERACIONES;OPERACIONES,REPUESTOS;REPUESTOS,POSTVENTA;POSTVENTA,MARKETING;MARKETING,TIC;TIC'
 ,p_lov_display_null=>'YES'
-,p_lov_null_text=>'   '
+,p_lov_null_text=>'   ...'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
 ,p_begin_on_new_field=>'N'
@@ -4118,7 +4118,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(52979499459988137)
-,p_process_sequence=>40
+,p_process_sequence=>30
 ,p_process_point=>'AFTER_HEADER'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'carga_collection'
@@ -4135,7 +4135,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(59091268876406740)
-,p_process_sequence=>50
+,p_process_sequence=>40
 ,p_process_point=>'AFTER_HEADER'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'CARGA_DATOS'

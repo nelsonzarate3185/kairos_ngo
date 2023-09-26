@@ -129,8 +129,8 @@ wwv_flow_imp_page.create_page(
 '}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'PBOGADO'
-,p_last_upd_yyyymmddhh24miss=>'20230719134105'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20230922155257'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(5476933179225721)
@@ -1588,6 +1588,14 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(209703801217309508)
+,p_name=>'P9_TIPO_IMPUESTO'
+,p_item_sequence=>320
+,p_item_plug_id=>wwv_flow_imp.id(41117290894000702)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
 wwv_flow_imp_page.create_page_validation(
  p_id=>wwv_flow_imp.id(5306440188947403)
 ,p_validation_name=>'VA_COD_CLIENTE'
@@ -1808,11 +1816,13 @@ wwv_flow_imp_page.create_page_da_action(
 '				select  c.cod_persona,',
 '                        p.nombre,',
 '						c.estado,',
-'                         p.direc_electronica',
+'                         p.direc_electronica,',
+'                         C.TIPO_IMPUESTO',
 '				  into  vcod_persona,',
 '                        :P9_CLIENTE_DESC,',
 '				  		vestado,',
 '                          :P9_CORREO',
+'                        ,:P9_TIPO_IMPUESTO',
 '				  from cc_clientes c, ',
 '				  		 personas p',
 '				 where c.cod_empresa = :P9_COD_EMPRESA_VA',
@@ -1924,7 +1934,7 @@ unistr('            raise_application_error(-20000, ''El cliente debe estar ACTI
 'END;',
 ''))
 ,p_attribute_02=>'P9_COD_CLIENTE,P9_COD_EMPRESA_VA'
-,p_attribute_03=>'P9_COD_CLIENTE,P9_RUC,P9_CI,P9_DIRECCION,P9_TELEFONO,P9_CLIENTE_DESC,P0_MENSAJE_VALIDACION,P9_CORREO,P9_COD_PAIS,P9_PROVINCIA,P9_CIUDAD,P9_BARRIO'
+,p_attribute_03=>'P9_COD_CLIENTE,P9_RUC,P9_CI,P9_DIRECCION,P9_TELEFONO,P9_CLIENTE_DESC,P0_MENSAJE_VALIDACION,P9_CORREO,P9_COD_PAIS,P9_PROVINCIA,P9_CIUDAD,P9_BARRIO,P9_TIPO_IMPUESTO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -2038,16 +2048,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'BUTTON'
 ,p_affected_button_id=>wwv_flow_imp.id(41223834391563138)
 );
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(6266370495275208)
-,p_event_id=>wwv_flow_imp.id(41120219463000732)
-,p_event_result=>'TRUE'
-,p_action_sequence=>50
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_DISABLE'
-,p_affected_elements_type=>'BUTTON'
-,p_affected_button_id=>wwv_flow_imp.id(5478343432225735)
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -2059,6 +2059,16 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(6266370495275208)
+,p_event_id=>wwv_flow_imp.id(41120219463000732)
+,p_event_result=>'TRUE'
+,p_action_sequence=>50
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_DISABLE'
+,p_affected_elements_type=>'BUTTON'
+,p_affected_button_id=>wwv_flow_imp.id(5478343432225735)
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(11951205113734713)
@@ -2931,15 +2941,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'fa-warning'
 ,p_attribute_06=>'Aceptar'
 );
-wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(5475215190225704)
-,p_name=>'DA_BORRAR'
-,p_event_sequence=>221
-,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P9_AUX_SEQ_ID'
-,p_bind_type=>'bind'
-,p_bind_event_type=>'change'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -2951,6 +2952,15 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(5475215190225704)
+,p_name=>'DA_BORRAR'
+,p_event_sequence=>221
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P9_AUX_SEQ_ID'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(5475391953225705)
@@ -4030,7 +4040,7 @@ wwv_flow_imp_page.create_page_process(
 '    END IF;',
 'END;',
 '',
-'IF :P9_RUC IS NULL AND :P9_CI IS NULL THEN ',
+'IF :P9_RUC IS NULL AND :P9_CI IS NULL and nvl(:P9_TIPO_IMPUESTO,''G'')=''G'' THEN ',
 '    RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar CI o RUC del cliente'');',
 'END IF;',
 '    ',

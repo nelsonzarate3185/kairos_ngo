@@ -45,7 +45,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230915090024'
+,p_last_upd_yyyymmddhh24miss=>'20230926145107'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(7709644571151320)
@@ -204,6 +204,7 @@ wwv_flow_imp_page.create_page_plug(
 '      from calendarios CC',
 '     where CC.cod_empresa = C.cod_empresa',
 '       and CC.cod_modulo = ''VT'')',
+'       and  round((TO_NUMBER(SYSDATE - nVL(FECHA_ALTA_COMPROBANTE,FEC_ALTA))) * 24, 2) < 47',
 ' order by tip_comprobante, ser_comprobante, nro_comprobante'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_ajax_items_to_submit=>'P_COD_SUCURSAL,P_COD_EMPRESA'

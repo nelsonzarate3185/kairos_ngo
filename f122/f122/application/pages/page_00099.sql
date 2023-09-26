@@ -146,7 +146,7 @@ unistr('  // Bloquea cualquier otro car\00E1cter'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'FCARDOZO'
-,p_last_upd_yyyymmddhh24miss=>'20230915161643'
+,p_last_upd_yyyymmddhh24miss=>'20230921143954'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(21771034358343321)
@@ -13023,7 +13023,7 @@ wwv_flow_imp_page.create_page_process(
 ':P99_NRO_LINEAS := 0;',
 ':P99_GRU_COMPROBANTE := ''FAC'';',
 ':P99_CARGA_DETALLES_VARIOS := ''S'';',
-':P99_TIP_COMPROBANTE := nvl( :P99_TIP_ANTERIOR, ''FCR'' );',
+'--:P99_TIP_COMPROBANTE := nvl( :P99_TIP_ANTERIOR, ''FCR'' );',
 ':P99_AJUSTE_IVA := NULL;',
 ':P99_COD_SECTOR := :P99_COD_SECTOR_VAR ;',
 ':P99_HORA_ALTA := to_char(sysdate, ''HH24:MI:SS'');',

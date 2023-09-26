@@ -75,7 +75,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230914095339'
+,p_last_upd_yyyymmddhh24miss=>'20230925081838'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(76490556189626944)
@@ -2044,6 +2044,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P315_TIPO_RETIRA'
 ,p_item_sequence=>210
 ,p_item_plug_id=>wwv_flow_imp.id(76992628000644909)
+,p_item_default=>'T'
 ,p_prompt=>'Origen'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_lov=>'STATIC2:STA;W,SALON;SALON,STNGO;STNGO,TODOS;T'
@@ -3071,15 +3072,15 @@ wwv_flow_imp_page.create_page_da_action(
 '    IF VTIPO = ''SALON'' THEN',
 '        -- ''VTREPDET'' ',
 '        SELECT APEX_PAGE.GET_URL (  p_page   => 322,',
-'                                    p_items  => ''P322_P_NRO_COMPROBANTE,P322_P_SER_COMPROBANTE'',',
-'                                    p_values => (''''||VNRO_COMPROBANTE||'',''||VSER_COMPROBANTE||'''')) f_url_1',
+'                                    p_items  => ''P322_P_NRO_COMPROBANTE,P322_P_SER_COMPROBANTE,P322_COD_ORIGEN'',',
+'                                    p_values => (''''||VNRO_COMPROBANTE||'',''||VSER_COMPROBANTE||'',''||:P315_TIPO_RETIRA||'''')) f_url_1',
 '          INTO :P315_URL',
 '          FROM DUAL;',
 '    ELSE ',
 '        -- ''VTPEDAUT''',
 '        SELECT APEX_PAGE.GET_URL (  p_page   => 298,',
-'                                p_items  => ''P298_NRO_COMPROBANTE,P298_SER_COMPROBANTE,P298_TIP_COMPROBANTE_REF,P298_SER_COMPROBANTE_REF,P298_NRO_COMPROBANTE_REF'',',
-'                                p_values => (''''||VNRO_COMPROBANTE||'',''||VSER_COMPROBANTE||'',''||V_TIP_COMPROBANTE_REF||'',''||V_SER_COMPROBANTE_REF||'',''||V_NRO_COMPROBANTE_REF||'''')) f_url_1',
+'                                p_items  => ''P298_NRO_COMPROBANTE,P298_SER_COMPROBANTE,P298_TIP_COMPROBANTE_REF,P298_SER_COMPROBANTE_REF,P298_NRO_COMPROBANTE_REF,P298_COD_ORIGEN'',',
+'                                p_values => (''''||VNRO_COMPROBANTE||'',''||VSER_COMPROBANTE||'',''||V_TIP_COMPROBANTE_REF||'',''||V_SER_COMPROBANTE_REF||'',''||V_NRO_COMPROBANTE_REF||:P315_TIPO_RETIRA||'''')) f_url_1',
 '          INTO :P315_URL',
 '          FROM DUAL;',
 '    END IF;',
@@ -3090,7 +3091,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 '',
 ''))
-,p_attribute_02=>'P315_PRS'
+,p_attribute_02=>'P315_PRS,P315_TIPO_RETIRA'
 ,p_attribute_03=>'P315_URL'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -3296,7 +3297,7 @@ unistr(':P315_LOGO:= ''Impresi\00F3n de Pedidos'';'),
 ':P315_ESTADO := ''T'';',
 ':P315_AUX_LABEL_BOTON := ''TODOS'';',
 ':P315_AUX_REPORTE_REPUESTO := 2;',
-':P315_TIPO_RETIRA := ''T'';',
+'--:P315_TIPO_RETIRA := ''T'';',
 ':P315_PROVEEDOR := ''T'';',
 '',
 'DECLARE ',

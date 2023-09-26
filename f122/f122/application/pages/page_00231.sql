@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230228123234'
+,p_last_upd_yyyymmddhh24miss=>'20230925093207'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(52576816348271018)
@@ -836,23 +836,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(54524318166231702)
 ,p_prompt=>'Clientes Especiales'
 ,p_display_as=>'NATIVE_POPUP_LOV'
-,p_named_lov=>'LV_CLIENTES1'
+,p_named_lov=>'LV_CLIENTES_PERSONA'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT nombre,',
-'       nomb_fantasia,',
-'       cod_cliente,',
-'       codigo_area,',
-'       num_telefono,',
-'       cod_ident,',
-'       numero,',
-'       cod_ident||'' - ''||nombre DESCRI,',
-'       c.cod_cliente codi',
-'  FROM cc_clientes c, personas p, telef_personas pt, ident_personas pi',
+'SELECT nombre||'' - ''||COD_CLIENTE D,',
+'     ',
+'       cod_cliente',
+'  FROM cc_clientes c, personas p ',
 ' WHERE c.cod_empresa = ''1''',
 '   AND c.cod_persona = p.cod_persona',
-'   AND p.cod_persona = pt.cod_persona(+)',
-'   AND p.cod_persona = pi.cod_persona(+)',
-'   AND nvl(c.estado, ''X'') in(''A'',''B'',''C'')',
+'  ',
 ' ORDER BY nombre'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
@@ -966,6 +958,16 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(52579286407271042)
+,p_event_id=>wwv_flow_imp.id(52579098296271040)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(52578270082271032)
+);
 wwv_flow_imp.component_end;
 end;
 /
@@ -977,16 +979,6 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(52579286407271042)
-,p_event_id=>wwv_flow_imp.id(52579098296271040)
-,p_event_result=>'TRUE'
-,p_action_sequence=>20
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_REFRESH'
-,p_affected_elements_type=>'REGION'
-,p_affected_region_id=>wwv_flow_imp.id(52578270082271032)
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(53898709521760408)

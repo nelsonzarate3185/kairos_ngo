@@ -21,20 +21,20 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'function ver_detalle(p_tipo,p_num){',
-'    apex.item("P610_TIPO").setValue(p_tipo);',
-'    apex.item("P610_NUMERO").setValue(p_num);',
+'    apex.item("P617_TIPO").setValue(p_tipo);',
+'    apex.item("P617_NUMERO").setValue(p_num);',
 '}',
 '',
-'function recibo(p_num_cuota){',
-'    apex.item("P610_NRO_CUOTA").setValue(p_num_cuota);',
-'    apex.item("P610_RECIBO").setValue(p_num_cuota);',
+'function recibo(p_num_cuota, p_ser_comprobante){',
+'    apex.item("P617_NRO_CUOTA").setValue(p_num_cuota);',
+'    apex.item("P617_SER_COMPROBANTE").setValue(p_ser_comprobante);',
+'    apex.item("P617_RECIBO").setValue(p_num_cuota);',
 '}',
 '',
-'function doDescarga(p_ruc, p_cod_cliente, p_tipo, p_ser_recibo, p_cod_empleado, p_nro_recibo, p_cod_persona){',
-'   var vURL = ''https://ngosaeca.com.py/reportes/rest_v2/reports/reports/RECIBO_DINERO.pdf?''',
-'            + ''P_RUC='' + p_ruc + ''&P_COD_CLIENTE='' + p_cod_cliente  + ''&P_TIPO=''+ p_tipo ',
-'            + ''&P_SER_RECIBO=''+ p_ser_recibo + ''&P_COD_EMPLEADO=''+ p_cod_empleado + ''&P_NRO_RECIBO=''+ p_nro_recibo',
-'            + ''&P_COD_PERSONA=''+ p_cod_persona +''&j_username=jasperadmin&j_password=jasperadmin'';',
+'function doDescarga(p_cod_cliente, p_ser_recibo, p_cod_empleado, p_nro_recibo){',
+'   var vURL = ''https://ngosaeca.com.py/reportes/rest_v2/reports/reports/RECIBO_DINERO_AENGO.pdf?''',
+'            + ''&P_COD_CLIENTE='' + p_cod_cliente  + ''&P_SER_RECIBO=''+ p_ser_recibo + ''&P_COD_EMPLEADO=''+ p_cod_empleado + ''&P_NRO_RECIBO=''+ p_nro_recibo',
+'            +''&j_username=jasperadmin&j_password=jasperadmin'';',
 '',
 '    console.log(vURL);',
 '    window.open(unescape(vURL.replace(/&amp;/g,''g'')),''_blank'');',
@@ -54,7 +54,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'AIBANEZ'
-,p_last_upd_yyyymmddhh24miss=>'20230920112134'
+,p_last_upd_yyyymmddhh24miss=>'20230921113921'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(416086068825022895)
@@ -80,20 +80,24 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT',
-'    nvl(a.numero_canje,a.numero) AS numero,',
-'    a.factura,',
-'    a.tipo,',
-'    a.numero_canje AS canje,',
-'    a.cod_cliente',
+'a.cod_empleado,',
+'nvl(a.nro_canje,a.nro_comprobante) AS numero,',
+'nvl2(a.nro_canje,''1'',''0'') AS prestamo,',
+'a.r_desc_sector,',
+'a.factura_pagare,',
+'a.tipo_comprobante tipo',
 'FROM',
-'    view_saldos_empleados a',
-'WHERE',
-'    a.cod_cliente = :P617_COD_CLIENTE -- 102362 ------------------- TEST',
+'v_saldos_aengo a',
+'WHERE  ',
+'a.cod_empleado = :P_COD_EMPLEADO --''1280'' --',
+'AND a.tipo_comprobante <> ''FCO''',
 'GROUP BY',
-'    nvl(a.numero_canje,a.numero),',
-'    a.factura,',
-'    a.tipo,',
-'    a.numero_canje,a.cod_cliente'))
+'a.cod_empleado,',
+'nvl(a.nro_canje,a.nro_comprobante),',
+'nvl2(a.nro_canje,''1'',''0''),',
+'a.r_desc_sector,',
+'a.factura_pagare,',
+'a.tipo_comprobante'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_ajax_items_to_submit=>'P617_COD_CLIENTE'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -134,7 +138,6 @@ wwv_flow_imp_page.create_worksheet(
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_show_search_bar=>'N'
-,p_report_list_mode=>'TABS'
 ,p_lazy_loading=>false
 ,p_show_detail_link=>'N'
 ,p_enable_mail_download=>'Y'
@@ -151,55 +154,51 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_display_text_as=>'HIDDEN_ESCAPE_SC'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209720101183267240)
-,p_db_column_name=>'FACTURA'
+ p_id=>wwv_flow_imp.id(208181596155458119)
+,p_db_column_name=>'COD_EMPLEADO'
 ,p_display_order=>20
-,p_column_identifier=>'B'
-,p_column_label=>'Facturas'
-,p_column_link=>'javascript:ver_detalle(''#TIPO#'',''#NUMERO#'');'
-,p_column_linktext=>'#FACTURA#'
-,p_column_link_attr=>'style="color:#b94a48; font-weight:bold;"'
-,p_allow_sorting=>'N'
-,p_allow_filtering=>'N'
-,p_allow_highlighting=>'N'
-,p_allow_ctrl_breaks=>'N'
-,p_allow_aggregations=>'N'
-,p_allow_computations=>'N'
-,p_allow_charting=>'N'
-,p_allow_group_by=>'N'
-,p_allow_pivot=>'N'
-,p_allow_hide=>'N'
+,p_column_identifier=>'F'
+,p_column_label=>'Cod Empleado'
 ,p_column_type=>'STRING'
-,p_heading_alignment=>'LEFT'
-,p_static_id=>'COL_FACT'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209720548554267240)
-,p_db_column_name=>'TIPO'
+ p_id=>wwv_flow_imp.id(208181609359458120)
+,p_db_column_name=>'PRESTAMO'
 ,p_display_order=>30
-,p_column_identifier=>'C'
+,p_column_identifier=>'G'
+,p_column_label=>'Prestamo'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208181790558458121)
+,p_db_column_name=>'R_DESC_SECTOR'
+,p_display_order=>40
+,p_column_identifier=>'H'
+,p_column_label=>unistr('Descripci\00F3n')
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208181821658458122)
+,p_db_column_name=>'FACTURA_PAGARE'
+,p_display_order=>50
+,p_column_identifier=>'I'
+,p_column_label=>'Factura '
+,p_column_link=>'javascript:ver_detalle(''#TIPO#'',''#NUMERO#'');'
+,p_column_linktext=>'#FACTURA_PAGARE#'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208182755397458131)
+,p_db_column_name=>'TIPO'
+,p_display_order=>60
+,p_column_identifier=>'J'
 ,p_column_label=>'Tipo'
 ,p_column_type=>'STRING'
-,p_display_text_as=>'HIDDEN_ESCAPE_SC'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209720962795267239)
-,p_db_column_name=>'CANJE'
-,p_display_order=>40
-,p_column_identifier=>'D'
-,p_column_label=>'Canje'
-,p_column_type=>'NUMBER'
-,p_display_text_as=>'HIDDEN_ESCAPE_SC'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209721375220267239)
-,p_db_column_name=>'COD_CLIENTE'
-,p_display_order=>50
-,p_column_identifier=>'E'
-,p_column_label=>'Cod Cliente'
-,p_column_type=>'STRING'
-,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(416315186477089523)
@@ -209,7 +208,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>5
-,p_report_columns=>'NUMERO:FACTURA:TIPO:CANJE:COD_CLIENTE'
+,p_report_columns=>'R_DESC_SECTOR:FACTURA_PAGARE:'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(416253806037343663)
@@ -221,23 +220,25 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'SQL'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT a.NRO_CUOTA,',
-'       NUMERO, ',
-'       TO_CHAR(a.VTO,''DD-MM-YYYY'') AS VTO, ',
-'       a.MONTO_CUOTA,',
-'       a.SALDO_CUOTA,',
+' SELECT a.nro_pagare,',
+'       a.nro_cuota,',
+'       a.nro_comprobante,',
+'       a.ser_comprobante,',
+'       a.tipo_comprobante,',
+'       TO_CHAR(a.fecha_vencimiento, ''DD-MM-YYYY'') AS VTO,',
+'       a.monto_cuota,',
+'       a.saldo_cuota,',
 '       CASE ',
-'        WHEN a.SALDO_CUOTA <= 0 AND :P617_TIPO = ''PG'' THEN ''<button type="button" onClick="javascript:recibo(''''''||a.NRO_CUOTA||'''''');" class="t-Button t-Button--icon t-Button--hot t-Button--link t-Button--iconLeft"><span aria-hidden="true" class="t-Ic'
-||'on t-Icon--left fa fa-print"></span>Recibo</button>''',
-'        ELSE NULL ',
-'       END recibo',
-'       ',
-'FROM view_saldos_empleados a ',
-'WHERE a.cod_cliente =  :P617_COD_CLIENTE --102362 ------------------- TEST ',
-'AND ((:P617_TIPO = ''PG'' AND a.numero_canje = :P617_NUMERO)',
-'      or (a.numero = :P617_NUMERO))',
-'ORDER BY a.NRO_CUOTA',
-'         '))
+'       WHEN a.SALDO_CUOTA <= 0 AND :P617_TIPO = ''PG''   THEN ''<button type="button" onClick="javascript:recibo(''''''||a.NRO_CUOTA||'''''',''''''||a.SER_COMPROBANTE||'''''');" class="t-Button t-Button--icon t-Button--hot t-Button--link t-Button--iconLeft"><span a'
+||'ria-hidden="true" class="t-Icon t-Icon--left fa fa-print"></span>Recibo</button>''',
+'       ELSE NULL ',
+'       END recib ',
+' FROM V_SALDOS_AENGO a',
+' WHERE a.cod_empleado =  :P_COD_EMPLEADO --''1280'' --',
+' AND NRO_COMPROBANTE = :P617_NUMERO',
+' AND TIPO_COMPROBANTE = :P617_TIPO',
+' ORDER BY a.nro_cuota;',
+''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_ajax_items_to_submit=>'P617_NUMERO,P617_TIPO,P617_COD_CLIENTE'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -278,7 +279,6 @@ wwv_flow_imp_page.create_worksheet(
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_show_search_bar=>'N'
-,p_report_list_mode=>'TABS'
 ,p_lazy_loading=>false
 ,p_show_detail_link=>'N'
 ,p_enable_mail_download=>'Y'
@@ -306,31 +306,11 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209722722247267235)
-,p_db_column_name=>'NUMERO'
-,p_display_order=>20
-,p_column_identifier=>'B'
-,p_column_label=>unistr('N\00B0 Pagar\00E9')
-,p_allow_sorting=>'N'
-,p_allow_filtering=>'N'
-,p_allow_highlighting=>'N'
-,p_allow_ctrl_breaks=>'N'
-,p_allow_aggregations=>'N'
-,p_allow_computations=>'N'
-,p_allow_charting=>'N'
-,p_allow_group_by=>'N'
-,p_allow_pivot=>'N'
-,p_allow_hide=>'N'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
  p_id=>wwv_flow_imp.id(209723172108267235)
 ,p_db_column_name=>'VTO'
 ,p_display_order=>30
 ,p_column_identifier=>'C'
-,p_column_label=>'Fecha Vto.-'
+,p_column_label=>'Fecha Vto.'
 ,p_allow_sorting=>'N'
 ,p_allow_filtering=>'N'
 ,p_allow_highlighting=>'N'
@@ -366,13 +346,14 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209723939957267235)
-,p_db_column_name=>'SALDO_CUOTA'
-,p_display_order=>90
-,p_column_identifier=>'I'
-,p_column_label=>'Saldo Cuota'
+ p_id=>wwv_flow_imp.id(208181905111458123)
+,p_db_column_name=>'NRO_PAGARE'
+,p_display_order=>100
+,p_column_identifier=>'K'
+,p_column_label=>unistr('N\00B0 Pagar\00E9')
 ,p_allow_sorting=>'N'
 ,p_allow_filtering=>'N'
+,p_allow_highlighting=>'N'
 ,p_allow_ctrl_breaks=>'N'
 ,p_allow_aggregations=>'N'
 ,p_allow_computations=>'N'
@@ -380,17 +361,43 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_allow_group_by=>'N'
 ,p_allow_pivot=>'N'
 ,p_allow_hide=>'N'
-,p_column_type=>'NUMBER'
-,p_column_alignment=>'RIGHT'
-,p_format_mask=>'999G999G999G999G999G999G990'
+,p_column_type=>'STRING'
+,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(209724349693267235)
-,p_db_column_name=>'RECIBO'
-,p_display_order=>100
-,p_column_identifier=>'J'
-,p_column_label=>'Recibo'
+ p_id=>wwv_flow_imp.id(208182058737458124)
+,p_db_column_name=>'NRO_COMPROBANTE'
+,p_display_order=>110
+,p_column_identifier=>'L'
+,p_column_label=>'Nro Comprobante'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208182194384458125)
+,p_db_column_name=>'SER_COMPROBANTE'
+,p_display_order=>120
+,p_column_identifier=>'M'
+,p_column_label=>'Ser Comprobante'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208182204039458126)
+,p_db_column_name=>'TIPO_COMPROBANTE'
+,p_display_order=>130
+,p_column_identifier=>'N'
+,p_column_label=>'Tipo Comprobante'
+,p_column_type=>'STRING'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208182317810458127)
+,p_db_column_name=>'RECIB'
+,p_display_order=>140
+,p_column_identifier=>'O'
+,p_column_label=>'&nbsp'
 ,p_allow_sorting=>'N'
 ,p_allow_filtering=>'N'
 ,p_allow_highlighting=>'N'
@@ -406,6 +413,26 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
 );
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208182561762458129)
+,p_db_column_name=>'SALDO_CUOTA'
+,p_display_order=>150
+,p_column_identifier=>'Q'
+,p_column_label=>'Saldo Cuota'
+,p_allow_sorting=>'N'
+,p_allow_filtering=>'N'
+,p_allow_highlighting=>'N'
+,p_allow_ctrl_breaks=>'N'
+,p_allow_aggregations=>'N'
+,p_allow_computations=>'N'
+,p_allow_charting=>'N'
+,p_allow_group_by=>'N'
+,p_allow_pivot=>'N'
+,p_allow_hide=>'N'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_use_as_row_header=>'N'
+);
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(416303975551129296)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -414,11 +441,11 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>15
-,p_report_columns=>'NRO_CUOTA:NUMERO:VTO:MONTO_CUOTA:SALDO_CUOTA:RECIBO:'
+,p_report_columns=>'NRO_CUOTA:NRO_PAGARE:VTO:MONTO_CUOTA:SALDO_CUOTA:RECIB:'
 ,p_sum_columns_on_break=>'MONTO_CUOTA:SALDO_CUOTA'
 );
 wwv_flow_imp_page.create_worksheet_condition(
- p_id=>wwv_flow_imp.id(209725054116267234)
+ p_id=>wwv_flow_imp.id(209911234862033845)
 ,p_report_id=>wwv_flow_imp.id(416303975551129296)
 ,p_name=>'Monto Cuota'
 ,p_condition_type=>'HIGHLIGHT'
@@ -432,7 +459,7 @@ wwv_flow_imp_page.create_worksheet_condition(
 ,p_column_font_color=>'#2069a9'
 );
 wwv_flow_imp_page.create_worksheet_condition(
- p_id=>wwv_flow_imp.id(209725498536267233)
+ p_id=>wwv_flow_imp.id(209911693426033845)
 ,p_report_id=>wwv_flow_imp.id(416303975551129296)
 ,p_name=>'Saldo Abonado'
 ,p_condition_type=>'HIGHLIGHT'
@@ -447,7 +474,7 @@ wwv_flow_imp_page.create_worksheet_condition(
 ,p_column_font_color=>'#467a3f'
 );
 wwv_flow_imp_page.create_worksheet_condition(
- p_id=>wwv_flow_imp.id(209725899954267233)
+ p_id=>wwv_flow_imp.id(209912063077033844)
 ,p_report_id=>wwv_flow_imp.id(416303975551129296)
 ,p_name=>'Saldo Cuota'
 ,p_condition_type=>'HIGHLIGHT'
@@ -473,6 +500,30 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_position=>'EDIT'
 ,p_warn_on_unsaved_changes=>null
 ,p_button_cattributes=>'style="color:white; font-weight:bold;"'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(208182845770458132)
+,p_name=>'P617_COD_EMPLEADO'
+,p_item_sequence=>100
+,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(208182962359458133)
+,p_name=>'P617_SER_COMPROBANTE'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(208183094519458134)
+,p_name=>'P617_NRO_COMPROBANTE'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209717008921267246)
@@ -568,7 +619,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209727425927267232)
 ,p_name=>'P617_NRO_RECIBO'
-,p_item_sequence=>50
+,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -576,7 +627,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209727812760267232)
 ,p_name=>'P617_TIPO_RECIBO'
-,p_item_sequence=>60
+,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -584,7 +635,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209728204285267232)
 ,p_name=>'P617_COD_PERSONA'
-,p_item_sequence=>70
+,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -592,7 +643,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209728609861267231)
 ,p_name=>'P617_COD_CLIENTE'
-,p_item_sequence=>80
+,p_item_sequence=>110
 ,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -600,7 +651,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209729036845267231)
 ,p_name=>'P617_RUC'
-,p_item_sequence=>90
+,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -608,7 +659,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209729445742267231)
 ,p_name=>'P617_MENSAJE'
-,p_item_sequence=>100
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(416253806037343663)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -670,33 +721,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(209731685469267227)
-,p_event_id=>wwv_flow_imp.id(209730646357267228)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'BEGIN',
-'    SELECT a.cod_persona ',
-'    INTO :P617_COD_PERSONA',
-'    FROM CC_CLIENTES a ',
-'    WHERE a.cod_cliente = :P617_COD_CLIENTE',
-'    AND a.cod_empresa = ''1'';',
-'    :P617_MENSAJE := null;',
-'    APEX_DEBUG.ERROR(''cod_persona: ''||:P617_COD_PERSONA);',
-'EXCEPTION',
-'    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(''Error al generar buscar el cod_persona para el recibo: ''||SQLERRM);',
-unistr('        :P617_MENSAJE := ''Ocurri\00F3 un error al generar el recibo. Contacte al administrador.'';    '),
-'END;        '))
-,p_attribute_02=>'P617_COD_CLIENTE'
-,p_attribute_03=>'P617_COD_PERSONA,P617_MENSAJE'
-,p_attribute_04=>'N'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
-wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(209732178728267226)
 ,p_event_id=>wwv_flow_imp.id(209730646357267228)
 ,p_event_result=>'TRUE'
@@ -705,40 +729,19 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'BEGIN',
+'',
+'    apex_debug.error(''ser ''||:P617_SER_COMPROBANTE || '' '' ||:P617_NRO_CUOTA ||'' ''||:P617_NUMERO);',
 '    SELECT a.nro_recibo, a.ser_recibo ',
 '    INTO :P617_NRO_RECIBO, :P617_SER_RECIBO',
-'    FROM cc_detalle_recibos a ',
+'    FROM v_recibos_aengo a ',
 '    WHERE a.nro_factura_ref = :P617_NUMERO',
+'    AND a.ser_factura_ref = :P617_SER_COMPROBANTE',
 '    AND a.nro_cuota = :P617_NRO_CUOTA;',
 '',
-'    IF :P617_NRO_RECIBO IS NOT NULL AND :P617_SER_RECIBO IS NOT NULL THEN',
-'        :P617_TIPO_RECIBO := 1;',
-'    ELSE',
-'        SELECT d.ser_comprobante AS SER_RECIBO,',
-'               d.nro_comprobante AS NRO_RECIBO',
-'        INTO :P617_SER_RECIBO, :P617_NRO_RECIBO    ',
-'        FROM cc_cancela_cuotas a,',
-'             cc_cancela_cuotas_det d',
-'        WHERE a.nro_comprobante =  :P617_NUMERO',
-'          AND a.nro_cuota = :P617_NRO_CUOTA',
-'          AND d.cod_empresa = a.cod_empresa',
-'          AND d.nro_cancelacion = a.nro_cancelacion;',
-'        :P617_TIPO_RECIBO := 2;      ',
-'    END IF;',
+'',
 '    :P617_MENSAJE := null;',
 'EXCEPTION',
-'    WHEN NO_DATA_FOUND THEN    ',
-'         SELECT d.ser_comprobante AS SER_RECIBO,',
-'               d.nro_comprobante AS NRO_RECIBO',
-'        INTO :P617_SER_RECIBO, :P617_NRO_RECIBO    ',
-'        FROM cc_cancela_cuotas a,',
-'             cc_cancela_cuotas_det d',
-'        WHERE a.nro_comprobante =  :P617_NUMERO',
-'          AND a.nro_cuota = :P617_NRO_CUOTA',
-'          AND d.cod_empresa = a.cod_empresa',
-'          AND d.nro_cancelacion = a.nro_cancelacion;',
-'        :P617_TIPO_RECIBO := 2; ',
-'        :P617_MENSAJE := null;',
+'  ',
 '    WHEN OTHERS THEN',
 '        APEX_DEBUG.ERROR(''Error al generar datos para el recibo: ''||SQLERRM);',
 unistr('        :P617_MENSAJE := ''Ocurri\00F3 un error al generar el recibo. Contacte al administrador.'';    '),
@@ -749,8 +752,8 @@ unistr('        :P617_MENSAJE := ''Ocurri\00F3 un error al generar el recibo. Co
 '    ',
 '    APEX_DEBUG.ERROR(''P617_NRO_RECIBO: ''||:P617_NRO_RECIBO);',
 '    ',
-'    APEX_DEBUG.ERROR(''P617_TIPO_RECIBO: ''||:P617_TIPO_RECIBO);'))
-,p_attribute_02=>'P617_NUMERO,P617_NRO_CUOTA'
+' '))
+,p_attribute_02=>'P617_NUMERO,P617_NRO_CUOTA,P617_SER_COMPROBANTE'
 ,p_attribute_03=>'P617_MENSAJE,P617_NRO_RECIBO,P617_SER_RECIBO,P617_TIPO_RECIBO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -765,9 +768,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action_sequence=>40
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'doDescarga(apex.item("P617_RUC").getValue(),  apex.item("P617_COD_CLIENTE").getValue(), apex.item("P617_TIPO_RECIBO").getValue(), apex.item("P617_SER_RECIBO").getValue(), ',
-'           apex.item("P_COD_EMPLEADO").getValue(), apex.item("P617_NRO_RECIBO").getValue(),  apex.item("P617_COD_PERSONA").getValue()); '))
+,p_attribute_01=>'doDescarga(apex.item("P617_COD_CLIENTE").getValue(), apex.item("P617_SER_RECIBO").getValue(),apex.item("P_COD_EMPLEADO").getValue(), apex.item("P617_NRO_RECIBO").getValue()); '
 ,p_client_condition_type=>'NULL'
 ,p_client_condition_element=>'P617_MENSAJE'
 );
@@ -841,8 +842,8 @@ unistr('        :P617_CREDITO_ACTUAL := ''Tu l\00EDnea de cr\00E9dito actual es 
 '    WHEN OTHERS THEN',
 unistr('        APEX_DEBUG.ERROR(''Error al buscar el l\00EDmite de cr\00E9dito PR_INIT: ''||SQLERRM);    '),
 'END;        ',
-'',
-''))
+'--:P617_MENSAJE := null;',
+'--:P617_COD_EMPLEADO := ''1280''; -- TEST'))
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
@@ -864,7 +865,7 @@ wwv_flow_imp_page.create_page_process(
 '    ident_personas c',
 '    WHERE',
 '    a.COD_EMPRESA = 1',
-'    AND a.COD_EMPLEADO = :P_COD_EMPLEADO',
+'    AND a.COD_EMPLEADO = :P_COD_EMPLEADO -- ''1280'' -- test',
 '    AND a.ACTIVO = ''S''',
 '    AND a.COD_EMPRESA = b.COD_EMPRESA',
 '    AND a.COD_PERSONA = b.COD_PERSONA',
@@ -879,7 +880,8 @@ wwv_flow_imp_page.create_page_process(
 '    WHEN OTHERS THEN',
 '        APEX_DEBUG.ERROR(''Error al buscar el datos ocultos PR_INIT_DATOS_USUARIO: ''||SQLERRM);    ',
 'END;        ',
-'--:P617_COD_CLIENTE := 102362;  -- para test',
+'',
+'',
 ''))
 ,p_process_clob_language=>'PLSQL'
 );

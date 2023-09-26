@@ -65,7 +65,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230914102501'
+,p_last_upd_yyyymmddhh24miss=>'20230925082030'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(78229020945554112)
@@ -1938,7 +1938,7 @@ wwv_flow_imp_page.create_page_button(
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(84124625989157128)
-,p_button_sequence=>10
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_imp.id(80147582317643723)
 ,p_button_name=>'BT_ELIMINAR_RESERVA'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -1952,7 +1952,7 @@ wwv_flow_imp_page.create_page_button(
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(81645489759666303)
-,p_button_sequence=>20
+,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_imp.id(80147582317643723)
 ,p_button_name=>'BT_GUARDAR'
 ,p_button_action=>'SUBMIT'
@@ -1973,6 +1973,14 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Agregar'
 ,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64602539689457124)
+,p_name=>'P322_COD_ORIGEN'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(78229020945554112)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(78229113592554113)

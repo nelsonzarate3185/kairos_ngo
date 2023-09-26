@@ -17,18 +17,194 @@ wwv_flow_imp_page.create_page(
 ,p_name=>'Cierre De Pedidos - VTACIEPE'
 ,p_alias=>'CIERRE-DE-PEDIDOS-VTACIEPE'
 ,p_step_title=>'Cierre De Pedidos - VTACIEPE'
+,p_allow_duplicate_submissions=>'N'
 ,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'#bt_imprimir {',
+'    margin-left: 25%;',
+'    width: 50%;',
+'    margin-top: 30px;',
+'    height: 60px;',
+'    font-size: 25px;',
+'}',
+'',
+'#bt_imprimir2 {',
+'    color: rgb(233, 236, 240);',
+'    background-color: rgb(73, 37, 145);',
+'}',
+'',
+'',
+'',
+'#bt_aceptar {',
+'    margin-left: 40%;',
+'    width: 20%;',
+'    margin-top: 15px;',
+'    height: 40px;',
+'    font-size: 15px;',
+'    }',
+'',
+'#bt_autorizar{',
+'    color: white;',
+'    background-color: rgb(62, 132, 62);',
+'}',
+'',
+'#P25_MSJ_ERROR_DISPLAY {',
+'    color: red;',
+'}',
+'',
+'.apex-item-select:focus, .apex-item-text:focus, .apex-item-textarea:focus {',
+'   background-color:  hsl(147, 69%, 87%)  !important;',
+'   border-color:  #c9fceb  !important;',
+'}',
+'',
+'',
+'#GRILLA   th.a-IRR-header {',
+'  background-color:  #003A85;',
+'  color: yellow;',
+' /* border-color: rgb(43, 79, 80);*/',
+'}',
+'',
+'',
+'',
+'.t-Form-label{',
+'    color:  darkblue !important;',
+'    font-weight: bold !important;;',
+'    }',
+'',
+'#PARAMETROS{',
+'      background-color: #003a85 !important;',
+'      box-shadow: black 1px 1px 5px 1px;}',
+'',
+'#P94_FECHA_FIN, #P94_FECHA_INI, #P94_ORIGEN, #P94_ESTADO, #P94_CLIENTE {',
+'    background: white;',
+'    border-color: yellow; ',
+'    color: darkblue;',
+'}      ',
+'',
+' .a-IRR-header{',
+'      background-color: #003a85 !important;',
+'	  font-weight: bold !important;',
+'      border:0.5px solid #16488a !important;',
+'   }',
+'',
+'  .a-IRR-headerLink{',
+'    background-color: #003a85 !important;',
+'	  color: #FFED00 !important;    }',
+'   ',
+'.a-IRR-table tr td { ',
+'        color: black !important;',
+'   }',
+' ',
+'.a-IRR-table td {',
+'    border: 1px solid #003a85b7 !important;',
+'}',
+'',
+'',
+'',
+'#btn{ ',
+'       ',
+'        background:white;',
+'        background-image: linear-gradient(180deg, rgb(1, 1, 131)  0%, #003a85de 100%);',
+'        color:  yellow; ',
+'        justify-content: center;',
+'        align-items: center; ',
+'        box-shadow: #79beca 1px 1px 5px 1px; ',
+'        border-style: solid;',
+'        border-width: 0.5px;',
+'        border-color: darkblue; ',
+'}',
+'',
+'#btn2, #btn3, #btn4{ ',
+'       ',
+'        background:white;',
+'        background-image: linear-gradient(180deg, rgb(1, 1, 131)  0%, #003a85de 100%);',
+'        color:  yellow; ',
+'        justify-content: center;',
+'        align-items: center; ',
+'        box-shadow: #79beca 1px 1px 5px 1px; ',
+'        border-style: solid;',
+'        border-width: 0.5px;',
+'        border-color: darkblue; ',
+'}',
+'',
+'',
+'',
+'',
+'',
+' ',
+'',
+'',
+'',
+'.chip {',
+'    padding: 4px 10px;',
+'    border-radius: 16px;',
+'    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);',
+'}',
+'',
+'.chip-success {',
+'    background: #cdffe0;',
+'    color: #00592e;',
+'}',
+'',
+'.chip-danger {',
+'    background: #ffebeb;',
+'    color: #a50000;',
+'}',
+'',
+'.chip-warning {',
+'    background: #fffedc;',
+'    color: #764400;',
+'}',
+'',
+'.chip-primary {',
+'    background: #e9f5ff;',
+'    color: #004f95;',
+'}',
+'',
+'.chip-purple {',
+'    background: #eddbfa;',
+'    color: #5200a5;',
+'}',
+'',
+'.chip-pink {',
+'    background: #ffeffa;',
+'    color: #990067;',
+'}',
+'',
+'.chip-orange {',
+'    background: #fff2e4;',
+'    color: #8d3600;',
+'}',
+'',
+'.chip-teal {',
+'    background: #e4fdff;',
+'    color: #00526e;',
+'}',
+'',
+'#btndet{   ',
+'        background:white;',
+'        background-image: linear-gradient(180deg, rgb(1, 1, 131)  0%, #003a85de 100%);',
+'        color:  yellow; ',
+'        ',
+'        justify-content: center;',
+'        align-items: center; ',
+'        box-shadow: #79beca 1px 1px 5px 1px; ',
+'        border-style: solid;',
+'        border-width: 0.5px;',
+'        border-color: rgb(97, 91, 0); ',
+'        ',
+'}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'AIBANEZ'
-,p_last_upd_yyyymmddhh24miss=>'20230428170124'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20230926153921'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(155286120246688206)
-,p_plug_name=>'Main Content'
-,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--scrollBody'
+,p_plug_name=>'Cierre de Pedidos'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>1140
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -74,8 +250,22 @@ wwv_flow_imp_page.create_page_plug(
 '       ROWID,',
 '       NULL INFO',
 ' FROM VT_PEDIDOS_CABECERA VT',
-''))
+'where VT.COD_EMPRESA=:P_COD_EMPRESA',
+' AND ESTADO =''F'' ',
+'AND ESTADO NOT IN (''A'',''C'') ',
+'and(VT.ser_comprobante||nro_comprobante in(select d.ser_comprobante||d.nro_comprobante',
+'from vt_pedidos_detalle d where ',
+'d.cod_empresa=VT.cod_empresa',
+'and d.tip_comprobante=VT.tip_comprobante',
+'and d.ser_comprobante=VT.ser_comprobante',
+'and d.nro_comprobante=VT.nro_comprobante',
+'and d.cod_articulo<>''ZZGASFIN''',
+'and d.cantidad           > 0',
+'and nvl( d.cantidad,0 )  > nvl( d.cantidad_facturada, 0 )))',
+'and VT.fec_comprobante>sysdate-180',
+' '))
 ,p_plug_source_type=>'NATIVE_IR'
+,p_ajax_items_to_submit=>'P_COD_EMPRESA'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_units=>'MILLIMETERS'
@@ -204,7 +394,10 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_identifier=>'I'
 ,p_column_label=>'Vendedor'
 ,p_column_type=>'STRING'
+,p_display_text_as=>'LOV_ESCAPE_SC'
 ,p_column_alignment=>'CENTER'
+,p_rpt_named_lov=>wwv_flow_imp.id(12299613844963402)
+,p_rpt_show_filter_lov=>'1'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
@@ -249,9 +442,10 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_db_column_name=>'TOT_COMPROBANTE'
 ,p_display_order=>140
 ,p_column_identifier=>'N'
-,p_column_label=>'Comprobante'
+,p_column_label=>'Total'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
@@ -278,7 +472,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_db_column_name=>'INFO'
 ,p_display_order=>180
 ,p_column_identifier=>'R'
-,p_column_label=>'&nbsp'
+,p_column_label=>'Ver Detalle'
 ,p_column_link=>'javascript:$s(''P519_INFO'', ''#ROWID#'');'
 ,p_column_linktext=>'<span aria-hidden="true" class="fa fa-eye"></span>'
 ,p_column_type=>'STRING'
@@ -293,7 +487,9 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>10
-,p_report_columns=>'INFO:TIP_COMPROBANTE:SER_COMPROBANTE:NRO_COMPROBANTE:COD_CLIENTE:NOMBRE:COD_VENDEDOR:TOT_COMPROBANTE:'
+,p_report_columns=>'FEC_COMPROBANTE:TIP_COMPROBANTE:SER_COMPROBANTE:NRO_COMPROBANTE:COD_CLIENTE:NOMBRE:COD_VENDEDOR:TOT_COMPROBANTE:INFO:'
+,p_sort_column_1=>'FEC_COMPROBANTE'
+,p_sort_direction_1=>'DESC'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(155286333607688208)
@@ -696,21 +892,10 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(155433931410971913)
-,p_event_id=>wwv_flow_imp.id(155433721006971911)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_CONFIRM'
-,p_attribute_01=>unistr('\00BFRealmente desea cerrar el pedido?')
-,p_attribute_03=>'information'
-,p_attribute_04=>'fa-trash-o'
-);
-wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(155434468404971918)
 ,p_event_id=>wwv_flow_imp.id(155433721006971911)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>20
+,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -745,6 +930,19 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(155433931410971913)
+,p_event_id=>wwv_flow_imp.id(155433721006971911)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CONFIRM'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+unistr('\00BFRealmente desea cerrar el pedido &P519_SER_COMPROBANTE_AUX. - '),
+'         &P519_NRO_COMPROBANTE_AUX. ?'))
+,p_attribute_03=>'information'
+,p_attribute_04=>'fa-trash-o'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(155433879268971912)
@@ -789,10 +987,44 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(155435235204971926)
+ p_id=>wwv_flow_imp.id(208559723905354636)
 ,p_event_id=>wwv_flow_imp.id(155433721006971911)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>50
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+' ',
+' VEXISTE VARCHAR2(100);',
+'',
+'BEGIN',
+'    :P519_MENSAJE := null;',
+' ',
+'',
+'    select  ''S'' INTO VEXISTE',
+'    FROM  VT_PEDIDOS_CABECERA ',
+'         WHERE  estado = ''C'' ',
+'    AND ROWID = :P519_INFO;',
+'',
+'  :P519_MENSAJE := ''Pedido Cerrado Exitosamente!'';',
+'    EXCEPTION',
+'          WHEN NO_DATA_FOUND THEN',
+'                   :P519_MENSAJE := ''No se pudo cerrar el pedido!'';',
+'          WHEN OTHERS THEN',
+'            :P519_MENSAJE := ''No se pudo cerrar el pedido!'';',
+'END;'))
+,p_attribute_02=>'P519_NOMBRE,P519_FEC_ESTADO,P519_COD_USUARIO_ANU,P519_ESTADO,P519_COD_USUARIO'
+,p_attribute_03=>'P519_MENSAJE'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(155435235204971926)
+,p_event_id=>wwv_flow_imp.id(155433721006971911)
+,p_event_result=>'TRUE'
+,p_action_sequence=>60
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
@@ -828,6 +1060,18 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_name=>'PR_CLEAR'
 ,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(155285656427688201)
 ,p_process_sequence=>20
@@ -842,6 +1086,7 @@ wwv_flow_imp_page.create_page_process(
 ''))
 ,p_process_clob_language=>'PLSQL'
 );
+null;
 wwv_flow_imp.component_end;
 end;
 /

@@ -20,8 +20,8 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'JGUZMAN'
-,p_last_upd_yyyymmddhh24miss=>'20220829092331'
+,p_last_updated_by=>'CHARBA'
+,p_last_upd_yyyymmddhh24miss=>'20230920171029'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(46408668130573018)
@@ -400,6 +400,20 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(185085711531060725)
+,p_name=>'P2_NEW'
+,p_item_sequence=>50
+,p_item_default=>'checked'
+,p_prompt=>'SEEEEEEEE'
+,p_display_as=>'NATIVE_SINGLE_CHECKBOX'
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
+,p_read_only_when_type=>'ALWAYS'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(5281895889367015)

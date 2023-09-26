@@ -233,7 +233,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230901091932'
+,p_last_upd_yyyymmddhh24miss=>'20230921091123'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(94035155548281250)
@@ -2521,9 +2521,9 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'IF :P346_ESTADO_PLANILLA = ''F'' THEN ',
+'/*IF :P346_ESTADO_PLANILLA = ''F'' THEN ',
 '    RAISE_APPLICATION_ERROR(-20001, ''La planilla ya se encuentra con estado Facturada'');',
-'END IF;',
+'END IF;*/',
 '',
 'IF :P346_SER_COMPROBANTE_FAC is null THEN ',
 '    RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar la serie de factura'');',
@@ -2586,11 +2586,11 @@ wwv_flow_imp_page.create_page_da_action(
 '        EXCEPTION',
 '			WHEN OTHERS THEN    ',
 '         :P346_ERROR:=''sp_CREA_FACTURA_ruteo_rep_vf. ''|| sqlerrm ;               ',
+'           RAISE_APPLICATION_ERROR(-20000, ''SP_CREA_FACTURA_RUTEO. ''||sqlerrm);     ',
 '         ROLLBACK;',
 '        END;                                          ',
 '    ELSE    	',
-'       	BEGIN',
-'            out_out( ''entro ''||  '' P_NRO_PLANILLA''||'' => ''||:P346_NRO_PLANILLA_FAC  );    ',
+'       	BEGIN           ',
 '				SP_CREA_FACTURA_RUTEO(p_cod_empresa => :P_COD_EMPRESA,',
 '                                      P_SER_FACTURA => :P346_SER_COMPROBANTE_FAC,',
 '                                      P_COD_CUSTODIO => :P346_COD_CUSTODIO_FAC,',

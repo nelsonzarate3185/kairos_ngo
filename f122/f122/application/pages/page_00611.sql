@@ -22,7 +22,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'17'
 ,p_last_updated_by=>'JUANASIS'
-,p_last_upd_yyyymmddhh24miss=>'20230920114520'
+,p_last_upd_yyyymmddhh24miss=>'20230920115222'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(208527582572438026)
@@ -75,11 +75,12 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>40
 ,p_button_plug_id=>wwv_flow_imp.id(208527582572438026)
 ,p_button_name=>'BT_CANCELAR'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_options=>'#DEFAULT#:t-Button--danger'
 ,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
 ,p_button_image_alt=>'Cancelar'
 ,p_button_position=>'CREATE'
+,p_button_redirect_url=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(208527808123438029)
@@ -252,7 +253,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_client_condition_type=>'EQUALS'
 ,p_client_condition_element=>'P611_P_REVISADO'
 ,p_client_condition_expression=>'S'
-,p_server_condition_type=>'NEVER'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(209169846979799104)
@@ -266,7 +266,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_client_condition_type=>'NOT_EQUALS'
 ,p_client_condition_element=>'P611_P_REVISADO'
 ,p_client_condition_expression=>'S'
-,p_server_condition_type=>'NEVER'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(209170048108799106)
@@ -304,8 +303,6 @@ wwv_flow_imp_page.create_page_da_action(
 '        :P611_MENSAJE_ERROR := ''Tu comentario tiene menos de 15 caracteres, por favor revisa esto antes de volver a guardar.'';',
 '        --apex_debug.error(''Tu comentario tiene menos de 15 caracteres, por favor revisa esto antes de volver a guardar.'');',
 '    END IF;',
-'  ',
-'',
 'END IF;'))
 ,p_attribute_02=>'P611_CONFORMIDAD,P611_COMENTARIO'
 ,p_attribute_03=>'P611_MENSAJE_ERROR'
@@ -374,10 +371,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'begin',
 '    :P611_P_COD_EMPRESA := :P_COD_EMPRESA;',
-'    --:P611_P_COD_EMPLEADO := :P_COD_EMPLEADO;',
-'    :P611_P_COD_EMPLEADO := ''863'';',
+'    :P611_P_COD_EMPLEADO := :P_COD_EMPLEADO;',
+'    --:P611_P_COD_EMPLEADO := ''863'';',
 '    :P611_P_TIPO := ''S'';',
-'    :P611_CONFORMIDAD:=''P'';',
+'   ',
 'end;',
 'declare',
 'mensaje varchar(1000);',
@@ -444,10 +441,11 @@ wwv_flow_imp_page.create_page_process(
 '        WHEN OTHERS THEN',
 '            raise_application_error(-20201,''Ocurrio un error al procesar su solicitud.''||sqlerrm);  ',
 'END;',
-'',
+'-- asignar valores a items de pagina',
 unistr(':P611_INFORMACION :=  :P611_VNOM_EMPLEADO ||'', usted obtuvo un total de ''||:P611_VPORC_TOTAL||'' puntos en el proceso de evaluaci\00F3n de desempe\00F1o '' ||:P611_VANIO ||'', con lo cual obtuvo la siguiente calificaci\00F3n: ''||:P611_VCALIFICACION||''.'),
 unistr('Favor indique su conformidad o no conformidad y en caso de que lo desee, a\00F1ada comentarios u observaciones sobre el proceso realizado y la calificaci\00F3n recibida.'' ;'),
-'                                        '))
+':P611_COMENTARIO := :P611_P_OBS_REVISADO;',
+':P611_CONFORMIDAD:= nvl(:P611_P_IND_REVISADO,''P'');                                      '))
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp.component_end;

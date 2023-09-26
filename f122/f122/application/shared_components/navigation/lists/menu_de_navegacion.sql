@@ -2921,6 +2921,60 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'615'
 );
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(210466478506685968)
+,p_list_item_display_sequence=>3300
+,p_list_item_link_text=>'Carga de Notas de Credito'
+,p_list_item_link_target=>'f?p=&APP_ID.:616:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'616'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(210542984801124509)
+,p_list_item_display_sequence=>3310
+,p_list_item_link_text=>unistr('Carga de Notas de Cr\00E9dito')
+,p_list_item_link_target=>'f?p=&APP_ID.:622:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'622'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(210699929672916330)
+,p_list_item_display_sequence=>3320
+,p_list_item_link_text=>'Reporte Detalles - STOCONS'
+,p_list_item_link_target=>'f?p=&APP_ID.:623:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'623'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(212115891662929947)
+,p_list_item_display_sequence=>3330
+,p_list_item_link_text=>'INFORME DE REMISIONES'
+,p_list_item_link_target=>'f?p=&APP_ID.:624:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-table-pointer'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'624'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(212752161857302339)
+,p_list_item_display_sequence=>3340
+,p_list_item_link_text=>'Pantalla de Documentos en Custodio'
+,p_list_item_link_target=>'f?p=&APP_ID.:626:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'626'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(212817217021359571)
+,p_list_item_display_sequence=>3350
+,p_list_item_link_text=>'cccomcuo-busq'
+,p_list_item_link_target=>'f?p=&APP_ID.:628:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'628'
+);
 wwv_flow_imp.component_end;
 end;
 /

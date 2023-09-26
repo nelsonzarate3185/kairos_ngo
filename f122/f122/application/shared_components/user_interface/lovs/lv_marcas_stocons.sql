@@ -20,10 +20,9 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_source_type=>'SQL'
 ,p_location=>'LOCAL'
 ,p_use_local_sync_table=>false
-,p_return_column_name=>'DESCRIPCION'
-,p_display_column_name=>'DESCRIPCION'
+,p_return_column_name=>'COD_MARCA'
+,p_display_column_name=>'COD_MARCA'
 ,p_group_sort_direction=>'ASC'
-,p_default_sort_column_name=>'DESCRIPCION'
 ,p_default_sort_direction=>'ASC'
 );
 wwv_flow_imp_shared.create_list_of_values_cols(
