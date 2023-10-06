@@ -56,7 +56,7 @@ unistr('//Realizamos la validaci\00F3n de la tecla ingresada'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230914142143'
+,p_last_upd_yyyymmddhh24miss=>'20230928105658'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(82564852671905823)
@@ -1704,7 +1704,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    RAISE_APPLICATION_ERROR(-20001, ''El codigo de producto ingresado no existe'');',
 'end if;',
 '',
-'if :P342_PRECIO_VENTA_ADD is null or :P342_PRECIO_VENTA_ADD = 0 then ',
+'if :P342_PRECIO_VENTA_ADD is null /*or :P342_PRECIO_VENTA_ADD = 0 */then ',
 ' RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar el precio del producto'');',
 'end if;'))
 ,p_attribute_02=>'P342_DESC_PRODUCTO,P342_PRECIO_VENTA_ADD'

@@ -26,7 +26,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'21'
 ,p_last_updated_by=>'PBOGADO'
-,p_last_upd_yyyymmddhh24miss=>'20230914081833'
+,p_last_upd_yyyymmddhh24miss=>'20231002080522'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(41134274602206001)

@@ -51,6 +51,7 @@ prompt --install
 @@application/shared_components/files/ngo2_mp4.sql
 @@application/shared_components/files/ngo3_mp4.sql
 @@application/shared_components/files/jquery_blockui_js.sql
+@@application/shared_components/files/logo_encuesta_png.sql
 @@application/plugin_settings.sql
 @@application/shared_components/security/authorizations/administration_rights.sql
 @@application/shared_components/security/authorizations/permiso_agregar.sql
@@ -286,6 +287,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_barrios.sql
 @@application/shared_components/user_interface/lovs/lv_barrios_callasal.sql
 @@application/shared_components/user_interface/lovs/lv_barrio_cagesvis.sql
+@@application/shared_components/user_interface/lovs/lv_bloques_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_bloque_stbloart.sql
 @@application/shared_components/user_interface/lovs/lv_bloque_stgeinmo.sql
 @@application/shared_components/user_interface/lovs/lv_busca_pais_bsciudad.sql
@@ -384,6 +386,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_cuenta_deu_me_vtparcon.sql
 @@application/shared_components/user_interface/lovs/lv_cuenta_deu_vtparcon.sql
 @@application/shared_components/user_interface/lovs/lv_cuenta_iva_vtparcon.sql
+@@application/shared_components/user_interface/lovs/lv_cuerpos_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_custodios.sql
 @@application/shared_components/user_interface/lovs/lv_custodios_ccautrec.sql
 @@application/shared_components/user_interface/lovs/lv_custodios_ccrecome.sql
@@ -425,6 +428,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_empleados_cod_nom.sql
 @@application/shared_components/user_interface/lovs/lv_empleados_fvcoprom.sql
 @@application/shared_components/user_interface/lovs/lv_empleados_rhautper.sql
+@@application/shared_components/user_interface/lovs/lv_empleados_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_empleado_it_smpedsg.sql
 @@application/shared_components/user_interface/lovs/lv_empleado_it_smpsgadm.sql
 @@application/shared_components/user_interface/lovs/lv_empresas.sql
@@ -449,6 +453,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_estado_smasisga.sql
 @@application/shared_components/user_interface/lovs/lv_estado_stpromoc.sql
 @@application/shared_components/user_interface/lovs/lv_estantes_carepsta.sql
+@@application/shared_components/user_interface/lovs/lv_estantes_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_familia.sql
 @@application/shared_components/user_interface/lovs/lv_familias.sql
 @@application/shared_components/user_interface/lovs/lv_familias_stcanpun.sql
@@ -539,6 +544,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_nacionalidad.sql
 @@application/shared_components/user_interface/lovs/lv_nacionalidad_bsperson.sql
 @@application/shared_components/user_interface/lovs/lv_nivel_estudio.sql
+@@application/shared_components/user_interface/lovs/lv_nivel_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_novedades_rpmotrep.sql
 @@application/shared_components/user_interface/lovs/lv_nro_pedido.sql
 @@application/shared_components/user_interface/lovs/lv_obras_smentsal.sql
@@ -587,6 +593,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_proveedores_det_streqrep.sql
 @@application/shared_components/user_interface/lovs/lv_proveedores_fvvalcom.sql
 @@application/shared_components/user_interface/lovs/lv_proveedores_rprotv.sql
+@@application/shared_components/user_interface/lovs/lv_proveedores_stcostco.sql
 @@application/shared_components/user_interface/lovs/lv_proveedores_streqrep.sql
 @@application/shared_components/user_interface/lovs/lv_proveedor_callapen.sql
 @@application/shared_components/user_interface/lovs/lv_proveedor_ot.sql
@@ -609,6 +616,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_responsables.sql
 @@application/shared_components/user_interface/lovs/lv_responsable_stenvio.sql
 @@application/shared_components/user_interface/lovs/lv_retira_de.sql
+@@application/shared_components/user_interface/lovs/lv_rhbeneficios.sql
 @@application/shared_components/user_interface/lovs/lv_rubros.sql
 @@application/shared_components/user_interface/lovs/lv_rubros_cccrecli.sql
 @@application/shared_components/user_interface/lovs/lv_rubros_stcanpun.sql
@@ -639,6 +647,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_solucion.sql
 @@application/shared_components/user_interface/lovs/lv_soluciones.sql
 @@application/shared_components/user_interface/lovs/lv_stock_bstipcom.sql
+@@application/shared_components/user_interface/lovs/lv_subloques_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_subloque_stgeinmo.sql
 @@application/shared_components/user_interface/lovs/lv_subtipos_ccdebito.sql
 @@application/shared_components/user_interface/lovs/lv_sub_bloque_stbloart.sql
@@ -654,6 +663,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_sucursales_rpplater.sql
 @@application/shared_components/user_interface/lovs/lv_sucursales_smentsal.sql
 @@application/shared_components/user_interface/lovs/lv_sucursales_stperepr.sql
+@@application/shared_components/user_interface/lovs/lv_sucursales_stposici.sql
 @@application/shared_components/user_interface/lovs/lv_sucursales_streped1.sql
 @@application/shared_components/user_interface/lovs/lv_sucursal_caentsal.sql
 @@application/shared_components/user_interface/lovs/lv_sucursal_dist_stcanpun.sql
@@ -684,6 +694,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_tecnico_cagesvis.sql
 @@application/shared_components/user_interface/lovs/lv_tel_ubicacion_callasal.sql
 @@application/shared_components/user_interface/lovs/lv_tipo.sql
+@@application/shared_components/user_interface/lovs/lv_tipo0100.sql
 @@application/shared_components/user_interface/lovs/lv_tipos.sql
 @@application/shared_components/user_interface/lovs/lv_tipos_bssubtra.sql
 @@application/shared_components/user_interface/lovs/lv_tipos_comprobantes.sql
@@ -769,6 +780,8 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_zonas_stenvio.sql
 @@application/shared_components/user_interface/lovs/lv_zonas_stremisi.sql
 @@application/shared_components/user_interface/lovs/lv_zona_fvproemp.sql
+@@application/shared_components/user_interface/lovs/ngo_ccla0100_act.sql
+@@application/shared_components/user_interface/lovs/ngo_umed0100_act.sql
 @@application/shared_components/user_interface/lovs/pill_display_as1.sql
 @@application/shared_components/user_interface/lovs/pill_display_as_gc.sql
 @@application/shared_components/user_interface/lovs/prueba.sql
@@ -1538,8 +1551,22 @@ prompt --install
 @@application/pages/page_00622.sql
 @@application/pages/page_00623.sql
 @@application/pages/page_00624.sql
+@@application/pages/page_00625.sql
 @@application/pages/page_00626.sql
+@@application/pages/page_00627.sql
 @@application/pages/page_00628.sql
+@@application/pages/page_00629.sql
+@@application/pages/page_00630.sql
+@@application/pages/page_00631.sql
+@@application/pages/page_00632.sql
+@@application/pages/page_00633.sql
+@@application/pages/page_00634.sql
+@@application/pages/page_00635.sql
+@@application/pages/page_00636.sql
+@@application/pages/page_00637.sql
+@@application/pages/page_00638.sql
+@@application/pages/page_00639.sql
+@@application/pages/page_00640.sql
 @@application/pages/page_00800.sql
 @@application/pages/page_00801.sql
 @@application/pages/page_00900.sql

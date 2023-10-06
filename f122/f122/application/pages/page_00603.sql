@@ -30,7 +30,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'MBLANCO'
-,p_last_upd_yyyymmddhh24miss=>'20230915074617'
+,p_last_upd_yyyymmddhh24miss=>'20230929152742'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(97750247088503613)
@@ -86,9 +86,10 @@ unistr('     when a.ind_estado is null then ''Pendiente de autorizaci\00F3n'''),
 '            1 = 1',
 '            AND a.cod_empresa = 1',
 '            AND a.cod_empleado = :P_COD_EMPLEADO  --1207--740 -- valores para test                                                                                                                                                              ',
-'        ORDER BY',
-'            a.fec_solicitud DESC',
-'    ) a'))
+'        ORDER BY ',
+'            a.fec_solicitud desc ',
+'    ) a',
+'   '))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_ajax_items_to_submit=>'P603_COD_EMPLEADO'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -410,6 +411,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>unistr('Atenci\00F3n')
 ,p_attribute_05=>'Aceptar'
 ,p_attribute_06=>'Cancelar'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(207193818113594036)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'PR_INIT'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'--:P_COD_EMPLEADO := 1207; ',
+'null;',
+''))
+,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp.component_end;
 end;

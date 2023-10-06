@@ -19,6 +19,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_mode=>'MODAL'
 ,p_step_title=>'Crear Clientes'
 ,p_autocomplete_on_off=>'OFF'
+,p_javascript_file_urls=>'#APP_FILES#util_generico.js'
 ,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'function validateText(event) {',
 '  var keyCode = event.keyCode;',
@@ -31,7 +32,7 @@ wwv_flow_imp_page.create_page(
 '  }',
 '} '))
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'.t-Form-label{',
+'/*.t-Form-label{',
 '    ',
 '    color: yellow  !important;',
 '    font-weight: bold !important;',
@@ -47,9 +48,9 @@ wwv_flow_imp_page.create_page(
 '#REG , #P92_DATOS{',
 '     background: #003a85;',
 '}',
+'*/',
 '',
-'',
-'#btn{ ',
+'#btn, #btn2, #btn3{ ',
 '        margin-top: 15px;',
 '        display: flex;',
 '        background:white;',
@@ -61,12 +62,12 @@ wwv_flow_imp_page.create_page(
 '        border-style: solid;',
 '        border-width: 0.5px;',
 '        border-color:  yellow;',
-'/*'))
+'}'))
 ,p_step_template=>wwv_flow_imp.id(40080790783263649)
-,p_page_template_options=>'#DEFAULT#'
+,p_page_template_options=>'#DEFAULT#:ui-dialog--stretch'
 ,p_page_component_map=>'16'
-,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230713074145'
+,p_last_updated_by=>'HSEGOVIA'
+,p_last_upd_yyyymmddhh24miss=>'20230928144536'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(69662198697953159)
@@ -79,6 +80,74 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(110450821372068132)
+,p_plug_name=>'CONSULTAR DATOS DE CLIENTE'
+,p_region_name=>'consulta'
+,p_parent_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_region_template_options=>'#DEFAULT#:is-expanded:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(40108275410263656)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'SUB_REGIONS'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(110451016346068134)
+,p_plug_name=>'ALTA NUEVO CLIENTE'
+,p_region_name=>'agregar_cliente'
+,p_parent_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_region_template_options=>'#DEFAULT#:is-collapsed:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(40108275410263656)
+,p_plug_display_sequence=>20
+,p_plug_display_point=>'SUB_REGIONS'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(110452615791068150)
+,p_plug_name=>'DATOS CREADOS'
+,p_parent_plug_id=>wwv_flow_imp.id(110451016346068134)
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(40125238939263661)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'SUB_REGIONS'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(110451716769068141)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_button_name=>'CONSULTAR'
+,p_button_static_id=>'btn2'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Consultar'
+,p_warn_on_unsaved_changes=>null
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(110451835720068142)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_button_name=>'LIMPIAR'
+,p_button_static_id=>'btn3'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Limpiar'
+,p_button_redirect_url=>'f?p=&APP_ID.:92:&SESSION.::&DEBUG.:92::'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(23488469981910223)
@@ -119,12 +188,21 @@ wwv_flow_imp_page.create_page_branch(
 ,p_branch_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_branch_condition=>'P92_NRO_TICKET'
 );
+wwv_flow_imp_page.create_page_branch(
+ p_id=>wwv_flow_imp.id(65784512730368501)
+,p_branch_action=>'f?p=&APP_ID.:92:&SESSION.::&DEBUG.:92::&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>20
+,p_branch_condition_type=>'ITEM_IS_NOT_NULL'
+,p_branch_condition=>'P92_COD_CLIENTE_CREADO'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23300209316411592)
 ,p_name=>'P92_ES_FISICA'
 ,p_is_required=>true
 ,p_item_sequence=>10
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'S'
 ,p_prompt=>'Es Fisica'
 ,p_source=>'S'
@@ -137,9 +215,8 @@ unistr('SELECT  ''F\00EDsica'' D, ''S'' C'),
 unistr('SELECT ''Jur\00EDdica''D,  ''N''C'),
 'FROM DUAL'))
 ,p_cHeight=>1
-,p_grid_label_column_span=>1
-,p_field_template=>wwv_flow_imp.id(40186748652263678)
-,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--radioButtonGroup'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -149,13 +226,12 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23300631253411593)
 ,p_name=>'P92_CI'
 ,p_item_sequence=>20
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'C.I.:'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_grid_label_column_span=>1
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -167,13 +243,12 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23301002628411593)
 ,p_name=>'P92_RUC'
 ,p_item_sequence=>30
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'Ruc'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_grid_label_column_span=>1
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -184,13 +259,12 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23301465478411593)
 ,p_name=>'P92_NOMBRE'
-,p_item_sequence=>50
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'Nombre'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>110
-,p_colspan=>12
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -201,14 +275,13 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23301845423411593)
 ,p_name=>'P92_DIRECCION'
-,p_item_sequence=>60
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>unistr('Direcci\00F3n')
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>110
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -219,12 +292,12 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23302266618411593)
 ,p_name=>'P92_TELEFONO'
-,p_item_sequence=>70
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>unistr('L\00EDnea Baja')
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -235,15 +308,14 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23302670428411593)
 ,p_name=>'P92_CORREO'
-,p_item_sequence=>80
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>110
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'Email'
 ,p_placeholder=>'correo@gmail.com'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -254,13 +326,13 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23303043287411594)
 ,p_name=>'P92_CELULAR'
-,p_item_sequence=>100
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'Celular'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -271,15 +343,14 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23303449216411594)
 ,p_name=>'P92_EMAIL_ST'
-,p_item_sequence=>110
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>120
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'Email ST'
 ,p_placeholder=>'correo@gmail.com'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -290,8 +361,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23303869062411594)
 ,p_name=>'P92_COD_TIP_CLIENTE'
-,p_item_sequence=>120
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>130
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'9'
 ,p_prompt=>'Tipo Cliente'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -301,7 +372,7 @@ wwv_flow_imp_page.create_page_item(
 '                            order by 1'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -316,8 +387,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23304220897411594)
 ,p_name=>'P92_COD_LISTA_PRECIO'
-,p_item_sequence=>130
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>150
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'5'
 ,p_prompt=>'Lista Precios'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -329,8 +400,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -346,7 +416,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23304633772411594)
 ,p_name=>'P92_COD_CONDICION_VENTA'
 ,p_item_sequence=>140
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'36'
 ,p_prompt=>'Cond. Venta'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -361,8 +431,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -377,8 +446,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23305068512411595)
 ,p_name=>'P92_COD_VENDEDOR'
-,p_item_sequence=>150
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>160
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'SELECT  F.COD_VENDEDOR',
 'FROM FV_VENDEDORES F, PERSONAS P, USUARIOS U',
@@ -400,9 +469,7 @@ wwv_flow_imp_page.create_page_item(
 'order by 1'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -417,8 +484,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23305412327411595)
 ,p_name=>'P92_COD_SECTOR'
-,p_item_sequence=>160
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>170
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_prompt=>'Sector'
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -429,8 +496,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -445,8 +511,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23305816112411595)
 ,p_name=>'P92_NACIONALIDAD'
-,p_item_sequence=>170
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>180
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'PAR'
 ,p_prompt=>'Nacionalidad'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -458,8 +524,7 @@ wwv_flow_imp_page.create_page_item(
 ' order by 1'))
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -474,8 +539,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23306270809411595)
 ,p_name=>'P92_COD_PAIS'
-,p_item_sequence=>180
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>190
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'PAR'
 ,p_prompt=>'Pais'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -487,8 +552,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_null=>'YES'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -503,8 +567,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23306636525411595)
 ,p_name=>'P92_COD_PROVINCIA'
-,p_item_sequence=>190
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>200
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'18'
 ,p_prompt=>'Departamento'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -516,8 +580,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_ajax_optimize_refresh=>'Y'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -532,8 +595,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23307050759411596)
 ,p_name=>'P92_COD_CIUDAD'
-,p_item_sequence=>200
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>210
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_item_default=>'1'
 ,p_prompt=>'Ciudad'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -546,8 +609,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_ajax_optimize_refresh=>'Y'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
@@ -562,8 +624,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23307459724411596)
 ,p_name=>'P92_DATOS'
-,p_item_sequence=>210
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(110452615791068150)
 ,p_prompt=>'Datos'
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -578,7 +640,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23307869148411596)
 ,p_name=>'P92_COD_CLIENTE'
 ,p_item_sequence=>220
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
@@ -587,11 +649,93 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23308278931411596)
 ,p_name=>'P92_COD_USUARIO'
 ,p_item_sequence=>230
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_source=>'&APP_USER.'
 ,p_source_type=>'STATIC'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64600219825457101)
+,p_name=>'P92_COD_CLIENTE_CREADO'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(110452615791068150)
+,p_prompt=>unistr('C\00F3d. Cliente')
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64600307818457102)
+,p_name=>'P92_COD_PERSONA_CREADO'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(110452615791068150)
+,p_prompt=>unistr('C\00F3d. Persona')
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64600453212457103)
+,p_name=>'P92_OPCION'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64604016562457139)
+,p_name=>'P92_NRO'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
+,p_prompt=>unistr('N\00FAmero')
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64604158206457140)
+,p_name=>'P92_TIPO_DATOS'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
+,p_prompt=>'Tipo Datos'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>unistr('STATIC:Documento de Admisi\00F3n;ADM,Documento Extranjero;EXT,Innominado;INN,Pasaporte;PAS,Tarjeta Diplomatica;TAD')
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'NO'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(64604281363457141)
+,p_name=>'P92_OCULTAR'
+,p_item_sequence=>100
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
@@ -605,7 +749,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(76728798783030034)
 ,p_name=>'P92_TIP_OPERACION'
 ,p_item_sequence=>240
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -613,20 +757,116 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(99286366563806447)
 ,p_name=>'P92_ESTADO'
 ,p_item_sequence=>250
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(110451127768068135)
+,p_name=>'P92_TIPO'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_prompt=>'Tipo'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_lov=>unistr('STATIC:C\00E9dula Identidad;CI,Documento de Admisi\00F3n;ADM,Documento Extranjero;EXT,Innominado;INN,Pasaporte;PAS,Ruc;RUC,Tarjeta Diplomatica;TAD')
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(110451259433068136)
+,p_name=>'P92_NRO_CONSULTA'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_prompt=>'Nro. a Consultar'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(110451383504068137)
+,p_name=>'P92_NOMBRE_APELLIDO'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_prompt=>'Nombre  y Apellido'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(110451468307068138)
+,p_name=>'P92_COD_CLIENTE_CONSULTA'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_prompt=>'Cod. Cliente'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(110451513278068139)
+,p_name=>'P92_COD_PERSONA_CONSULTA'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_prompt=>unistr('C\00F3d. Persona')
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(110451613039068140)
+,p_name=>'P92_ESTADO_CLIENTE_CONSULTA'
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_imp.id(110450821372068132)
+,p_prompt=>'Estado Cliente'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(110477743551213444)
 ,p_name=>'P92_NECESARIO'
-,p_item_sequence=>40
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
-,p_prompt=>'Ingresa Correo'
+,p_item_sequence=>100
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
+,p_prompt=>'Tiene Email?'
 ,p_display_as=>'NATIVE_SINGLE_CHECKBOX'
-,p_begin_on_new_line=>'N'
-,p_grid_label_column_span=>1
-,p_field_template=>wwv_flow_imp.id(40186463825263678)
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'S'
@@ -636,7 +876,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(147541139541413022)
 ,p_name=>'P92_NRO_TICKET'
 ,p_item_sequence=>260
-,p_item_plug_id=>wwv_flow_imp.id(69662198697953159)
+,p_item_plug_id=>wwv_flow_imp.id(110451016346068134)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 );
@@ -645,8 +885,12 @@ wwv_flow_imp_page.create_page_validation(
 ,p_validation_name=>'Valida RUC'
 ,p_validation_sequence=>10
 ,p_validation=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'IF :P92_CI IS NULL AND :P92_RUC IS NULL THEN ',
-unistr('    RETURN ''Debe ingresar C\00E9dula o Ruc'';'),
+'IF :P92_NRO IS NULL THEN ',
+'',
+'    IF :P92_CI IS NULL AND :P92_RUC IS NULL THEN ',
+unistr('        RETURN ''Debe ingresar C\00E9dula o Ruc'';'),
+'    END IF;',
+'',
 'END IF;',
 '',
 'IF :P92_NOMBRE IS NULL THEN ',
@@ -744,9 +988,9 @@ unistr('        vdatos2:=replace(p_datos,''\00F3'',''\005Cu00F3'');   '),
 '      :P92_NOMBRE := apex_json.get_varchar2(p_path => ''resultadoRuc[%d].razonSocial'',  p0 => 1);',
 '      :P0_MENSAJE_VALIDACION := convert(replace(apex_json.get_varchar2(p_path => ''resultadoRuc[%d].mensajeError'',  p0 => 1),''"'',''''), ''WE8MSWIN1252'', ''UTF8'');',
 '      v_descripcion_estado := apex_json.get_varchar2(p_path => ''resultadoRuc[%d].descripcionEstadoRuc'',  p0 => 1);',
-'         IF :P92_ESTADO = ''EXISTE'' and v_descripcion_estado <> ''ACTIVO'' THEN ',
+'        /* IF :P92_ESTADO = ''EXISTE'' and v_descripcion_estado <> ''ACTIVO'' THEN ',
 unistr('                RETURN ''El n\00FAmero de Ruc est\00E1 ''|| v_descripcion_estado;'),
-'        ELSIF :P92_ESTADO  <> ''EXISTE'' OR  :P0_MENSAJE_VALIDACION IS NOT NULL then ',
+'        ELS*/IF :P92_ESTADO  <> ''EXISTE'' OR  :P0_MENSAJE_VALIDACION IS NOT NULL then ',
 unistr('            RETURN ''El n\00FAmero de Ruc ingresado no existe'';'),
 '       END IF;',
 '    end;',
@@ -757,6 +1001,18 @@ unistr('            RETURN ''El n\00FAmero de Ruc ingresado no existe'';'),
 ,p_validation2=>'PLSQL'
 ,p_validation_type=>'FUNC_BODY_RETURNING_ERR_TEXT'
 ,p_error_display_location=>'INLINE_WITH_FIELD_AND_NOTIFICATION'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_validation(
  p_id=>wwv_flow_imp.id(174250811091975417)
@@ -792,6 +1048,7 @@ unistr('    SELECT nvl(LENGTH(TRIM(TRANSLATE(:P92_NOMBRE, ''abcdefghijklmnopqrst
 'END;'))
 ,p_validation2=>'PLSQL'
 ,p_validation_type=>'FUNC_BODY_RETURNING_ERR_TEXT'
+,p_validation_condition_type=>'NEVER'
 ,p_associated_item=>wwv_flow_imp.id(23301465478411593)
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -809,7 +1066,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_event_id=>wwv_flow_imp.id(23309024242411597)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
-,p_execute_on_page_init=>'Y'
+,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SET_VALUE'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P92_NOMBRE'
@@ -821,7 +1078,7 @@ wwv_flow_imp_page.create_page_da_action(
 '				  from cedulas_per',
 '				 where numero =:P92_ci '))
 ,p_attribute_07=>'P92_NOMBRE'
-,p_attribute_08=>'Y'
+,p_attribute_08=>'N'
 ,p_attribute_09=>'N'
 ,p_wait_for_result=>'Y'
 );
@@ -831,42 +1088,65 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_event_sequence=>20
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P92_CI'
+,p_condition_element=>'P92_CI'
+,p_triggering_condition_type=>'NOT_NULL'
 ,p_bind_type=>'bind'
-,p_bind_event_type=>'change'
+,p_bind_event_type=>'focusout'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65786164962368517)
+,p_event_id=>wwv_flow_imp.id(23309994742411598)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'		select  nombres ||'' ''||apellidoS nombre',
+'        into :P92_NOMBRE',
+'				  from cedulas_per',
+'				 where numero =:P92_ci;'))
+,p_attribute_02=>'P92_CI'
+,p_attribute_03=>'P92_NOMBRE'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(23310429668411598)
 ,p_event_id=>wwv_flow_imp.id(23309994742411598)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>10
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-' declare ',
-' vnombre varchar2(600); ',
-' ',
-' BEGIN begin select nombre|| ''. Cliente: ''|| c.cod_cliente||''. '' NOMBRE, C.COD_CLIENTE',
-' into ',
-'			  :P92_DATOS,:P92_COD_CLIENTE',
-'			   from personas p, ',
-'			   			cc_clientes c, IDENT_PERSONAS I',
-'			  where I.numero = :P92_CI',
-'			    and c.cod_empresa = ''1''',
-'			    and p.cod_persona = c.cod_persona',
-'                            AND C.COD_PERSONA=I.COD_PERSONA',
-'                            AND ROWNUM=''1'';',
-'                           exception when others then',
-'                            :P92_DATOS:=NULL;',
-'                            :P92_COD_CLIENTE:=NULL;',
-'                            end;',
-'                            ',
-'                            ',
-'                            ',
+'   DECLARE',
+'     vnombre VARCHAR2(600);',
+'   ',
+'   BEGIN',
+'     BEGIN',
+'       SELECT nombre || ''. Cliente: '' || c.cod_cliente || ''. '' nombre,',
+'              c.cod_cliente, c.cod_persona',
+'         INTO :p92_datos, :p92_cod_cliente, :P92_COD_PERSONA_CREADO',
+'         FROM personas p, cc_clientes c, ident_personas i',
+'        WHERE i.numero = :p92_ci',
+'          AND c.cod_empresa = ''1''',
+'          AND p.cod_persona = c.cod_persona',
+'          AND c.cod_persona = i.cod_persona',
+'          AND rownum = ''1'';',
+'          :P92_COD_CLIENTE_CREADO := :p92_cod_cliente;',
+'     EXCEPTION',
+'       WHEN OTHERS THEN',
+'         :p92_datos       := NULL;',
+'         :p92_cod_cliente := NULL;',
+'         :P92_COD_CLIENTE_CREADO := null;',
+'         :P92_COD_PERSONA_CREADO := null;',
 '',
-'                    ',
-'                            END;'))
+'     END;',
+'   ',
+'   END;',
+''))
 ,p_attribute_02=>'P92_CI'
-,p_attribute_03=>'P92_DATOS,P92_COD_CLIENTE'
+,p_attribute_03=>'P92_DATOS,P92_COD_CLIENTE_CONSULTA,P92_COD_CLIENTE_CREADO,P92_COD_PERSONA_CREADO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -875,8 +1155,8 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(23310930774411598)
 ,p_event_id=>wwv_flow_imp.id(23309994742411598)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>20
-,p_execute_on_page_init=>'Y'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SET_CSS'
 ,p_affected_elements_type=>'ITEM'
 ,p_affected_elements=>'P92_DATOS'
@@ -900,31 +1180,35 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-' declare ',
-' vnombre varchar2(600); ',
+' DECLARE',
+'   VNOMBRE VARCHAR2(600);',
 ' ',
-' BEGIN begin select nombre|| ''. Cliente: ''|| c.cod_cliente||''. '' NOMBRE, C.COD_CLIENTE',
-' into ',
-'			  :P92_DATOS,:P92_COD_CLIENTE',
-'			   from personas p, ',
-'			   			cc_clientes c, IDENT_PERSONAS I',
-'			  where I.numero = :P92_ruc',
-'			    and c.cod_empresa = ''1''',
-'			    and p.cod_persona = c.cod_persona',
-'                            AND C.COD_PERSONA=I.COD_PERSONA',
-'                            AND ROWNUM=''1'';',
-'                           exception when others then',
-'                            :P92_DATOS:=NULL;',
-'                            :P92_COD_CLIENTE:=NULL;',
-'                            end;',
-'                            ',
-'                            ',
-'                            ',
+' BEGIN',
+'   BEGIN',
+'     SELECT NOMBRE || ''. Cliente: '' || C.COD_CLIENTE || ''. '' NOMBRE,',
+'            C.COD_CLIENTE, ',
+'            C.COD_PERSONA',
+'       INTO :P92_DATOS, :P92_COD_CLIENTE, :P92_COD_PERSONA_CREADO',
+'       FROM PERSONAS P, CC_CLIENTES C, IDENT_PERSONAS I',
+'      WHERE I.NUMERO = :P92_RUC',
+'        AND C.COD_EMPRESA = ''1''',
+'        AND P.COD_PERSONA = C.COD_PERSONA',
+'        AND C.COD_PERSONA = I.COD_PERSONA',
+'        AND ROWNUM = ''1'';',
 '',
-'                    ',
-'                            END;'))
+'        :P92_COD_CLIENTE_CREADO  := :P92_COD_CLIENTE;',
+'   EXCEPTION',
+'     WHEN OTHERS THEN',
+'       :P92_DATOS       := NULL;',
+'       :P92_COD_CLIENTE := NULL;',
+'       :P92_COD_CLIENTE_CREADO := NULL;',
+'       :P92_COD_PERSONA_CREADO := NULL;',
+'   END;',
+' ',
+' END;',
+''))
 ,p_attribute_02=>'P92_RUC'
-,p_attribute_03=>'P92_DATOS,P92_COD_CLIENTE'
+,p_attribute_03=>'P92_DATOS,P92_COD_CLIENTE_CONSULTA,P92_COD_PERSONA_CREADO,P92_COD_CLIENTE_CREADO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -968,10 +1252,56 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(99286234161806446)
+ p_id=>wwv_flow_imp.id(64603533989457134)
 ,p_event_id=>wwv_flow_imp.id(99286176692806445)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'   DECLARE',
+'     vnombre VARCHAR2(600);',
+'   ',
+'   BEGIN',
+'     BEGIN',
+'',
+'          select  p.nombre || ''. Cliente: '' || nvl(c.cod_cliente,'''') || ''. '' nombre,',
+'               nvl(c.cod_cliente,'''') cod_cliente, p.cod_persona ',
+'          INTO :p92_datos, :p92_cod_cliente, :P92_COD_PERSONA_CREADO',
+'          from ident_personas i,',
+'               personas p,',
+'               cc_clientes c',
+'         WHERE i.numero = :P92_RUC',
+'          AND I.COD_IDENT = ''RUC''',
+'         and i.cod_persona=p.cod_persona ',
+'         and nvl(c.cod_empresa,''1'')=''1''',
+'         and c.cod_persona(+)=p.cod_persona',
+'         AND rownum = ''1'';',
+'',
+'      ',
+'          :P92_COD_CLIENTE_CREADO := :p92_cod_cliente;',
+'     EXCEPTION',
+'       WHEN OTHERS THEN',
+'         :p92_datos       := NULL;',
+'         :p92_cod_cliente := NULL;',
+'         :P92_COD_CLIENTE_CREADO := null;',
+'         :P92_COD_PERSONA_CREADO := null;',
+'',
+'     END;',
+'   ',
+'   END;',
+''))
+,p_attribute_02=>'P92_RUC'
+,p_attribute_03=>'P92_DATOS,P92_COD_CLIENTE_CONSULTA,P92_COD_CLIENTE_CREADO,P92_COD_PERSONA_CREADO'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(99286234161806446)
+,p_event_id=>wwv_flow_imp.id(99286176692806445)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -1045,7 +1375,7 @@ unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00F3'', ''\005Cu00F3'');'),
 '        IF :P92_ESTADO = ''EXISTE'' AND V_DESCRIPCION_ESTADO <> ''ACTIVO'' THEN',
 unistr('          :P0_MENSAJE_VALIDACION := ''El n\00FAmero de Ruc est\00E1 '' ||'),
 '                                    V_DESCRIPCION_ESTADO;',
-'          :P92_NOMBRE            := NULL;',
+'        --  :P92_NOMBRE            := NULL;',
 '        ELSIF :P92_ESTADO <> ''EXISTE'' OR :P0_MENSAJE_VALIDACION IS NOT NULL THEN',
 unistr('          :P0_MENSAJE_VALIDACION := ''El n\00FAmero de Ruc ingresado no existe'';'),
 '        END IF;',
@@ -1060,17 +1390,468 @@ unistr('          :P0_MENSAJE_VALIDACION := ''El n\00FAmero de Ruc ingresado no 
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(110452400283068148)
+,p_name=>'Consulta datos del cliente'
+,p_event_sequence=>70
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(110451716769068141)
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(110452533221068149)
+,p_event_id=>wwv_flow_imp.id(110452400283068148)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'BEGIN ',
+'    IF :P92_TIPO IS NULL THEN ',
+'        RAISE_APPLICATION_ERROR(-20001, ''Debe seleccionar el tipo de documento del cliente'');',
+'    ELSIF :P92_NRO_CONSULTA IS NULL THEN ',
+unistr('        RAISE_APPLICATION_ERROR(-20001, ''Debe ingresar el n\00FAmero para a consultar''); '),
+'    END IF;',
+'',
+'    inv.ccclient.pr_obtiene_datos_cliente(p_cod_tipo    => :P92_TIPO,',
+'                                     p_numero      => :P92_NRO_CONSULTA,',
+'                                     p_cod_cliente => :P92_COD_CLIENTE_CONSULTA,',
+'                                     p_cod_persona => :P92_COD_PERSONA_CONSULTA,',
+'                                     p_nombre      => :P92_NOMBRE_APELLIDO,',
+'                                     p_estado      => :P92_ESTADO_CLIENTE_CONSULTA,',
+'                                     p_opcion      => :P92_OPCION);',
+'',
+'END;'))
+,p_attribute_02=>'P92_TIPO,P92_NRO_CONSULTA'
+,p_attribute_03=>'P92_COD_CLIENTE_CONSULTA,P92_COD_PERSONA_CONSULTA,P92_NOMBRE_APELLIDO,P92_ESTADO_CLIENTE_CONSULTA,P92_OPCION'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(64600583356457104)
+,p_name=>'Muestra regiones'
+,p_event_sequence=>80
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P92_OPCION'
+,p_condition_element=>'P92_OPCION'
+,p_triggering_condition_type=>'EQUALS'
+,p_triggering_expression=>'1'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64600674063457105)
+,p_event_id=>wwv_flow_imp.id(64600583356457104)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+unistr('var htmldb_delete_messag_agregar =''El n\00FAmero ingresado no se encuentra. \00BFDesea agregar?'';  '),
+'    apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
+'        if( okPressed ) {',
+'            //apex.item("P92_OCULTAR").setValue(1); ',
+'            ',
+'            var tipo = apex.item("P92_TIPO").getValue();',
+'            var numero = apex.item("P92_NRO_CONSULTA").getValue();',
+'            if (tipo === "CI") {',
+'',
+'                apex.item("P92_OCULTAR").setValue(1); ',
+'',
+'                apex.item("P92_TIPO_DATOS").setValue(null);',
+'                apex.item("P92_NRO").setValue(null);',
+'',
+'                apex.item("P92_CI").setValue(numero);',
+'',
+'            }else if  (tipo === "RUC")  {',
+'                apex.item("P92_OCULTAR").setValue(1); ',
+'',
+'                apex.item("P92_TIPO_DATOS").setValue(null);',
+'                apex.item("P92_NRO").setValue(null);',
+'',
+'                apex.item("P92_RUC").setValue(numero);',
+'',
+'            }else {',
+'                apex.item("P92_OCULTAR").setValue(2); ',
+'',
+'                apex.item("P92_CI").setValue(null);',
+'                apex.item("P92_RUC").setValue(null);',
+'                apex.item("P92_NOMBRE").setValue(nombre);',
+'                apex.item("P92_TIPO_DATOS").setValue(tipo);',
+'                apex.item("P92_NRO").setValue(numero);',
+'            }',
+'             document.getElementById("consulta").classList.add("is-collapsed"); ',
+'             $("#agregar_cliente").find("button.t-Button--hideShow").eq(0).click(); ',
+'        } else {',
+'           null;',
+'        }',
+'    });'))
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65785838856368514)
+,p_event_id=>wwv_flow_imp.id(64600583356457104)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>':P92_NOMBRE := :P92_NOMBRE_APELLIDO;'
+,p_attribute_02=>'P92_NOMBRE_APELLIDO'
+,p_attribute_03=>'P92_NOMBRE'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(64603848671457137)
+,p_name=>'Muestra regiones_1'
+,p_event_sequence=>90
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P92_OPCION'
+,p_condition_element=>'P92_OPCION'
+,p_triggering_condition_type=>'EQUALS'
+,p_triggering_expression=>'2'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64603972474457138)
+,p_event_id=>wwv_flow_imp.id(64603848671457137)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+unistr('var htmldb_delete_messag_agregar =''El registro ingresado no existe como cliente. \00BFDesea agregar?'';  '),
+'    apex.message.confirm(htmldb_delete_messag_agregar, function( okPressed ) { ',
+'        if( okPressed ) {',
+'            var tipo = apex.item("P92_TIPO").getValue();',
+'            var numero = apex.item("P92_NRO_CONSULTA").getValue();',
+'            if (tipo === "CI") {',
+'',
+'                apex.item("P92_OCULTAR").setValue(1); ',
+'',
+'                apex.item("P92_TIPO_DATOS").setValue(null);',
+'                apex.item("P92_NRO").setValue(null);',
+'',
+'                apex.item("P92_CI").setValue(numero);',
+'',
+'            }else if  (tipo === "RUC")  {',
+'                apex.item("P92_OCULTAR").setValue(1); ',
+'',
+'                apex.item("P92_TIPO_DATOS").setValue(null);',
+'                apex.item("P92_NRO").setValue(null);',
+'',
+'                apex.item("P92_RUC").setValue(numero);',
+'',
+'            }else {',
+'                apex.item("P92_OCULTAR").setValue(2); ',
+'',
+'                apex.item("P92_CI").setValue(null);',
+'                apex.item("P92_RUC").setValue(null);',
+'',
+'                apex.item("P92_TIPO_DATOS").setValue(tipo);',
+'                apex.item("P92_NRO").setValue(numero);',
+'            }',
+'             document.getElementById("consulta").classList.add("is-collapsed"); ',
+'            $("#agregar_cliente").find("button.t-Button--hideShow").eq(0).click(); ',
+'        } else {',
+'           null;',
+'        }',
+'    });'))
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65785918137368515)
+,p_event_id=>wwv_flow_imp.id(64603848671457137)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>':P92_NOMBRE := :P92_NOMBRE_APELLIDO;'
+,p_attribute_02=>'P92_NOMBRE_APELLIDO'
+,p_attribute_03=>'P92_NOMBRE'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(64600755643457106)
+,p_name=>'Verifica datos'
+,p_event_sequence=>100
+,p_condition_element=>'P92_COD_PERSONA_CREADO'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64600823663457107)
+,p_event_id=>wwv_flow_imp.id(64600755643457106)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+' $("#consulta").find("button.t-Button--hideShow").eq(0).click(); ',
+'  $("#agregar_cliente").find("button.t-Button--hideShow").eq(0).click(); '))
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65784655735368502)
+,p_event_id=>wwv_flow_imp.id(64600755643457106)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P92_NRO,P92_TIPO_DATOS'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(64600967565457108)
+,p_name=>'Quita los espacios y caracteres especiales'
+,p_event_sequence=>110
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P92_NOMBRE'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'focusout'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64601027077457109)
+,p_event_id=>wwv_flow_imp.id(64600967565457108)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'BEGIN',
+'  :P92_NOMBRE := REGEXP_REPLACE(',
+'                   REGEXP_REPLACE(',
+unistr('                     TRANSLATE(:P92_NOMBRE, ''\00E1\00E9\00ED\00F3\00FA\00FC\00C1\00C9\00CD\00D3\00DA\00DC'', ''aeiouuAEIOUU''),'),
+'                     ''[^a-zA-Z0-9 ]+'',',
+'                     '' ''),',
+'                   '' +'', '' '');',
+'END;',
+'',
+'',
+''))
+,p_attribute_02=>'P92_NOMBRE'
+,p_attribute_03=>'P92_NOMBRE'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(64604380779457142)
+,p_name=>'Tipo_dato_nro'
+,p_event_sequence=>120
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P92_OCULTAR'
+,p_condition_element=>'P92_OCULTAR'
+,p_triggering_condition_type=>'EQUALS'
+,p_triggering_expression=>'1'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64604423794457143)
+,p_event_id=>wwv_flow_imp.id(64604380779457142)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P92_TIPO_DATOS,P92_NRO'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64605081352457149)
+,p_event_id=>wwv_flow_imp.id(64604380779457142)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SHOW'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P92_CI,P92_RUC'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(64604571368457144)
+,p_name=>'CI_RUC'
+,p_event_sequence=>130
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P92_OCULTAR'
+,p_condition_element=>'P92_OCULTAR'
+,p_triggering_condition_type=>'EQUALS'
+,p_triggering_expression=>'2'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64604681013457145)
+,p_event_id=>wwv_flow_imp.id(64604571368457144)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P92_CI,P92_RUC'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(64604971299457148)
+,p_event_id=>wwv_flow_imp.id(64604571368457144)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SHOW'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P92_TIPO_DATOS,P92_NRO'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(65784765530368503)
+,p_name=>'Busca datos cliente'
+,p_event_sequence=>140
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P92_RUC'
+,p_condition_element=>'P92_RUC'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'focusout'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65784978874368505)
+,p_event_id=>wwv_flow_imp.id(65784765530368503)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'   DECLARE',
+'     vnombre VARCHAR2(600);',
+'   ',
+'   BEGIN',
+'     BEGIN',
+'',
+'          select  p.nombre || ''. Cliente: '' || nvl(c.cod_cliente,'''') || ''. '' nombre,',
+'               nvl(c.cod_cliente,'''') cod_cliente, p.cod_persona ',
+'          INTO :p92_datos, :p92_cod_cliente, :P92_COD_PERSONA_CREADO',
+'          from ident_personas i,',
+'               personas p,',
+'               cc_clientes c',
+'         WHERE i.numero = :P92_RUC',
+'          AND I.COD_IDENT = ''RUC''',
+'         and i.cod_persona=p.cod_persona ',
+'         and nvl(c.cod_empresa,''1'')=''1''',
+'         and c.cod_persona(+)=p.cod_persona',
+'         AND rownum = ''1'';',
+'',
+'      ',
+'          :P92_COD_CLIENTE_CREADO := :p92_cod_cliente;',
+'     EXCEPTION',
+'       WHEN OTHERS THEN',
+'         :p92_datos       := NULL;',
+'         :p92_cod_cliente := NULL;',
+'         :P92_COD_CLIENTE_CREADO := null;',
+'         :P92_COD_PERSONA_CREADO := null;',
+'',
+'     END;',
+'   ',
+'   END;',
+''))
+,p_attribute_02=>'P92_RUC'
+,p_attribute_03=>'P92_DATOS,P92_COD_CLIENTE_CONSULTA,P92_COD_CLIENTE_CREADO,P92_COD_PERSONA_CREADO'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65785040835368506)
+,p_event_id=>wwv_flow_imp.id(65784765530368503)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DECLARE',
+'  VDATOS               VARCHAR2(32000);',
+'  VDIREC               VARCHAR2(32000);',
+'  V_DETALLE            VARCHAR2(10000);',
+'  V_CABECERA           VARCHAR2(10000);',
+'  VDATOS_RETORNO       VARCHAR2(32000);',
+'  P_JSON               VARCHAR2(4000);',
+'  P_DATOS              VARCHAR2(4000);',
+'  L_MSJ                VARCHAR2(4000);',
+'  L_PATH               VARCHAR2(200);',
+'  L_ESTADO             VARCHAR2(200);',
+'  NOMBRE               VARCHAR2(1);',
+'  VDATOS2              VARCHAR2(5000);',
+'  V_DESCRIPCION_ESTADO VARCHAR2(500);',
+'BEGIN',
+'  :P0_MENSAJE_VALIDACION := NULL;',
+'  IF :P92_RUC IS NOT NULL THEN',
+'    DECLARE',
+'      T_HTTP_REQ     UTL_HTTP.REQ;',
+'      T_HTTP_RESP    UTL_HTTP.RESP;',
+'      T_REQUEST_BODY VARCHAR2(30000);',
+'    BEGIN',
+'      BEGIN',
+'        VDIREC := ''http://192.168.15.102:8080/efactura-py/api/consultas/consulta-ruc'';',
+'      END;',
+'      VDATOS := ''{"ruc":["'' || :P92_RUC || ''"],',
+'                "retornarRespuestaOriginal":"true"',
+'                }'';',
+'      P_JSON := ''{"ruc":["'' || :P92_RUC || ''"],',
+'                "retornarRespuestaOriginal":"true"',
+'                }'';',
+'    ',
+'      T_REQUEST_BODY := VDATOS;',
+'      T_HTTP_REQ     := UTL_HTTP.BEGIN_REQUEST(VDIREC, ''POST'', ''HTTP/1.1'');',
+'      UTL_HTTP.SET_HEADER(T_HTTP_REQ, ''Content-Type'', ''application/json'');',
+'    ',
+'      UTL_HTTP.SET_HEADER(T_HTTP_REQ, ''Content-Length'', LENGTH(VDATOS));',
+'    ',
+'      UTL_HTTP.WRITE_TEXT(T_HTTP_REQ, T_REQUEST_BODY);',
+'      P_JSON := T_REQUEST_BODY;',
+'      DBMS_OUTPUT.PUT_LINE(''t_request_body: '' || T_REQUEST_BODY);',
+'    ',
+'      T_HTTP_RESP := UTL_HTTP.GET_RESPONSE(T_HTTP_REQ);',
+'      UTL_HTTP.READ_TEXT(T_HTTP_RESP, P_DATOS);',
+'      UTL_HTTP.END_RESPONSE(T_HTTP_RESP);',
+'      BEGIN',
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00D1'', ''\005Cu00D1'');'),
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00F3'', ''\005Cu00F3'');'),
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00E1'', ''\005Cu00E1'');'),
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00E1'', ''\005Cu00E1'');'),
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00F3'', ''\005Cu00F3'');'),
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00F3'', ''\005Cu00F3'');'),
+unistr('        VDATOS2 := REPLACE(P_DATOS, ''\00F3'', ''\005Cu00F3'');'),
+'      ',
+'        APEX_JSON.PARSE(VDATOS2);',
+'        :P92_ESTADO            := APEX_JSON.GET_VARCHAR2(P_PATH => ''resultadoRuc[%d].codigoRespuesta'',',
+'                                                         P0     => 1);',
+'        :P92_NOMBRE            := APEX_JSON.GET_VARCHAR2(P_PATH => ''resultadoRuc[%d].razonSocial'',',
+'                                                         P0     => 1);',
+'        :P0_MENSAJE_VALIDACION := CONVERT(REPLACE(APEX_JSON.GET_VARCHAR2(P_PATH => ''resultadoRuc[%d].mensajeError'',',
+'                                                                         P0     => 1),',
+'                                                  ''"'',',
+'                                                  ''''),',
+'                                          ''WE8MSWIN1252'',',
+'                                          ''UTF8'');',
+'        V_DESCRIPCION_ESTADO   := APEX_JSON.GET_VARCHAR2(P_PATH => ''resultadoRuc[%d].descripcionEstadoRuc'',',
+'                                                         P0     => 1);',
+'        IF :P92_ESTADO = ''EXISTE'' AND V_DESCRIPCION_ESTADO <> ''ACTIVO'' THEN',
+unistr('          :P0_MENSAJE_VALIDACION := ''El n\00FAmero de Ruc est\00E1 '' ||'),
+'                                    V_DESCRIPCION_ESTADO;',
+'        --  :P92_NOMBRE            := NULL;',
+'        ELSIF :P92_ESTADO <> ''EXISTE'' OR :P0_MENSAJE_VALIDACION IS NOT NULL THEN',
+unistr('          :P0_MENSAJE_VALIDACION := ''El n\00FAmero de Ruc ingresado no existe'';'),
+'        END IF;',
+'      END;',
+'    END;',
+'  END IF;',
+'END;',
+''))
+,p_attribute_02=>'P92_RUC'
+,p_attribute_03=>'P92_ESTADO,P92_NOMBRE,P0_MENSAJE_VALIDACION'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(76728924139030036)
@@ -1090,28 +1871,196 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(23308691406411597)
+ p_id=>wwv_flow_imp.id(65785165116368507)
 ,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Busca Codigo persona'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'if :P92_RUC IS NOT NULL THEN ',
+'   DECLARE',
+'     vnombre VARCHAR2(600);',
+'   BEGIN',
+'     BEGIN',
+'          select   p.cod_persona ',
+'          INTO :P92_COD_PERSONA_CREADO',
+'          from ident_personas i,',
+'               personas p,',
+'               cc_clientes c',
+'         WHERE i.numero = :P92_RUC',
+'          AND I.COD_IDENT = ''RUC''',
+'         and i.cod_persona=p.cod_persona ',
+'         and nvl(c.cod_empresa,''1'')=''1''',
+'         and c.cod_persona(+)=p.cod_persona',
+'         AND rownum = ''1'';',
+'     EXCEPTION',
+'       WHEN OTHERS THEN',
+'         :P92_COD_PERSONA_CREADO := null;',
+'',
+'     END;',
+'   ',
+'   END;',
+'END IF;',
+'',
+'IF :P92_COD_PERSONA_CREADO IS NULL THEN ',
+'',
+'if :P92_CI IS NOT NULL THEN ',
+'   DECLARE',
+'     vnombre VARCHAR2(600);',
+'   BEGIN',
+'     BEGIN',
+'',
+'          select   p.cod_persona ',
+'          INTO :P92_COD_PERSONA_CREADO',
+'          from ident_personas i,',
+'               personas p,',
+'               cc_clientes c',
+'         WHERE i.numero = :P92_CI',
+'          AND I.COD_IDENT = ''CI''',
+'         and i.cod_persona=p.cod_persona ',
+'         and nvl(c.cod_empresa,''1'')=''1''',
+'         and c.cod_persona(+)=p.cod_persona',
+'         AND rownum = ''1'';',
+'     EXCEPTION',
+'       WHEN OTHERS THEN',
+'         :P92_COD_PERSONA_CREADO := null;',
+'',
+'     END;',
+'   ',
+'   END;',
+'END IF;',
+'',
+'END IF;'))
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(23308691406411597)
+,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'crea_cliente'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'if :P92_cod_cliente is null then',
+'if :P92_COD_PERSONA_CREADO is not null and :P92_cod_cliente is null then ',
+'declare ',
+'v_codigo varchar2(100);',
+'vcli varchar2(50);',
+'begin',
+'IF :P92_coD_tip_cliente = ''9'' THEN',
+'                v_codigo := ''71'';',
+'              ELSIF :P92_cod_tip_cliente = ''23'' THEN',
+'                v_codigo := ''30'';',
+'              ELSIF :P92_cod_tip_cliente = ''18'' THEN',
+'                v_codigo := ''74'';',
+'              ELSE',
+'                v_codigo := NULL;',
+'              END IF;',
+'',
+'              BEGIN',
+'              select nvl(max(to_number(cod_cliente)), 0) + 1',
+'                into vcli',
+'                from cc_clientes',
+'               where cod_empresa = ''1'';',
+'              :P92_cod_cliente := vcli;',
+'            EXCEPTION',
+'              when others then',
+unistr('               apex_application.g_print_success_message := ''<span style="color:white">Error en la generaci\00F3n del c\00F3digo de cliente .</span>'';'),
+'               ROLLBACK;',
+'            END;',
+'            begin',
+'insert into cc_clientes',
+'                (cod_empresa,',
+'                 cod_cliente,',
+'                 cod_persona,',
+'                 estado,',
+'                 plazo,',
+'                 cod_condicion_venta,',
+'                 nro_jerarquia,',
+'                 tip_documento,',
+'                 tip_cliente,',
+'                 cod_vendedor,',
+'                 cod_moneda_limite,',
+'                 limite_credito,',
+'                 cod_zona,',
+'                 fec_alta,',
+'                 cod_usuario,',
+'                 cod_lista_precio,',
+'                 nro_llamada,',
+'                 TIP_OPERACION,',
+'                 cod_cobrador)',
+'              values',
+'                (''1'',',
+'                 :P92_cod_cliente,',
+'                 :P92_COD_PERSONA_CREADO,',
+'                 ''A'',',
+'                 ''0'',',
+'                 :P92_cod_condicion_venta,',
+'                 ''600'',',
+'                 NULL,',
+'                 :P92_cod_tip_cliente,',
+'                 :P92_cod_vendedor,',
+'                 ''1'',',
+'                 1,',
+'                 NULL,',
+'                 sysdate,',
+'                 :P92_cod_usuario,',
+'                 :P92_cod_lista_precio,',
+'                 NULL,',
+'                 NULL,',
+'                 v_codigo);',
+'                 :P92_COD_CLIENTE_CREADO := :P92_cod_cliente;',
+'',
+unistr('                 :P92_DATOS :=''El cliente ha sido creado con \00E9xito.'' ||''   C\00F3digo de cliente: '' || :P92_cod_cliente   ;'),
+unistr('                  apex_application.g_print_success_message := ''<span style="color:white">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
+' ',
+' exception',
+' when others then ',
+'    raise_application_error(-20001, ''Error al insertar cliente'');',
+'   ',
+' end;',
+' end;',
+'else ',
+'',
 'begin',
 '  declare',
 '    vruc varchar2(30);',
 '    vnom varchar2(100);',
 '    vcod_persona varchar2(500);',
+'    V_COD_CLIENTE   varchar2(30);',
+'    V_COD_PERSONA varchar2(100);',
 '  begin',
-'    select max(cod_persona)',
+'    /*select max(cod_persona)',
 '      into vruc',
 '      from ident_personas',
-'     where numero = :P92_ruc;',
+'     where numero = :P92_ruc;*/',
+'',
+'     select a.cod_cliente, p.cod_persona',
+'        INTO V_COD_CLIENTE,  V_COD_PERSONA',
+'        from cc_clientes  a, personas p, inv.ident_personas i',
+'        where a.cod_persona(+) = p.cod_persona',
+'        and i.cod_persona(+) = p.cod_persona',
+'        and i.cod_ident(+) = ''RUC''',
+'        AND i.numero = :P92_ruc;',
 '  ',
 '    select nombre into vnom from personas where cod_persona = vruc;',
 '  ',
 '    if vnom is not null then',
-'                apex_application.g_print_success_message := ''<span style="color:red">',
+'                :P92_COD_CLIENTE_CREADO := V_COD_CLIENTE;',
+'                :P92_COD_PERSONA_CREADO := V_COD_PERSONA;',
+'                apex_application.g_print_success_message := ''<span style="color:white">',
 unistr('               El n\00FAmero de RUC ingresado ya se encuentra registrado a la persona cod. '' || vruc ||'),
 '              '' - '' || vnom || ''. ',
 '               .</span>'';',
@@ -1151,7 +2100,7 @@ unistr('               El n\00FAmero de RUC ingresado ya se encuentra registrado
 '                  --',
 '                  IF vcli IS NOT NULL THEN',
 '                     ',
-'                        apex_application.g_print_success_message := ''<span style="color:red">',
+'                        apex_application.g_print_success_message := ''<span style="color:white">',
 unistr('              El n\00FAmero de documento seleccionado ya fue definido en el cliente: '' ||'),
 '                               chr(13) || nvl(vnom, vfan) || '' ('' || vcli ||',
 '                               ''). ',
@@ -1162,7 +2111,7 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '                  when no_data_found then',
 '                                ',
 '                               ',
-'                             apex_application.g_print_success_message := ''<span style="color:red">',
+'                             apex_application.g_print_success_message := ''<span style="color:white">',
 unistr('              El n\00FAmero de documento seleccionado ya fue definido en la persona: '' ||'),
 '                               chr(13) || nvl(vnom, vfan) || '' ('' || vper ||',
 '                               '').          .</span>'';        ',
@@ -1179,7 +2128,7 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '          EXCEPTION',
 '            when others then',
 '          ',
-'                 apex_application.g_print_success_message := ''<span style="color:red">   No se puede verificar el numero de documento .</span>'';',
+'                 apex_application.g_print_success_message := ''<span style="color:white">   No se puede verificar el numero de documento .</span>'';',
 '              RETURN FALSE;',
 '          END;',
 '        ',
@@ -1199,7 +2148,7 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '          EXCEPTION',
 '            when others then',
 '                          ',
-'apex_application.g_print_success_message := ''<span style="color:red">   No se puede insertar el documento de pa persona .</span>'';                         ',
+'apex_application.g_print_success_message := ''<span style="color:white">   No se puede insertar el documento de pa persona .</span>'';                         ',
 '              return FALSE;',
 '          END;',
 '        ',
@@ -1207,24 +2156,24 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '          --break;',
 '          IF :P92_COD_TIP_CLIENTE IS NULL THEN',
 '         ',
-'            apex_application.g_print_success_message := ''<span style="color:red">Debe completar el Tipo de cliente.</span>'';',
+'            apex_application.g_print_success_message := ''<span style="color:white">Debe completar el Tipo de cliente.</span>'';',
 '             ',
 '            raise verr;',
 '          END IF;',
 '        ',
 '          IF :P92_COD_LISTA_PRECIO IS NULL THEN',
-'             apex_application.g_print_success_message := ''<span style="color:red">Debe completar la lista de precios.</span>'';',
+'             apex_application.g_print_success_message := ''<span style="color:white">Debe completar la lista de precios.</span>'';',
 '            raise verr;',
 '          END IF;',
 '        ',
 '          IF :P92_cod_provincia IS NULL THEN',
 '          ',
-'           apex_application.g_print_success_message := ''<span style="color:red">Debe completar el departamento del cliente.</span>'';',
+'           apex_application.g_print_success_message := ''<span style="color:white">Debe completar el departamento del cliente.</span>'';',
 '            raise verr;',
 '          END IF;',
 '        ',
 '          IF :P92_cod_ciudad IS NULL THEN',
-'            apex_application.g_print_success_message := ''<span style="color:red">Debe completar la ciudad del cliente.</span>'';',
+'            apex_application.g_print_success_message := ''<span style="color:white">Debe completar la ciudad del cliente.</span>'';',
 '            raise verr;',
 '          END IF;',
 '        ',
@@ -1235,7 +2184,7 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '             ',
 '          ',
 '            IF :P92_ruc IS NULL THEN',
-'               apex_application.g_print_success_message := ''<span style="color:red">Debe ingresar el RUC del cliente.</span>'';',
+'               apex_application.g_print_success_message := ''<span style="color:white">Debe ingresar el RUC del cliente.</span>'';',
 '          ',
 '          ',
 '              raise verr;',
@@ -1266,7 +2215,7 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '            when verr then',
 '              raise verr;',
 '            when others then',
-'              apex_application.g_print_success_message := ''<span style="color:red">Error en la generacion del codigo de persona.</span>'';',
+'              apex_application.g_print_success_message := ''<span style="color:white">Error en la generacion del codigo de persona.</span>'';',
 '              raise verr;',
 '          END;',
 '        ',
@@ -1281,7 +2230,7 @@ unistr('              El n\00FAmero de documento seleccionado ya fue definido en
 '              when verr then',
 '                raise verr;',
 '              when others then',
-unistr('               apex_application.g_print_success_message := ''<span style="color:red">Error en la generaci\00F3n del c\00F3digo de cliente .</span>'';'),
+unistr('               apex_application.g_print_success_message := ''<span style="color:white">Error en la generaci\00F3n del c\00F3digo de cliente .</span>'';'),
 '               ROLLBACK;',
 '            END;',
 '          END IF;        ',
@@ -1317,7 +2266,7 @@ unistr('               apex_application.g_print_success_message := ''<span style
 '              when verr then',
 '                raise verr;',
 '              when others then',
-unistr('              apex_application.g_print_success_message := ''<span style="color:red">Error en la generaci\00F3n del c\00F3digo de persona .</span>''; '),
+unistr('              apex_application.g_print_success_message := ''<span style="color:white">Error en la generaci\00F3n del c\00F3digo de persona .</span>''; '),
 '                raise verr;',
 '            END;',
 '           IF :P92_CORREO IS NOT NULL THEN',
@@ -1329,7 +2278,7 @@ unistr('              apex_application.g_print_success_message := ''<span style=
 '																		raise verr;',
 '																when others then',
 '													 ',
-'                                     apex_application.g_print_success_message := ''<span style="color:red">No se pudo insertar el email de la persona .</span>''; ',
+'                                     apex_application.g_print_success_message := ''<span style="color:white">No se pudo insertar el email de la persona .</span>''; ',
 '																		raise verr;',
 '											      END;',
 '										    END IF;',
@@ -1362,7 +2311,7 @@ unistr('              apex_application.g_print_success_message := ''<span style=
 '                when verr then',
 '                  raise verr;',
 '                when others then',
-unistr('                 apex_application.g_print_success_message := ''<span style="color:red">Error en la generaci\00F3n de la direccion de cliente .</span>'';'),
+unistr('                 apex_application.g_print_success_message := ''<span style="color:white">Error en la generaci\00F3n de la direccion de cliente .</span>'';'),
 '                  raise verr;',
 '              END;',
 '            END IF;',
@@ -1418,14 +2367,15 @@ unistr('                 apex_application.g_print_success_message := ''<span sty
 '                 NULL,',
 '                 NULL,',
 '                 vcob);',
-'                 ',
-'                 ',
-unistr('                   :P92_DATOS :=''El cliente ha sido creado con \00E9xito.'' ||''   C\00F3digo de cliente: '' || :P92_cod_cliente   ;'),
+'                ',
+unistr('                 --  :P92_DATOS :=''El cliente ha sido creado con \00E9xito.'' ||''   C\00F3digo de cliente: '' || :P92_cod_cliente   ;'),
+'                   :P92_COD_CLIENTE_CREADO := :P92_cod_cliente;',
+'                   :P92_COD_PERSONA_CREADO := Vcod_persona;',
 '            EXCEPTION',
 '              when verr then',
 '                raise verr;',
 '              when others then',
-'     apex_application.g_print_success_message := ''<span style="color:red">Error en la insercion del cliente.''||sqlerrm||''</span>'';  ',
+'     apex_application.g_print_success_message := ''<span style="color:white">Error en la insercion del cliente.''||sqlerrm||''</span>'';  ',
 '                raise verr;',
 '            END;',
 '          ',
@@ -1437,6 +2387,12 @@ unistr('                   :P92_DATOS :=''El cliente ha sido creado con \00E9xit
 '          ',
 '            IF :P92_ruc IS NOT NULL THEN',
 '              IF NOT inserta_doc(''RUC'', :P92_ruc) THEN',
+'                raise verr;',
+'              END IF;',
+'            END IF;',
+'',
+'            IF :P92_NRO IS NOT NULL THEN',
+'              IF NOT inserta_doc(:P92_TIPO, :P92_NRO) THEN',
 '                raise verr;',
 '              END IF;',
 '            END IF;',
@@ -1462,7 +2418,7 @@ unistr('                   :P92_DATOS :=''El cliente ha sido creado con \00E9xit
 '                  raise verr;',
 '                when others then',
 '                           ',
-'                 apex_application.g_print_success_message := ''<span style="color:red">Error en la insercion del telefono</span>'';              ',
+'                 apex_application.g_print_success_message := ''<span style="color:white">Error en la insercion del telefono</span>'';              ',
 '                  raise verr;',
 '              END;',
 '            END IF;',
@@ -1488,7 +2444,7 @@ unistr('                   :P92_DATOS :=''El cliente ha sido creado con \00E9xit
 '                when verr then',
 '                  raise verr;',
 '                when others then',
-'             apex_application.g_print_success_message := ''<span style="color:red">Error en la insercion del celular.</span>'';  ',
+'             apex_application.g_print_success_message := ''<span style="color:white">Error en la insercion del celular.</span>'';  ',
 '             raise verr;',
 '              END;',
 '            END IF;',
@@ -1503,30 +2459,34 @@ unistr('                   :P92_DATOS :=''El cliente ha sido creado con \00E9xit
 '        ',
 '         COMMIT;',
 '            if :P92_cod_cliente is not null then',
+'                    :P92_COD_CLIENTE_CREADO := :P92_cod_cliente;',
+'                   :P92_COD_PERSONA_CREADO := Vcod_persona;',
 unistr('                     :P92_DATOS :=''El cliente ha sido creado con \00E9xito.'' ||''   C\00F3digo de cliente: '' || :P92_cod_cliente   ;           '),
-unistr('                    apex_application.g_print_success_message := ''<span style="color:red">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
+unistr('                    apex_application.g_print_success_message := ''<span style="color:white">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
 '           end if;   ',
 '        EXCEPTION',
 '          when verr then          ',
 '            ROLLBACK;',
-'             apex_application.g_print_success_message := ''<span style="color:red">Error al intentar crear el Cliente.''||chr(10)||sqlerrm||''</span>'';   ',
+'             apex_application.g_print_success_message := ''<span style="color:white">Error al intentar crear el Cliente.''||chr(10)||sqlerrm||''</span>'';   ',
 '        END; ',
 '        /*',
 unistr('        :P92_DATOS :=''El cliente ha sido creado con \00E9xito.'' ||''   C\00F3digo de cliente: '' || :P92_cod_cliente   ;'),
-unistr('               apex_application.g_print_success_message := ''<span style="color:red">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
+unistr('               apex_application.g_print_success_message := ''<span style="color:white">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
 '        */',
 '      end if;',
 '',
 '      if :P92_cod_cliente is not null then',
+'        :P92_COD_CLIENTE_CREADO := :P92_cod_cliente;',
+'                   :P92_COD_PERSONA_CREADO := Vcod_persona;',
 unistr('       :P92_DATOS :=''El cliente ha sido creado con \00E9xito.'' ||''   C\00F3digo de cliente: '' || :P92_cod_cliente   ;'),
-unistr('         apex_application.g_print_success_message := ''<span style="color:red">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
+unistr('         apex_application.g_print_success_message := ''<span style="color:white">      El cliente ha sido creado con \00E9xito. '' || :P92_cod_cliente  || ''.          .</span>''; '),
 '      else     ',
-'             apex_application.g_print_success_message := ''<span style="color:red">No se ha podido crear el Cliente.</span>''; ',
+'             apex_application.g_print_success_message := ''<span style="color:white">No se ha podido crear el Cliente.</span>''; ',
 '      end if;      ',
 '  end;',
 'end;',
 'end if;',
-''))
+'end if;'))
 ,p_process_clob_language=>'PLSQL'
 ,p_process_error_message=>'Error'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
@@ -1534,7 +2494,7 @@ unistr('         apex_application.g_print_success_message := ''<span style="colo
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(73913464195687144)
-,p_process_sequence=>20
+,p_process_sequence=>30
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'PR_CERRAR_MODAL'
@@ -1545,7 +2505,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(147541372006413024)
-,p_process_sequence=>30
+,p_process_sequence=>40
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'Actualiza ticket'

@@ -17,12 +17,13 @@ wwv_flow_imp_page.create_page(
 ,p_name=>'VTPEDIDOV'
 ,p_alias=>'VTPEDIDOV'
 ,p_step_title=>'VTPEDIDOV'
+,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230811155314'
+,p_last_upd_yyyymmddhh24miss=>'20231006142014'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(56079088945779729)

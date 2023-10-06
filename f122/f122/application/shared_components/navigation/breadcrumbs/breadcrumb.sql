@@ -59,8 +59,9 @@ wwv_flow_imp_shared.create_menu_option(
 );
 wwv_flow_imp_shared.create_menu_option(
  p_id=>wwv_flow_imp.id(6963503311787629)
+,p_parent_id=>wwv_flow_imp.id(111399681645461489)
 ,p_short_name=>unistr('Generaci\00F3n de Gift Card')
-,p_link=>'f?p=&APP_ID.:21:&APP_SESSION.::&DEBUG.:::'
+,p_link=>'f?p=&APP_ID.:21:&SESSION.::&DEBUG.:::'
 ,p_page_id=>21
 );
 wwv_flow_imp_shared.create_menu_option(
@@ -2009,12 +2010,6 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_page_id=>623
 );
 wwv_flow_imp_shared.create_menu_option(
- p_id=>wwv_flow_imp.id(212116393433929939)
-,p_short_name=>'INFORME DE REMISIONES'
-,p_link=>'f?p=&APP_ID.:624:&APP_SESSION.::&DEBUG.:::'
-,p_page_id=>624
-);
-wwv_flow_imp_shared.create_menu_option(
  p_id=>wwv_flow_imp.id(212817758425359569)
 ,p_short_name=>'cccomcuo-busq'
 ,p_link=>'f?p=&APP_ID.:628:&APP_SESSION.::&DEBUG.:::'
@@ -2026,6 +2021,87 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_short_name=>'Cierre de Pedidos de Ventas'
 ,p_link=>'f?p=&APP_ID.:519:&SESSION.::&DEBUG.:::'
 ,p_page_id=>519
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(213290624562529665)
+,p_parent_id=>wwv_flow_imp.id(112679975586408979)
+,p_short_name=>unistr('Remisi\00F3n por Reposici\00F3n')
+,p_link=>'f?p=&APP_ID.:624:&SESSION.::&DEBUG.:::'
+,p_page_id=>624
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(213395295175500842)
+,p_parent_id=>wwv_flow_imp.id(112679975586408979)
+,p_short_name=>unistr('Remisi\00F3n de Facturas')
+,p_link=>'f?p=&APP_ID.:422:&SESSION.::&DEBUG.:::'
+,p_page_id=>422
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(214098875329002621)
+,p_short_name=>unistr('Unidades de Medici\00F3n')
+,p_link=>'f?p=&APP_ID.:625:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>625
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(214106012289931548)
+,p_short_name=>'Grupos de Preguntas'
+,p_link=>'f?p=&APP_ID.:627:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>627
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(215121595021333159)
+,p_short_name=>'Gestion de la encuesta'
+,p_link=>'f?p=&APP_ID.:629:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>629
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(215138211316132820)
+,p_short_name=>'Gestion de Encuestas'
+,p_link=>'f?p=&APP_ID.:630:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>630
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(215229970443899856)
+,p_short_name=>'Mantenimiento de encuestas'
+,p_link=>'f?p=&APP_ID.:631:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>631
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(216423775524088679)
+,p_short_name=>'Mantenimiento de Preguntas de Clima'
+,p_link=>'f?p=&APP_ID.:633:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>633
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(216926963487153733)
+,p_short_name=>'RH BENEFICIO LINEA CREDITO'
+,p_link=>'f?p=&APP_ID.:634:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>634
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(217104593988406805)
+,p_short_name=>'Encuesta Clima Laboral'
+,p_link=>'f?p=&APP_ID.:639:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>639
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(217147422957758952)
+,p_short_name=>'Seleccion de Listado de Encuestas'
+,p_link=>'f?p=&APP_ID.:640:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>640
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(217520691070175906)
+,p_short_name=>'Indicadores de Encuestas'
+,p_link=>'f?p=&APP_ID.:635:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>635
+);
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(217642445143828460)
+,p_parent_id=>wwv_flow_imp.id(112679975586408979)
+,p_short_name=>'Listado de Ordenes de trabajo'
+,p_link=>'f?p=&APP_ID.:637:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>637
 );
 wwv_flow_imp.component_end;
 end;

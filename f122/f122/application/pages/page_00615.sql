@@ -22,8 +22,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'ADIAZ'
-,p_last_upd_yyyymmddhh24miss=>'20230922113218'
+,p_last_updated_by=>'MBLANCO'
+,p_last_upd_yyyymmddhh24miss=>'20231006141851'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(206308268257040130)
@@ -293,6 +293,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_label=>'Costo FOB'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'CENTER'
+,p_format_mask=>'999G999G999G999G999G999G990'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
@@ -534,7 +535,7 @@ wwv_flow_imp_page.create_page_plug(
 '       c004 CANT_EXIST_ANT,',
 '       c005 COSTO_COMPROBANTE,',
 '       c006 CANT_COMPROBANTE,',
-'       c007 COSTO_PROM_NUE,',
+'       TO_NUMBER(c007) COSTO_PROM_NUE,',
 '       c008 CANT_EXIST_NUE,',
 '       c009 COD_MONEDA_COSTO,',
 '       c010 COD_MONEDA_COMP,',
@@ -544,18 +545,18 @@ wwv_flow_imp_page.create_page_plug(
 '       c014 TICOMPROBANTE,',
 '       c015 SER_COMPROBANTE,',
 '       c016 NRO_COMPROBANTE,',
-'       c017 COSTO_FOB,',
-'       c018 COSTO_ULTIMO,',
-'       c019 COSTO_EQUIPO,',
-'       c020 TICAMBIO_COMP,',
-'       c021 TICAMBIO_COSTO,',
-'       c022 FEC_PROCESO,',
-'       c023 COSTO_PROM_NUE_US,',
-'       c024 COSTO_PROM_ANT_US,',
-'       c025 COSTO_ULTIMO_US,',
-'       c026 COSTO_PROM_LOT,',
+'       TO_NUMBER(c017) COSTO_FOB,',
+'       TO_NUMBER(c018) COSTO_ULTIMO,',
+'       TO_NUMBER(c019) COSTO_EQUIPO,',
+'       TO_NUMBER(c020) TICAMBIO_COMP,',
+'       TO_NUMBER(c021) TICAMBIO_COSTO,',
+'       TO_DATE(c022,''DD/MM/YYYY'') FEC_PROCESO,',
+'       TO_NUMBER(c023) COSTO_PROM_NUE_US,',
+'       TO_NUMBER(c024) COSTO_PROM_ANT_US,',
+'      TO_NUMBER( c025) COSTO_ULTIMO_US,',
+'       TO_NUMBER(c026) COSTO_PROM_LOT,',
 '       c027 NRO_LOTE,',
-'       c028 COSTO_PROM_LOT_ANT,',
+'       TO_NUMBER(c028) COSTO_PROM_LOT_ANT,',
 '       c029 CANT_EXIST_LOT_ANT,',
 '       c030 FEC_COMPROBANTE_OLD,',
 '       c031 COD_IVA,',
@@ -646,7 +647,6 @@ wwv_flow_imp_page.create_worksheet(
 ,p_report_list_mode=>'TABS'
 ,p_lazy_loading=>false
 ,p_show_detail_link=>'N'
-,p_show_select_columns=>'N'
 ,p_show_control_break=>'N'
 ,p_show_computation=>'N'
 ,p_show_aggregate=>'N'
@@ -717,16 +717,6 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473885837603710)
-,p_db_column_name=>'FEC_PROCESO'
-,p_display_order=>360
-,p_column_identifier=>'X'
-,p_column_label=>'Fecha Proceso'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
  p_id=>wwv_flow_imp.id(210473167639603703)
 ,p_db_column_name=>'TICOMPROBANTE'
 ,p_display_order=>370
@@ -751,7 +741,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_db_column_name=>'NRO_COMPROBANTE'
 ,p_display_order=>390
 ,p_column_identifier=>'R'
-,p_column_label=>'Numero Comprobante'
+,p_column_label=>unistr('N\00FAmero Comprobante')
 ,p_column_type=>'STRING'
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
@@ -772,56 +762,6 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_display_order=>410
 ,p_column_identifier=>'O'
 ,p_column_label=>'Fecha Comprobante'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210359756067702949)
-,p_db_column_name=>'COSTO_PROM_NUE'
-,p_display_order=>420
-,p_column_identifier=>'M'
-,p_column_label=>'Costo Promedio GS'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473456216603706)
-,p_db_column_name=>'COSTO_ULTIMO'
-,p_display_order=>430
-,p_column_identifier=>'T'
-,p_column_label=>'Costo Ultimo GS'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473959121603711)
-,p_db_column_name=>'COSTO_PROM_NUE_US'
-,p_display_order=>440
-,p_column_identifier=>'Y'
-,p_column_label=>'Costo Promedio US'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210474126453603713)
-,p_db_column_name=>'COSTO_ULTIMO_US'
-,p_display_order=>450
-,p_column_identifier=>'AA'
-,p_column_label=>'Costo Ultimo Us'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473339235603705)
-,p_db_column_name=>'COSTO_FOB'
-,p_display_order=>460
-,p_column_identifier=>'S'
-,p_column_label=>'Costo FOB'
 ,p_column_type=>'STRING'
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
@@ -866,6 +806,7 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_identifier=>'K'
 ,p_column_label=>'Costo Comprobante'
 ,p_column_type=>'STRING'
+,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
@@ -884,60 +825,6 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_display_order=>540
 ,p_column_identifier=>'P'
 ,p_column_label=>'Nro Despacho'
-,p_column_type=>'STRING'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473566968603707)
-,p_db_column_name=>'COSTO_EQUIPO'
-,p_display_order=>550
-,p_column_identifier=>'U'
-,p_column_label=>'Costo Equipo'
-,p_column_type=>'STRING'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473633175603708)
-,p_db_column_name=>'TICAMBIO_COMP'
-,p_display_order=>560
-,p_column_identifier=>'V'
-,p_column_label=>'Ticambio Comp'
-,p_column_type=>'STRING'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210473761830603709)
-,p_db_column_name=>'TICAMBIO_COSTO'
-,p_display_order=>570
-,p_column_identifier=>'W'
-,p_column_label=>'Ticambio Costo'
-,p_column_type=>'STRING'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210474078528603712)
-,p_db_column_name=>'COSTO_PROM_ANT_US'
-,p_display_order=>580
-,p_column_identifier=>'Z'
-,p_column_label=>'Costo Prom Ant Us'
-,p_column_type=>'STRING'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210474222887603714)
-,p_db_column_name=>'COSTO_PROM_LOT'
-,p_display_order=>590
-,p_column_identifier=>'AB'
-,p_column_label=>'Costo Prom Lot'
-,p_column_type=>'STRING'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(210474395100603715)
-,p_db_column_name=>'COSTO_PROM_LOT_ANT'
-,p_display_order=>600
-,p_column_identifier=>'AC'
-,p_column_label=>'Costo Prom Lot Ant'
 ,p_column_type=>'STRING'
 ,p_use_as_row_header=>'N'
 );
@@ -1045,15 +932,121 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_alignment=>'RIGHT'
 ,p_use_as_row_header=>'N'
 );
-wwv_flow_imp_page.create_worksheet_rpt(
- p_id=>wwv_flow_imp.id(210488952386602918)
-,p_application_user=>'APXWS_DEFAULT'
-,p_report_seq=>10
-,p_report_alias=>'2104890'
-,p_status=>'PUBLIC'
-,p_is_default=>'Y'
-,p_display_rows=>5
-,p_report_columns=>'COD_ARTICULO:COD_RUBRO:COD_FAMILIA:COD_LINEA:COD_MARCA:COD_MONEDA_COSTO:VER_DETALLES:'
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190347020088132)
+,p_db_column_name=>'FEC_PROCESO'
+,p_display_order=>720
+,p_column_identifier=>'AR'
+,p_column_label=>'Fecha Proceso'
+,p_column_type=>'DATE'
+,p_column_alignment=>'CENTER'
+,p_tz_dependent=>'N'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190471080088133)
+,p_db_column_name=>'COSTO_PROM_NUE'
+,p_display_order=>730
+,p_column_identifier=>'AS'
+,p_column_label=>'Costo Prom. GS'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190527049088134)
+,p_db_column_name=>'COSTO_FOB'
+,p_display_order=>740
+,p_column_identifier=>'AT'
+,p_column_label=>'Costo FOB'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190634322088135)
+,p_db_column_name=>'COSTO_ULTIMO'
+,p_display_order=>750
+,p_column_identifier=>'AU'
+,p_column_label=>unistr('Costo \00DAltimo GS')
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190796293088136)
+,p_db_column_name=>'COSTO_EQUIPO'
+,p_display_order=>760
+,p_column_identifier=>'AV'
+,p_column_label=>'Costo Equipo'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190830500088137)
+,p_db_column_name=>'TICAMBIO_COMP'
+,p_display_order=>770
+,p_column_identifier=>'AW'
+,p_column_label=>'Ticambio Comp'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190933481088138)
+,p_db_column_name=>'TICAMBIO_COSTO'
+,p_display_order=>780
+,p_column_identifier=>'AX'
+,p_column_label=>'Ticambio Costo'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217191007348088139)
+,p_db_column_name=>'COSTO_PROM_NUE_US'
+,p_display_order=>790
+,p_column_identifier=>'AY'
+,p_column_label=>'Costo Prom. US'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217191175091088140)
+,p_db_column_name=>'COSTO_PROM_ANT_US'
+,p_display_order=>800
+,p_column_identifier=>'AZ'
+,p_column_label=>'Costo Prom Ant Us'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217191265730088141)
+,p_db_column_name=>'COSTO_ULTIMO_US'
+,p_display_order=>810
+,p_column_identifier=>'BA'
+,p_column_label=>unistr('Costo \00DAltimo US')
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217191367132088142)
+,p_db_column_name=>'COSTO_PROM_LOT'
+,p_display_order=>820
+,p_column_identifier=>'BB'
+,p_column_label=>'Costo Prom Lot'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
 );
 wwv_flow_imp.component_end;
 end;
@@ -1066,6 +1059,28 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>122
 ,p_default_id_offset=>0
 ,p_default_owner=>'INV'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217191433136088143)
+,p_db_column_name=>'COSTO_PROM_LOT_ANT'
+,p_display_order=>830
+,p_column_identifier=>'BC'
+,p_column_label=>'Costo Prom Lot Ant'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(210488952386602918)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'2104890'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_display_rows=>10
+,p_report_columns=>'FEC_PROCESO:TICOMPROBANTE:SER_COMPROBANTE:NRO_COMPROBANTE:FEC_COMPROBANTE:CANT_COMPROBANTE:COSTO_PROM_NUE:COSTO_ULTIMO:COSTO_PROM_NUE_US:COSTO_ULTIMO_US:COSTO_FOB:CANT_EXIST_ANT:CANT_EXIST_NUE:'
+,p_sort_column_1=>'FEC_PROCESO'
+,p_sort_direction_1=>'DESC'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(209623466095893329)
@@ -1131,7 +1146,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P615_COD_ARTICULO'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(206308892317040136)
-,p_prompt=>unistr('C\00F3digo Articulo')
+,p_prompt=>unistr('C\00F3digo Art\00CDculo')
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'LV_ARTICULOS_STOCONS'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -1159,7 +1174,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P615_DESC_ARTICULO'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(206308892317040136)
-,p_prompt=>unistr('Descripci\00F3n Articulo')
+,p_prompt=>unistr('Descripci\00F3n Art\00EDculo')
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
 ,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1303,7 +1318,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P615_COD_LINEA'
 ,p_item_sequence=>110
 ,p_item_plug_id=>wwv_flow_imp.id(206308892317040136)
-,p_prompt=>unistr('C\00F3digo Linea ')
+,p_prompt=>unistr('C\00F3digo L\00EDnea ')
 ,p_display_as=>'NATIVE_POPUP_LOV'
 ,p_named_lov=>'LV_LINEAS_STOCONS'
 ,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -1327,7 +1342,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P615_DESC_LINEA'
 ,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(206308892317040136)
-,p_prompt=>unistr('Descripci\00F3n Linea')
+,p_prompt=>unistr('Descripci\00F3n L\00EDnea')
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
 ,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -1834,6 +1849,23 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_triggering_element=>'P615_DETALLES'
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(217080474764856418)
+,p_name=>'DA_PAGE_LOAD'
+,p_event_sequence=>100
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(217080539637856419)
+,p_event_id=>wwv_flow_imp.id(217080474764856418)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_HIDE'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(210355315303702905)
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(210703545848902925)

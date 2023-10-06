@@ -48,11 +48,54 @@ wwv_flow_imp_page.create_page(
 '',
 '.t-Report-pagination{',
 '    display: none;',
+'}',
+'',
+'//// css para btn encuesta',
+'#P1_LOGO_ENCUESTA{',
+'    width: 15px;',
+'}',
+'',
+'',
+'.btn-flotante {',
+unistr('        font-size: 16px; /* Cambiar el tama\00F1o de la tipografia */'),
+'        text-transform: uppercase; /* Texto en mayusculas */',
+'        font-weight: bold; /* Fuente en negrita o bold */',
+'        color: #ffffff; /* Color del texto */',
+'        border-radius: 100%; /* Borde del boton */',
+'        letter-spacing: 2px; /* Espacio entre letras */',
+'        position: fixed;',
+'        bottom: 40px;',
+'        right: 40px;',
+'        transition: all 300ms ease 0ms;',
+'        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);',
+'        z-index: 99;',
+'		}',
+'		.btn-flotante:hover {',
+'        background-color: #0550f3; /* #ff5722 Color de fondo al pasar el cursor */',
+'        box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);',
+'        transform: translateY(-10px);',
+'        cursor: pointer;',
+'        /*-moz-transform: rotate(15deg);',
+'        -o-transform: rotate(15deg);',
+'        -webkit-transform: rotate(15deg);',
+'        transform: rotate(15deg) translateY(-7px);*/',
+'		}',
+'		@media only screen and (max-width: 600px) {',
+'          .btn-flotante {',
+'              font-size: 14px;',
+'              padding: 12px 20px;',
+'              bottom: 20px;',
+'              right: 20px;',
+'        }',
+'		}',
+'',
+'#P1_LOGO_ENCUESTA_CONTAINER{',
+'  padding:0px;',
 '}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'13'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230504131135'
+,p_last_updated_by=>'AIBANEZ'
+,p_last_upd_yyyymmddhh24miss=>'20231005123509'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(43761648655968131)
@@ -281,6 +324,42 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_condition_type=>'EXISTS'
 ,p_grid_new_row=>'Y'
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(217042858242178302)
+,p_name=>'P1_LOGO_ENCUESTA'
+,p_item_sequence=>940
+,p_source=>'#APP_FILES#logo_encuesta.png'
+,p_source_type=>'STATIC'
+,p_display_as=>'NATIVE_DISPLAY_IMAGE'
+,p_tag_attributes=>'style="width: 100px;"'
+,p_display_when=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select 1',
+'from NGO$clab0100 c100',
+'where empr0100$id = :P_COD_EMPRESA',
+'and ((fhas is null and trunc(sysdate) >= fdes) or (trunc(sysdate) between fdes and fhas+1))',
+'and dm$acti = 1',
+'and rownum = 1',
+'',
+'--and not exists (select 1 from NGO$cola0300 c300 where c300.cola0100$id = :P_COD_EMPLEADO and c300.clab0100$id = c100.id)',
+'--and exists (select 1 from NGO$clab0130 c130 where c130.cola0100$id = :P_COD_EMPLEADO AND c130.clab0100$id = c100.id)',
+'',
+'-- TEST',
+'--and  exists (select 1 from NGO$cola0300 c300 where c300.cola0100$id = :APP_USER)',
+';',
+''))
+,p_display_when_type=>'EXISTS'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_css_classes=>'btn-flotante'
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'URL'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(217043120346178305)
+,p_name=>'P1_URL'
+,p_item_sequence=>950
+,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(94711392768784346)
 ,p_name=>'New'
@@ -368,6 +447,48 @@ wwv_flow_imp_page.create_page_da_action(
 'window.open(vURL,"Pagina Child","width=1800,height=1000,scrollbars=NO") ;',
 '',
 '',
+''))
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(217042935692178303)
+,p_name=>'da_encuesta'
+,p_event_sequence=>40
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P1_LOGO_ENCUESTA'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'click'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(217043034391178304)
+,p_event_id=>wwv_flow_imp.id(217042935692178303)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT APEX_PAGE.GET_URL (  p_page   => 640--,',
+'                 --   p_items  => ''P33_NRO_PLANILLA,P33_SER_COMPROBANTE,P33_NRO_COMPROBANTE'',',
+'                  --  p_values => (''''||:P31_NRO_PLANILLA||'',''||:P31_VSER_VALE||'',''||:P31_VNRO_VALE||'''')',
+'                  ) f_url_1',
+'INTO :P1_URL',
+'FROM DUAL;',
+''))
+,p_attribute_03=>'P1_URL'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(217043210354178306)
+,p_event_id=>wwv_flow_imp.id(217042935692178303)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'var url = apex.item("P1_URL").getValue();',
+'',
+'apex.navigation.redirect (url);',
 ''))
 );
 wwv_flow_imp.component_end;

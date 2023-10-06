@@ -14,15 +14,35 @@ wwv_flow_imp.component_begin (
 wwv_flow_imp_page.create_page(
  p_id=>624
 ,p_user_interface_id=>wwv_flow_imp.id(40210426655263685)
-,p_name=>'INFORME DE REMISIONES'
-,p_alias=>'INFORME-DE-REMISIONES'
-,p_step_title=>'INFORME DE REMISIONES'
+,p_name=>'REMISIONES POR REPOSICION'
+,p_alias=>'REMISIONES-POR-REPOSICION'
+,p_step_title=>'REMISIONES POR REPOSICION'
+,p_warn_on_unsaved_changes=>'N'
 ,p_autocomplete_on_off=>'OFF'
+,p_javascript_file_urls=>'#APP_FILES#util_generico#MIN#.js'
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'.t-PageBody {',
+'    background-color: #f0f7f9 !important; ',
+'',
+'}',
+'',
+'',
+'  .a-IRR-header  a , #checktext , .a-IRR-header--group , .a-IRR-headerLabel{color: yellow !important; }',
+' .a-IRR-header {    background: #003a85!important;}',
+'',
+'',
+'.t-Body-mainContent  { ',
+'    background: #082b642f!important;',
+'} ',
+'  ',
+'  .t-Form-label{',
+'    color:  darkblue  !important; ',
+'    } '))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'JUANSA'
-,p_last_upd_yyyymmddhh24miss=>'20230925160313'
+,p_last_upd_yyyymmddhh24miss=>'20230927090630'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(209705383063309523)
@@ -73,8 +93,7 @@ wwv_flow_imp_page.create_page_plug(
 '       ST_ARTICULOS    SA,',
 '       sucursales      s2,',
 '       st_notas_envio_cab_pend e',
-' where c.cod_empresa = ''1''',
-'   and c.fec_comprobante >''01/09/2020''   ',
+' where c.cod_empresa = :P_COD_EMPRESA  ',
 '   and s1.cod_empresa = c.cod_empresa',
 '   and s1.cod_sucursal = c.cod_sucursal ',
 '   and nvl(anulado, ''N'') <> ''S''',
@@ -92,8 +111,16 @@ wwv_flow_imp_page.create_page_plug(
 '   and c.cod_empresa=e.cod_empresa',
 '   and e.cod_empresa=s2.cod_empresa',
 '   and e.cod_sucursal_ent=s2.cod_sucursal',
-''))
+'   AND ( :P624_FECHA_INI IS NULL OR c.fec_comprobante >= :P624_FECHA_INI)',
+'   AND ( :P624_FECHA_FIN IS NULL OR c.fec_comprobante <= :P624_FECHA_FIN)',
+'   AND ( :P624_SUC_SALIDA IS NULL OR c.cod_sucursal = :P624_SUC_SALIDA)',
+'   AND ( :P624_SUC_ENTRADA IS NULL OR e.cod_sucursal_ent = :P624_SUC_ENTRADA)   ',
+'   AND ( :P624_NRO_PEDIDO IS NULL OR c.nro_comprobante_ref = :P624_NRO_PEDIDO)',
+'   AND ( :P624_NRO_REMISION IS NULL OR c.nro_comprobante = :P624_NRO_REMISION)',
+'   ',
+'order by c.fec_comprobante desc'))
 ,p_plug_source_type=>'NATIVE_IR'
+,p_ajax_items_to_submit=>'P624_SUC_ENTRADA,P624_SUC_SALIDA,P624_FECHA_INI,P624_FECHA_FIN,P624_NRO_REMISION,P624_NRO_PEDIDO'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_units=>'MILLIMETERS'
@@ -292,26 +319,29 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_report_alias=>'2123642'
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
-,p_report_columns=>'COD_SUC_SAL:DESC_SUC_SAL:COD_SUCURSAL_ENT:DESC_SUC_ENT:FECHA:SER_REM:NRO_REM:SER_PEDIDO:NRO_PEDIDO:FECHA_PEDIDO:NRO_RECEPCION:FECHA_RECEP:COD_ARTICULO:DESC_ARTICULO:CANTIDAD'
+,p_report_columns=>'FECHA:SER_REM:NRO_REM:COD_SUC_SAL:DESC_SUC_SAL:COD_SUCURSAL_ENT:DESC_SUC_ENT:SER_PEDIDO:NRO_PEDIDO:FECHA_PEDIDO:NRO_RECEPCION:FECHA_RECEP:COD_ARTICULO:DESC_ARTICULO:CANTIDAD:'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(209707484972309544)
-,p_button_sequence=>10
+,p_button_sequence=>80
 ,p_button_plug_id=>wwv_flow_imp.id(209705383063309523)
 ,p_button_name=>'FILTRAR'
 ,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconRight:t-Button--stretch'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconRight:t-Button--stretch:t-Button--gapTop'
 ,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Filtrar'
-,p_button_position=>'CHANGE'
 ,p_warn_on_unsaved_changes=>null
+,p_button_css_classes=>'u-color-21-text'
 ,p_icon_css_classes=>'fa-search'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
+,p_grid_column_span=>2
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209705407324309524)
 ,p_name=>'P624_SUC_ENTRADA'
-,p_item_sequence=>10
+,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(209705383063309523)
 ,p_prompt=>'SUCURSAL ENTRADA'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -326,6 +356,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_null_text=>'-TODOS-'
 ,p_lov_null_value=>'T'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
@@ -338,7 +369,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209705534270309525)
 ,p_name=>'P624_SUC_SALIDA'
-,p_item_sequence=>20
+,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(209705383063309523)
 ,p_prompt=>'SUCURSAL SALIDA'
 ,p_display_as=>'NATIVE_POPUP_LOV'
@@ -353,7 +384,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_null_text=>'-TODOS-'
 ,p_lov_null_value=>'T'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
@@ -366,12 +396,13 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209705695150309526)
 ,p_name=>'P624_FECHA_INI'
-,p_item_sequence=>30
+,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(209705383063309523)
 ,p_prompt=>'FECHA DESDE'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
+,p_tag_css_classes=>'allow_only_numbers'
+,p_tag_attributes=>'onfocusout="this.value= isValidDate(this.value);" onkeyup = "setDateFormat(this);"'
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
@@ -383,11 +414,13 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209705769583309527)
 ,p_name=>'P624_FECHA_FIN'
-,p_item_sequence=>40
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(209705383063309523)
 ,p_prompt=>'FECHA HASTA'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_tag_css_classes=>'allow_only_numbers'
+,p_tag_attributes=>'onfocusout="this.value= isValidDate(this.value);" onkeyup = "setDateFormat(this);"'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
@@ -400,12 +433,14 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209707554997309545)
 ,p_name=>'P624_NRO_REMISION'
-,p_item_sequence=>50
+,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_imp.id(209705383063309523)
-,p_prompt=>'Nro Remision'
+,p_prompt=>'NRO REMISION'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
 ,p_colspan=>2
+,p_grid_column=>7
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_01=>'N'
@@ -416,9 +451,9 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(209707602222309546)
 ,p_name=>'P624_NRO_PEDIDO'
-,p_item_sequence=>60
+,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(209705383063309523)
-,p_prompt=>'Nota Env. Pend.'
+,p_prompt=>'NOTA ENVIO PEND.'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -443,11 +478,31 @@ wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(209707880648309548)
 ,p_event_id=>wwv_flow_imp.id(209707744829309547)
 ,p_event_result=>'TRUE'
-,p_action_sequence=>10
+,p_action_sequence=>20
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(212116579769929938)
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(209708092185309550)
+,p_name=>'da_limpiar'
+,p_event_sequence=>20
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(213274930746599501)
+,p_event_id=>wwv_flow_imp.id(209708092185309550)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'Y'
+,p_action=>'NATIVE_SET_VALUE'
+,p_affected_elements_type=>'ITEM'
+,p_affected_elements=>'P624_SUC_SALIDA,P624_SUC_ENTRADA,P624_FECHA_INI,P624_FECHA_FIN,P624_NRO_REMISION,P624_NRO_PEDIDO'
+,p_attribute_01=>'STATIC_ASSIGNMENT'
+,p_attribute_09=>'N'
+,p_wait_for_result=>'Y'
 );
 wwv_flow_imp.component_end;
 end;

@@ -43,7 +43,7 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_source_type=>'SQL'
 ,p_location=>'LOCAL'
 ,p_use_local_sync_table=>false
-,p_return_column_name=>'NRO_COMPROBANTE'
+,p_return_column_name=>'ROW_ID'
 ,p_display_column_name=>'TIPO_COMPROBANTE'
 ,p_group_sort_direction=>'ASC'
 ,p_default_sort_direction=>'ASC'
@@ -54,14 +54,6 @@ wwv_flow_imp_shared.create_list_of_values_cols(
 ,p_heading=>'Tipo Comprobante'
 ,p_display_sequence=>10
 ,p_data_type=>'VARCHAR2'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(136363779537508426)
-,p_query_column_name=>'ROW_ID'
-,p_heading=>'Row Id'
-,p_display_sequence=>10
-,p_data_type=>'ROWID'
-,p_is_visible=>'N'
 );
 wwv_flow_imp_shared.create_list_of_values_cols(
  p_id=>wwv_flow_imp.id(116642987900184677)
@@ -125,6 +117,8 @@ wwv_flow_imp_shared.create_list_of_values_cols(
 ,p_heading=>'Fec Acobrar'
 ,p_display_sequence=>100
 ,p_data_type=>'DATE'
+,p_is_visible=>'N'
+,p_is_searchable=>'N'
 );
 wwv_flow_imp_shared.create_list_of_values_cols(
  p_id=>wwv_flow_imp.id(116646505856184678)
@@ -132,6 +126,13 @@ wwv_flow_imp_shared.create_list_of_values_cols(
 ,p_heading=>'Cod Custodio'
 ,p_display_sequence=>110
 ,p_data_type=>'VARCHAR2'
+);
+wwv_flow_imp_shared.create_list_of_values_cols(
+ p_id=>wwv_flow_imp.id(136363779537508426)
+,p_query_column_name=>'ROW_ID'
+,p_heading=>'Row Id'
+,p_display_sequence=>120
+,p_data_type=>'ROWID'
 );
 wwv_flow_imp.component_end;
 end;

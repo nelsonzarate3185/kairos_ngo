@@ -15,7 +15,6 @@ wwv_flow_imp_shared.create_flow_item(
  p_id=>wwv_flow_imp.id(54394534649761211)
 ,p_name=>'REPORT_FORMAT'
 ,p_protection_level=>'N'
-,p_escape_on_http_output=>'N'
 );
 wwv_flow_imp.component_end;
 end;

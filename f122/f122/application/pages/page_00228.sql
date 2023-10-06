@@ -38,12 +38,12 @@ unistr('//Realizamos la validaci\00F3n de la tecla ingresada'),
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230517112937'
+,p_last_upd_yyyymmddhh24miss=>'20231004094553'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(51564881267250240)
 ,p_plug_name=>unistr('Verificaci\00F3n de M\00E1rgenes de Promociones ')
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>40
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -375,7 +375,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(52274147434438314)
 ,p_plug_name=>'Detalle'
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>60
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -398,14 +398,14 @@ wwv_flow_imp_page.create_page_plug(
 '       c001 COD_ARTICULO,',
 '       c002 COD_ARTICULO_PROMO1,',
 '       c003 COD_ARTICULO_PROMO2,',
-'       c004 PRECIO,',
+'       TO_NUMBER(c004) PRECIO,',
 '       c005 PORC_DTO,',
-'       c006 PRECIO_NETO,',
-'       c007 COSTO_ART,',
-'       c008 COSTO_PROMO1,',
-'       c009 UTILIDAD,',
+'       TO_NUMBER(c006) PRECIO_NETO,',
+'       TO_NUMBER(c007) COSTO_ART,',
+'       TO_NUMBER(c008) COSTO_PROMO1,',
+'       TO_NUMBER(c009) UTILIDAD,',
 '       c010 PORC_MARGEN,',
-'       c011 COSTO_PROMO2,',
+'       TO_NUMBER(c011) COSTO_PROMO2,',
 '       c012 NRO_PROMO,',
 '       c013 COD_EMPRESA,',
 '       c014 COD_ART_CORTO,',
@@ -510,16 +510,6 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(52274926330438322)
-,p_db_column_name=>'PRECIO'
-,p_display_order=>50
-,p_column_identifier=>'E'
-,p_column_label=>'Precio Vta.'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
  p_id=>wwv_flow_imp.id(52275067180438323)
 ,p_db_column_name=>'PORC_DTO'
 ,p_display_order=>60
@@ -530,61 +520,11 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(52275179040438324)
-,p_db_column_name=>'PRECIO_NETO'
-,p_display_order=>70
-,p_column_identifier=>'G'
-,p_column_label=>'Importe Neto'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(52275215959438325)
-,p_db_column_name=>'COSTO_ART'
-,p_display_order=>80
-,p_column_identifier=>'H'
-,p_column_label=>'Costo Art.'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(52275335738438326)
-,p_db_column_name=>'COSTO_PROMO1'
-,p_display_order=>90
-,p_column_identifier=>'I'
-,p_column_label=>'Costo Promo1'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(52275488404438327)
-,p_db_column_name=>'UTILIDAD'
-,p_display_order=>100
-,p_column_identifier=>'J'
-,p_column_label=>'Utilidad'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
  p_id=>wwv_flow_imp.id(52275586742438328)
 ,p_db_column_name=>'PORC_MARGEN'
 ,p_display_order=>110
 ,p_column_identifier=>'K'
 ,p_column_label=>'Markup Promo'
-,p_column_type=>'STRING'
-,p_column_alignment=>'CENTER'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(52275626969438329)
-,p_db_column_name=>'COSTO_PROMO2'
-,p_display_order=>120
-,p_column_identifier=>'L'
-,p_column_label=>'Costo Promo2'
 ,p_column_type=>'STRING'
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
@@ -718,6 +658,71 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_alignment=>'CENTER'
 ,p_use_as_row_header=>'N'
 );
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208560114256354640)
+,p_db_column_name=>'PRECIO_NETO'
+,p_display_order=>250
+,p_column_identifier=>'Y'
+,p_column_label=>'Importe Neto'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208560298239354641)
+,p_db_column_name=>'COSTO_ART'
+,p_display_order=>260
+,p_column_identifier=>'Z'
+,p_column_label=>'Costo Art'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208560343691354642)
+,p_db_column_name=>'COSTO_PROMO1'
+,p_display_order=>270
+,p_column_identifier=>'AA'
+,p_column_label=>'Costo Promo1'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208560406655354643)
+,p_db_column_name=>'UTILIDAD'
+,p_display_order=>280
+,p_column_identifier=>'AB'
+,p_column_label=>'Utilidad'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208560530471354644)
+,p_db_column_name=>'COSTO_PROMO2'
+,p_display_order=>290
+,p_column_identifier=>'AC'
+,p_column_label=>'Costo Promo2'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(208560688924354645)
+,p_db_column_name=>'PRECIO'
+,p_display_order=>300
+,p_column_identifier=>'AD'
+,p_column_label=>'Precio Vta.'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(52324037841590775)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -726,7 +731,163 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>5
-,p_report_columns=>'COD_ARTICULO:CANTIDAD_MINIMA_COMPRA:COD_ARTICULO_PROMO1:CANTIDAD_REGALO1:COD_ARTICULO_PROMO2:CANTIDAD_REGALO2:PRECIO:PORC_DTO:PRECIO_NETO:COSTO_ART:UTILIDAD:PORC_MARGEN:PORC_MARGEN_MK:DETALLE:EDITAR:BORRAR:'
+,p_report_columns=>'COD_ARTICULO:CANTIDAD_MINIMA_COMPRA:COD_ARTICULO_PROMO1:CANTIDAD_REGALO1:COD_ARTICULO_PROMO2:CANTIDAD_REGALO2:PRECIO:PORC_DTO:PRECIO_NETO:COSTO_ART:COSTO_PROMO1:COSTO_PROMO2:UTILIDAD:PORC_MARGEN:PORC_MARGEN_MK:DETALLE:EDITAR:BORRAR:'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(208560759649354646)
+,p_plug_name=>'resumen_COLEC_FV_MARGEN_PROMO'
+,p_parent_plug_id=>wwv_flow_imp.id(52274147434438314)
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(40123385688263660)
+,p_plug_display_sequence=>20
+,p_plug_display_point=>'SUB_REGIONS'
+,p_query_type=>'SQL'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select total_neto,costo_total_articulo,costo_total_promos,',
+'costo_total,utilidad_total,',
+'NVL(utilidad_total,0) / NVL(costo_total,1) * 100 markup_total,',
+'NVL(utilidad_total,0) / NVL(total_neto,1) * 100 margen_total',
+'from (SELECT  ',
+'       sum(TO_NUMBER(c006) )total_neto,',
+'       sum(TO_NUMBER(c007) )costo_total_articulo,',
+'       sum(nvl(TO_NUMBER(c008),0) +nvl(TO_NUMBER(c011),0) )costo_total_promos,',
+'sum(NVL( TO_NUMBER(c008),0)+NVL( TO_NUMBER(c011),0) +NVL(TO_NUMBER(c007),0)) costo_total ,',
+'       sum(NVL( TO_NUMBER(c009),0))  utilidad_total',
+'  FROM APEX_COLLECTIONS',
+' WHERE COLLECTION_NAME = ''COLEC_FV_MARGEN_PROMO''',
+'   AND (c019 = ''U'' OR c019 = ''I'' OR c019 IS NULL)',
+'   AND c012 = :P228_NRO_PROMO)'))
+,p_plug_source_type=>'NATIVE_IR'
+,p_ajax_items_to_submit=>'P228_NRO_PROMO_CAB'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'MILLIMETERS'
+,p_prn_paper_size=>'A4'
+,p_prn_width=>297
+,p_prn_height=>210
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header=>'resumen_COLEC_FV_MARGEN_PROMO'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(208560871745354647)
+,p_max_row_count=>'1000000'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_show_search_bar=>'N'
+,p_lazy_loading=>false
+,p_show_detail_link=>'N'
+,p_enable_mail_download=>'Y'
+,p_owner=>'INV'
+,p_internal_uid=>208560871745354647
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217189460729088123)
+,p_db_column_name=>'TOTAL_NETO'
+,p_display_order=>10
+,p_column_identifier=>'Y'
+,p_column_label=>'Importe Total'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217189522280088124)
+,p_db_column_name=>'COSTO_TOTAL_ARTICULO'
+,p_display_order=>20
+,p_column_identifier=>'Z'
+,p_column_label=>'Costo Total Articulo'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217189621501088125)
+,p_db_column_name=>'COSTO_TOTAL_PROMOS'
+,p_display_order=>30
+,p_column_identifier=>'AA'
+,p_column_label=>'Costo Total Promos'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217189793285088126)
+,p_db_column_name=>'COSTO_TOTAL'
+,p_display_order=>40
+,p_column_identifier=>'AB'
+,p_column_label=>'Costo Total'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217189836345088127)
+,p_db_column_name=>'UTILIDAD_TOTAL'
+,p_display_order=>50
+,p_column_identifier=>'AC'
+,p_column_label=>'Utilidad Total'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G999G999G990'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217189964954088128)
+,p_db_column_name=>'MARKUP_TOTAL'
+,p_display_order=>60
+,p_column_identifier=>'AD'
+,p_column_label=>'Markup Total'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(217190072572088129)
+,p_db_column_name=>'MARGEN_TOTAL'
+,p_display_order=>70
+,p_column_identifier=>'AE'
+,p_column_label=>'Margen Total'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+,p_format_mask=>'999G999G999G999G990D00'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(217210862984084574)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'2172109'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'TOTAL_NETO:COSTO_TOTAL_ARTICULO:COSTO_TOTAL_PROMOS:COSTO_TOTAL:UTILIDAD_TOTAL:MARKUP_TOTAL:MARGEN_TOTAL:'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(52277592260438348)
@@ -799,6 +960,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Crear'
 ,p_button_position=>'COPY'
 ,p_warn_on_unsaved_changes=>null
+,p_button_css_classes=>'u-color-20-bg'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(52277668508438349)
@@ -806,12 +968,14 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_plug_id=>wwv_flow_imp.id(51564881267250240)
 ,p_button_name=>'BTCREAR_CAB'
 ,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
+,p_button_template_options=>'#DEFAULT#:t-Button--iconRight'
+,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Crear'
 ,p_button_position=>'COPY'
 ,p_warn_on_unsaved_changes=>null
+,p_button_css_classes=>'u-color-20-bg'
+,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(60227608431608904)
@@ -819,11 +983,25 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_plug_id=>wwv_flow_imp.id(51564881267250240)
 ,p_button_name=>'BTGUARDAR_CAMBIOS'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_imp.id(40187749278263678)
+,p_button_template_options=>'#DEFAULT#:t-Button--iconRight'
+,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Guardar Cambios'
 ,p_button_position=>'COPY'
+,p_button_css_classes=>'u-color-20-bg'
+,p_icon_css_classes=>'fa-save'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(51564983890250241)
@@ -1017,18 +1195,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(51565315510250245)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(52960148062847833)
@@ -1637,6 +1803,16 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(52274211157438315)
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(217189389432088122)
+,p_event_id=>wwv_flow_imp.id(52277061432438343)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(208560759649354646)
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(52277771422438350)
 ,p_name=>'DA_ABRIR_MODAL_CAB'
@@ -1890,6 +2066,18 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_client_condition_type=>'NULL'
 ,p_client_condition_element=>'P228_EDIT_DATA_CAB'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(52959806174847830)
 ,p_event_id=>wwv_flow_imp.id(52959306956847825)
@@ -2037,18 +2225,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
-);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(52961795651847849)
 ,p_event_id=>wwv_flow_imp.id(52961582721847847)
@@ -2064,7 +2240,9 @@ wwv_flow_imp_page.create_page_da_action(
 '                          pnro_promo      => :P228_NRO_PROMO,',
 '                          pcosto_prom1    => :P228_COSTO_PROM_1,',
 '                          pcosto_prom2    => :P228_COSTO_PROM_2,',
+'                                            P_DESCUENTO    => :P228_PORC_DESC,      ',
 '                          pcosto_total    => :P228_COSTO_TOTAL,',
+'                                  ',
 '                          putil           => :P228_UTILIDAD,',
 '                          pcosto_art      => :P228_COSTO_ART,',
 '                          pprecio         => :P228_PRECIO,',
@@ -2077,7 +2255,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    WHEN OTHERS THEN',
 '    APEX_DEBUG.ERROR(''DA_CALCULAR ''||SQLERRM);',
 'END;'))
-,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1'
+,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1,P228_PORC_DESC'
 ,p_attribute_03=>'P228_COSTO_ART,P228_PRECIO,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_COSTO_TOTAL,P228_UTILIDAD,P228_COSTO_PROMOS'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -2121,7 +2299,9 @@ wwv_flow_imp_page.create_page_da_action(
 '                          pnro_promo      => :P228_NRO_PROMO,',
 '                          pcosto_prom1    => :P228_COSTO_PROM_1,',
 '                          pcosto_prom2    => :P228_COSTO_PROM_2,',
+'                                P_DESCUENTO    => :P228_PORC_DESC,   ',
 '                          pcosto_total    => :P228_COSTO_TOTAL,',
+'                       ',
 '                          putil           => :P228_UTILIDAD,',
 '                          pcosto_art      => :P228_COSTO_ART,',
 '                          pprecio         => :P228_PRECIO,',
@@ -2134,8 +2314,69 @@ wwv_flow_imp_page.create_page_da_action(
 '    WHEN OTHERS THEN',
 '    APEX_DEBUG.ERROR(''DA_CALCULAR ''||SQLERRM);',
 'END;'))
-,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1'
+,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1,P228_PORC_DESC'
 ,p_attribute_03=>'P228_COSTO_ART,P228_PRECIO,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_COSTO_TOTAL,P228_UTILIDAD,P228_COSTO_PROMOS'
+,p_attribute_04=>'N'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(208559867298354637)
+,p_name=>'DA_CALCULAR_porc_desc'
+,p_event_sequence=>100
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P228_PORC_DESC'
+,p_condition_element=>'P228_PORC_DESC'
+,p_triggering_condition_type=>'NOT_NULL'
+,p_bind_type=>'bind'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(208559971103354638)
+,p_event_id=>wwv_flow_imp.id(208559867298354637)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>'NULL;'
+,p_attribute_02=>'P228_COD_ARTICULO'
+,p_attribute_05=>'PLSQL'
+,p_wait_for_result=>'Y'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(208560018639354639)
+,p_event_id=>wwv_flow_imp.id(208559867298354637)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'declare',
+'vprecio number;',
+'BEGIN',
+'    FVMRGPRM.CALCULAR_ART(pcod_articulo   => :P228_COD_ARTICULO,',
+'                          pcod_empresa    => :P_COD_EMPRESA,',
+'                          pcantidad_min   => :P228_CANTIDAD_ART,',
+'                          pnro_promo      => :P228_NRO_PROMO,',
+'                          pcosto_prom1    => :P228_COSTO_PROM_1,',
+'                          pcosto_prom2    => :P228_COSTO_PROM_2,',
+'                                P_DESCUENTO    => :P228_PORC_DESC,   ',
+'                          pcosto_total    => :P228_COSTO_TOTAL,',
+'                       ',
+'                          putil           => :P228_UTILIDAD,',
+'                          pcosto_art      => :P228_COSTO_ART,',
+'                          pprecio         => :P228_PRECIO,',
+'                          pprecio_neto    =>  :P228_PRECIO_NETO,',
+'                          pporc_margen    => :P228_MARGEN_PROMO,',
+'                          pporc_margen_mk => :P228_MARGEN_PROMO_MK,',
+'                          pcosto_promos   => :P228_COSTO_PROMOS);',
+'',
+'EXCEPTION',
+'    WHEN OTHERS THEN',
+'    APEX_DEBUG.ERROR(''DA_CALCULAR ''||SQLERRM);',
+'END;'))
+,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1,P228_PORC_DESC'
+,p_attribute_03=>'P228_COSTO_ART,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_COSTO_TOTAL,P228_UTILIDAD,P228_COSTO_PROMOS,P228_PRECIO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -2143,7 +2384,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(55168269447894305)
 ,p_name=>'DA_AGREGAR_EDITAR_DET'
-,p_event_sequence=>100
+,p_event_sequence=>110
 ,p_triggering_element_type=>'BUTTON'
 ,p_triggering_button_id=>wwv_flow_imp.id(55167930493894302)
 ,p_bind_type=>'bind'
@@ -2196,7 +2437,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    APEX_DEBUG.ERROR(''DA_AGREGAR_EDITAR_DET ADD_COL_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P228_COD_ARTICULO,P228_COD_ARTICULO_PROM_1,P228_COD_ARTICULO_PROM_2,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_CANTIDAD_REG_1,P228_CANTIDAD_REG_2,P228_NRO_PROMO,P228_COSTO_ART,P228_PRECIO,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_UTILIDA'
-||'D,P228_PORC_DESC,P228_COSTO_PROM_1,P228_COSTO_PROM_2'
+||'D,P228_PORC_DESC,P228_COSTO_PROM_1,P228_COSTO_PROM_2,P228_PORC_DESC'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 ,p_client_condition_type=>'NULL'
@@ -2233,7 +2474,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    APEX_DEBUG.ERROR(''DA_EDIT_DATA_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P228_EDIT_DATA_DET,P_COD_EMPRESA,P228_COD_ARTICULO,P228_COD_ARTICULO_PROM_1,P228_COD_ARTICULO_PROM_2,P228_CANTIDAD_ART,P228_CANTIDAD_REG_1,P228_CANTIDAD_REG_2,P228_COSTO_ART,P228_PRECIO,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_UTI'
-||'LIDAD,P228_PORC_DESC'
+||'LIDAD,P228_PORC_DESC,P228_PORC_DESC'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 ,p_client_condition_type=>'NOT_NULL'
@@ -2259,10 +2500,20 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(52274211157438315)
 );
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(217190153964088130)
+,p_event_id=>wwv_flow_imp.id(55168269447894305)
+,p_event_result=>'TRUE'
+,p_action_sequence=>60
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(208560759649354646)
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(55169000464894313)
 ,p_name=>'DA_ABRIR_MODAL_EDIT_DET'
-,p_event_sequence=>110
+,p_event_sequence=>120
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_EDIT_DATA_DET'
 ,p_bind_type=>'bind'
@@ -2355,14 +2606,13 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_OPEN_REGION'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(52960048514847832)
-,p_client_condition_type=>'EQUALS'
-,p_client_condition_element=>'P228_CONTROL_CAB'
-,p_client_condition_expression=>'1'
+,p_client_condition_type=>'NOT_NULL'
+,p_client_condition_element=>'P228_EDIT_DATA_DET'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(55169415165894317)
 ,p_name=>'DA_DELETE_DATA'
-,p_event_sequence=>120
+,p_event_sequence=>130
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_DELETE_DATA_DET'
 ,p_bind_type=>'bind'
@@ -2414,7 +2664,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58687830499224314)
 ,p_name=>'DA_SOLO_NUMEROS'
-,p_event_sequence=>130
+,p_event_sequence=>140
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_CANTIDAD_ART'
 ,p_bind_type=>'bind'
@@ -2432,7 +2682,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58688050792224316)
 ,p_name=>'DA_SOLO_NUMEROS_1'
-,p_event_sequence=>140
+,p_event_sequence=>150
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_CANTIDAD_REG_1'
 ,p_bind_type=>'bind'
@@ -2450,7 +2700,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58688259890224318)
 ,p_name=>'DA_SOLO_NUMEROS_1_1'
-,p_event_sequence=>150
+,p_event_sequence=>160
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_CANTIDAD_REG_2'
 ,p_bind_type=>'bind'
@@ -2468,7 +2718,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58688701022224323)
 ,p_name=>'DA_OBTENER_DESC'
-,p_event_sequence=>160
+,p_event_sequence=>170
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_COD_ARTICULO'
 ,p_bind_type=>'bind'
@@ -2512,7 +2762,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58689345058224329)
 ,p_name=>'DA_OBTENER_DESC_2'
-,p_event_sequence=>170
+,p_event_sequence=>180
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_COD_ARTICULO_PROM_2'
 ,p_bind_type=>'bind'
@@ -2556,7 +2806,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58689048524224326)
 ,p_name=>'DA_OBTENER_DESC_1'
-,p_event_sequence=>180
+,p_event_sequence=>190
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_COD_ARTICULO_PROM_1'
 ,p_bind_type=>'bind'
@@ -2600,7 +2850,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58689684818224332)
 ,p_name=>'DA_CALCULAR_PROM_1'
-,p_event_sequence=>190
+,p_event_sequence=>200
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_COD_ARTICULO_PROM_1,P228_CANTIDAD_REG_1'
 ,p_condition_element=>'P228_COD_ARTICULO_PROM_1'
@@ -2659,6 +2909,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                          pnro_promo      => :P228_NRO_PROMO,',
 '                          pcosto_prom1    => :P228_COSTO_PROM_1,',
 '                          pcosto_prom2    => :P228_COSTO_PROM_2,',
+'                          P_DESCUENTO    => :P228_PORC_DESC,                            ',
 '                          pcosto_total    => :P228_COSTO_TOTAL,',
 '                          putil           => :P228_UTILIDAD,',
 '                          pcosto_art      => :P228_COSTO_ART,',
@@ -2672,16 +2923,28 @@ wwv_flow_imp_page.create_page_da_action(
 '    WHEN OTHERS THEN',
 '    APEX_DEBUG.ERROR(''DA_CALCULAR PROM 1 ''||SQLERRM);',
 'END;'))
-,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1'
+,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1,P228_PORC_DESC'
 ,p_attribute_03=>'P228_COSTO_ART,P228_PRECIO,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_COSTO_TOTAL,P228_UTILIDAD,P228_COSTO_PROMOS'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(58690081354224336)
 ,p_name=>'DA_CALCULAR_PROM_1_1'
-,p_event_sequence=>200
+,p_event_sequence=>210
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_COD_ARTICULO_PROM_2,P228_CANTIDAD_REG_2'
 ,p_condition_element=>'P228_COD_ARTICULO_PROM_2'
@@ -2740,7 +3003,9 @@ wwv_flow_imp_page.create_page_da_action(
 '                          pnro_promo      => :P228_NRO_PROMO,',
 '                          pcosto_prom1    => :P228_COSTO_PROM_1,',
 '                          pcosto_prom2    => :P228_COSTO_PROM_2,',
+'P_DESCUENTO    => :P228_PORC_DESC,                              ',
 '                          pcosto_total    => :P228_COSTO_TOTAL,',
+'                                                  ',
 '                          putil           => :P228_UTILIDAD,',
 '                          pcosto_art      => :P228_COSTO_ART,',
 '                          pprecio         => :P228_PRECIO,',
@@ -2753,7 +3018,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    WHEN OTHERS THEN',
 '    APEX_DEBUG.ERROR(''DA_CALCULAR PROM 1 ''||SQLERRM);',
 'END;'))
-,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1'
+,p_attribute_02=>'P228_COD_ARTICULO,P_COD_EMPRESA,P228_CANTIDAD_ART,P228_NRO_PROMO,P228_COSTO_PROM_1,P228_PORC_DESC'
 ,p_attribute_03=>'P228_COSTO_ART,P228_PRECIO,P228_PRECIO_NETO,P228_MARGEN_PROMO,P228_MARGEN_PROMO_MK,P228_COSTO_TOTAL,P228_UTILIDAD,P228_COSTO_PROMOS'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
@@ -2762,7 +3027,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(60227313548608901)
 ,p_name=>'DA_OBTENER_DATA_DET'
-,p_event_sequence=>210
+,p_event_sequence=>220
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_DET_DATA'
 ,p_bind_type=>'bind'
@@ -2816,7 +3081,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(61199784016587510)
 ,p_name=>'DA_MENSAJE_AUT_COM'
-,p_event_sequence=>220
+,p_event_sequence=>230
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_MENSAJE_AUT_COM'
 ,p_condition_element=>'P228_MENSAJE_AUT_COM'
@@ -2837,7 +3102,7 @@ wwv_flow_imp_page.create_page_da_action(
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(61200188791587514)
 ,p_name=>'DA_MENSAJE_AUT_MKT'
-,p_event_sequence=>230
+,p_event_sequence=>240
 ,p_triggering_element_type=>'ITEM'
 ,p_triggering_element=>'P228_MENSAJE_AUT_MKT'
 ,p_condition_element=>'P228_MENSAJE_AUT_MKT'
@@ -2878,18 +3143,6 @@ wwv_flow_imp_page.create_page_process(
 '    APEX_DEBUG.ERROR(''PR_INIT ''||SQLERRM);',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(61198832830587501)
@@ -2941,6 +3194,7 @@ wwv_flow_imp_page.create_page_process(
 '    APEX_DEBUG.ERROR(''PR_SAVE PAG 228 ''||SQLERRM);',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
+,p_process_error_message=>'sqlerrm'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(60227608431608904)
 );

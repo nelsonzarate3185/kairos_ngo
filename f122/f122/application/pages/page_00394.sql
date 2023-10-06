@@ -64,8 +64,8 @@ unistr('//Realizamos la validaci\00F3n de la tecla ingresada'),
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230926151139'
+,p_last_updated_by=>'JUANSA'
+,p_last_upd_yyyymmddhh24miss=>'20231003152942'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(228286338147152127)
@@ -106,8 +106,8 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(229037132380478305)
 ,p_plug_name=>'Datos del Recibo'
 ,p_parent_plug_id=>wwv_flow_imp.id(228286338147152127)
-,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
-,p_plug_template=>wwv_flow_imp.id(40125238939263661)
+,p_region_template_options=>'#DEFAULT#:is-collapsed:t-Region--accent1:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_imp.id(40108275410263656)
 ,p_plug_display_sequence=>40
 ,p_plug_new_grid_row=>false
 ,p_plug_new_grid_column=>false
@@ -119,9 +119,9 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(229041043400478344)
 ,p_plug_name=>'Comprobantes'
 ,p_parent_plug_id=>wwv_flow_imp.id(228286338147152127)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent1:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
-,p_plug_display_sequence=>50
+,p_plug_display_sequence=>60
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -421,7 +421,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(229129582545761499)
 ,p_plug_name=>'Datos Administrativos'
 ,p_parent_plug_id=>wwv_flow_imp.id(228286338147152127)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent15:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'SUB_REGIONS'
@@ -433,7 +433,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(229129878095761502)
 ,p_plug_name=>unistr('Datos de Anulaci\00F3n')
 ,p_parent_plug_id=>wwv_flow_imp.id(228286338147152127)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent15:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>20
 ,p_plug_new_grid_row=>false
@@ -446,7 +446,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(229129936380761503)
 ,p_plug_name=>'Estado del Recibo'
 ,p_parent_plug_id=>wwv_flow_imp.id(228286338147152127)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--accent15:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_imp.id(40125238939263661)
 ,p_plug_display_sequence=>30
 ,p_plug_new_grid_row=>false
@@ -458,7 +458,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(229706893298446209)
 ,p_plug_name=>unistr('Comprobantes a a\00F1adir')
-,p_region_template_options=>'#DEFAULT#:js-dialog-autoheight:t-DialogRegion--noPadding:js-dialog-size720x480'
+,p_region_template_options=>'#DEFAULT#:js-dialog-autoheight:js-dialog-size720x480'
 ,p_plug_template=>wwv_flow_imp.id(40117728043263659)
 ,p_plug_display_sequence=>20
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -501,7 +501,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
 ,p_button_image_alt=>'Forma de Cobro'
 ,p_warn_on_unsaved_changes=>null
-,p_button_css_classes=>'u-color-21-bg u-color-13-text'
+,p_button_css_classes=>'u-color-21-bg u-color-43-text'
 ,p_icon_css_classes=>'fa-money'
 ,p_grid_new_row=>'N'
 ,p_grid_new_column=>'Y'
@@ -546,6 +546,20 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-color-21-bg u-color-13-text'
 ,p_icon_css_classes=>'fa-save'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(116804640761812539)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(229041043400478344)
+,p_button_name=>'BTN_AGREGAR_COMPROBANTE'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconRight'
+,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
+,p_button_image_alt=>'Agregar Comprobantes'
+,p_button_position=>'EDIT'
+,p_warn_on_unsaved_changes=>null
+,p_button_css_classes=>'u-color-21-bg u-color-43-text'
+,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(117371504779768843)
@@ -601,20 +615,6 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-color-1-border'
 ,p_icon_css_classes=>'fa-print'
-);
-wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(116804640761812539)
-,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_imp.id(229041043400478344)
-,p_button_name=>'BTN_AGREGAR_COMPROBANTE'
-,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#:t-Button--iconRight'
-,p_button_template_id=>wwv_flow_imp.id(40187845155263678)
-,p_button_image_alt=>'Agregar Comprobantes'
-,p_button_position=>'NEXT'
-,p_warn_on_unsaved_changes=>null
-,p_button_css_classes=>'u-color-21-bg u-color-13-text'
-,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(116764891803812506)
@@ -696,7 +696,6 @@ wwv_flow_imp_page.create_page_item(
 '          where cod_empresa = :P_COD_EMPRESA',
 '            and cod_usuario = :P_COD_USUARIO))',
 ' order by fec_vencimiento'))
-,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P394_CLIENTE,P394_CUSTODIO'
 ,p_ajax_items_to_submit=>'P394_CLIENTE,P394_CUSTODIO'
 ,p_ajax_optimize_refresh=>'Y'
@@ -710,6 +709,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'Y'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'0'
+,p_attribute_08=>'1200'
+,p_attribute_09=>'400'
 ,p_attribute_10=>'ROW_ID:P394_ROW_ID_DET'
 );
 wwv_flow_imp_page.create_page_item(
@@ -762,7 +763,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Cuota'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
-,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
@@ -887,7 +887,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116775354562812525)
 ,p_name=>'P394_V_COD_CUSTODIO'
-,p_item_sequence=>90
+,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -896,7 +896,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116775774961812525)
 ,p_name=>'P394_V_COD_MODULO'
-,p_item_sequence=>100
+,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -905,7 +905,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116776144494812525)
 ,p_name=>'P394_V_TIPO_TRAN'
-,p_item_sequence=>110
+,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -914,7 +914,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116776579857812525)
 ,p_name=>'P394_V_SUB_TIPO_TRANS'
-,p_item_sequence=>120
+,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -923,7 +923,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116776952299812526)
 ,p_name=>'P394_V_TIPO_RECIBO'
-,p_item_sequence=>130
+,p_item_sequence=>110
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -932,7 +932,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116777375972812526)
 ,p_name=>'P394_V_SER_RECIBO'
-,p_item_sequence=>140
+,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -941,7 +941,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116777720985812526)
 ,p_name=>'P394_V_TIPO_CHEQUE'
-,p_item_sequence=>150
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -962,7 +962,7 @@ wwv_flow_imp.component_begin (
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116778143193812526)
 ,p_name=>'P394_P_TIP_COMPROBANTE'
-,p_item_sequence=>160
+,p_item_sequence=>140
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -971,7 +971,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116778577606812526)
 ,p_name=>'P394_V_TIPO_TALON_FACTURA'
-,p_item_sequence=>170
+,p_item_sequence=>180
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -980,7 +980,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116778948527812527)
 ,p_name=>'P394_V_GENERA_MD'
-,p_item_sequence=>180
+,p_item_sequence=>190
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -989,7 +989,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116779390148812527)
 ,p_name=>'P394_V_COD_CUSTODIO_ENT'
-,p_item_sequence=>190
+,p_item_sequence=>200
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -998,7 +998,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116779716901812527)
 ,p_name=>'P394_V_TIP_ANTICIPO'
-,p_item_sequence=>200
+,p_item_sequence=>210
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1007,7 +1007,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116780137673812527)
 ,p_name=>'P394_V_CLIENTE_CONTADO_CREDITO'
-,p_item_sequence=>210
+,p_item_sequence=>220
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1016,7 +1016,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116780559283812527)
 ,p_name=>'P394_V_REIMPRIME'
-,p_item_sequence=>220
+,p_item_sequence=>230
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1025,7 +1025,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116780962366812527)
 ,p_name=>'P394_V_MODIFICA_CAMBIO'
-,p_item_sequence=>230
+,p_item_sequence=>240
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1034,7 +1034,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116781373620812527)
 ,p_name=>'P394_V_PERMITE_ANULAR'
-,p_item_sequence=>240
+,p_item_sequence=>250
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1043,7 +1043,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116781768725812528)
 ,p_name=>'P394_V_CARGA_SUCURSAL'
-,p_item_sequence=>250
+,p_item_sequence=>260
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1052,7 +1052,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116782106445812528)
 ,p_name=>'P394_V_CARGA_TIP_CAMBIO'
-,p_item_sequence=>260
+,p_item_sequence=>270
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1061,7 +1061,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116782552455812528)
 ,p_name=>'P394_V_CARGA_SUB_TIPO_TRANS'
-,p_item_sequence=>270
+,p_item_sequence=>280
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1070,7 +1070,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116782939178812528)
 ,p_name=>'P394_V_MODIFICA_FECHA_ANT'
-,p_item_sequence=>280
+,p_item_sequence=>290
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1079,7 +1079,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116783366641812528)
 ,p_name=>'P394_V_CAMBIA_FECHA'
-,p_item_sequence=>290
+,p_item_sequence=>300
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1088,7 +1088,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116783727294812528)
 ,p_name=>'P394_V_CARGA_SENIA'
-,p_item_sequence=>300
+,p_item_sequence=>310
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1097,7 +1097,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116784197806812529)
 ,p_name=>'P394_V_NRO_INICIAL'
-,p_item_sequence=>310
+,p_item_sequence=>320
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1106,7 +1106,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116784548900812529)
 ,p_name=>'P394_V_NRO_FINAL'
-,p_item_sequence=>320
+,p_item_sequence=>330
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1115,7 +1115,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116784958270812529)
 ,p_name=>'P394_V_SERIE'
-,p_item_sequence=>330
+,p_item_sequence=>340
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1124,7 +1124,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116785359413812529)
 ,p_name=>'P394_V_FEC_ESTADO'
-,p_item_sequence=>340
+,p_item_sequence=>350
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1132,7 +1132,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116785789326812529)
 ,p_name=>'P394_V_ESTADO'
-,p_item_sequence=>350
+,p_item_sequence=>360
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1140,7 +1140,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116786123330812529)
 ,p_name=>'P394_V_P_REQUIERE_DETALLE'
-,p_item_sequence=>360
+,p_item_sequence=>370
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1148,7 +1148,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116786550080812530)
 ,p_name=>'P394_V_SER_CAMBIO'
-,p_item_sequence=>370
+,p_item_sequence=>380
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1156,7 +1156,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116786955575812530)
 ,p_name=>'P394_NRO_SELECT'
-,p_item_sequence=>380
+,p_item_sequence=>390
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1165,7 +1165,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116787389516812530)
 ,p_name=>'P394_SER_SELECT'
-,p_item_sequence=>390
+,p_item_sequence=>400
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1174,7 +1174,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116787782083812530)
 ,p_name=>'P394_TIP_SELECT'
-,p_item_sequence=>400
+,p_item_sequence=>410
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1214,7 +1214,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P394_FEC_VENC_D'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(229037132380478305)
-,p_prompt=>'Fecha Vencimiento Desde'
+,p_prompt=>'Fecha Vto. Desde'
 ,p_display_as=>'NATIVE_DATE_PICKER_JET'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -1232,7 +1232,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P394_FEC_VENC_H'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(229037132380478305)
-,p_prompt=>'Fecha Vencimiento Hasta'
+,p_prompt=>'Fecha Vto. Hasta'
 ,p_display_as=>'NATIVE_DATE_PICKER_JET'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -1310,7 +1310,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_lov_display_null=>'YES'
 ,p_lov_null_text=>'Seleccione'
 ,p_cSize=>30
-,p_colspan=>3
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
@@ -1415,44 +1414,53 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_prompt=>'Ref.:'
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
-,p_attribute_05=>'PLAIN'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116795451930812534)
 ,p_name=>'P394_SER_COMPROBANTE_REF'
 ,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_prompt=>'Serie Ref.'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
+,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
-,p_attribute_05=>'PLAIN'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116795866321812534)
 ,p_name=>'P394_NRO_COMPROBANTE_REF'
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
-,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_prompt=>'Nro. Ref.'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_tag_attributes=>'readonly'
 ,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'Y'
-,p_attribute_02=>'VALUE'
-,p_attribute_04=>'Y'
-,p_attribute_05=>'PLAIN'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116796259570812534)
@@ -1461,16 +1469,16 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_prompt=>'Anulado Real'
 ,p_display_as=>'NATIVE_SINGLE_CHECKBOX'
-,p_colspan=>4
-,p_grid_column=>4
+,p_begin_on_new_line=>'N'
+,p_colspan=>3
 ,p_field_template=>wwv_flow_imp.id(40186634462263678)
-,p_item_template_options=>'#DEFAULT#'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--xlarge:margin-top-md'
 ,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116796616815812534)
 ,p_name=>'P394_ANULACION_INICIAL'
-,p_item_sequence=>110
+,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1478,7 +1486,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116797028452812534)
 ,p_name=>'P394_TIP_RECIBO'
-,p_item_sequence=>120
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1869,7 +1877,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(117367917802768807)
 ,p_name=>'P394_V_IMPORTE_ANT'
-,p_item_sequence=>410
+,p_item_sequence=>420
 ,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1885,7 +1893,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118476451239648202)
 ,p_name=>'P394_CONTROL_ORIGEN'
-,p_item_sequence=>130
+,p_item_sequence=>140
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1893,7 +1901,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118476783676648205)
 ,p_name=>'P394_ROWID'
-,p_item_sequence=>140
+,p_item_sequence=>150
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1965,7 +1973,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118478456460648222)
 ,p_name=>'P394_MENSAJE_GUARDAR_CAMBIOS'
-,p_item_sequence=>150
+,p_item_sequence=>160
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1973,7 +1981,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118478846284648226)
 ,p_name=>'P394_CONTROL_GUARDADO'
-,p_item_sequence=>170
+,p_item_sequence=>180
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1981,7 +1989,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118478939577648227)
 ,p_name=>'P394_MENSAJE_GUARDAR_CAMBIOS_1'
-,p_item_sequence=>160
+,p_item_sequence=>170
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1989,7 +1997,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118479749383648235)
 ,p_name=>'P394_CONTROL_BRUNCH'
-,p_item_sequence=>180
+,p_item_sequence=>190
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -1997,7 +2005,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118480116405648239)
 ,p_name=>'P394_TIP_MOV_CAJ_AUX'
-,p_item_sequence=>190
+,p_item_sequence=>200
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -2017,7 +2025,7 @@ wwv_flow_imp.component_begin (
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118480221166648240)
 ,p_name=>'P394_NRO_MOV_CAJ_AUX'
-,p_item_sequence=>210
+,p_item_sequence=>220
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -2025,7 +2033,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(118480353844648241)
 ,p_name=>'P394_SER_MOV_CAJ_AUX'
-,p_item_sequence=>200
+,p_item_sequence=>210
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -2083,13 +2091,19 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P394_ROW_ID_DET'
 ,p_item_sequence=>210
 ,p_item_plug_id=>wwv_flow_imp.id(229706893298446209)
-,p_display_as=>'NATIVE_HIDDEN'
-,p_attribute_01=>'N'
+,p_prompt=>'rowid'
+,p_display_as=>'NATIVE_DISPLAY_ONLY'
+,p_field_template=>wwv_flow_imp.id(40186634462263678)
+,p_item_template_options=>'#DEFAULT#'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'VALUE'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'PLAIN'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(132546456191400142)
 ,p_name=>'P394_URL'
-,p_item_sequence=>230
+,p_item_sequence=>240
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
@@ -2097,9 +2111,36 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(202410424808397801)
 ,p_name=>'P394_FORMA_COBRO'
-,p_item_sequence=>220
+,p_item_sequence=>230
 ,p_item_plug_id=>wwv_flow_imp.id(228287352098152137)
 ,p_display_as=>'NATIVE_HIDDEN'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(213275749600599509)
+,p_name=>'P394_P_SER_COMPROBANTE'
+,p_item_sequence=>150
+,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(213275814637599510)
+,p_name=>'P394_P_NRO_COMPROBANTE'
+,p_item_sequence=>160
+,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(213276057193599512)
+,p_name=>'P394_P_MONTO'
+,p_item_sequence=>170
+,p_item_plug_id=>wwv_flow_imp.id(228286338147152127)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'N'
 );
 wwv_flow_imp_page.create_page_validation(
@@ -2892,7 +2933,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                                  pcod_cobrador_out      => :P394_COBRADOR);',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_CLIENTE ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_CLIENTE ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_CLIENTE,P394_V_CLIENTE_CONTADO_CREDITO,P_COD_EMPRESA,P394_COBRADOR'
 ,p_attribute_03=>'P394_MENSAJE_CLIENTE,P394_COBRADOR'
@@ -3025,6 +3066,18 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'change'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
+);
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(208559592169354634)
 ,p_event_id=>wwv_flow_imp.id(116851951383812571)
@@ -3078,25 +3131,13 @@ wwv_flow_imp_page.create_page_da_action(
 '    END IF;                    ',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_DELETE_DATA_DET ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_DELETE_DATA_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_DELETE_DATA_DET,P394_CONTROL_ORIGEN'
 ,p_attribute_03=>'P394_MENSAJE_BORRADO'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(117368054624768808)
@@ -3177,7 +3218,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    END IF;',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_ANULADO ''||SQLERRM);',
+'       raise_application_error(-20000,''DA_ANULADO ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_CONTROL_ORIGEN'
 ,p_attribute_03=>'P394_CONTROL_ANUL'
@@ -3382,7 +3423,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_BT_GUARDAR_CAMBIOS ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_BT_GUARDAR_CAMBIOS ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_SER_RECIBO,P_COD_EMPRESA,P394_V_TIPO_RECIBO,P394_V_NRO_INICIAL,P394_V_NRO_FINAL,P394_NRO_RECIBO'
 ,p_attribute_03=>'P394_NRO_RECIBO,P394_V_NRO_INICIAL,P394_V_NRO_FINAL,P394_MENSAJE_GUARDAR_CAMBIOS,P394_MENSAJE_GUARDAR_CAMBIOS_1,P394_CONTROL_GUARDADO'
@@ -3482,8 +3523,7 @@ wwv_flow_imp_page.create_page_da_action(
 '        end;',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    RAISE_APPLICATION_ERROR(-20000, ''PR_SAVE. ''||sqlerrm);',
-'     APEX_DEBUG.ERROR(''PR_SAVE ''||SQLERRM);',
+'    RAISE_APPLICATION_ERROR(-20000, ''PR_SAVE. ''||sqlerrm); ',
 '    ',
 'END;'))
 ,p_attribute_02=>'P394_SUCURSAL,P394_SER_RECIBO,P394_NRO_RECIBO,P394_FECHA_RECIBO,P394_CLIENTE,P394_COBRADOR,P394_COD_MONEDA,P394_TIP_CAMBIO,P394_USUARIO,P394_ANULADO,P394_FEC_ANUL,P394_ESTADO,P394_CUSTODIO,P394_REFENCIA,P_COD_EMPRESA,P394_MOV_DE_CAJA,P394_TIP_RECIBO,'
@@ -3521,22 +3561,9 @@ wwv_flow_imp_page.create_page_da_action(
 '                             PI_SER_COMPROBANTE_REF    => NULL,',
 '                             PI_NRO_COMPROBANTE_REF    =>NULL,',
 '                             pi_llamar                 =>  :P394_FORMA_COBRO);',
-'--                             :P394_URL:=''95'';',
-'/*BEGIN',
-'     ',
-'    SELECT APEX_PAGE.GET_URL (p_page => 95,',
-'				              p_items  => ''P95_P_TIP_MOV_CAJ,P95_P_SER_MOV_CAJ,P95_P_NRO_MOV_CAJ'', ',
-'				              p_values => ''''||:P394_TIP_MOV_CAJ_AUX||'',''||:P394_SER_MOV_CAJ_AUX||'',''||:P394_NRO_MOV_CAJ_AUX||'''') f_url_1',
-'	INTO :P394_URL',
-'	FROM DUAL;',
-'',
-'',
-'EXCEPTION',
-'    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(''DA_TIP_MOV_CAJ_AUX ''||SQLERRM);',
-'END;*/',
+' ',
 '             exception when others then',
-'          null;--    RAISE_APPLICATION_ERROR(-20000, ''error col_mov_caj. ''||sqlerrm);',
+'                RAISE_APPLICATION_ERROR(-20000, ''error col_mov_caj. ''||sqlerrm);',
 '              end ;',
 '                               ',
 'END IF;',
@@ -3604,7 +3631,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_CUSTODIO ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_CUSTODIO ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_CUSTODIO'
 ,p_attribute_03=>'P394_COBRADOR'
@@ -3679,15 +3706,16 @@ wwv_flow_imp_page.create_page_da_action(
 '                               ptip_cambio          => :P394_TIP_CAMBIO_ADD,',
 '                               pfec_vencimiento     => :P394_FEC_VENCIMIENTO_ADD,',
 '                               pcod_moneda =>:P394_COD_MONEDA_CUOTA_ADD  );',
+'                               :P394_ROW_ID_DET:=:P394_TIP_FACTURA_REF_ADD;',
 '    END IF;',
 '    ',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_EDIT_DATA_DET ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_EDIT_DATA_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_EDIT_DATA_DET,P394_CONTROL_ORIGEN'
 ,p_attribute_03=>'P394_TIPO_TRANSAC,P394_TIP_FACTURA_REF_ADD,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_MONTO_CUOTA_ADD,P394_IMPORTE_ADD,P394_TIP_FACTURA_REF_ADD_AUX,'
-||'P394_MENSAJE_EDICION,P394_NRO_CUOTA_ADD'
+||'P394_MENSAJE_EDICION,P394_NRO_CUOTA_ADD,P394_ROW_ID_DET'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -3850,7 +3878,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_TIP_FACTURA_REF_ADD ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_TIP_FACTURA_REF_ADD ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_TIP_FACTURA_REF_ADD,P_COD_EMPRESA,P394_CLIENTE,P394_CUSTODIO,P_COD_USUARIO,P394_NRO_CUOTA_ADD'
 ,p_attribute_03=>'P394_TIP_FACTURA_REF_ADD_AUX,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_MONTO_CUOTA_ADD,,P394_IMPORTE_ADD'
@@ -3880,10 +3908,8 @@ wwv_flow_imp_page.create_page_da_action(
 '   ',
 '    ELSE ',
 '        :P394_IMPORTE_ADD := NVL(:P394_MONTO_CUOTA_ADD,0);',
-'    END IF;',
-'           APEX_DEBUG.ERROR(''DA_TIP_FACTURA_REF_ADD_2 entro ''||:P394_IMPORTE_ADD);',
-'SELECT  ',
-'       ',
+'    END IF; ',
+'  SELECT         ',
 '      sum( TO_NUMBER(c006)) Monto ,',
 '       sum(TO_NUMBER(c011)) Importe ',
 '       into :P394_TOTAL,:P394_TOTAL',
@@ -3897,13 +3923,25 @@ wwv_flow_imp_page.create_page_da_action(
 '    WHEN VERROR THEN',
 '    :P394_MENSAJE_MONTO := VMENSAJE;',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_MONTO_CUOTA_ADD coll ''||SQLERRM);',
+'    raise_application_error(-20000,''DA_MONTO_CUOTA_ADD coll ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_COD_MONEDA_CUOTA_ADD,P394_COD_MONEDA,P394_MONTO_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_TIP_CAMBIO'
 ,p_attribute_03=>'P394_TOTAL,P394_IMPORTE_ADD'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.04.12'
+,p_release=>'22.1.0'
+,p_default_workspace_id=>1501145227114753
+,p_default_application_id=>122
+,p_default_id_offset=>0
+,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(116514537325245033)
@@ -3925,18 +3963,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'P394_TIP_FACTURA_REF_ADD,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_MONTO_CUOTA_ADD,P394_IMPORTE_ADD,P394_TIP_FACTURA_REF_ADD_AUX'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.04.12'
-,p_release=>'22.1.0'
-,p_default_workspace_id=>1501145227114753
-,p_default_application_id=>122
-,p_default_id_offset=>0
-,p_default_owner=>'INV'
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(116514754143245035)
@@ -3974,7 +4000,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_AGREGAR_EDITAR_DET ''||SQLERRM);',
+'    raise_application_error(-20000,''DA_AGREGAR_EDITAR_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_TIPO_TRANSAC,P394_TIP_FACTURA_REF_ADD_AUX,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_MONTO_CUOTA_ADD,P394_IMPORTE_ADD,P394_V_COD_MODULO,P_COD_E'
 ||'MPRESA,P394_V_TIPO_TRAN,P394_TIP_FACTURA_REF_ADD,P394_SUCURSAL,P394_SER_RECIBO,P394_NRO_RECIBO,P394_COD_MONEDA,P394_TIP_CAMBIO'
@@ -4012,7 +4038,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_AGREGAR_EDITAR_DET ''||SQLERRM);',
+'    raise_application_error(-20000,''DA_AGREGAR_EDITAR_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_TIPO_TRANSAC,P394_TIP_FACTURA_REF_ADD_AUX,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_MONTO_CUOTA_ADD,P394_IMPORTE_ADD,P394_V_COD_MODULO,P_COD_E'
 ||'MPRESA,P394_V_TIPO_TRAN,P394_EDIT_DATA_DET,P394_SUCURSAL,P394_SER_RECIBO,P394_NRO_RECIBO'
@@ -4048,10 +4074,9 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 ' ',
 '',
-'EXCEPTION',
-'   ',
+'EXCEPTION   ',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_MONTO_CUOTA_ADD coll ''||SQLERRM);',
+'    raise_application_error(-20000,''DA_MONTO_CUOTA_ADD coll ''||SQLERRM);',
 'END;'))
 ,p_attribute_03=>'P394_TOTAL'
 ,p_attribute_04=>'N'
@@ -4139,7 +4164,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    END;',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_COD_MONEDA_CUOTA_ADD ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_COD_MONEDA_CUOTA_ADD ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_COD_MONEDA_CUOTA_ADD'
 ,p_attribute_03=>'P394_TIP_CAMBIO_ADD'
@@ -4192,7 +4217,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    END;',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_DET_DATA_DET ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_DET_DATA_DET ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_DET_DATA_DET'
 ,p_attribute_03=>'P394_MONEDA,P394_TRANSACCION'
@@ -4249,7 +4274,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    ',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_TIP_CAMBIO_ADD ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_TIP_CAMBIO_ADD ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_COD_MONEDA_CUOTA_ADD,P394_MONEDA,P394_MONTO_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_TIP_CAMBIO,P394_V_IMPORTE_ANT,P394_TOTAL_AUX'
 ,p_attribute_03=>'P394_IMPORTE_ADD,P394_TOTAL,P394_V_IMPORTE_ANT,P394_TOTAL_AUX'
@@ -4302,7 +4327,7 @@ wwv_flow_imp_page.create_page_da_action(
 '                    ptotal         => :P394_TOTAL);',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_BUSCAR ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_BUSCAR ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_FEC_EMISION_D,P394_FEC_EMI_HASTA,P394_FEC_VENC_D,P394_FEC_VENC_H,P_COD_EMPRESA,P394_CLIENTE,P_COD_USUARIO,P394_CUSTODIO,P394_V_COD_MODULO'
 ,p_attribute_03=>'P394_MENSAJE_BUSCAR,P394_TOTAL'
@@ -4530,7 +4555,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(''DA_TIP_MOV_CAJ_AUX ''||SQLERRM);',
+'        raise_application_error(-20000,''DA_TIP_MOV_CAJ_AUX ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_TIP_MOV_CAJ_AUX,P394_SER_MOV_CAJ_AUX,P394_NRO_MOV_CAJ_AUX'
 ,p_attribute_05=>'PLSQL'
@@ -4559,7 +4584,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(''DA_SER_MOV_CAJ_AUX ''||SQLERRM);',
+'         raise_application_error(-20000,''DA_SER_MOV_CAJ_AUX ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_SUCURSAL,P394_SER_RECIBO,P394_NRO_RECIBO,P394_CLIENTE,P394_CUSTODIO,P394_CUSTODIO_ENT,P394_SER_COMPROBANTE_REF,P394_NRO_COMPROBANTE_REF,P394_FECHA_RECIBO'
 ,p_attribute_03=>'P394_URL'
@@ -4584,12 +4609,11 @@ wwv_flow_imp_page.create_page_da_action(
 '				              p_items  => ''P95_TIPO_COMPROBANTE,P95_COD_SUCURSAL,P95_SER_COMPROBANTE,P95_NRO_COMPROBANTE,P95_P_COD_CLIENTE,P95_COD_CUSTODIO,P95_COD_CUSTODIO_ENT,P95_P_IND_GENERA_MD,P95_P_FECHA'', ',
 '				              p_values => ''''||''REC''||'',''||:P394_SUCURSAL||'',''||:P394_SER_RECIBO||'',''||:P394_NRO_RECIBO||'',''||:P394_CLIENTE||'',''||:P394_CUSTODIO||'',''||:P394_CUSTODIO_ENT||'',''||''S''||'',''||:P394_FECHA_RECIBO||'''') f_url_1',
 '	INTO :P394_URL',
-'	FROM DUAL;',
-'APEX_DEBUG.ERROR(''P394_URL ''||:P394_URL);',
+'	FROM DUAL; ',
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(''DA_NRO_MOV_CAJ_AUX ''||SQLERRM);',
+'         raise_application_error(-20000,''DA_NRO_MOV_CAJ_AUX ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_SUCURSAL,P394_SER_RECIBO,P394_NRO_RECIBO,P394_CLIENTE,P394_CUSTODIO,P394_CUSTODIO_ENT,P394_SER_COMPROBANTE_REF,P394_NRO_COMPROBANTE_REF,P394_FECHA_RECIBO'
 ,p_attribute_03=>'P394_URL'
@@ -4749,7 +4773,8 @@ wwv_flow_imp_page.create_page_da_action(
 'VSALDO NUMBER;',
 'BEGIN',
 ':P394_MENSAJE_MONTO := NULL;    ',
-'IF :P394_TIP_FACTURA_REF_ADD IS NOT NULL AND :P394_TIP_COMPROBANTE_REF <>''GIF'' AND :P394_SER_FACTURA_REF_ADD IS NOT NULL AND :P394_NRO_FACTURA_REF_ADD IS NOT NULL AND :P394_NRO_CUOTA_ADD IS NOT NULL THEN',
+'IF :P394_TIP_FACTURA_REF_ADD IS NOT NULL AND :P394_TIP_COMPROBANTE_REF <>''GIF'' AND :P394_SER_FACTURA_REF_ADD IS NOT NULL',
+' AND :P394_NRO_FACTURA_REF_ADD IS NOT NULL AND :P394_NRO_CUOTA_ADD IS NOT NULL THEN',
 '    BEGIN',
 '        select saldo_cuota',
 '          into :P394_SALDO_AUX',
@@ -4762,7 +4787,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    EXCEPTION',
 '        WHEN NO_DATA_FOUND THEN',
 '        IF NVL(:P394_GENERA_CREDITO_ADD,''N'') <> ''S'' THEN',
-unistr('            VMENSAJE := ''No se encuentra n\00FAmero de factura en saldos.'';'),
+unistr('            VMENSAJE := ''No se encuentra n\00FAmero de factura en saldos..'';'),
 '            RAISE VERROR;',
 '        END IF;',
 '        WHEN OTHERS THEN',
@@ -4788,8 +4813,9 @@ unistr('            VMENSAJE := ''No se encuentra n\00FAmero de factura en saldo
 '    :P394_TOTAL_AUX := NVL(:P394_TOTAL_AUX,0) + NVL(to_number(:P394_IMPORTE_ADD),0) - NVL(:P394_V_IMPORTE_ANT,0);',
 '    :P394_V_IMPORTE_ANT := to_number(NVL(:P394_IMPORTE_ADD,0));',
 '    :P394_TOTAL := :P394_TOTAL_AUX;',
-'        :P394_TOTAL := (:P394_TOTAL);    ',
-'ELSIF :P394_TIP_FACTURA_REF_ADD IS NOT NULL AND :P394_SER_FACTURA_REF_ADD IS NOT NULL AND :P394_MONTO_CUOTA_ADD > 0 THEN',
+'    :P394_TOTAL := (:P394_TOTAL);    ',
+'ELSIF :P394_TIP_FACTURA_REF_ADD IS NOT NULL AND :P394_SER_FACTURA_REF_ADD IS NOT NULL AND :P394_MONTO_CUOTA_ADD > 0 ',
+'and :P394_NRO_CUOTA_ADD is not null THEN',
 'BEGIN',
 '    select saldo_cuota',
 '      into :P394_SALDO_AUX',
@@ -4802,7 +4828,7 @@ unistr('            VMENSAJE := ''No se encuentra n\00FAmero de factura en saldo
 'EXCEPTION',
 '    WHEN NO_DATA_FOUND THEN',
 '    IF NVL(:P394_GENERA_CREDITO_ADD,''N'') <> ''S'' THEN',
-unistr('        VMENSAJE := ''No se encuentra n\00FAmero de factura en saldos.'';'),
+unistr('        VMENSAJE := ''No se encuentra n\00FAmero de factura en saldos...''||:P394_TIP_FACTURA_REF_ADD_AUX||''-''||:P394_SER_FACTURA_REF_ADD||''-''||:P394_NRO_FACTURA_REF_ADD||''-''||:P394_NRO_CUOTA_ADD;'),
 '        RAISE VERROR;',
 '    END IF;',
 '    WHEN OTHERS THEN',
@@ -4825,16 +4851,16 @@ unistr('        VMENSAJE := ''No se encuentra n\00FAmero de factura en saldos.''
 '    ELSE         ',
 '         :P394_IMPORTE_ADD := to_number(NVL(:P394_MONTO_CUOTA_ADD,0));',
 '    END IF;  ',
-'     :P394_TOTAL_AUX := NVL(:P394_TOTAL_AUX,0) + NVL(:P394_IMPORTE_ADD,0) - NVL(:P394_V_IMPORTE_ANT,0);',
+'    :P394_TOTAL_AUX := NVL(:P394_TOTAL_AUX,0) + NVL(:P394_IMPORTE_ADD,0) - NVL(:P394_V_IMPORTE_ANT,0);',
 '    :P394_V_IMPORTE_ANT := NVL(:P394_IMPORTE_ADD,0);',
 '    :P394_TOTAL := :P394_TOTAL_AUX;',
-'        :P394_TOTAL :=  (:P394_TOTAL );',
+'    :P394_TOTAL :=  (:P394_TOTAL );',
 'END IF;',
 'EXCEPTION',
 '    WHEN VERROR THEN',
 '    :P394_MENSAJE_MONTO := VMENSAJE;',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_MONTO_CUOTA_ADD ''||SQLERRM);',
+'    :P394_MENSAJE_MONTO := SQLERRM;',
 'END;'))
 ,p_attribute_02=>'P394_MENSAJE_MONTO,P394_TIP_FACTURA_REF_ADD,P394_TIP_COMPROBANTE_REF,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P_COD_EMPRESA,P394_TIP_FACTURA_REF_ADD_AUX,P394_GENERA_CREDITO_ADD,P394_IMPORTE_ADD,P394_TIP_CAMBIO_ADD,P394_TIP'
 ||'_CAMBIO,P394_IMPORTE_ADD,P394_V_IMPORTE_ANT,P394_TOTAL,P394_TOTAL_AUX,P394_SALDO_AUX'
@@ -4875,8 +4901,7 @@ wwv_flow_imp_page.create_page_da_action(
 '   ',
 '    ELSE ',
 '        :P394_IMPORTE_ADD := NVL(:P394_MONTO_CUOTA_ADD,0);',
-'    END IF;',
-'           APEX_DEBUG.ERROR(''DA_MONTO_CUOTA_ADD entro ''||:P394_IMPORTE_ADD);',
+'    END IF; ',
 'SELECT  ',
 '       ',
 '      sum( TO_NUMBER(c006)) Monto ,',
@@ -4892,7 +4917,7 @@ wwv_flow_imp_page.create_page_da_action(
 '    WHEN VERROR THEN',
 '    :P394_MENSAJE_MONTO := VMENSAJE;',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_MONTO_CUOTA_ADD coll ''||SQLERRM);',
+'    raise_application_error(-20000,''DA_MONTO_CUOTA_ADD coll ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_COD_MONEDA_CUOTA_ADD,P394_COD_MONEDA,P394_MONTO_CUOTA_ADD,P394_TIP_CAMBIO_ADD,P394_TIP_CAMBIO'
 ,p_attribute_03=>'P394_TOTAL,P394_IMPORTE_ADD'
@@ -4990,13 +5015,15 @@ wwv_flow_imp_page.create_page_da_action(
 '    END IF;',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_TIP_FACTURA_REF_ADD_AUX ''||SQLERRM);',
+'      raise_application_error(-20000,''DA_TIP_FACTURA_REF_ADD_AUX ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_TIP_FACTURA_REF_ADD_AUX,P394_V_TIP_ANTICIPO,P_COD_EMPRESA,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P394_CLIENTE,P394_SER_RECIBO'
 ,p_attribute_03=>'P394_SER_FACTURA_REF_ADD ,P394_GENERA_CREDITO_ADD'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
+,p_client_condition_type=>'NOT_NULL'
+,p_client_condition_element=>'P394_NRO_CUOTA_ADD'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(126306902489686814)
@@ -5096,11 +5123,11 @@ wwv_flow_imp_page.create_page_da_action(
 '                  into VEXISTE',
 '                  from cc_saldos',
 '                 where cod_empresa = :P_COD_EMPRESA',
-'                   and tipo_comprobante = :P394_TIP_FACTURA_REF_ADD',
-'                   and ser_comprobante = :P394_SER_FACTURA_REF_ADD',
+'                   and ROWID = :P394_TIP_FACTURA_REF_ADD',
+'                   /*and ser_comprobante = :P394_SER_FACTURA_REF_ADD',
 '                   and nro_comprobante = :P394_NRO_FACTURA_REF_ADD',
 '                   and nro_cuota = :P394_NRO_CUOTA_ADD',
-'                   and cod_cliente = :P394_CLIENTE;',
+'                   and cod_cliente = :P394_CLIENTE*/;',
 '            EXCEPTION ',
 '          	    WHEN OTHERS THEN  ',
 '        		VEXISTE := ''N''; ',
@@ -5108,9 +5135,9 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 '            IF VEXISTE = ''N'' THEN ',
 '        	  :P394_GENERA_CREDITO_ADD := ''S'';',
-'              :P394_SER_FACTURA_REF_ADD := :P394_SER_RECIBO;',
+'             -- :P394_SER_FACTURA_REF_ADD := :P394_SER_RECIBO;',
 '        	  --:b_detalle.nro_factura_ref := :b_detalle.nro_recibo ;',
-'        	  :P394_NRO_CUOTA_ADD := 1;',
+'        	   :P394_NRO_CUOTA_ADD := 1;',
 '              :P394_FEC_VENCIMIENTO_ADD := :P394_FECHA_RECIBO;',
 '              :P394_COD_MONEDA_CUOTA_ADD := ''1'';',
 '        	ELSE',
@@ -5120,7 +5147,7 @@ wwv_flow_imp_page.create_page_da_action(
 '        END IF;',
 '    ELSE',
 '        BEGIN',
-'            select /*+ rule */',
+'            select  ',
 '                   c.nro_cuota',
 '              into :P394_NRO_CUOTA_ADD',
 '              from cc_saldos c',
@@ -5142,10 +5169,10 @@ wwv_flow_imp_page.create_page_da_action(
 '    END IF;',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''DA_TIP_FACTURA_REF_ADD ''||SQLERRM);',
+'     raise_application_error(-20000,''DA_TIP_FACTURA_REF_ADD ''||SQLERRM);',
 'END;'))
 ,p_attribute_02=>'P394_TIP_FACTURA_REF_ADD,P394_V_TIP_ANTICIPO,P_COD_EMPRESA,P394_SER_FACTURA_REF_ADD,P394_NRO_FACTURA_REF_ADD,P394_NRO_CUOTA_ADD,P394_CLIENTE,P394_SER_RECIBO,P394_FECHA_RECIBO,P394_ROW_ID_DET,P_COD_USUARIO'
-,p_attribute_03=>'P394_GENERA_CREDITO_ADD ,P394_NRO_CUOTA_ADD,P394_SER_FACTURA_REF_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_MENSAJE_TIP_COMP'
+,p_attribute_03=>'P394_GENERA_CREDITO_ADD,P394_FEC_VENCIMIENTO_ADD,P394_COD_MONEDA_CUOTA_ADD,P394_MENSAJE_TIP_COMP,P394_NRO_CUOTA_ADD'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -5316,7 +5343,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'        APEX_DEBUG.ERROR(''DA_TIP_MOV_CAJ_AUX ''||SQLERRM);',
+'         raise_application_error(-20000,''DA_TIP_MOV_CAJ_AUX ''||SQLERRM);',
 'END;',
 '             exception when others then',
 '              RAISE_APPLICATION_ERROR(-20000, ''error col_mov_caj. ''||sqlerrm);',
@@ -5498,11 +5525,10 @@ wwv_flow_imp_page.create_page_process(
 '             end if;',
 '             ',
 '           end if;',
-'        end;',
-'        apex_debug.error(''P394_CONTROL_BRUNCH ''||:P394_CONTROL_BRUNCH);',
+'        end; ',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''PR_SAVE ''||SQLERRM);',
+'     raise_application_error(-20000,''PR_SAVE ''||SQLERRM);',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
@@ -5546,8 +5572,7 @@ wwv_flow_imp_page.create_page_process(
 '        into :P394_COD_CUSTODIO',
 '        from usuarios',
 '        where cod_empresa = :P_COD_EMPRESA',
-'          and cod_usuario = :p_cod_usuario ;',
-'         -- APEX_DEBUG.ERROR(''P394_CUSTODIO ''||:P394_CUSTODIO);',
+'          and cod_usuario = :p_cod_usuario ; ',
 '  exception',
 '     when others then',
 '        :p394_cod_custodio := null ;',
@@ -5752,7 +5777,7 @@ unistr('  -- PARA CASO DE SE\00D1A DE TRATO --'),
 '',
 'EXCEPTION',
 '    WHEN OTHERS THEN',
-'    APEX_DEBUG.ERROR(''PR_INIT_EDIT ''||SQLERRM);',
+'      raise_application_error(-20000,''PR_INIT_EDIT ''||SQLERRM);',
 'END;'))
 ,p_process_clob_language=>'PLSQL'
 ,p_process_when=>'P394_CONTROL_ORIGEN'
@@ -5889,42 +5914,119 @@ unistr('           ''Comun\00EDquese con el administrador del sistema para crear
 '    valerta      number;',
 '    algun_error  exception;',
 '  begin',
-'    IF :P394_NRO_RECIBO IS NULL AND :P394_TIP_COMPROBANTE_REF <>''GIF'' THEN',
-'      IF :P394_V_NRO_INICIAL IS NOT NULL AND :P394_V_NRO_FINAL IS NOT NULL THEN',
-'        BEGIN',
-'          Select nvl(max(nro_recibo), 0)',
-'            into nro_recibo',
-'            from cc_recibos',
-'           where cod_empresa = :P_COD_EMPRESA',
-'             and cod_sucursal = :P394_SUCURSAL  ',
-'             and ser_recibo = :P394_V_SER_RECIBO',
-'              and nro_recibo between :P394_V_NRO_INICIAL and :P394_V_NRO_FINAL',
-'            and nro_recibo not in (14511400, 14511401); -- sacar esta linea luego.',
-'          ',
-'          IF nro_recibo >= :P394_V_NRO_FINAL THEN',
-'            :P394_NRO_RECIBO := NULL;',
-unistr('            /*alerta(''El n\00FAmero de recibo ha llegado hasta el final del talonario. ''||'),
-unistr('                   ''Seleccione un nuevo talonario o comun\00EDquese con el ''||'),
-'                   ''administrador del sistema para crear un nuevo talonario.'','''',2,valerta);',
-'            raise algun_error;*/',
-'          ELSIF nro_recibo <= :P394_V_NRO_INICIAL THEN',
-'            :P394_NRO_RECIBO := :P394_V_NRO_INICIAL;',
-'          ELSE',
-'            :P394_NRO_RECIBO := nvl(:P394_NRO_RECIBO, :P394_V_NRO_INICIAL) + 1;',
-'          END IF;',
-'        EXCEPTION',
-'          when algun_error then',
-'            NULL;--raise algun_error;',
-'          when others then',
-'            :P394_NRO_RECIBO := 1;',
-unistr('            --alerta(''Error al cargar el n\00FAmero recibo actual ''||sqlerrm,'''',3,valerta);'),
-'        END;',
+'    IF :P394_NRO_RECIBO IS NULL THEN',
+'       IF  :P394_TIP_COMPROBANTE_REF <>''GIF'' THEN',
+'              IF :P394_V_NRO_INICIAL IS NOT NULL AND :P394_V_NRO_FINAL IS NOT NULL THEN',
+'                BEGIN',
+'                  Select nvl(max(nro_recibo), 0)',
+'                    into nro_recibo',
+'                    from cc_recibos',
+'                   where cod_empresa = :P_COD_EMPRESA',
+'                     and cod_sucursal = :P394_SUCURSAL  ',
+'                     and ser_recibo = :P394_V_SER_RECIBO',
+'                      and nro_recibo between :P394_V_NRO_INICIAL and :P394_V_NRO_FINAL',
+'                    and nro_recibo not in (14511400, 14511401); -- sacar esta linea luego.',
+'                  ',
+'                  IF nro_recibo >= :P394_V_NRO_FINAL THEN',
+'                    :P394_NRO_RECIBO := NULL;',
+unistr('                    /*alerta(''El n\00FAmero de recibo ha llegado hasta el final del talonario. ''||'),
+unistr('                           ''Seleccione un nuevo talonario o comun\00EDquese con el ''||'),
+'                           ''administrador del sistema para crear un nuevo talonario.'','''',2,valerta);',
+'                    raise algun_error;*/',
+'                  ELSIF nro_recibo <= :P394_V_NRO_INICIAL THEN',
+'                    :P394_NRO_RECIBO := :P394_V_NRO_INICIAL;',
+'                  ELSE',
+'                    :P394_NRO_RECIBO := nvl(:P394_NRO_RECIBO, :P394_V_NRO_INICIAL) + 1;',
+'                  END IF;',
+'                EXCEPTION',
+'                  when algun_error then',
+'                    NULL;--raise algun_error;',
+'                  when others then',
+'                    :P394_NRO_RECIBO := 1;',
+unistr('                    --alerta(''Error al cargar el n\00FAmero recibo actual ''||sqlerrm,'''',3,valerta);'),
+'                END;',
+'              ELSE',
+unistr('                NULL;--alerta(''Debe seleccionar un talonario para poder completar la transacci\00F3n.'','''',2,valerta);'),
+'                --raise algun_error;',
+'              END IF;',
+'',
 '      ELSE',
-unistr('        NULL;--alerta(''Debe seleccionar un talonario para poder completar la transacci\00F3n.'','''',2,valerta);'),
-'        --raise algun_error;',
+'            :P394_TIP_COMPROBANTE_REF := :P394_P_TIP_COMPROBANTE;',
+'            :P394_NRO_COMPROBANTE_REF := :P394_P_NRO_COMPROBANTE;',
+'            :P394_SER_COMPROBANTE_REF := :P394_P_SER_COMPROBANTE; ',
+'            ',
+'            declare',
+'                vcodcli varchar2(30);',
+'            begin',
+'                SELECT COD_CLIENTE ',
+'                 INTO vcodcli ',
+'              FROM VT_VALES',
+'             WHERE COD_EMPRESA =''1''',
+'               AND NRO_COMPROBANTE = :P394_P_NRO_COMPROBANTE',
+'               AND SER_COMPROBANTE = :P394_P_SER_COMPROBANTE;',
+'',
+'                ',
+'                :P394_CLIENTE :=vcodcli;',
+'                BEGIN',
+'                    select nvl(ltrim(p.nombre), ltrim(p.nomb_fantasia)), COD_COBRADOR',
+'                      into :P394_NOMB_CLIENTE, :P394_COBRADOR',
+'                      from cc_clientes c,',
+'                           personas p ',
+'                     where c.cod_empresa = :P_COD_EMPRESA',
+'                       and c.cod_persona = p.cod_persona',
+'                       and c.cod_cliente = vcodcli;',
+'                EXCEPTION',
+'                    WHEN NO_DATA_FOUND THEN',
+'                    :P394_NOMB_CLIENTE := NULL;',
+'                END;',
+'',
+'            exception ',
+'            when others then ',
+'                  raise_application_error(-20000, :P394_P_NRO_COMPROBANTE||:P394_P_SER_COMPROBANTE );',
+'            end;',
+'',
+'            begin',
+'                select TIPO_CAMBIO_DIA, decimales,''1''',
+'                    into :p394_tip_cambio, :p394_decimales,:p394_cod_moneda',
+'                    from monedas',
+'                   where cod_moneda = ''1'';',
+'            exception ',
+'            when others then ',
+'                null;',
+'            end;',
+'',
+'            BEGIN ',
+'',
+'                CCRECIBO.ADD_COL_DET(ptipo_transac      => :P394_V_TIPO_TRAN,',
+'                                     ptip_comprobante   => ''REC'',',
+'                                     pser_comprobante   => ''GC'',',
+'                                     pnro_comprobante   => NULL,',
+'                                     pnro_cuota         => ''1'',',
+'                                     pcod_moneda_cuota  => NVL(:P394_COD_MONEDA,''1''),',
+'                                     pmonto_cuota       => replace(:P394_P_MONTO,''.''),',
+'                                     pimporte           => replace(:P394_P_MONTO,''.''),',
+'                                     pfec_vencimiento   => TO_CHAR(SYSDATE,''DD/MM/YYYY''),',
+'                                     pcod_empresa       => :P_COD_EMPRESA,',
+'                                     ptip_cambio        => NVL(:P394_TIP_CAMBIO,''1''),',
+'                                     pcod_modulo        => :P394_V_COD_MODULO,',
+'                                     psubtipo_trans     => nvl(:P394_TIPO_TRANSAC,''1''),',
+'                                     ptip_comprobante_2 => ''REC'',',
+'                                     p_cod_sucursal => :P394_SUCURSAL,',
+'                                     p_ser_recibo => :P394_SER_RECIBO,',
+'                                     p_nro_recibo => :P394_NRO_RECIBO',
+'                                     );',
+'',
+'            EXCEPTION',
+'                WHEN OTHERS THEN',
+'                raise_application_error(-20000,''DA_AGREGAR_EDITAR_DET ''||SQLERRM);',
+'            END;',
+'',
+'',
 '      END IF;',
 '    END IF;',
 '  end;',
+'  ',
+'',
 '  /*:b_recibos.cod_sucursal := :parameter.cod_sucursal;',
 '  :b_recibos.tip_comprobante_ref := :parameter.tip_comprobante;',
 '  :b_recibos.ser_comprobante_ref := :parameter.ser_comprobante;',
@@ -6002,14 +6104,9 @@ wwv_flow_imp_page.create_page_process(
 ':P394_TOTAL := 0;',
 ':P394_V_SER_CAMBIO := ''N'';',
 '',
-':P394_SER_RECIBO := :P394_V_SER_RECIBO;',
-' ',
+':P394_SER_RECIBO := :P394_V_SER_RECIBO; ',
 '',
-':P394_TIP_RECIBO := :P394_V_TIPO_RECIBO;',
-'',
-'',
-'',
-'',
+':P394_TIP_RECIBO := :P394_V_TIPO_RECIBO; ',
 '',
 ' '))
 ,p_process_clob_language=>'PLSQL'

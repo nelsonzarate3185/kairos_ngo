@@ -2975,6 +2975,114 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'628'
 );
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(214098401772002624)
+,p_list_item_display_sequence=>3360
+,p_list_item_link_text=>unistr('Unidades de Medici\00F3n')
+,p_list_item_link_target=>'f?p=&APP_ID.:625:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'625'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(214105590372931549)
+,p_list_item_display_sequence=>3370
+,p_list_item_link_text=>'Grupos de Preguntas'
+,p_list_item_link_target=>'f?p=&APP_ID.:627:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'627'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(215121030653333160)
+,p_list_item_display_sequence=>3380
+,p_list_item_link_text=>'Gestion de la encuesta'
+,p_list_item_link_target=>'f?p=&APP_ID.:629:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'629'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(215137749424132821)
+,p_list_item_display_sequence=>3390
+,p_list_item_link_text=>'Gestion de Encuestas'
+,p_list_item_link_target=>'f?p=&APP_ID.:630:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'630'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(215229445716899858)
+,p_list_item_display_sequence=>3400
+,p_list_item_link_text=>'Mantenimiento de encuestas'
+,p_list_item_link_target=>'f?p=&APP_ID.:631:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'631'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(216423210049088687)
+,p_list_item_display_sequence=>3410
+,p_list_item_link_text=>'Mantenimiento de Preguntas de Clima'
+,p_list_item_link_target=>'f?p=&APP_ID.:633:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'633'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(216926427554153734)
+,p_list_item_display_sequence=>3420
+,p_list_item_link_text=>'RH BENEFICIO LINEA CREDITO'
+,p_list_item_link_target=>'f?p=&APP_ID.:634:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'634'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(216944409443806855)
+,p_list_item_display_sequence=>3430
+,p_list_item_link_text=>'Reporte - STCOSTCO'
+,p_list_item_link_target=>'f?p=&APP_ID.:638:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'638'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(217104063883406809)
+,p_list_item_display_sequence=>3440
+,p_list_item_link_text=>'Encuesta Clima Laboral'
+,p_list_item_link_target=>'f?p=&APP_ID.:639:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'639'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(217146905178758953)
+,p_list_item_display_sequence=>3450
+,p_list_item_link_text=>'Seleccion de Listado de Encuestas'
+,p_list_item_link_target=>'f?p=&APP_ID.:640:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'640'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(217520164257175907)
+,p_list_item_display_sequence=>3460
+,p_list_item_link_text=>'Indicadores de Encuestas'
+,p_list_item_link_target=>'f?p=&APP_ID.:635:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'635'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(218439317546278635)
+,p_list_item_display_sequence=>3470
+,p_list_item_link_text=>unistr('Definici\00F3n de Posiciones')
+,p_list_item_link_target=>'f?p=&APP_ID.:636:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'636'
+);
 wwv_flow_imp.component_end;
 end;
 /

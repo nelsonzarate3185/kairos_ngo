@@ -154,8 +154,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
-,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230901165505'
+,p_last_updated_by=>'INV'
+,p_last_upd_yyyymmddhh24miss=>'20231006154022'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(55983001397779669)
@@ -10241,7 +10241,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_event_sequence=>10
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'ready'
-,p_display_when_type=>'ITEM_IS_NULL'
+,p_display_when_type=>'ITEM_IS_NOT_NULL'
 ,p_display_when_cond=>'P234_NRO_COMPROBANTE'
 );
 wwv_flow_imp_page.create_page_da_action(
@@ -10303,7 +10303,7 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '  :P234_COD_LISTA_PRECIO       :=   inv.vtpedido.fn_busca_parametro( ''VT'', ''PRECIO_CONTADO'', :P0_MENSAJE_VALIDACION);',
-'  :P234_COD_CONDICION_VENTA     :=   inv.vtpedido.fn_busca_parametro( ''VT'', ''CONDICION_CONTADO'', :P0_MENSAJE_VALIDACION);',
+'  --:P234_COD_CONDICION_VENTA     :=   inv.vtpedido.fn_busca_parametro( ''VT'', ''CONDICION_CONTADO'', :P0_MENSAJE_VALIDACION);',
 '  :P234_COD_MONEDA_PRECIO   :=   inv.vtpedido.fn_busca_parametro( ''VT'', ''COD_MONEDA_PREC'', :P0_MENSAJE_VALIDACION);',
 '  :P234_COD_MONEDA_BASE     :=   inv.vtpedido.fn_busca_parametro( ''VT'', ''COD_MONEDA_BASE'', :P0_MENSAJE_VALIDACION);',
 '  :P234_COD_MONEDA_DOL      :=   inv.vtpedido.fn_busca_parametro( ''VT'', ''COD_MONEDA_DOL'', :P0_MENSAJE_VALIDACION);',
@@ -10311,7 +10311,7 @@ wwv_flow_imp_page.create_page_da_action(
 '',
 '  '))
 ,p_attribute_02=>'P234_ESTADO'
-,p_attribute_03=>'P234_COD_LISTA_PRECIO,P234_COD_CONDICION_VENTA,P234_COD_MONEDA_PRECIO,P234_COD_MONEDA_DOL,P234_COD_MONEDA_GS,P0_MENSAJE_VALIDACION,P234_COD_MONEDA_BASE'
+,p_attribute_03=>'P234_COD_MONEDA_PRECIO,P234_COD_MONEDA_DOL,P234_COD_MONEDA_GS,P0_MENSAJE_VALIDACION,P234_COD_MONEDA_BASE'
 ,p_attribute_04=>'N'
 ,p_attribute_05=>'PLSQL'
 ,p_wait_for_result=>'Y'
@@ -15540,7 +15540,7 @@ unistr('    :P0_MENSAJE_VALIDACION := ''Debe ingresar el Art\00EDculo'';'),
 '        raise_application_error(-20001, ''Debe ingresar el precio unitario'');',
 '    end if;',
 '',
-'    if to_number(replace(:P234_MONTO_TOTAL, ''.'')) is null or to_number(replace(:P234_MONTO_TOTAL, ''.'')) = 0 then ',
+'    if to_number(replace(:P234_MONTO_TOTAL, ''.'')) is null /*or to_number(replace(:P234_MONTO_TOTAL, ''.'')) = 0 */then ',
 '        raise_application_error(-20001, ''Debe ingresar monto total'');',
 '    end if;',
 '',

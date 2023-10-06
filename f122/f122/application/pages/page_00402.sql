@@ -24,7 +24,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_page_component_map=>'16'
 ,p_last_updated_by=>'HSEGOVIA'
-,p_last_upd_yyyymmddhh24miss=>'20230912160250'
+,p_last_upd_yyyymmddhh24miss=>'20230928130719'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(350928475166892850)
@@ -279,7 +279,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'FIRST_ROWSET'
 ,p_attribute_03=>'N'
 ,p_attribute_04=>'Y'
-,p_attribute_05=>'N'
+,p_attribute_05=>'Y'
+,p_attribute_06=>'0'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(116014472765673044)

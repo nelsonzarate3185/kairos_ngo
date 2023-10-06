@@ -110,7 +110,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20230909090324'
+,p_last_upd_yyyymmddhh24miss=>'20230927125937'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(117369689802768824)
@@ -153,7 +153,7 @@ wwv_flow_imp_page.create_page_plug(
 '       REC.COD_USUARIO,',
 '       (DECODE(REC.ANULADO,''N'',''NO'',''S'',''SI'')) ANULADO,',
 '       REC.FEC_ANULACION,',
-'       CCRECIBO.OBTENER_DESC_ESTADO(pestado => REC.ESTADO) ESTADO,',
+'              CCRECIBO.OBTENER_DESC_ESTADO(pestado => CASE WHEN NVL(REC.ANULADO,''N'')=''S''THEN ''A'' ELSE REC.ESTADO END) ESTADO,',
 '       REC.COD_CUSTODIO,',
 '       (SELECT C.COD_CUSTODIO||'' - ''||C.DESCRIPCION',
 '          FROM CC_CUSTODIOS C',

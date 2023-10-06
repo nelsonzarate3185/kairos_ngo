@@ -21,8 +21,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'FCARDOZO'
-,p_last_upd_yyyymmddhh24miss=>'20230921091631'
+,p_last_updated_by=>'ADIAZ'
+,p_last_upd_yyyymmddhh24miss=>'20230927161635'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(208455828436669302)
@@ -48,11 +48,20 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select COD_EMPRESA,',
 '       COD_CLIENTE,',
+'     (  select ltrim(p.nombre)',
+'    from personas p ',
+'   where p.cod_persona = v.cod_persona ) nombre_cliente,',
 '       COD_PERSONA,',
 '       COD_MONEDA_LIMITE,',
 '       LIMITE_CREDITO,',
 '       COD_COBRADOR,',
 '       COD_VENDEDOR,',
+'                     (  select nvl( fv.descripcion, ltrim(p.nombre) )',
+'    from fv_vendedores fv, personas p ',
+'   where fv.cod_empresa = :P_COD_EMPRESA',
+'     and fv.cod_persona = p.cod_persona ',
+'     and fv.cod_vendedor = v.cod_vendedor',
+'     and fv.estado = ''A'' ) nombre_vendedor,',
 '       DIAS_COBRO,',
 '       PLAZO,',
 '       COD_ZONA,',
@@ -143,7 +152,7 @@ wwv_flow_imp_page.create_page_plug(
 '       FECHA_LIMITE_FACTURACION,',
 '       NULL EDITAR,',
 '       ROWID',
-'  from CC_CLIENTES'))
+'  from CC_CLIENTES v'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_content_disposition=>'ATTACHMENT'
@@ -1132,6 +1141,26 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_rpt_show_filter_lov=>'N'
 ,p_use_as_row_header=>'N'
 );
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(210021714515258542)
+,p_db_column_name=>'NOMBRE_VENDEDOR'
+,p_display_order=>980
+,p_column_identifier=>'CT'
+,p_column_label=>'Nombre Vendedor'
+,p_column_type=>'STRING'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(210021818617258543)
+,p_db_column_name=>'NOMBRE_CLIENTE'
+,p_display_order=>990
+,p_column_identifier=>'CU'
+,p_column_label=>'Nombre Cliente'
+,p_column_type=>'STRING'
+,p_column_alignment=>'CENTER'
+,p_use_as_row_header=>'N'
+);
 wwv_flow_imp_page.create_worksheet_rpt(
  p_id=>wwv_flow_imp.id(208499428184616073)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -1140,7 +1169,7 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>10
-,p_report_columns=>'EDITAR:COD_CLIENTE:COD_PERSONA:LIMITE_CREDITO:COD_COBRADOR:COD_VENDEDOR:DIAS_COBRO:PLAZO:COD_ZONA:ESTADO:COD_USUARIO:FEC_ALTA:COD_CONDICION_VENTA:NRO_JERARQUIA:TIP_DOCUMENTO:TIP_CLIENTE:COD_CAUSAL:FEC_ESTADO:COMENTARIO:'
+,p_report_columns=>'EDITAR:COD_CLIENTE:NOMBRE_CLIENTE:COD_PERSONA:LIMITE_CREDITO:COD_COBRADOR:COD_VENDEDOR:NOMBRE_VENDEDOR:PLAZO:COD_ZONA:ESTADO:COD_USUARIO:FEC_ALTA:COD_CONDICION_VENTA:FEC_ESTADO:COMENTARIO:'
 );
 wwv_flow_imp.component_end;
 end;
