@@ -155,7 +155,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'INV'
-,p_last_upd_yyyymmddhh24miss=>'20231006154022'
+,p_last_upd_yyyymmddhh24miss=>'20231006165000'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(55983001397779669)
@@ -10241,7 +10241,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_event_sequence=>10
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'ready'
-,p_display_when_type=>'ITEM_IS_NOT_NULL'
+,p_display_when_type=>'ITEM_IS_NULL'
 ,p_display_when_cond=>'P234_NRO_COMPROBANTE'
 );
 wwv_flow_imp_page.create_page_da_action(

@@ -353,6 +353,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_cliente_cavispro.sql
 @@application/shared_components/user_interface/lovs/lv_cliente_ccrecibo.sql
 @@application/shared_components/user_interface/lovs/lv_cliente_smasisga.sql
+@@application/shared_components/user_interface/lovs/lv_cliente_stetique.sql
 @@application/shared_components/user_interface/lovs/lv_cliente_ticket.sql
 @@application/shared_components/user_interface/lovs/lv_cobrador.sql
 @@application/shared_components/user_interface/lovs/lv_cobradores_ccrecome.sql
@@ -409,6 +410,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lv_des_marca.sql
 @@application/shared_components/user_interface/lovs/lv_des_marca_stgeinmo.sql
 @@application/shared_components/user_interface/lovs/lv_direcciones_vtfactur.sql
+@@application/shared_components/user_interface/lovs/lv_direcc_stetique.sql
 @@application/shared_components/user_interface/lovs/lv_distribuidor.sql
 @@application/shared_components/user_interface/lovs/lv_distribuidores_stprocan.sql
 @@application/shared_components/user_interface/lovs/lv_distribuidor_callapen.sql
@@ -1567,6 +1569,7 @@ prompt --install
 @@application/pages/page_00638.sql
 @@application/pages/page_00639.sql
 @@application/pages/page_00640.sql
+@@application/pages/page_00641.sql
 @@application/pages/page_00800.sql
 @@application/pages/page_00801.sql
 @@application/pages/page_00900.sql

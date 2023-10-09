@@ -3083,6 +3083,15 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
 ,p_list_item_current_for_pages=>'636'
 );
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(219651415725308519)
+,p_list_item_display_sequence=>3480
+,p_list_item_link_text=>'Impresion de Etiquetas - STETIQUE'
+,p_list_item_link_target=>'f?p=&APP_ID.:641:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_icon=>'fa-file-o'
+,p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'
+,p_list_item_current_for_pages=>'641'
+);
 wwv_flow_imp.component_end;
 end;
 /

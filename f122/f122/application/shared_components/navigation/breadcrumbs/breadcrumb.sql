@@ -2103,6 +2103,12 @@ wwv_flow_imp_shared.create_menu_option(
 ,p_link=>'f?p=&APP_ID.:637:&APP_SESSION.::&DEBUG.:::'
 ,p_page_id=>637
 );
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(219651925392308524)
+,p_short_name=>'Impresion de Etiquetas - STETIQUE'
+,p_link=>'f?p=&APP_ID.:641:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>641
+);
 wwv_flow_imp.component_end;
 end;
 /

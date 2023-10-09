@@ -1515,16 +1515,6 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(
- p_id=>wwv_flow_imp.id(13240408188880303)
-,p_db_column_name=>'ESTADO'
-,p_display_order=>81
-,p_column_identifier=>'J'
-,p_column_label=>'Estado'
-,p_column_type=>'STRING'
-,p_heading_alignment=>'LEFT'
-,p_use_as_row_header=>'N'
-);
-wwv_flow_imp_page.create_worksheet_column(
  p_id=>wwv_flow_imp.id(13247205981880308)
 ,p_db_column_name=>'PEDIDOS_PENDIENTES'
 ,p_display_order=>81
@@ -1532,6 +1522,16 @@ wwv_flow_imp_page.create_worksheet_column(
 ,p_column_label=>'Pedidos Pendientes'
 ,p_column_type=>'NUMBER'
 ,p_display_text_as=>'HIDDEN'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(13240408188880303)
+,p_db_column_name=>'ESTADO'
+,p_display_order=>81
+,p_column_identifier=>'J'
+,p_column_label=>'Estado'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
 ,p_use_as_row_header=>'N'
 );
 wwv_flow_imp_page.create_worksheet_column(

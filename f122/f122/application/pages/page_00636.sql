@@ -22,8 +22,8 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'18'
-,p_last_updated_by=>'JANDERSON'
-,p_last_upd_yyyymmddhh24miss=>'20231006140550'
+,p_last_updated_by=>'ADIAZ'
+,p_last_upd_yyyymmddhh24miss=>'20231009092358'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(217080615205856420)
@@ -370,8 +370,9 @@ wwv_flow_imp_page.create_worksheet_rpt(
 ,p_report_alias=>'2185797'
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
+,p_display_rows=>10
 ,p_report_columns=>'COD_EMPRESA:COD_SUCURSAL:COD_BLOQUE:COD_SUB_BLOQUE:COD_ESTANTE:COD_CUERPO:COD_NIVEL:COD_POSICION:ALTO_MTS:ANCHO_MTS:LARGO_MTS:PESO_KG:FECHA_ALTA:FECHA_BAJA:COD_USUARIO_ALTA:ESTADO:COD_USUARIO_BAJA:IND_MIGRADO_OS:REG_ID_ORDEN:IND_CELDA:COD_RESPONSABLE'
-||':ROWID'
+||':'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(217081682387856430)
